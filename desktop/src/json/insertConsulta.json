@@ -1,0 +1,14 @@
+{
+	"nome": "joao",
+    "cpf": "49914181864",
+    "nomeMedico": "joaoTeste",
+    "cpfMedico": "30067805825",
+    "Consulta": [
+      {
+        "data": "15/09/2004",
+        "hora": "09:30",
+        "status": "1"
+      }
+    ]
+  }
+  

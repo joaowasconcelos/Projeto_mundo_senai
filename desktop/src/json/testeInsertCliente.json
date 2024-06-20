@@ -1,0 +1,48 @@
+{
+    "cpf": "50513777857",
+    "nome": "Giovanna",
+    "dataNasc": "01/10/2001",
+    "genero": "F",
+    "email": "giovanna@gmail",
+    "endereco": [
+        {
+            "logradouro": "teste",
+            "bairro": "teste",
+            "estado": "SP",
+            "numeroEndereco": "157",
+            "complementoEndereco": null,
+            "cep": "13173-418"
+        }
+    ],
+    "telefone": [
+        {
+            "numeroTelefone": "19885787878"
+        }
+    ],
+    "funcionario": [
+        {
+            "dataAdmissao": null,
+            "crm": null
+        }
+    ],
+    "Login": [
+        {
+            "login": "50513777857",
+            "senha": "1234",
+            "status": "1"
+        }
+    ],
+    "Perfis": [
+        {
+            "tipo": "Paciente"
+        }
+    ],
+    "Especialidade": [
+        {
+            "descEspecialidade": null
+        },
+        {
+            "descEspecialidade": null
+        }
+    ]
+}

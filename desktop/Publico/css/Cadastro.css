@@ -1,0 +1,135 @@
+header {
+    background: #00665E;
+    color: #fff;
+    padding: 10px 0;
+    text-align: center;
+    width: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 1000;
+}
+
+.container {
+    max-width: 800px;
+    margin: 0 auto;
+    background-color: #fff;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+    margin-top: -70px; /* Espaço para o header */
+}
+
+h2 {
+    margin-bottom: 20px;
+    color: #00665E;
+}
+
+label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+input[type="text"],
+input[type="date"],
+input[type="email"],
+input[type="password"],
+input[type="time"],
+select {
+    width: calc(100% - 22px); /* Adicionado para considerar a largura do padding */
+    padding: 10px;
+    margin-bottom: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-sizing: border-box;
+}
+
+input[type="submit"] {
+    width: calc(100% - 22px); /* Adicionado para considerar a largura do padding */
+    padding: 12px;
+    background-color: #00665E;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+input[type="submit"]:hover {
+    background-color: #68BCB6;
+}
+
+.telefone-endereco {
+    display: flex;
+    justify-content: space-between;
+}
+
+
+.endereco {
+    width: 48%;
+    margin-left: -30px;
+}
+
+.phone-inputs {
+    display: flex;
+    flex-direction: column;
+}
+
+.phone-input {
+    margin-bottom: 10px;
+    position: relative;
+}
+
+.add-phone {
+    margin-top: 10px;
+    cursor: pointer;
+    color: #00665E;
+}
+
+.add-phone:hover {
+    color: #68BCB6;
+}
+
+/* Estilos para a caixa de seleção  */
+.checkbox-container {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.checkbox-item {
+    display: flex;
+    align-items: center;
+}
+
+.checkbox-item input[type="checkbox"] {
+    margin-right: 10px;
+}
+
+.checkbox-item label {
+    font-size: 16px;
+}
+
+/* Estilos para o botão */
+input[type="submit"] {
+    margin-top: 20px;
+    padding: 12px; /* Ajustado para corresponder ao tamanho dos outros botões */
+    background-color: 00665E;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+input[type="submit"]:hover {
+    background-color: #68BCB6;
+}
+
+.perfil {
+    margin-top: -200px;
+}
+
+.botao{
+  
+    margin-left: 350px;
+}

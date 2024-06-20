@@ -1,0 +1,34 @@
+21.05 - Thata
+
+
+-> Imports
+
+npm i expo
+npm i react-native-safe-area-context @react-navigation/native-stack @react-navigation/native react-native-screens
+npm install @react-navigation/bottom-tabs
+npm install @mindinventory/react-native-tab-bar-interaction
+react-native-vector-icons/FontAwesome
+npm i mdb-react-ui-kit
+npm i @fortawesome/fontawesome-free
+npx expo install expo-linear-gradient
+impc i axios
+npm install mongoose (O mongoose é uma biblioteca de modelagem de dados para MongoDB e Node.js. Ela fornece uma solução baseada em esquemas para a modelagem de dados da aplicação, incluindo validação integrada, consultas, relacionamentos e outras funcionalidades úteis para trabalhar com o banco de dados MongoDB.)
+
+
+---------------
+
+-> Telas necessárias
+
+-consultas
+-dados cadastrais
+-entre em contato
+-menu
+
+
+telas do médico tambem serão necessarias
+
+---------------
+
+
+
+'react-router-dom'
