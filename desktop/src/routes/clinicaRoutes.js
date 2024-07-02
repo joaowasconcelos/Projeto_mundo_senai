@@ -27,7 +27,7 @@ router.post("/Login/entrar",LoginPerfis.LoginPessoa);
 router.get('/Cadastro', cadastro.paginaCadastro);
 router.get ("/Login",LoginPerfis.paginaLogin);
 router.get('/login/loginTipo', LoginPerfis.selecionaTipo);
-router.get('/login/loginCef', LoginPerfis.selecionaLogin);
+//router.get('/login/loginCef', LoginPerfis.selecionaLogin);
 router.get('/login/loginTipo', LoginPerfis.selecionaTipo);
 router.get("/paciente/infos",viewPaciente.selecionaInfosPaciente);
 router.get("/paciente/consultas", viewPaciente.selecionaConsultas);
@@ -55,6 +55,9 @@ router.put("/Update/telefone/:id",cadastro.updateTelefone);
 router.put("/Update/endereco/:id",cadastro.updateEndereco);
 router.put("/Update/consulta/:id",cadastroConsulta.updateConsultas);
 router.put("/Update/prontuario/:id",cadastroProntuario.UpdateProntuario);
+
+router.delete('/deletar/pessoa/:id',cadastro.deletePessoa)
+router.delete('/deletar/funcionario/:id',cadastro.deletarFuncionario)
 
 router.use(function (req, res) {
     res.status(404).render(`pages/pag_erro`, { message: '404 - Página não encontrada' })

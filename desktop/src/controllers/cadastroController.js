@@ -5,7 +5,7 @@ const Funcionario = require("../models/classes/Funcionario");
 const Login = require("../models/classes/Login");
 const Perfis = require("../models/classes/Perfis")
 const Especialidade = require("../models/classes/Especialidade")
-const { insert, verificaCpf, verificaEndereco,updateTel,updateEndereco } = require("../models/PessoaModel")
+const { insert, verificaCpf, verificaEndereco,updateTel,updateEndereco,deletePessoa,deletarFuncionario } = require("../models/PessoaModel")
 
 
 const cadastro = {
@@ -119,6 +119,37 @@ const cadastro = {
             res.status(500).json({ error: "Erro ao cadastrar especialidades" });
         }
     },
+    deletePessoa:async(req,res) => {
+        try {
+            const id = req.params.id;
+            const objPessoa = new Pessoa(id)
+            console.log(objPessoa)
+            const result = await deletePessoa(objPessoa);
+            if (result.error) {
+                res.status(500).json({ success: false, message: 'Erro ao excluir Funcionario', error: result.details });
+            } else {
+                res.status(200).json(result);
+            }
+        } catch (error) {
+            res.status(500).json({  error: "Erro ao excluir pessoa" });
+        }
+    },
+    deletarFuncionario: async (req,res) =>{
+        try {
+            const id = req.params.id
+            const objFunci = new Funcionario(id);
+            console.log(objFunci)
+            const result = await deletarFuncionario(objFunci);
+            if (result.error) {
+                res.status(500).json({ success: false, message: 'Erro ao excluir Funcionario', error: result.details });
+            } else {
+                res.status(200).json(result);
+            }
+        } catch (error) {
+            console.error('Erro ao editar Funcionario:', error);
+            res.status(500).json({ success: false, message: 'Erro ao excluir Funcionario', error });
+        }
+    }
     
 }
 module.exports = { cadastro }
