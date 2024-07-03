@@ -1,0 +1,169 @@
+@import url('https://fonts.googleapis.com/css2?family=Anek+Bangla:wght@100..800&family=Noto+Sans+Khmer:wght@100..900&family=Noto+Sans+Oriya:wght@100..900&family=Oleo+Script+Swash+Caps:wght@400;700&family=Quicksand:wght@300..700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+Oriya:wght@100..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+Oriya:wght@100..900&family=Oleo+Script+Swash+Caps:wght@400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Anek+Bangla:wght@100..800&family=Noto+Sans+Oriya:wght@100..900&family=Oleo+Script+Swash+Caps:wght@400;700&display=swap');
+
+section {
+    min-height: 70vh;
+}
+
+#banner {
+    margin-bottom: 20px;
+}
+
+.item2 {
+    font-family: "Noto Sans Oriya", sans-serif;
+    font-optical-sizing: auto;
+    font-style: normal;
+    font-weight: bold;
+    font-variation-settings: "wdth" 100;
+    text-align: center;
+    padding-top: 20px;
+    margin-bottom: 20px;
+}
+
+.slogan {
+    text-align: center;
+    font-family: "Quicksand", sans-serif;
+    font-size: 30px;
+    font-style: normal;
+    padding-top: 30px;
+}
+
+.slogan_2 {
+    font-family: "Oleo Script Swash Caps", system-ui;
+    font-weight: 700;
+    font-style: normal;
+    font-size: 23px;
+    text-align: center;
+}
+
+.slogan_3 {
+    text-align: center;
+    font-family: "Quicksand", sans-serif;
+    font-size: 30px;
+    font-style: normal;
+}
+
+.carousel-control-prev {
+    left: 10px;
+}
+
+.carousel-control-next {
+    right: 10px;
+}
+
+h3 {
+    font-family: "Noto Sans Oriya", sans-serif;
+    font-optical-sizing: auto;
+    font-style: normal;
+    font-weight: bold;
+    font-variation-settings: "wdth" 100;
+    text-align: center;
+    padding-top: 10px;
+}
+
+p {
+    font-family: "Noto Sans Oriya", sans-serif;
+    font-optical-sizing: auto;
+    font-style: normal;
+    font-variation-settings: "wdth" 100;
+    text-align: center;
+}
+
+.apresentation {
+    background-image: url('../images/blur-hospital.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    width: 100%;
+    height: 90vh;
+}
+
+.box {
+    padding-top: 12.5vh;
+}
+
+.blur_box {
+    width: 60%;
+    margin-top: 8vh;
+    margin: auto;
+    padding-left: 30px;
+    padding-right: 30px;
+    background: rgba(255, 255, 255, 0.45);
+    box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
+    border-radius: 10px;
+    border: 1px solid rgba(218, 201, 201, 0.18);
+}
+
+span {
+    font-weight: bold;
+}
+
+#Contato {
+    text-align: center;
+    background-color: #9FE8DD;
+    margin-bottom: 10px;
+    padding: 20px 0;
+    box-shadow: inset 0 6px 12px rgba(0, 0, 0, 0.1), inset 0 -6px 12px rgba(0, 0, 0, 0.1);
+}
+
+
+.infos {
+    display: flex;
+    justify-content: center;
+    gap: 40px;
+    margin-top: 20px;
+    align-items: stretch;
+}
+
+.box_contato,
+.box_contato2 {
+    background-color: #ffffff;
+    padding: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    margin-bottom: 20px;
+}
+
+.box_contato2 {
+    margin-left: 20px;
+}
+
+.box_contato,
+.box_contato2 {
+    width: 300px;
+}
+
+.box_contato p,
+.box_contato2 p {
+    margin: 8px 0;
+}
+
+#Localizacao {
+    text-align: center;
+}
+
+.localizacao {
+    display: inline-block;
+    text-align: left;
+    max-width: 100%;
+}
+
+.endereco {
+    font-family: "Anek Bangla", sans-serif;
+    font-optical-sizing: auto;
+    font-style: normal;
+    font-weight: bold;
+    font-variation-settings: "wdth" 100;
+    padding-top: 10px
+}
+
+.abrangencia {
+    font-family: "Anek Bangla", sans-serif;
+    font-optical-sizing: auto;
+    font-style: normal;
+    font-size: 15px;
+    font-variation-settings: "wdth" 100;
+}

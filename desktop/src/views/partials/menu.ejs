@@ -1,14 +1,44 @@
 <link rel="stylesheet" href="/css/menu.css">
 
-<div class="navegador">
-
-    <a href="/"  class="header_link">
-        <img src="../../../images/FOTO DA LOGO DA CLINICA.png" width="85" height="60" class="logo" />
-        <text class="medical_name">MEDICAL GROUP - SP</text>
-    </a>
-
-    <div>
-        <a href="Login" class="btn_login">Login</a>
+<nav id="main-nav">
+    <div class="logo">
+        <span class="logo-text1">Medical</span>
+        <a href="/" class="header_link">
+            <img src="../../../images/FOTO DA LOGO DA CLINICA.png" class="logo" />
+        </a>
+        <span class="logo-text2">Group</span>
     </div>
 
-</div>
+    <div class="list">
+        <a href="/#Sobre" id="list_item">Sobre</a>
+        <a href="/#Contato" id="list_item">Contato</a>
+        <a href="/#Localizacao" id="list_item">Localização</a>
+    </div>
+
+    <a href="Login" class="btn_login">Login</a>
+</nav>
+
+<script>
+
+    var lastScrollTop = 0;
+    var delta = 5;
+    var navbarHeight = document.getElementById('main-nav').offsetHeight;
+
+    window.addEventListener('scroll', function() {
+        var currentScroll = window.pageYOffset;
+
+        // Scroll up
+        if (currentScroll < lastScrollTop - delta) {
+            document.getElementById('main-nav').style.top = "0";
+        }
+        // Scroll down or initial position
+        else {
+            if (currentScroll > navbarHeight) {
+                document.getElementById('main-nav').style.top = "-" + navbarHeight + "px";
+            }
+        }
+        lastScrollTop = currentScroll;
+    });
+
+</script>
+
