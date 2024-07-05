@@ -146,4 +146,46 @@ async function updateEndereco(endere){
     }
 }
 
-module.exports = { insert, verificaCpf, verificaEndereco,updateTel,updateEndereco };
+async function deletePessoa(id){
+    const bd = await conectarBancoDeDados();
+    try {
+        await bd.beginTransaction();
+        const [res] = await bd.query('DELETE FROM tbl_pessoa WHERE id = ?', [id.id]);
+        console.log('RESULTADO DELETE Pessoa =>', res);
+        if (res.affectedRows === 0) {
+            throw new Error('Funcionario não encontrado');
+        }else {
+            await bd.commit();
+            return res;
+        }
+    } catch (error) {
+        console.error('Erro ao deletar Pessoa:', error);
+        await bd.rollback();
+        return { error: 'Falha no delete', details: error };
+    } finally {
+        await bd.release();
+    }
+}
+
+async function deletarFuncionario(id) {
+    const bd = await conectarBancoDeDados();
+    try {
+        await bd.beginTransaction();
+        const [res] = await bd.query('DELETE FROM tbl_funcionario WHERE id = ?', [id.id]);
+        console.log('RESULTADO DELETE Funcionario =>', res);
+        if (res.affectedRows === 0) {
+            throw new Error('Funcionario não encontrado');
+        }else {
+            await bd.commit();
+            return res;
+        }
+
+    } catch (error) {
+        console.error('Erro ao deletar Funcionario:', error);
+        await bd.rollback();
+        return { error: 'Falha no delete', details: error };
+    } finally {
+        await bd.release();
+    }
+}
+module.exports = { insert, verificaCpf, verificaEndereco,updateTel,updateEndereco,deletePessoa,deletarFuncionario };

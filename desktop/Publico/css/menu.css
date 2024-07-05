@@ -1,46 +1,97 @@
-/* header span {
-    gap: 100;
-    padding: 50;
-} */
+@import url('https://fonts.googleapis.com/css2?family=Armata&family=Parisienne&display=swap');
 
-.navegador {
+nav {
+    position: absolute;
+    background: #00665E;
+    color: #fafafa;
+    top: 0;
+    width: 100%;
+    height: 50px;
     justify-content: center;
     align-items: center;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-    margin-right: 20vh;
-    margin-left: 10vh;
-    
+    box-shadow: rgba(4, 4, 5, 0.418) 10px 10px 10px -10px;
+    transition: top 0.3s ease-in-out;
+    z-index: 1000;
 }
 
-.medical_name {
-    text-decoration: none;
-    color: white;
-    font-weight: bold;
-
+nav.scrolled {
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    background-color: #f8f8f8;
+    top: -60px;
 }
 
-.header_link {
-    text-decoration: none;
+.navbar-hidden {
+    top: -60px;
+}
+
+.list {
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
+    gap: 45px;
+    font-weight: bold;
 }
 
-.logo {
-    margin-left: 40px;
-    margin-bottom: 10px;
+#list_item {
+    font-family: "Armata", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+    text-decoration: none;
+    color: #fafafa;
+}
+
+#list_item:hover {
+    transition: 1, 5s;
+    text-decoration: underline 2px;
+    cursor: pointer;
 }
 
 .btn_login {
     text-decoration: none;
     color: white;
-    font-weight: bold;
-    font-size: 20px;
-    padding-left: 300px;
+    padding-right: 40px;
+    padding-left: 135px;
+    font-family: "Armata", sans-serif;
+    font-weight: 400;
+    font-style: normal;
 }
 
 .btn_login:hover {
-    transition: 100ms;
-    text-decoration: underline white;
+    transition: 1, 5s;
+    text-decoration: underline 2px;
+    cursor: pointer;
+}
+
+span {
+    cursor: pointer;
+
+}
+
+img {
+    width: 60px;
+    height: 43px;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+
+.logo-text1 {
+    margin: 0 1px;
+    padding-left: 40px;
+    font-family: "Armata", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+}
+
+.logo-text2 {
+    margin: 0 1px;
+    font-family: "Armata", sans-serif;
+    font-weight: 400;
+    font-style: normal;
 }
