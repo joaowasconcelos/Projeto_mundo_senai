@@ -23,17 +23,6 @@ const viewAdm = {
 
     },
 
-
-    paginaMedicoAdm: async(req, res) => {
-        try{
-            res.render('pages/MedicoAdm');
-        }
-        catch (error) {
-            console.log(error);
-            res.render('pages/pag_erro', { message: error});
-        }
-    }
-
 }
 
 module.exports = { viewAdm }

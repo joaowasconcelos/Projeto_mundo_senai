@@ -1,153 +1,187 @@
-<!DOCTYPE html>
-<html lang="pt-br">
+<link rel="stylesheet" href="/css/Cadastro.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="/css/Cadastro.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <title>Cadastro</title>
-</head>
+<div class="container">
+    <div class="cadastro-form">
+        <h2 class="text-1">Cadastro</h2>
+        <form id="cadastroForm" action="/Pessoa/novo" method="post">
+            <label for="cpf">CPF:</label>
+            <input type="text" id="cpf" name="cpf" required>
 
-<body>
-    <div class="container">
-        <div class="cadastro-form">
-            <h2 class="text-1">Cadastro</h2>
-            <form id="cadastroForm" action="/submit-cadastro" method="post">
-                <label for="cpf">CPF:</label>
-                <input type="text" id="cpf" name="cpf" required>
+            <label for="nome">Nome:</label>
+            <input type="text" id="nome" name="nome" required>
 
-                <label for="nome">Nome:</label>
-                <input type="text" id="nome" name="nome" required>
+            <label for="dataNasc">Data de Nascimento:</label>
+            <input type="date" id="dataNasc" name="dataNasc" required>
 
-                <label for="data_nasc">Data de Nascimento:</label>
-                <input type="date" id="data_nasc" name="data_nasc" required>
+            <label for="genero">Gênero:</label>
+            <select id="genero" name="genero" required>
+                <option value="vazio"></option>
+                <option value="masculino">Masculino</option>
+                <option value="feminino">Feminino</option>
+            </select>
 
-                <label for="genero">Gênero:</label>
-                <select id="genero" name="genero">
-                    <option value="masculino">Masculino</option>
-                    <option value="feminino">Feminino</option>
-                    <option value="outro">Outro</option>
-                </select>
+            <label for="email">E-mail:</label>
+            <input type="email" id="email" name="email" required>
 
-                <label for="email">E-mail:</label>
-                <input type="email" id="email" name="email" required>
-
-                <label for="data_cad">Data de Cadastro:</label>
-                <input type="date" id="data_cad" name="data_cad" value="<%= new Date().toISOString().split('T')[0] %>"
-                    required>
-
-                <div class="telefone-endereco">
-                    <div class="telefone">
-                        <h2 class="text-2">Telefone</h2>
-                        <div class="phone-inputs">
-                            <div class="phone-input">
-                                <label for="telefone">Telefone:</label>
-                                <input type="tel" name="telefone[]" pattern="[0-9]{2} [0-9]{5}-[0-9]{4}"
-                                    placeholder="99 99999-9999" required>
-                            </div>
+            <div class="telefone-endereco">
+                <div class="telefone">
+                    <h2 class="text-2">Telefone</h2>
+                    <div class="phone-inputs">
+                        <div class="phone-input">
+                            <label for="telefone">Telefone:</label>
+                            <input type="tel" name="telefone[]" placeholder="99 99999-9999" required>
                         </div>
-                        <span class="add-phone" onclick="addPhoneField()">
-                            <i class="fas fa-plus-circle"></i> Adicionar outro telefone
-                        </span>
-                        <br>
                     </div>
-
-                    <div class="endereco">
-                        <h2 class="text-3">Endereço</h2>
-                        <label for="logradouro">Logradouro:</label>
-                        <input type="text" id="logradouro" name="logradouro" required>
-
-                        <label for="bairro">Bairro:</label>
-                        <input type="text" id="bairro" name="bairro" required>
-
-                        <label for="estado">Estado:</label>
-                        <input type="text" id="estado" name="estado" required>
-
-                        <label for="numero">Número:</label>
-                        <input type="text" id="numero" name="numero" required>
-
-                        <label for="complemento">Complemento:</label>
-                        <input type="text" id="complemento" name="complemento">
-
-                        <label for="cep">CEP:</label>
-                        <input type="text" id="cep" name="cep" required>
-                    </div>
+                    <span class="add-phone" onclick="addPhoneField()">
+                        <i class="fas fa-plus-circle"></i> Adicionar outro telefone
+                    </span>
+                    <br>
                 </div>
 
-                <div class="perfil">
-                    <h2>Criar Perfil</h2>
-                    <label for="tipo">Tipo de Perfil:</label>
-                    <div class="checkbox-container">
-                        <div class="checkbox-item">
-                            <input type="checkbox" id="medico" name="perfil" value="medico">
-                            <label for="medico">Médico</label>
-                        </div>
-                        <div class="checkbox-item">
-                            <input type="checkbox" id="paciente" name="perfil" value="paciente">
-                            <label for="paciente">Paciente</label>
-                        </div>
-                        <div class="checkbox-item">
-                            <input type="checkbox" id="adm" name="perfil" value="adm">
-                            <label for="adm">Administrador</label>
-                        </div>
+                <div class="endereco">
+                    <h2 class="text-3">Endereço</h2>
+                    <label for="logradouro">Logradouro:</label>
+                    <input type="text" id="logradouro" name="logradouro" required>
+
+                    <label for="bairro">Bairro:</label>
+                    <input type="text" id="bairro" name="bairro" required>
+
+                    <label for="estado">Estado:</label>
+                    <input type="text" id="estado" name="estado" required>
+
+                    <label for="numeroEndereco">Número:</label>
+                    <input type="text" id="numeroEndereco" name="numeroEndereco" required>
+
+                    <label for="complementoEndereco">Complemento:</label>
+                    <input type="text" id="complementoEndereco" name="complementoEndereco">
+
+                    <label for="cep">CEP:</label>
+                    <input type="text" id="cep" name="cep" required>
+                </div>
+            </div>
+
+            <div class="perfil">
+                <h2>Criar Perfil</h2>
+                <label for="tipo">Tipo de Perfil:</label>
+                <div class="checkbox-container">
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="medico" name="perfil" value="medico">
+                        <label for="medico">Médico</label>
+                    </div>
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="paciente" name="perfil" value="paciente" checked required>
+                        <label for="paciente">Paciente</label>
+                    </div>
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="adm" name="perfil" value="adm">
+                        <label for="adm">Administrador</label>
                     </div>
                 </div>
-                <br>
-                
-                <button type="submit" id="submitButton" class="botao" disabled>Criar Perfil</button>
-                <br><br>
-            </form>
-        </div>
+            </div>
+            <br>
 
+            <div id="camposMedico" style="display: none;">
+                <label for="dataAdmissao">Data de Admissão:</label>
+                <input type="date" id="dataAdmissao" name="dataAdmissao">
+
+                <label for="crm">CRM:</label>
+                <input type="number" id="crm" name="crm">
+
+                <label for="especialidade">Especialidade:</label>
+                <input type="text" id="especialidade" name="especialidade">
+            </div>
+
+            <label for="login">Login:</label>
+            <input type="text" id="login" name="login" disabled>
+
+            <label for="senha">Senha:</label>
+            <input type="password" id="senha" name="senha" required>
+
+            <label for="status">Status:</label>
+            <input type="text" id="status" name="status" required>
+
+
+            <button type="submit" id="submitButton" class="botao">Criar Perfil</button>
+        </form>
     </div>
+</div>
 
-
-    <script src="/js/cadastro.js"></script>
-    <script>
-        // Obtém a referência ao formulário com o ID 'cadastroForm'
-        const form = document.getElementById('cadastroForm');
-
-        // Obtém a referência ao botão de envio com o ID 'submitButton'
-        const submitButton = document.getElementById('submitButton');
-
-
-        // Adiciona um ouvinte de evento ao formulário que dispara em qualquer mudança nos campos do formulário
-        form.addEventListener('input', () => {
-            let isValid = true;
-
-            // Seleciona todos os inputs e selects obrigatórios no formulário
-            const inputs = form.querySelectorAll('input[required], select[required]');
-            inputs.forEach(input => {
-                // Percorre todos os inputs selecionados
-                if (!input.value) {
-                    isValid = false;
-                }
-            });
-
-            // Habilita ou desabilita o botão de envio baseado na validade dos campos
-            submitButton.disabled = !isValid;
-        });
-
-        // Função para adicionar um novo campo de telefone ao formulário
-        function addPhoneField() {
-            // Obtém a referência ao contêiner dos inputs de telefone
-            const phoneInputs = document.querySelector('.phone-inputs');
-
-            // Cria um novo elemento 'div' para o novo input de telefone
-            const newInput = document.createElement('div');
-            newInput.classList.add('phone-input');
-
-            // Define o conteúdo HTML do novo input de telefone
-            newInput.innerHTML = `
-                <label for="telefone">Telefone:</label>
-                <input type="tel" name="telefone[]" pattern="[0-9]{2} [0-9]{5}-[0-9]{4}" placeholder="99 99999-9999" required>
-            `;
-
-            // Adiciona o novo input de telefone ao contêiner existente
-            phoneInputs.appendChild(newInput);
+<script>
+    document.getElementById('medico').addEventListener('change', function () {
+        if (this.checked) {
+            document.getElementById('camposMedico').style.display = 'block';
+        } else {
+            document.getElementById('camposMedico').style.display = 'none';
+            document.getElementById('dataAdmissao').value = '';
+            document.getElementById('crm').value = '';
+            document.getElementById('especialidade').value = '';
         }
-    </script>
-</body>
+    });
 
-</html>
+    function addPhoneField() {
+        const phoneInputs = document.querySelector('.phone-inputs');
+        const newInput = document.createElement('div');
+        newInput.classList.add('phone-input');
+        newInput.innerHTML = `
+                <label for="telefone">Telefone:</label>
+                <input type="tel" name="telefone[]" placeholder="99 99999-9999" required>
+            `;
+        phoneInputs.appendChild(newInput);
+    }
+
+    function getFieldValue(id) {
+        const element = document.getElementById(id);
+        return (element.value.trim() === '') ? null : element.value;
+    }
+
+    document.getElementById('cadastroForm').addEventListener('submit', function (event) {
+        event.preventDefault();
+
+        const cpfInput = document.getElementById('cpf').value;
+        document.getElementById('login').value = cpfInput;
+
+        var formData = {
+            cpf: getFieldValue('cpf'),
+            nome: getFieldValue('nome'),
+            dataNasc: getFieldValue('dataNasc'),
+            genero: getFieldValue('genero'),
+            email: getFieldValue('email'),
+            logradouro: getFieldValue('logradouro'),
+            bairro: getFieldValue('bairro'),
+            estado: getFieldValue('estado'),
+            numeroEndereco: getFieldValue('numeroEndereco'),
+            complementoEndereco: getFieldValue('complementoEndereco'),
+            cep: getFieldValue('cep'),
+            telefones: Array.from(document.querySelectorAll('input[name="telefone[]"]')).map(input => input.value),
+            dataAdmissao: (document.getElementById('medico').checked) ? getFieldValue('dataAdmissao') : null,
+            crm: (document.getElementById('medico').checked) ? getFieldValue('crm') : null,
+            login: cpfInput,
+            senha: getFieldValue('senha'),
+            status: getFieldValue('status'),
+            tipo: Array.from(document.querySelectorAll('input[name="perfil"]:checked')).map(input => input.value),
+            descEspecialidade: (document.getElementById('medico').checked) ? getFieldValue('especialidade') : null
+        };
+
+        fetch('/Pessoa/novo', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(formData)
+        })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    alert('Cadastro realizado com sucesso!');
+                    window.location.href = data.redirect;
+                } else {
+                    alert('Falha no cadastro: ' + data.message);
+                }
+            })
+            .catch(error => {
+                console.error('Erro:', error);
+                alert('Um erro ocorreu. Por favor, tente novamente.');
+            });
+    });
+</script>

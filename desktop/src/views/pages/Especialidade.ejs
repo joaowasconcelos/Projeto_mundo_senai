@@ -1,0 +1,143 @@
+<link rel="stylesheet" href="/css/Especialidade.css">
+
+<div class="container">
+    <h2 class="titulo">Lista de Especialidades</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Descrição Especialidade</th>
+                <th>Editar</th>
+                <th>Deletar</th>
+            </tr>
+        </thead>
+        <tbody>
+            <% Especialidade.forEach(function(item) { %>
+                <tr>
+                    <td><%= item.id %></td>
+                    <td><%= item.desc_especialidade %></td>
+                    <td>
+                        <button class="editButton" data-id="<%= item.id %>" data-desc="<%= item.desc_especialidade %>">
+                            <span class="material-symbols-outlined">edit</span>
+                        </button>
+                    </td>
+                    <td>
+                        <button class="deleteButton" data-id="<%= item.id %>">
+                            <span class="material-symbols-outlined">delete</span>
+                        </button>
+                    </td>
+                </tr>
+            <% }); %>
+        </tbody>
+    </table>
+
+    <div class="addEspec">
+        <button id="toggleBox"><span class="material-symbols-outlined">add</span>Adiciona Especialidade</button>
+        <div class="box" id="boxForm">
+            <form id="especialidadeForm" action="/CadastraEspecialidade" method="post">
+                <label for="Especialidade">Descrição Especialidade</label>
+                <input type="text" id="Especialidade" name="Especialidade">
+                <button type="submit">Cadastrar</button>
+                <button type="button" id="backButton">Voltar</button>
+            </form>
+        </div>
+    </div>
+</div>
+
+
+    <div class="editEspec">
+        <div class="box" id="editBoxForm" style="display: none;">
+            <form id="editEspecialidadeForm">
+                <input type="hidden" id="editId" name="id">
+                <label for="editEspecialidade">Descrição Especialidade</label>
+                <input type="text" id="editEspecialidade" name="Especialidade" required>
+                <button type="submit">Salvar</button>
+                <button type="button" id="editBackButton">Voltar</button>
+            </form>
+        </div>
+    </div>
+</div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const toggleButton = document.getElementById('toggleBox');
+        const boxForm = document.getElementById('boxForm');
+        const backButton = document.getElementById('backButton');
+        const especialidadeForm = document.getElementById('EspecialidadeForm'); 
+
+        toggleButton.addEventListener('click', function () {
+            if (boxForm.style.display === 'none' || boxForm.style.display === '') {
+                boxForm.style.display = 'block';
+            } else {
+                boxForm.style.display = 'none';
+            }
+        });
+
+        backButton.addEventListener('click', function () {
+            boxForm.style.display = 'none';
+        });
+
+        especialidadeForm.addEventListener('submit', function (event) {
+            event.preventDefault()
+            boxForm.style.display = 'none';
+           
+        });
+      
+    });
+</script>
+
+
+<script>
+
+document.addEventListener('DOMContentLoaded', function () {
+    const editButtons = document.querySelectorAll('.editButton');
+    const editBoxForm = document.getElementById('editBoxForm');
+    const editBackButton = document.getElementById('editBackButton');
+    const editEspecialidadeForm = document.getElementById('editEspecialidadeForm');
+    const editId = document.getElementById('editId');
+    const editEspecialidade = document.getElementById('editEspecialidade');
+
+    editButtons.forEach(button => {
+        button.addEventListener('click', function () {
+            const id = this.dataset.id;
+            const desc = this.dataset.desc;
+
+            editId.value = id;
+            editEspecialidade.value = desc;
+
+            editBoxForm.style.display = 'block';
+        });
+    });
+
+    editBackButton.addEventListener('click', function () {
+        editBoxForm.style.display = 'none';
+    });
+
+    editEspecialidadeForm.addEventListener('submit', function (event) {
+        event.preventDefault();
+
+        const id = editId.value;
+        const especialidade = editEspecialidade.value;
+
+        fetch(`/Update/especialidade/${id}`, {
+            method: 'PUT', 
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ Especialidades: especialidade }),
+        })
+        .then(response => response.json())
+        .then(data => {
+            console.log('Resposta do servidor:', data);
+            alert('Especialidade atualizada com sucesso!');
+            editBoxForm.style.display = 'none'; // Fechar o formulário após a atualização
+            window.location.reload(); // Recarregar a página após a atualização
+        })
+        .catch(error => {
+            console.error('Erro ao atualizar especialidade:', error);
+            alert('Erro ao atualizar especialidade. Verifique o console para mais detalhes.');
+        });
+    });
+});
+
+</script>

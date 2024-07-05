@@ -1,35 +1,59 @@
-<!DOCTYPE html>
-<html lang="pt-BR">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Admin - Clínica</title>
+
     <link rel="stylesheet" href="/css/ConsultaAdm.css">
-</head>
-<body>
-    <main>
-        <h2>Lista de Consultas</h2>
+
+    <div>
+        <h2 class="titulo">Lista de Consultas</h2>
         <table>
             <thead>
                 <tr>
                     <th>ID</th>
-                    <th>Nome</th>
-                    <th>Data da Consulta</th>
-                    <th>Hora da Consulta</th>
-                    <th>status</th>
-                </tr>   
+                    <th>Data</th>
+                    <th>Hora</th>
+                    <th>Nome Paciente</th>
+                    <th>CPF Paciente</th>
+                    <th>Nome do Medico</th>
+                    <th>Especialidade do Medico</th>
+                </tr>
             </thead>
-            <tbody>
-                
+            <tbody id="consulta-list">
+                <!-- Pacientes serão inseridos aqui -->
             </tbody>
         </table>
-    </main>
-    
+    </div>
 
-
-
-
-
-
-</body>
-</html>
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            fetch('/Seleciona/Todas/Consultas', {
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('A resposta da rede não foi ok');
+                }
+                return response.json();
+            })
+            .then(data => {
+                const tableBody = document.getElementById('consulta-list');
+                data.forEach(paciente => {
+                    const row = document.createElement('tr');
+                    row.innerHTML = `
+                        <td>${paciente.id}</td>
+                        <td>${paciente.data}</td>
+                        <td>${paciente.hora}</td>
+                        <td>${paciente.nome_paciente}</td>
+                        <td>${paciente.cpf_paciente}</td>
+                        <td>${paciente.nome_funcionario}</td>
+                        <td>${paciente.desc_especialidade}</td>
+                     
+                    `;
+                    tableBody.appendChild(row);
+                });
+            })
+            .catch(error => {
+                console.error('Erro ao buscar dados:', error);
+            });
+        });
+    </script>

@@ -5,7 +5,7 @@ class Funcionario extends Pessoa {
         super(pId, pCpf, pNome, pDataNasc, pGenero, pEmail);
         this.crm = pCrm;
 
-        if (pDataAdmissao === null) {
+        if (pDataAdmissao != null) {
             this.dataAdmissao = pDataAdmissao;
         } else {
             this.dataAdmissao = this.DataConvert(pDataAdmissao);
@@ -20,16 +20,10 @@ class Funcionario extends Pessoa {
 
   
     DataConvert(value) {
-        if (value === null || value === undefined) {
-            return null;
-        } else {
-            let [dia, mes, ano] = value.split('/');
-            if (!dia || !mes || !ano) {
-                throw new Error('Formato de data inválido');
-            }
-            let dataFormatada = `${ano}-${mes}-${dia}`;
-            return dataFormatada;
-        }
+        let [dia, mes, ano] = value.split('/');
+        let dataFormatada = `${ano}-${mes}-${dia}`;
+        this.dataNasc = new Date(dataFormatada);
+        return this.DataAdmissao
     }
     
     validaCampos() {

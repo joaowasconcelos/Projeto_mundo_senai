@@ -8,10 +8,10 @@ async function selectInfosPaciente(id) {
          SELECT 
     p.nome AS Nome,
     p.cpf AS CPF,
-    p.data_nasc AS DataNascimento,
+    DATE_FORMAT(p.data_nasc, '%d/%m/%Y') AS DataNascimento,
     p.genero AS Genero,
     p.email AS Email,
-    p.data_cad AS DataCadastro,
+    DATE_FORMAT( p.data_cad, '%d/%m/%Y') AS DataCadastro,
     e.logradouro AS Logradouro,
     e.bairro AS Bairro,
     e.estado AS Estado,
