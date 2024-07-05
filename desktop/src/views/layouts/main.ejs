@@ -1,36 +1,34 @@
-<!DOCTYPE html>
-<html lang="pt-br">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>projeto</title>
-    <link rel="stylesheet" href="/css/styles.css">
-   
-</head>
-<body>
+<title>Home</title>
+<link rel="stylesheet" href="/css/styles.css">
 
-    <header>
-        <h4 class="clinica">SP MEDICAL GROUP</h4>
-        <nav>
-            <ul>
-             
-                
-                <!-- Adicione mais links de navegação aqui -->
-            </ul>
-        </nav>
-    </header>
+<body>
 
     <header>
         <%- include ('../partials/menu.ejs'); %>
     </header>
 
     <main>
-        <main><%- body %></main>
+        <%- body %>
     </main>
 
     <footer>
         <%- include ('../partials/footer'); %>
     </footer>
 
+    <script>
+
+        //Essa função faz com que o header mude de cor 
+        //conforme a gente rola a pagin pra baixo
+        const menu = document.querySelector('nav');
+
+        function activeScroll() {
+            menu.classList.toggle('ativo', scrollY > 0);
+        }
+
+        window.addEventListener('scroll', activeScroll);
+
+    </script>
+
 </body>
+
 </html>
