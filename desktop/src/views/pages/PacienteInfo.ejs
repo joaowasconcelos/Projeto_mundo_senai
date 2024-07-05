@@ -1,0 +1,93 @@
+<link rel="stylesheet" href="/css/Paciente.css">
+<div>
+    <h2 class="titulo">Todos Dados dos Pacientes</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>Nome</th>
+                <th>CPF</th>
+                <th>DataNascimento</th>
+                <th>Genero</th>
+                <th>Email</th>
+                <th>DataCadastro</th>
+                <th>Logradouro</th>
+                <th>Bairro</th>
+                <th>Estado</th>
+                <th>NumeroResidencia</th>
+                <th>Complemento</th>
+                <th>CEP</th>
+                <th>Telefone</th>
+                <th>Tipo</th>
+                <th>Login</th>
+                <th>Senha</th>
+                <th>DataAdmissao</th>
+                <th>CRM</th>
+                <th>Especialidade</th>
+            </tr>
+        </thead>
+        <tbody>
+            <% infoPaciente.forEach(function(item) { %>
+                <tr>
+                    <td>
+                        <%= item.Nome %>
+                    </td>
+                    <td>
+                        <%= item.CPF %>
+                    </td>
+                    <td>
+                        <%= item.DataNascimento %>
+                    </td>
+                    <td>
+                        <%= item.Genero %>
+                    </td>
+                    <td>
+                        <%= item.Email %>
+                    </td>
+                    <td>
+                        <%= item.DataCadastro %>
+                    </td>
+                    <td>
+                        <%= item.Logradouro %>
+                    </td>
+                    <td>
+                        <%= item.Bairro %>
+                    </td>
+                    <td>
+                        <%= item.Estado %>
+                    </td>
+                    <td>
+                        <%= item.NumeroResidencia %>
+                    </td>
+                    <td>
+                        <%= item.Complemento %>
+                    </td>
+                    <td>
+                        <%= item.CEP %>
+                    </td>
+                    <td>
+                        <%= item.Telefone %>
+                    </td>
+                    <td>
+                        <%= item.Tipo %>
+                    </td>
+                    <td>
+                        <%= item.Login %>
+                    </td>
+                    <td>
+                        <%= item.Senha %>
+                    </td>
+                    <td>
+                        <%= item.DataAdmissao %>
+                    </td>
+                    <td>
+                        <%= item.CRM %>
+                    </td>
+                    <td>
+                        <%= item.Especialidade %>
+                    </td>
+
+                </tr>
+                <% }); %>
+        </tbody>
+    </table>
+</div>

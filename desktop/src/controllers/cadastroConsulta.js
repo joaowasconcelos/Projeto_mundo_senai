@@ -4,18 +4,6 @@ const { insertConsulta, updateConsul} = require("../models/ConsultaModel");
 
 
 const cadastroConsulta = {
-
-    paginaConsulta: async (req, res) => {
-        try {
-            res.render('pages/Consulta');
-        }
-        catch (error) {
-            console.log(error);
-            res.render('pages/pag_erro', { message: error });
-        }
-
-
-    },
     cadastraConsulta: async (req, res) => {
         try {
             const { nome, cpf, nomeMedico, cpfMedico, Consulta: [{ data, hora, status }] } = req.body;
@@ -30,8 +18,6 @@ const cadastroConsulta = {
             if (dataConsulta == "Invalid Date" || !(new Date(novaConsulta.Data) instanceof Date)) {
                 return res.json({ message: "Data informada é invalida" });
             }
-           
-
             const result = await insertConsulta(novoPaciente, novaConsulta, novoMedico);
             return res.json({message:"Consulta inserida com sucesso"})     
 
