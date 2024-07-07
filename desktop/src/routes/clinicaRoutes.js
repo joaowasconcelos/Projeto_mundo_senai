@@ -58,6 +58,13 @@ router.put("/Update/prontuario/:id",cadastroProntuario.UpdateProntuario);
 
 router.delete('/deletar/pessoa/:id',cadastro.deletePessoa)
 router.delete('/deletar/funcionario/:id',cadastro.deletarFuncionario)
+router.delete('/deletar/login/:id',LoginPerfis.deletarLogin)
+router.delete('/deletar/consulta/:id',cadastroConsulta.excluirConsulta)
+router.delete('/deletar/especialidade/:id',cadastroEspecia.deleteModalidade)
+router.delete('/deletar/prontuario/:id',cadastroProntuario.excluirProntu)
+router.delete('/deletar/endereco/:id',cadastro.deletarEndereco)
+router.delete('/deletar/telefone/id:',cadastro.deletarTelefone)
+router.delete('/deletar/perfil/id:',cadastro.deletarPerfil)
 
 router.use(function (req, res) {
     res.status(404).render(`pages/pag_erro`, { message: '404 - Página não encontrada' })

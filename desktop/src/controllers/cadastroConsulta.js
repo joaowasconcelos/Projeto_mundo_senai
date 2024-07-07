@@ -1,6 +1,6 @@
 const Consulta = require("../models/classes/Consulta");
 const Pessoa = require("../models/classes/Pessoa")
-const { insertConsulta, updateConsul} = require("../models/ConsultaModel");
+const { insertConsulta, updateConsul,excluirConsulta} = require("../models/ConsultaModel");
 
 
 const cadastroConsulta = {
@@ -59,6 +59,20 @@ const cadastroConsulta = {
             res.status(500).json({ error: "Erro ao cadastrar Consulta" });
         }
     },
+    excluirConsulta:async (req,res) => {
+        try {
+            const id = req.params.id;
+            const obgConsult = new Consulta(id)
+            const result = await excluirConsulta(obgConsult)
+            if (result.error) {
+                res.status(500).json({ success: false, message: 'Erro ao excluir Login', error: result.details });
+            } else {
+                res.status(200).json(result);
+            }
+        } catch (error) {
+            res.status(500).json({  error: "Erro ao excluir Consulta" });
+        }
+    }
 
 };
 

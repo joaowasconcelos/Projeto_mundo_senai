@@ -42,12 +42,12 @@ async function insertEspecialidade(especialidades) {
     }
 }
 
-async function UpdateEspecialidade(descricao){
+async function UpdateEspecialidade(descricao) {
     const bd = await conectarBancoDeDados();
     try {
         await bd.beginTransaction();
         const UpdateEspe = await bd.query('UPDATE tbl_especialidade SET desc_especialidade = ? where id =?;',
-            [descricao._descEspecialidade,descricao.id]
+            [descricao._descEspecialidade, descricao.id]
         );
         console.log(UpdateEspe)
         return UpdateEspe;
@@ -60,4 +60,27 @@ async function UpdateEspecialidade(descricao){
         bd.release();
     }
 }
-module.exports = { insertEspecialidade,selectEspecialidades,UpdateEspecialidade };
+
+async function deleteModalidade(especialidade) {
+    const bd = await conectarBancoDeDados();
+    try {
+        await bd.beginTransaction();
+        const [res] = await bd.query('DELETE FROM tbl_especialidade WHERE id = ?', [especialidade.id]);
+        console.log('RESULTADO DELETE Especialidade =>', res);
+        if (res.affectedRows === 0) {
+            throw new Error('Modalidade não encontrada');
+        } else {
+            await bd.commit();
+            return res;
+        }
+
+    } catch (error) {
+        console.error('Erro ao deletar Modalidade:', error);
+        await bd.rollback();
+        return { error: 'Falha no delete', details: error };
+    } finally {
+        await bd.release();
+    }
+}
+
+module.exports = { insertEspecialidade, selectEspecialidades, UpdateEspecialidade, deleteModalidade };

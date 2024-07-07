@@ -1,5 +1,5 @@
 const Especialidade = require("../models/classes/Especialidade");
-const { insertEspecialidade, selectEspecialidades,UpdateEspecialidade } = require("../models/EspecialidadeModel");
+const { insertEspecialidade, selectEspecialidades,UpdateEspecialidade,deleteModalidade } = require("../models/EspecialidadeModel");
 
 const cadastroEspecia = {
     cadastraEspecialidade: async (req, res) => {
@@ -35,6 +35,22 @@ const cadastroEspecia = {
             console.error("Erro ao cadastrar especialidades:", error);
             res.status(500).json({ error: "Erro ao cadastrar especialidades" });
         }
+    },
+
+    deleteModalidade: async (req, res) => {
+        try {
+            const id = req.params.id
+            const objEspe = new Especialidade(id)
+            console.log(objEspe)
+            const result = await deleteModalidade(objEspe);
+            if (result.error) {
+                res.status(500).json({ success: false, message: 'Erro ao excluir Especialidade', error: result.details });
+            } else {
+                res.status(200).json(result);
+            }
+        } catch (error) {
+            res.status(500).json({  error: "Erro ao excluir Especialidade" });
+        }
     }
 };
 
@@ -65,5 +81,7 @@ const updateEspecialidade = {
         }
     }
 }
+
+
 
 module.exports = { cadastroEspecia, selectEspecialidade,updateEspecialidade };

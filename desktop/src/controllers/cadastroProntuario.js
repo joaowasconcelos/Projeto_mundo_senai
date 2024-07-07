@@ -1,6 +1,6 @@
 const Prontuario = require("../models/classes/Prontuario");
 const Consulta = require("../models/classes/Consulta")
-const {criarProntu,EditaProntuario } = require("../models/ProntuarioModel");
+const {criarProntu,EditaProntuario,excluirProntu } = require("../models/ProntuarioModel");
 
 const cadastroProntuario = {
     cadastraProntuario: async (req, res) => {
@@ -34,7 +34,21 @@ const cadastroProntuario = {
             res.status(500).json({ error: "Erro ao Editar Prontuario" });
         }
     },
-
+    excluirProntu: async (req,res) => {
+        try{
+            const id = req.params.id
+            const objProntu = new Prontuario (id)
+            console.log(objProntu)
+            const result = await excluirProntu(objProntu);
+            if (result.error) {
+                res.status(500).json({ success: false, message: 'Erro ao excluir Prontuario', error: result.details });
+            } else {
+                res.status(200).json(result);
+            }
+        } catch (error) {
+            res.status(500).json({  error: "Erro ao excluir prontuario" });
+        }
+    }
 
 
 };
