@@ -4,89 +4,39 @@ body {
     padding: 0;
     background-color: #f4f4f4;
     margin-top: 100px;
+    margin-bottom: 60px;
 }
 
-header {
-    background: #00665E;
-    color: #fff;
-    padding: 15px 0;
-    text-align: center;
+/* essa parte faz com que o header mude de cor conforme a 
+gente rola a pagina para baixo - funciona com o javascript (que ta no arquivo main.ejs) */
+nav.ativo {
+    background: #B5DAD7;
+    transition: 1.5s;
+}
+
+section {
     width: 100%;
-    position: fixed;
-    top: 0;
-    left: 0;
-    z-index: 1000;
-    align-items: center;
-    text-align: center;
-    justify-content: center;
 }
 
-/* .logo{
-    margin-top: -10px;
-} */
-
-nav ul {
-    list-style: none;
-    padding: 0;
-}
-
-nav ul li {
-    display: inline;
-    margin: 0 10px;
-}
-
-nav ul li a {
-    color: #fff;
-    text-decoration: none;
-}
+/* fim */
 
 main {
-    padding: 20px;
+    min-height: 439px;
 }
 
 footer {
+    display: block;
     background: #00665E;
     color: #fff;
     text-align: center;
-    position: fixed ;
-    padding: 10px 0;
-    bottom: 0;
+    font-size: 14px;
     width: 100%;
-}
-
-.img-01{
-    margin-left: 850px;
-    margin-top: -280px;
-}
-
-
-.btn-Login {
-    display: inline-block;
-    margin: 50px;
-    margin-top: -100%;
-}
-    
-.btn-Login a {
-    text-decoration: none;
-    color: white;
-    background-color: #38847E;
-    padding: 10px 10px;
-    border-radius: 5px;
-    display: inline-flex;
-    align-items: center;
-    transition: background-color 0.3s, transform 0.1s;
-    
-}
-
-.btn-Login a:hover {
-    background-color: 38847E;
-}
-
-.btn-Login a:active {
-    background-color: #38847E;
-    transform: scale(0.95);
-}
-
-.btn-Login i {
-    margin-right: 4px;
+    position: fixed; /* Altera de absolute para fixed */
+    bottom: 0; /* Garante que o footer esteja no fundo da página */
+    left: 0; /* Garante que o footer esteja alinhado à esquerda */
+    padding: 8px 0;
+    font-family: "Armata", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+    z-index: 1000; /* Garante que o footer fique sobre outros elementos */
 }

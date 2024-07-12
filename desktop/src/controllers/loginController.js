@@ -1,3 +1,4 @@
+const { render } = require("ejs");
 const Login = require("../models/classes/Login");
 const { selectLogin, verificarSenha,deletarLogin } = require('../models/LoginModel')
 const Perfis = require("../models/PerfisModel");
@@ -6,61 +7,43 @@ const Perfis = require("../models/PerfisModel");
 
 const LoginPerfis = {
     paginaLogin: async (req, res) => {
-        try {
-            res.render('pages/Login');
-        }
-        catch (error) {
-            console.log(error);
-            res.render('pages/pag_erro', { message: error });
-        }
-
+        res.render('pages/Login');
     },
     LoginPessoa: async (req, res) => {
         try {
-            const { login, senha } = req.body
+            const { login, senha } = req.body;
+            const loginConsulta = new Login(null, login, senha, null, null, null);
+            const result = await selectLogin(loginConsulta);
+            console.log(result)
 
-            const loginConsulta = new Login(null, login, senha, null, null, null)
-            console.log(loginConsulta)
-            const result = await selectLogin(loginConsulta)
-
-            if (result === "Medico") {
+            if (result && await verificarSenha(senha, result.senha) === false) {
+                req.session.isAuthenticated = true;
+                req.session.user = result;
                 console.log(result)
-                console.log("entrou")
-              
-                return res.render('pages/Cadastro'); 
-           
+                
+                if (result.tipo === 'Paciente' || result.tipo === 'paciente') {
+                    return res.redirect('/Paciente/Usuario'); // Redirecionar para a página de paciente
+                } else if (result.tipo === 'Medico') {
+                    return res.redirect('/Medico'); // Redirecionar para a página de médico
+                } else if (result.tipo === 'Adm') {
+                    return res.redirect('/adm'); // Redirecionar para a página de admin
+                } else {
+                    req.flash('error', 'Usuario ou senha incorretos');
+                    return res.redirect('/Login');
+                }
+            } else {
+                req.flash('error', 'Usuario ou senha incorretos');
+                return res.render('pages/Login');
             }
-
-            console.log('aqui', result[0][0].senha)
-            if (senha != result[0][0].senha) {
-                return res.json({ message: 'Senha incorreta' })
-            }
-            if (result[0].tipo === 'Paciente') {
-                return res.render('/Paciente', { data: result[0] })
-            } else if (result[0].tipo === 'Medico') {
-                return res.render('/Medico', { data: result[0] })
-            }
-            return res.render('/Adm', { data: result[0] })
-
-
         } catch (error) {
-            console.log(error)
-            res.json(error);
+            console.error('Erro ao realizar login:', error);
+            return res.status(500).json({ message: 'Ocorreu um erro no servidor. Por favor, tente novamente mais tarde.' });
         }
     },
-
-
-
     LoginPessoaMobile: async (req, res) => {
-        console.log('HELP=>');
         try {
             const { login, senha } = req.body
-            console.log('HELP=>');
-            // const loginConsulta = new Login(null, login, senha, null, null, null)
-            // console.log(loginConsulta)
             const result = await selectLogin(login)
-            console.log('aaaaaaa',result);
-            console.log('aqui', result[0][0].senha)
             if (senha != result[0][0].senha) {
                 return res.json({ message: 'Senha incorreta' })
             }
@@ -70,13 +53,12 @@ const LoginPerfis = {
                 return res.json({ data: result[0] })
             }
             return res.json({ data: result[0] })
-
         } catch (error) {
             console.log(error)
             res.json(error);
         }
     },
-    
+
     // selecionaLogin: async (req, res) => {
     //     try {
     //         console.log(req.body)

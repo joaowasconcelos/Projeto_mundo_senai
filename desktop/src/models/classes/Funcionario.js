@@ -20,16 +20,11 @@ class Funcionario extends Pessoa {
 
   
     DataConvert(value) {
-        if (value === null || value === undefined) {
-            return null;
-        } else {
-            let [dia, mes, ano] = value.split('/');
-            if (!dia || !mes || !ano) {
-                throw new Error('Formato de data inválido');
-            }
-            let dataFormatada = `${ano}-${mes}-${dia}`;
-            return dataFormatada;
-        }
+        console.log()
+        let [dia, mes, ano] = value.split('/');
+        let dataFormatada = `${ano}-${mes}-${dia}`;
+        this.dataAdmissao = new Date(dataFormatada);
+        return this.DataAdmissao
     }
     
     validaCampos() {

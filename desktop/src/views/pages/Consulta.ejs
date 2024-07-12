@@ -1,16 +1,21 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-br">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Consulta</title>
     <link rel="stylesheet" href="/css/Consulta.css">
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
+    <title>Formulário de Consulta</title>
 </head>
+
 <body>
-    
+
     <div class="container">
         <h2>Formulário de Consulta</h2>
-        <form action="/consultas" method="POST">
+        <form id="consultaForm" action="/Cadastro/Consulta" method="post">
             <div class="form-group">
                 <label for="data">Data:</label>
                 <input type="date" id="data" name="data" required>
@@ -22,39 +27,80 @@
             </div>
 
             <div class="form-group">
-                <label for="status">Status:</label>
-                <select id="status" name="status" required>
-                    <option value="Agendado">Agendado</option>
-                    <option value="Concluído">Concluído</option>
-                    <option value="Cancelado">Cancelado</option>
-                </select>
-            </div>
-
-            <div class="form-group">
-                <label for="funcionario">Funcionário:</label>
-                <select id="funcionario" name="funcionario" required>
-                    <option value="Agendado">Adm</option>
-                    <option value="Concluído">Médico</option>
-                    <option value="Cancelado">Paciente</option>
-                </select>
-            </div>
-
-            <div class="form-group">
-                <label for="paciente">Paciente:</label>
-                <select id="paciente" name="paciente" required>
-                    
-                </select>
+                <label for="search">Buscar Paciente:</label>
+                <input type="text" id="search" placeholder="Digite para buscar...">
+                <input type="hidden" id="paciente" name="paciente" required>
+            
+                <input type="hidden" id="ID_PACIENTE" name="ID_PACIENTE">
             </div>
 
             <div class="form-group">
                 <label for="especialidade">Especialidade:</label>
                 <select id="especialidade" name="especialidade" required>
-                    
+                    <option value=""></option>
+                    <% Especialidade.forEach(function(item) { %>
+                        <option value="<%= item.id %>" <%=item.id==especialidadeSelecionada ? 'selected' : '' %>><%=
+                                item.desc_especialidade %>
+                        </option>
+                    <% }); %>
                 </select>
             </div>
+
+            <div class="form-group">
+                <label for="medico">Médico:</label>
+                <select id="medico" name="medico" required>
+                    <% if (medico.length > 0) { %>
+                        <% medico.forEach(function(medicoItem) { %>
+                            <option value="<%= medicoItem.id %>">
+                                <%= medicoItem.nome %>
+                            </option>
+                            <input type="hidden" id="id_funcionario" name="id_funcionario" value="<%= medicoItem.id_funcionario %>">
+                        <% }); %>
+                    <% } else { %>
+                        <option value="">Nenhum médico encontrado</option>
+                    <% } %>
+                </select>
+            </div>
+
+            <input type="hidden" id="status" name="status" value="1">
 
             <button type="submit">Enviar</button>
         </form>
     </div>
+
+    <!-- <script>
+        $(document).ready(function () {
+            var pacientes = [
+                <% pacientes.forEach(function (paciente) { %>
+                    {
+                        label: "<%= paciente.NOME %> <%= paciente.CPF %>",
+                        value: "<%= paciente.id %>",
+                        ID_PACIENTE: "<%= paciente.ID_PACIENTE %>"
+                    },
+                <% }); %>
+            ];
+
+            $("#search").autocomplete({
+                source: pacientes,
+                select: function (event, ui) {
+                    $("#search").val(ui.item.label);
+                    $("#paciente").val(ui.item.value);
+                    $("#ID_PACIENTE").val(ui.item.ID_PACIENTE); // Define o valor do ID_PACIENTE
+                    return false;
+                }
+            });
+
+            $("#especialidade").change(function () {
+                console.log('Submitting form...');
+                $("#consultaForm").submit();
+            });
+
+            var consultaAtiva = true; // Aqui você define a lógica para verificar se a consulta está ativa
+            var statusInput = document.getElementById('status');
+            statusInput.value = consultaAtiva ? "1" : "0";
+        });
+    </script> -->
+
 </body>
+
 </html>

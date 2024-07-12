@@ -1,52 +1,35 @@
-const express = require('express')
-const { engine } = require('express-handlebars')
+const express = require('express');
 const bodyParser = require('body-parser');
-const router = require("./src/routes/clinicaRoutes")
+const router = require('./src/routes/clinicaRoutes');
 const expressLayouts = require('express-ejs-layouts');
 const path = require('path');
+const session = require('express-session');
 
 const app = express();
-const port= 3000;
-
-// app.use(bodyParser.json());
-// app.use(bodyParser.urlencoded({ extended: false }));
-
-//app.use(expressLayouts);
-
-// layoutPrincipal = 'main'
-// app.engine('handlebars', engine({
-//     defaultLayout: layoutPrincipal,
-//     helpers: {
-//         section: function (name, options) {
-//             if (!this._sections) this._sections = {};
-//             this._sections[name] = options.fn(this);
-//             return null;
-//         }
-//     }
-// }));
-// app.set('view engine', 'handlebars');
-// app.set('views', './views');
+const port = 3000;
 
 app.use(express.json());
-
-// Configuração do bodyParser
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 
-// Configuração do EJS
 app.use(expressLayouts);
 app.set('view engine', 'ejs');
-app.set('views', './src/views'); // Configurando o diretório de views
-app.set('layout', 'layouts/main'); // Define o layout principal
+app.set('views', './src/views');
+app.set('layout', 'layouts/main');
 
-
-// Configuração para servir arquivos estáticos
 app.use(express.static(path.join(__dirname, 'publico')));
 
-// Rotas
-app.use('/',router);
+app.use(session({
+    secret: 'yourSecretKey',
+    resave: false,
+    saveUninitialized: true,
+    cookie: { maxAge: 900000, httpOnly: true }
+}));
 
-// Inicialização do servidor
+app.use(express.urlencoded({ extended: true }));
+
+app.use('/', router );
+
 app.listen(port, () => {
     console.log(`Servidor respondendo na porta ${port}`);
 });

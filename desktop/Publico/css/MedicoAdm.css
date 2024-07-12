@@ -1,38 +1,3 @@
-
-
-header {
-    background-color: #00665E;
-    color: #fff;
-    padding: 1rem;
-    text-align: center;
-}
-
-nav {
-    background-color: #00665E;
-    padding: 0.5rem;
-}
-
-nav ul {
-    list-style-type: none;
-    margin: 0;
-    padding: 0;
-    display: flex;
-    justify-content: center;
-}
-
-nav ul li {
-    margin: 0 1rem;
-}
-
-nav ul li a {
-    color: #fff;
-    text-decoration: none;
-}
-
-main {
-    padding: 1rem;
-}
-
 table {
     width: 100%;
     border-collapse: collapse;
@@ -52,6 +17,9 @@ th {
     background-color: #eee;
 }
 
+.titulo{
+    text-align: center;
+}
 /* Estilos para o botão de voltar */
 .back-button {
     text-decoration: none; /* Remove sublinhado do link */

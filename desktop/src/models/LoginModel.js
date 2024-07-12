@@ -1,14 +1,14 @@
 const conectarBancoDeDados = require("../config/db")
+const bcrypt = require('bcrypt');
 
 async function selectLogin(objLogin) {
-    console.log('HELP =>', objLogin.login, objLogin.senha);
     const bd = await conectarBancoDeDados();
     try {
-        console.log(objLogin.login, objLogin.senha);
         await bd.beginTransaction();
 
         const selectLogin = await bd.query(`
-            SELECT 
+            SELECT
+            p.nome,
                 lo.id,
                 lo.login,
                 lo.senha,
@@ -21,7 +21,7 @@ async function selectLogin(objLogin) {
             ON lo.pessoa_id=p.id
             WHERE lo.login=? AND lo.senha=?;`, [objLogin.login, objLogin.senha]);
 
-        const perfilLogin = selectLogin[0][0].tipo
+        const perfilLogin = selectLogin[0][0]
         return perfilLogin
     }
     catch (error) {
@@ -38,21 +38,14 @@ async function selectLogin(objLogin) {
     }
 }
 
-async function verificarSenha() {
-    const bd = conectarBancoDeDados()
-    bcrypt.compare(password, user.password, (err, isMatch) => {
-        if (err) {
-            console.error('Erro ao comparar as senhas:', err);
-            res.status(500).json({ success: false, message: 'Erro no servidor' });
-            return;
-        }
-
-        if (isMatch) {
-            res.json({ success: true });
-        } else {
-            res.json({ success: false, message: 'Senha incorreta' });
-        }
-    });
+async function verificarSenha(senhaFornecida, senhaHash) {
+    try {
+        const isMatch = await bcrypt.compare(senhaFornecida, senhaHash);
+        return isMatch;
+    } catch (err) {
+        console.error('Erro ao comparar as senhas:', err);
+        throw err;
+    }
 }
 
 async function deletarLogin(id) {
@@ -78,4 +71,6 @@ async function deletarLogin(id) {
 }
 
 
+
 module.exports = { selectLogin, verificarSenha,deletarLogin }
+

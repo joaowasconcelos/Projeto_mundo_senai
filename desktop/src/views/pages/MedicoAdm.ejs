@@ -1,33 +1,63 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="/css/MedicoAdm.css">
-    <title>Document</title>
-</head>
-<body>
+<link rel="stylesheet" href="/css/MedicoAdm.css">
 
-    <div class="actions">
-        <button onclick="window.location.href='/Medico'">Cadastrar Medico</button>
-    </div>
+<div class="actions">
+    <button onclick="window.location.href='/Medico'">Cadastrar Medico</button>
+</div>
 
-    <main>
-        <h2 class="titulo">Lista de Medicos</h2>
-        <table>
-            <thead>
-                <tr>
-                    <th>ID</th>
-                    <th>Nome</th>
-                    <th>Especialidade</th>
-                    <th>sexo</th>
-                </tr>   
-            </thead>
-            <tbody>
+<div>
+    <h2 class="titulo">Lista de Medicos</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Nome</th>
+                <th>CPF</th>
+                <th>Data Nascimento</th>
+                <th>CRM</th>
+                <th>Data Admissão</th>
+                <th>Especialidade</th>
+                <th>Todos os dados</th>
                 
-            </tbody>
-        </table>
-    </main>
-    
-</body>
-</html>
+            </tr>
+        </thead>
+        <tbody>
+            <% TdsMedicos.forEach(function(item) { %>
+                <tr>
+                    <td>
+                        <%= item.id %>
+                    </td>
+                    <td>
+                        <%= item.nome %>
+                    </td>
+                    <td>
+                        <%= item.cpf %>
+                    </td>
+                    <td>
+                        <%= item.data_nasc %>
+                    </td>
+                    <td>
+                        <%= item.crm %>
+                    </td>
+                    <td>
+                        <%= item.data_admissao %>
+                    </td>
+                    <td>
+                        <%= item.desc_especialidade %>
+                    </td>
+                    <td>
+                        <a method="get" href="/PacienteInfo/<%= item.id %>"><span
+                                class="material-symbols-outlined">folder_shared</span>
+                        </a>
+                    </td>
+                </tr>
+
+
+                <% }); %>
+        </tbody>
+    </table>
+</div>
+<div>
+    <a href="/adm" class="back-button">
+        <button><span class="material-symbols-outlined">arrow_back</span> Voltar</button>
+    </a>
+</div>

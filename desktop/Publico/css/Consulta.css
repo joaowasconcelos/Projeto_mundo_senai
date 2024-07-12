@@ -1,17 +1,8 @@
-header {
-    background: #00665E;
-    color: #fff;
-    padding: 10px 0;
-    text-align: center;
-    width: 100%;
-    position: fixed;
-    top: 0;
-    left: 0;
-    z-index: 1000;
-}
+
 
 .container {
     max-width: 800px;
+    height: 800px;
     margin: 0 auto;
     background-color: #fff;
     padding: 30px;
@@ -128,3 +119,4 @@ input[type="submit"]:hover {
 .perfil {
     margin-top: 50px;
 }
+

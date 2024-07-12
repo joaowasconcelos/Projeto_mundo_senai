@@ -1,33 +1,51 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="/css/Paciente.css">
-    <title>Document</title>
-</head>
-<body>
-    
-</body>
-</html>
+<link rel="stylesheet" href="/css/Paciente.css">
 
-
-<div class="actions">
-    <button onclick="window.location.href='/Cadastro'">Cadastrar Paciente</button>
-</div>
-
-<main>
-    <h2>Lista de Pacientes</h2>
+<div>
+    <h2 class="titulo">Lista de Pacientes</h2>
     <table>
         <thead>
             <tr>
                 <th>ID</th>
+                <th>CPF</th>
                 <th>Nome</th>
-                <th>Data da Consulta</th>
+                <th>Data de Nascimento</th>
+                <th>Gênero</th>
+                <th>Tipo</th>
+                <th>Todos dados Pacientes</th>
             </tr>
         </thead>
         <tbody>
-            
+            <% tdPessoas.forEach(function(item) { %>
+                <tr>
+                    <td>
+                        <%= item.id %>
+                    </td>
+                    <td>
+                        <%= item.CPF %>
+                    </td>
+                    <td>
+                        <%= item.NOME %>
+                    </td>
+                    <td>
+                        <%= item.DATA_NASCIMENTO %>
+                    </td>
+                    <td>
+                        <%= item.GENERO %>
+                    </td>
+                    <td>
+                        <%= item.TIPO %>
+                    </td>
+                    <td><a method="get" href="/PacienteInfo/<%= item.id %>"><span
+                                class="material-symbols-outlined">folder_shared</span></a></td>
+                </tr>
+
+                <% }); %>
         </tbody>
     </table>
-</main>
+</div>
+
+<div>
+    <a href="/adm" class="back-button">
+        <button><span class="material-symbols-outlined">arrow_back</span> Voltar</button>
+    </a>
+</div>
