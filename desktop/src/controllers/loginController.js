@@ -1,3 +1,4 @@
+const { render } = require("ejs");
 const Login = require("../models/classes/Login");
 const { selectLogin, verificarSenha } = require('../models/LoginModel')
 const Perfis = require("../models/PerfisModel");
@@ -6,14 +7,7 @@ const Perfis = require("../models/PerfisModel");
 
 const LoginPerfis = {
     paginaLogin: async (req, res) => {
-        try {
-            res.render('pages/Login');
-        }
-        catch (error) {
-            console.log(error);
-            res.render('pages/pag_erro', { message: error });
-        }
-
+        res.render('pages/Login');
     },
     LoginPessoa: async (req, res) => {
         try {
@@ -21,27 +15,31 @@ const LoginPerfis = {
             const loginConsulta = new Login(null, login, senha, null, null, null);
             const result = await selectLogin(loginConsulta);
             console.log(result)
-            if (result === 'Paciente') {
-                console.log("Usuário logado como Paciente");
-                return res.render('pages/',);
-            }else if (result === 'Medico') {
-                console.log("Usuário logado como Médico");
-                return res.render('pages/MedicoAdm');
-            } else if (result === 'Adm') {
-                console.log("Usuário logado como Administrador");
-                return res.render('pages/Adm');
+
+            if (result && await verificarSenha(senha, result.senha) === false) {
+                req.session.isAuthenticated = true;
+                req.session.user = result;
+                console.log(result)
+                
+                if (result.tipo === 'Paciente' || result.tipo === 'paciente') {
+                    return res.redirect('/Paciente/Usuario'); // Redirecionar para a página de paciente
+                } else if (result.tipo === 'Medico') {
+                    return res.redirect('/Medico'); // Redirecionar para a página de médico
+                } else if (result.tipo === 'Adm') {
+                    return res.redirect('/adm'); // Redirecionar para a página de admin
+                } else {
+                    req.flash('error', 'Usuario ou senha incorretos');
+                    return res.redirect('/Login');
+                }
             } else {
-                return res.json({ message: 'Tipo de usuário desconhecido' });
+                req.flash('error', 'Usuario ou senha incorretos');
+                return res.render('pages/Login');
             }
         } catch (error) {
             console.error('Erro ao realizar login:', error);
             return res.status(500).json({ message: 'Ocorreu um erro no servidor. Por favor, tente novamente mais tarde.' });
         }
     },
-
-
-
-
     LoginPessoaMobile: async (req, res) => {
         try {
             const { login, senha } = req.body

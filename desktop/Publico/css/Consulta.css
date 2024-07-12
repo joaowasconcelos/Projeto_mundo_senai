@@ -2,7 +2,7 @@
 
 .container {
     max-width: 800px;
-    height: 600px;
+    height: 800px;
     margin: 0 auto;
     background-color: #fff;
     padding: 30px;
@@ -119,3 +119,4 @@ input[type="submit"]:hover {
 .perfil {
     margin-top: 50px;
 }
+

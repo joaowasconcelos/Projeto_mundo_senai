@@ -30,11 +30,13 @@ footer {
     color: #fff;
     text-align: center;
     font-size: 14px;
-    margin-top: auto;
     width: 100%;
-    position: absolute;
+    position: fixed; /* Altera de absolute para fixed */
+    bottom: 0; /* Garante que o footer esteja no fundo da página */
+    left: 0; /* Garante que o footer esteja alinhado à esquerda */
     padding: 8px 0;
     font-family: "Armata", sans-serif;
     font-weight: 400;
     font-style: normal;
+    z-index: 1000; /* Garante que o footer fique sobre outros elementos */
 }

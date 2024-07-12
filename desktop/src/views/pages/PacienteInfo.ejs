@@ -1,93 +1,84 @@
-<link rel="stylesheet" href="/css/Paciente.css">
-<div>
-    <h2 class="titulo">Todos Dados dos Pacientes</h2>
-    <table>
-        <thead>
-            <tr>
-                <th>Nome</th>
-                <th>CPF</th>
-                <th>DataNascimento</th>
-                <th>Genero</th>
-                <th>Email</th>
-                <th>DataCadastro</th>
-                <th>Logradouro</th>
-                <th>Bairro</th>
-                <th>Estado</th>
-                <th>NumeroResidencia</th>
-                <th>Complemento</th>
-                <th>CEP</th>
-                <th>Telefone</th>
-                <th>Tipo</th>
-                <th>Login</th>
-                <th>Senha</th>
-                <th>DataAdmissao</th>
-                <th>CRM</th>
-                <th>Especialidade</th>
-            </tr>
-        </thead>
-        <tbody>
-            <% infoPaciente.forEach(function(item) { %>
-                <tr>
-                    <td>
-                        <%= item.Nome %>
-                    </td>
-                    <td>
-                        <%= item.CPF %>
-                    </td>
-                    <td>
-                        <%= item.DataNascimento %>
-                    </td>
-                    <td>
-                        <%= item.Genero %>
-                    </td>
-                    <td>
-                        <%= item.Email %>
-                    </td>
-                    <td>
-                        <%= item.DataCadastro %>
-                    </td>
-                    <td>
-                        <%= item.Logradouro %>
-                    </td>
-                    <td>
-                        <%= item.Bairro %>
-                    </td>
-                    <td>
-                        <%= item.Estado %>
-                    </td>
-                    <td>
-                        <%= item.NumeroResidencia %>
-                    </td>
-                    <td>
-                        <%= item.Complemento %>
-                    </td>
-                    <td>
-                        <%= item.CEP %>
-                    </td>
-                    <td>
-                        <%= item.Telefone %>
-                    </td>
-                    <td>
-                        <%= item.Tipo %>
-                    </td>
-                    <td>
-                        <%= item.Login %>
-                    </td>
-                    <td>
-                        <%= item.Senha %>
-                    </td>
-                    <td>
-                        <%= item.DataAdmissao %>
-                    </td>
-                    <td>
-                        <%= item.CRM %>
-                    </td>
-                    <td>
-                        <%= item.Especialidade %>
-                    </td>
+<link rel="stylesheet" href="/css/PacienteInfo.css">
 
-                </tr>
-                <% }); %>
-        </tbody>
-    </table>
+<div class="paciente-container">
+    <h2 class="titulo">Todos os Dados dos Pacientes</h2>
+
+    <% infoPaciente.forEach(function(item) { %>
+        <div class="paciente-item">
+            <label>Nome:</label>
+            <input type="text" value="<%= item.Nome %>" readonly>
+
+            <label>CPF:</label>
+            <input type="text" value="<%= item.CPF %>" readonly>
+
+            <label>Data de Nascimento:</label>
+            <input type="text" value="<%= item.DataNascimento %>" readonly>
+
+            <label>Gênero:</label>
+            <input type="text" value="<%= item.Genero %>" readonly>
+
+            <label>Email:</label>
+            <input type="text" value="<%= item.Email %>" readonly>
+
+            <label>Data de Cadastro:</label>
+            <input type="text" value="<%= item.DataCadastro %>" readonly>
+
+            <label>Logradouro:</label>
+            <input type="text" value="<%= item.Logradouro %>" readonly>
+
+            <label>Bairro:</label>
+            <input type="text" value="<%= item.Bairro %>" readonly>
+
+            <label>Estado:</label>
+            <input type="text" value="<%= item.Estado %>" readonly>
+
+            <label>Número Residencial:</label>
+            <input type="text" value="<%= item.NumeroResidencia %>" readonly>
+
+            <label>Complemento:</label>
+            <input type="text" value="<%= item.Complemento %>" readonly>
+
+            <label>CEP:</label>
+            <input type="text" value="<%= item.CEP %>" readonly>
+
+            <label>Telefone:</label>
+            <input type="text" value="<%= item.Telefone %>" readonly>
+
+            <label>Tipo:</label>
+            <input type="text" value="<%= item.Tipo %>" readonly>
+
+            <label>Login:</label>
+            <input type="text" value="<%= item.Login %>" readonly>
+
+            <label>Senha:</label>
+            <input type="text" value="<%= item.Senha %>" readonly>
+
+            <label>Data de Admissão:</label>
+            <input type="text" value="<%= item.DataAdmissao %>" readonly>
+
+            <label>CRM:</label>
+            <input type="text" value="<%= item.CRM %>" readonly>
+
+            <label>Especialidade:</label>
+            <input type="text" value="<%= item.Especialidade %>" readonly>
+        </div>
+        <% }); %>
+</div>
+
+<div class="botoes">
+    <div>
+        <a href="/Paciente" class="back-button">
+            <button><span class="material-symbols-outlined">arrow_back</span> Voltar</button>
+        </a>
+    </div>
+    <div class="button-container">
+        <a href="#" class="edit-button">
+            <button><span class="material-symbols-outlined">edit</span> Editar</button>
+        </a>
+    </div>
+    <div class="button-container">
+        <a href="#" class="delete-button">
+            <button><span class="material-symbols-outlined">delete</span> Deletar</button>
+        </a>
+    </div>
 </div>

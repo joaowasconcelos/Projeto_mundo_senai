@@ -7,7 +7,7 @@ async function SelectsConsultas() {
         console.log("entrou1")
         const SelectsConsulta = await bd.query(`SELECT 
     c.id,
-    c.data,
+    DATE_FORMAT(c.data, '%d/%m/%Y') as data,
     c.hora,
     p.nome AS nome_paciente,
     p.cpf AS cpf_paciente,
@@ -79,7 +79,13 @@ async function SelectPessoas() {
     const bd = await conectarBancoDeDados();
     try {
         await bd.beginTransaction();
-        const SelectsPessoas = await bd.query(`select p.id,cpf as CPF, nome as NOME,DATE_FORMAT(p.data_nasc, '%d/%m/%Y') as DATA_NASCIMENTO, genero as GENERO,pf.tipo as TIPO from tbl_pessoa p join tbl_perfis pf on login_pessoa_id = p.id;`)
+        const SelectsPessoas = await bd.query(`select p.id,cpf as CPF, nome as NOME,DATE_FORMAT(p.data_nasc, '%d/%m/%Y') as DATA_NASCIMENTO, genero as GENERO,pf.tipo as TIPO,pa.id as ID_PACIENTE
+from 
+tbl_pessoa p 
+join 
+tbl_perfis pf on login_pessoa_id = p.id
+join 
+tbl_paciente pa on pa.id = p.id;`)
         return SelectsPessoas;
         await bd.commit();
     } catch (error) {
@@ -95,7 +101,9 @@ async function SelectMedicoEspec(especialidade) {
     try {
         await bd.beginTransaction();
         const SelectMedico = await bd.query(`SELECT 
-p.nome
+p.id,
+p.nome,
+f.id as id_funcionario
 FROM 
     tbl_funcionario f
 JOIN 

@@ -1,19 +1,16 @@
 <!DOCTYPE html>
 <html lang="pt-br">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Home</title>
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
     <link rel="stylesheet" href="/css/styles.css">
-   
 </head>
-<body>
-
-
 
 <body>
-
     <header>
         <%- include ('../partials/menu.ejs'); %>
     </header>
@@ -25,21 +22,19 @@
     <footer>
         <%- include ('../partials/footer'); %>
     </footer>
-
-    <script>
-
-        //Essa função faz com que o header mude de cor 
-        //conforme a gente rola a pagin pra baixo
-        const menu = document.querySelector('nav');
-
-        function activeScroll() {
-            menu.classList.toggle('ativo', scrollY > 0);
-        }
-
-        window.addEventListener('scroll', activeScroll);
-
-    </script>
-
 </body>
 
 </html>
+
+<script>
+    //Essa função faz com que o header mude de cor 
+    //conforme a gente rola a pagin pra baixo
+    const menu = document.querySelector('nav');
+
+    function activeScroll() {
+        menu.classList.toggle('ativo', scrollY > 0);
+    }
+
+    window.addEventListener('scroll', activeScroll);
+
+</script>

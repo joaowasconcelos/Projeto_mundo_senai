@@ -16,6 +16,8 @@
                 <th>CRM</th>
                 <th>Data Admissão</th>
                 <th>Especialidade</th>
+                <th>Todos os dados</th>
+                
             </tr>
         </thead>
         <tbody>
@@ -42,9 +44,20 @@
                     <td>
                         <%= item.desc_especialidade %>
                     </td>
+                    <td>
+                        <a method="get" href="/PacienteInfo/<%= item.id %>"><span
+                                class="material-symbols-outlined">folder_shared</span>
+                        </a>
+                    </td>
                 </tr>
+
 
                 <% }); %>
         </tbody>
     </table>
+</div>
+<div>
+    <a href="/adm" class="back-button">
+        <button><span class="material-symbols-outlined">arrow_back</span> Voltar</button>
+    </a>
 </div>

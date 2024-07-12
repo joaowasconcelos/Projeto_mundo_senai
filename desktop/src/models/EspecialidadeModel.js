@@ -38,12 +38,10 @@ async function  insertEspecialidade(especialidades) {
 async function UpdateEspecialidade(descricao){
     const bd = await conectarBancoDeDados();
     try {
-        console.log("descricao",descricao)
         await bd.beginTransaction();
         const UpdateEspe = await bd.query('UPDATE tbl_especialidade SET desc_especialidade = ? where id =?;',
             [descricao._descEspecialidade,descricao.id]
         );
-        console.log(UpdateEspe)
         return UpdateEspe;
         await bd.commit();
     } catch (error) {

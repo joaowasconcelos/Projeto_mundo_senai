@@ -51,3 +51,28 @@ th, td {
 th {
     background-color: #eee;
 }
+
+/* Estilos para o botão de voltar */
+.back-button {
+    text-decoration: none; /* Remove sublinhado do link */
+}
+
+.back-button button {
+    background-color: #007bff; /* Cor de fundo do botão */
+    color: #fff; /* Cor do texto dentro do botão */
+    border: none; /* Remove a borda do botão */
+    padding: 10px 20px; /* Espaçamento interno do botão */
+    border-radius: 4px; /* Borda arredondada */
+    cursor: pointer; /* Cursor ao passar por cima do botão */
+    display: inline-block; /* Permite que o botão se ajuste ao conteúdo interno */
+}
+
+.back-button button:hover {
+    background-color: #0056b3; /* Cor de fundo do botão ao passar o mouse */
+}
+
+.material-symbols-outlined {
+    font-size: 24px; /* Tamanho do ícone */
+    vertical-align: middle; /* Alinha verticalmente com o texto */
+    margin-right: 5px; /* Espaçamento à direita do ícone */
+}
