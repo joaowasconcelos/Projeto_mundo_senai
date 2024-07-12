@@ -1,6 +1,5 @@
 
 const viewMedico = {
-
     paginaMedico: async (req, res) => {
         try {
             res.render('pages/Medico');

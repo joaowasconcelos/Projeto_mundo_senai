@@ -5,7 +5,7 @@ class Funcionario extends Pessoa {
         super(pId, pCpf, pNome, pDataNasc, pGenero, pEmail);
         this.crm = pCrm;
 
-        if (pDataAdmissao != null) {
+        if (pDataAdmissao === null) {
             this.dataAdmissao = pDataAdmissao;
         } else {
             this.dataAdmissao = this.DataConvert(pDataAdmissao);
@@ -20,9 +20,10 @@ class Funcionario extends Pessoa {
 
   
     DataConvert(value) {
+        console.log()
         let [dia, mes, ano] = value.split('/');
         let dataFormatada = `${ano}-${mes}-${dia}`;
-        this.dataNasc = new Date(dataFormatada);
+        this.dataAdmissao = new Date(dataFormatada);
         return this.DataAdmissao
     }
     

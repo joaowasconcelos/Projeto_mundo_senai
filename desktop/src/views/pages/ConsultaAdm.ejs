@@ -1,34 +1,59 @@
+<link rel="stylesheet" href="/css/ConsultaAdm.css">
 
-    <link rel="stylesheet" href="/css/ConsultaAdm.css">
-
-    <div>
-        <h2 class="titulo">Lista de Consultas</h2>
-        <table>
-            <thead>
+<div>
+    <h2 class="titulo">Lista de Consultas</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Data</th>
+                <th>Hora</th>
+                <th>Nome Paciente</th>
+                <th>CPF Paciente</th>
+                <th>Nome do Medico</th>
+                <th>Especialidade do Medico</th>
+                <th>Editar</th>
+                <th>Deletar</th>
+            </tr>
+        </thead>
+        <tbody>
+            <% tdsConsultas.forEach(function(item) { %>
                 <tr>
-                    <th>ID</th>
-                    <th>Data</th>
-                    <th>Hora</th>
-                    <th>Nome Paciente</th>
-                    <th>CPF Paciente</th>
-                    <th>Nome do Medico</th>
-                    <th>Especialidade do Medico</th>
+                    <td><%= item.id %></td>
+                    <td><%= item.data %></td>
+                    <td><%= item.hora %></td>
+                    <td><%= item.nome_paciente %></td>
+                    <td><%= item.cpf_paciente %></td>
+                    <td><%= item.nome_funcionario %></td>
+                    <td><%= item.desc_especialidade %></td>
+                    <td>
+                        <span class="material-symbols-outlined">edit</span>
+                    </td>
+                    <td>
+                        <span class="material-symbols-outlined">delete</span>
+                    </td>
+            
                 </tr>
-            </thead>
-            <tbody id="consulta-list">
-                <!-- Pacientes serão inseridos aqui -->
-            </tbody>
-        </table>
-    </div>
+            <% }); %>
+        </tbody>
+    </table>
+</div>
 
-    <script>
-        document.addEventListener("DOMContentLoaded", function() {
-            fetch('/Seleciona/Todas/Consultas', {
-                method: 'GET',
-                headers: {
-                    'Content-Type': 'application/json'
-                }
-            })
+<div>
+    <a href="/adm" class="back-button">
+        <button><span class="material-symbols-outlined">arrow_back</span> Voltar</button>
+    </a>
+</div>
+
+
+<!-- <script>
+    document.addEventListener("DOMContentLoaded", function () {
+        fetch('/Seleciona/Todas/Consultas', {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        })
             .then(response => {
                 if (!response.ok) {
                     throw new Error('A resposta da rede não foi ok');
@@ -55,5 +80,5 @@
             .catch(error => {
                 console.error('Erro ao buscar dados:', error);
             });
-        });
-    </script>
+    });
+</script> -->

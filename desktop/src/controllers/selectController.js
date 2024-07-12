@@ -7,8 +7,9 @@ const selects = {
     selecionaTodasConsultas: async (req, res) => {
         try {
             const TdConsultas = await SelectsConsultas()
-            console.log(TdConsultas)
-            return res.json(TdConsultas[0])
+            const tdsConsultas = TdConsultas[0]
+            console.log(tdsConsultas)
+            return res.render('pages/ConsultaAdm', { tdsConsultas });
         } catch (error) {
             console.log(error)
             res.json(error);

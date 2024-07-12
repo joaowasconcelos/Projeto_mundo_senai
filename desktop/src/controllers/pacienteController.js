@@ -5,28 +5,9 @@ const Consultas = require("../models/classes/Consulta");
 
 
 const viewPaciente = {
-
-    // paginaPaciente: async (req, res) => {
-    //     try {
-    //         res.render('pages/Paciente');
-    //         res.json('/Seleciona/Todas/Pessoas');
-    //     }
-    //     catch (error) {
-    //         console.log(error);
-    //         res.render('pages/pag_erro', { message: error });
-    //     }
-    // },
-
-    // paginaPacienteInfo: async (req, res) => {
-    //     try {
-    //         res.render('pages/PacienteInfo');
-    //     }
-    //     catch (error) {
-    //         console.log(error);
-    //         res.render('pages/pag_erro', { message: error });
-    //     }
-    // },
-
+    paginaPaciente: async (req, res) => {
+        res.render('pages/PacienteUsuario', { user: req.session.user });
+    },
     selecionaInfosPaciente: async (req, res) => {
         try {
             const { id } = req.params
@@ -40,9 +21,6 @@ const viewPaciente = {
             res.json(error);
         }
     },
-
-
-
     selecionaConsultas: async (req, res) => {
         try {
             const { id } = req.params.id
