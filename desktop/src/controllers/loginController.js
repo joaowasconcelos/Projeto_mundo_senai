@@ -1,6 +1,6 @@
 const { render } = require("ejs");
 const Login = require("../models/classes/Login");
-const { selectLogin, verificarSenha } = require('../models/LoginModel')
+const { selectLogin, verificarSenha,deletarLogin } = require('../models/LoginModel')
 const Perfis = require("../models/PerfisModel");
 
 
@@ -95,5 +95,20 @@ const LoginPerfis = {
     //     });
     // }
 
+    deletarLogin: async (req, res) => {
+        try {
+            const id = req.params.id;
+            const obgLog = new Login(id);
+            console.log(obgLog)
+            const result = await deletarLogin(obgLog);
+            if (result.error) {
+                res.status(500).json({ success: false, message: 'Erro ao excluir Login', error: result.details });
+            } else {
+                res.status(200).json(result);
+            }
+        } catch (error) {
+            res.status(500).json({  error: "Erro ao excluir login" });
+        }
+    },
 }
 module.exports = { LoginPerfis }

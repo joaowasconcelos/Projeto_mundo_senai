@@ -81,7 +81,7 @@ async function updateConsul(consultas) {
         await bd.beginTransaction();
         console.log(consultas)
         const UpConsultas = await bd.query('update tbl_consulta set data = ?,hora = ?,status = ? where id =?;',
-            [consultas.data,consultas.hora,consultas.status,consultas.id]
+            [consultas.data, consultas.hora, consultas.status, consultas.id]
         );
         await bd.commit();
         return UpConsultas
@@ -92,8 +92,26 @@ async function updateConsul(consultas) {
     } finally {
         bd.release();
     }
-
+}
+async function excluirConsulta(consulta) {
+    const bd = await conectarBancoDeDados();
+    try {
+        await bd.beginTransaction();
+        const [res] = await bd.query(`DELETE FROM tbl_consulta WHERE id = ?`, [consulta.id])
+        if (res.affectedRows === 0) {
+            throw new Error('Consulta não encontrado');
+        } else {
+            await bd.commit();
+            return res;
+        }
+    } catch (error) {
+        console.error('Erro ao deletar Consulta:', error);
+        await bd.rollback();
+        return { error: 'Falha no delete', details: error };
+    } finally {
+        await bd.release();
+    }
 }
 
 
-module.exports = { insertConsulta,updateConsul };
+module.exports = { insertConsulta, updateConsul, excluirConsulta };

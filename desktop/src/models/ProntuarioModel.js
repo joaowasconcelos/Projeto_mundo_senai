@@ -48,4 +48,25 @@ async function EditaProntuario(prontuario) {
     }
 
 }
-module.exports = { criarProntu,EditaProntuario };
+
+
+async function excluirProntu(prontu) {
+    const bd = await conectarBancoDeDados();
+    try {
+        await bd.beginTransaction();
+        const [res] = await bd.query(`DELETE FROM tbl_prontuario WHERE id = ?`, [prontu.id])
+        if (res.affectedRows === 0) {
+            throw new Error('Consulta não encontrado');
+        } else {
+            await bd.commit();
+            return res;
+        }
+    } catch (error) {
+        console.error('Erro ao deletar Consulta:', error);
+        await bd.rollback();
+        return { error: 'Falha no delete', details: error };
+    } finally {
+        await bd.release();
+    }
+}
+module.exports = { criarProntu,EditaProntuario,excluirProntu };

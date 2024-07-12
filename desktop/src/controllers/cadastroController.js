@@ -5,7 +5,7 @@ const Funcionario = require("../models/classes/Funcionario");
 const Login = require("../models/classes/Login");
 const Perfis = require("../models/classes/Perfis")
 const Especialidade = require("../models/classes/Especialidade")
-const { insert, verificaCpf, verificaEndereco,updateTel,updateEndereco,deletePessoa,deletarFuncionario } = require("../models/PessoaModel")
+const { insert, verificaCpf, verificaEndereco,updateTel,updateEndereco,deletePessoa,deletarFuncionario,deletarEndereco,deletarTelefone, deletarPerfil} = require("../models/PessoaModel")
 
 const cadastro = {
 
@@ -152,8 +152,54 @@ const cadastro = {
             console.error('Erro ao editar Funcionario:', error);
             res.status(500).json({ success: false, message: 'Erro ao excluir Funcionario', error });
         }
+    },
+    deletarEndereco: async (req,res) =>{
+        try {
+            const id = req.params.id
+            const obgEndereco = new Endereco(id);
+            console.log(obgEndereco)
+            const result = await deletarEndereco(obgEndereco);
+            if (result.error) {
+                res.status(500).json({ success: false, message: 'Erro ao excluir Endereco', error: result.details });
+            } else {
+                res.status(200).json(result);
+            }
+        } catch (error) {
+            console.error('Erro ao editar Funcionario:', error);
+            res.status(500).json({ success: false, message: 'Erro ao excluir Endereco', error });
+        }
+    },
+    deletarTelefone: async (req,res) => {
+        try{
+            const id = req.params.id
+            const obgTele = new Telefone (id)
+            console.log(obgTele)
+            const result = await deletarTelefone(obgTele);
+            if (result.error) {
+                res.status(500).json({ success: false, message: 'Erro ao excluir Telefone', error: result.details });
+            } else {
+                res.status(200).json(result);
+            }
+        } catch (error) {
+            console.error('Erro ao editar Funcionario:', error);
+            res.status(500).json({ success: false, message: 'Erro ao excluir Telefone', error });
+        }
+    },
+    deletarPerfil: async (req,res) => {
+        try{
+            const id = req.params.id
+            const obfPerfil = new Perfis (id)
+            console.log(obfPerfil)
+            const result = await deletarPerfil(obfPerfil);
+            if (result.error) {
+                res.status(500).json({ success: false, message: 'Erro ao excluir Perfil', error: result.details });
+            } else {
+                res.status(200).json(result);
+            }
+        } catch (error) {
+            console.error('Erro ao editar Funcionario:', error);
+            res.status(500).json({ success: false, message: 'Erro ao excluir Perfil', error });
+        }
     }
-    
 
-}
 module.exports = { cadastro }
