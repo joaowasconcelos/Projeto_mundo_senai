@@ -10,11 +10,14 @@ table {
     margin-top: 1rem;
 }
 
-table, th, td {
+table,
+th,
+td {
     border: 1px solid #ccc;
 }
 
-th, td {
+th,
+td {
     padding: 0.5rem;
     text-align: left;
 }
@@ -41,7 +44,9 @@ th {
     flex-direction: column;
 }
 
-.box form label, .box form input, .box form button {
+.box form label,
+.box form input,
+.box form button {
     margin-bottom: 10px;
 }
 
@@ -57,14 +62,16 @@ th {
     background-color: #dc3545;
 }
 
-.addEspec, .editEspec {
+.addEspec,
+.editEspec {
     display: flex;
     justify-content: center;
     align-items: center;
     flex-direction: column;
 }
 
-.addEspec button, .editEspec button {
+.addEspec button,
+.editEspec button {
     padding: 10px;
     background-color: #007bff;
     color: #fff;
@@ -77,72 +84,142 @@ th {
     color: green;
     margin-top: 10px;
 }
+
 /* Estilos para o botão de voltar */
 .back-button {
-    text-decoration: none; /* Remove sublinhado do link */
+    text-decoration: none;
+    /* Remove sublinhado do link */
 }
 
 .back-button button {
-    background-color: #007bff; /* Cor de fundo do botão */
-    color: #fff; /* Cor do texto dentro do botão */
-    border: none; /* Remove a borda do botão */
-    padding: 10px 20px; /* Espaçamento interno do botão */
-    border-radius: 4px; /* Borda arredondada */
-    cursor: pointer; /* Cursor ao passar por cima do botão */
-    display: inline-block; /* Permite que o botão se ajuste ao conteúdo interno */
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 4px;
+    cursor: pointer;
+    display: inline-block;
 }
 
 .back-button button:hover {
-    background-color: #0056b3; /* Cor de fundo do botão ao passar o mouse */
+    background-color: #0056b3;
 }
 
 .material-symbols-outlined {
-    font-size: 24px; /* Tamanho do ícone */
-    vertical-align: middle; /* Alinha verticalmente com o texto */
-    margin-right: 5px; /* Espaçamento à direita do ícone */
+    font-size: 24px;
+    vertical-align: middle;
+    margin-right: 5px;
 }
 
 .button-container {
-    margin-bottom: 10px; /* Espaço entre os botões */
+    margin-bottom: 10px;
 }
 
 .edit-button button {
-    background-color: #28a745; /* Cor verde para o botão de editar */
-    color: #fff; /* Cor do texto dentro do botão */
-    border: none; /* Remove a borda do botão */
-    padding: 10px 20px; /* Espaçamento interno do botão */
-    border-radius: 4px; /* Borda arredondada */
-    cursor: pointer; /* Cursor ao passar por cima do botão */
-    display: inline-block; /* Permite que o botão se ajuste ao conteúdo interno */
+    background-color: #28a745;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 4px;
+    cursor: pointer;
+    display: inline-block;
 }
 
 .edit-button button:hover {
-    background-color: #218838; /* Cor de fundo do botão ao passar o mouse */
+    background-color: #218838;
 }
 
 .delete-button button {
-    background-color: #dc3545; /* Cor vermelha para o botão de deletar */
-    color: #fff; /* Cor do texto dentro do botão */
-    border: none; /* Remove a borda do botão */
-    padding: 10px 20px; /* Espaçamento interno do botão */
-    border-radius: 4px; /* Borda arredondada */
-    cursor: pointer; /* Cursor ao passar por cima do botão */
-    display: inline-block; /* Permite que o botão se ajuste ao conteúdo interno */
+    background-color: #dc3545;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 4px;
+    cursor: pointer;
+    display: inline-block;
 }
 
 .delete-button button:hover {
-    background-color: #c82333; /* Cor de fundo do botão ao passar o mouse */
+    background-color: #c82333;
 }
 
 .material-symbols-outlined {
-    font-size: 18px; /* Tamanho do ícone */
-    vertical-align: middle; /* Alinha verticalmente com o texto */
-    margin-right: 5px; /* Espaçamento à direita do ícone */
+    font-size: 18px;
+    /* Tamanho do ícone */
+    vertical-align: middle;
+    /* Alinha verticalmente com o texto */
+    margin-right: 5px;
+    /* Espaçamento à direita do ícone */
 }
 
-.botoes{
+.botoes {
     display: flex;
     flex-direction: row;
     width: 100%;
-    justify-content:center;
+    justify-content: center;
+}
+
+
+/* Estilos para o modal de confirmação */
+.modal {
+    display: none;
+    /* Por padrão, o modal está oculto */
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    /* Fundo escuro semi-transparente */
+    overflow: auto;
+}
+
+.modal-content {
+    background-color: #fefefe;
+    margin: 15% auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 50%;
+    max-width: 400px;
+    text-align: center;
+}
+
+.modal-content p {
+    margin-bottom: 20px;
+}
+
+.modal-content button {
+    margin: 10px;
+    padding: 10px 20px;
+    cursor: pointer;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 3px;
+}
+
+.modal-content button:hover {
+    background-color: #45a049;
+}
+
+/* Estilos para o botão de delete */
+.delete-button {
+    background-color: #f44336;
+    /* Vermelho */
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin-top: 10px;
+    cursor: pointer;
+    border-radius: 3px;
+}
+
+.delete-button:hover {
+    background-color: #cc0000;
+    /* Vermelho mais escuro ao passar o mouse */
 }

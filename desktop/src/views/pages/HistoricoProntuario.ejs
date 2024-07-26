@@ -1,0 +1,78 @@
+<link rel="stylesheet" href="/css/HistoricoProntuario.css">
+<div class="body">
+    <% resultProntuario.forEach(function(item) { %>
+        <div class="container">
+            <div class="diagnostico">
+                <h5>ID: <%= item.id_prontuario %></h5>
+                <h3>Diagnóstico:</h3>
+                <p><%= item.diagnostico %></p>
+            </div>
+            <div class="medicacao">
+                <h3>Medicação:</h3>
+                <p><%= item.medicacao %></p>
+            </div>
+
+            <div class="text">
+                <a href="#" class="open-modal" data-id="<%= item.id_prontuario %>">Historico desse prontuario</a>
+            </div>
+        </div>
+    <% }); %>
+
+    <a href="/Medico" class="back-button">
+        <button><span class="material-symbols-outlined">arrow_back</span> Voltar</button>
+    </a>
+</div>
+
+
+<div id="myModal" class="modal">
+    <div class="modal-content">
+        <span class="close">&times;</span>
+        <div id="modalBody">
+        </div>
+    </div>
+</div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const modal = document.getElementById("myModal");
+        const span = document.getElementsByClassName("close")[0];
+        const modalBody = document.getElementById("modalBody");
+    
+        document.querySelectorAll('.open-modal').forEach(function(element) {
+            element.addEventListener('click', async function(event) {
+                event.preventDefault();
+                const id = this.getAttribute('data-id');
+                try {
+                    const response = await fetch(`/Item/Prontuario/${id}`);
+                    console.log(response)
+                    const data = await response.json();
+                    console.log(data)
+    
+                    modalBody.innerHTML = `
+                        <h3>ID CONSULTA: ${data.id_consulta}</h3>
+                        <p>Data da Consulta: ${data.data}</p>
+                        <p>Hora da Consulta: ${data.hora}</p>
+                        <p>Nome do Paciente: ${data.nome_paciente}</p>
+                        <p>Nome do Médico: ${data.nome_funcionario}</p>
+                        <p>Especialidade do Médico: ${data.desc_especialidade}</p>
+                    `;
+    
+                    modal.style.display = "block";
+                } catch (error) {
+                    console.error('Erro ao buscar dados do prontuário:', error);
+                }
+            });
+        });
+    
+        span.onclick = function() {
+            modal.style.display = "none";
+        }
+    
+        window.onclick = function(event) {
+            if (event.target == modal) {
+                modal.style.display = "none";
+            }
+        }
+    });
+    </script>
+    

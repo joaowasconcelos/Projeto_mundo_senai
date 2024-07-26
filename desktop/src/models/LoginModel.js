@@ -7,21 +7,21 @@ async function selectLogin(objLogin) {
         await bd.beginTransaction();
 
         const selectLogin = await bd.query(`
-            SELECT
-            p.nome,
-                lo.id,
-                lo.login,
-                lo.senha,
-                pe.tipo
-            FROM
-                tbl_login AS lo
-            INNER JOIN tbl_perfis AS pe
-            ON lo.id= pe.login_id
-            inner join tbl_pessoa AS p
-            ON lo.pessoa_id=p.id
-            WHERE lo.login=? AND lo.senha=?;`, [objLogin.login, objLogin.senha]);
+          SELECT
+    p.nome AS nome_pessoa,
+    lo.pessoa_id AS id,
+    lo.login,
+    lo.senha,
+    GROUP_CONCAT(pe.tipo ORDER BY pe.tipo SEPARATOR ', ') AS tipo
+    FROM
+        tbl_login AS lo
+    INNER JOIN tbl_perfis AS pe ON lo.id = pe.login_id
+    INNER JOIN tbl_pessoa AS p ON lo.pessoa_id = p.id
+    WHERE lo.login = ? AND lo.senha = ?
+    GROUP BY lo.login, lo.senha, p.nome, lo.pessoa_id;`, [objLogin.login, objLogin.senha]);
 
-        const perfilLogin = selectLogin[0][0]
+        const perfilLogin = selectLogin[0]
+        
         return perfilLogin
     }
     catch (error) {

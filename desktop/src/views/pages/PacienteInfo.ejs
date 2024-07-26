@@ -5,6 +5,9 @@
 
     <% infoPaciente.forEach(function(item) { %>
         <div class="paciente-item">
+
+            <input type="hidden" value="<%= item.id %>" id="id">
+
             <label>Nome:</label>
             <input type="text" value="<%= item.Nome %>" readonly>
 
@@ -62,7 +65,7 @@
             <label>Especialidade:</label>
             <input type="text" value="<%= item.Especialidade %>" readonly>
         </div>
-        <% }); %>
+        <% infoPaciente.forEach(function(item) { %>
 </div>
 
 <div class="botoes">
@@ -82,3 +85,65 @@
         </a>
     </div>
 </div>
+
+<!-- Modal de confirmação -->
+<div id="confirmDeleteModal" class="modal">
+    <div class="modal-content">
+        <p>Tem certeza que deseja deletar esta pessoa?</p>
+        <button id="confirmDeleteButton">Confirmar</button>
+        <button id="cancelDeleteButton">Cancelar</button>
+    </div>
+</div>
+
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const deleteButtons = document.querySelectorAll('.delete-button');
+        const confirmDeleteModal = document.getElementById('confirmDeleteModal');
+        const confirmDeleteButton = document.getElementById('confirmDeleteButton');
+        const cancelDeleteButton = document.getElementById('cancelDeleteButton');
+        const idPessoa = document.getElementById("id").value
+
+
+        // Event listener para cada botão de delete
+        deleteButtons.forEach(button => {
+            button.addEventListener('click', function (event) {
+                event.preventDefault();
+                confirmDeleteModal.style.display = 'block'; // Exibir modal de confirmação
+            });
+        });
+
+        // Event listener para o botão de confirmar no modal
+        confirmDeleteButton.addEventListener('click', function () {
+            // Enviar requisição DELETE usando fetch
+            fetch(`/deletar/pessoa/${idPessoa}`, {
+                method: 'DELETE',
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            })
+                .then(response => {
+                    console.log(response)
+                    if (response.ok) {
+                        alert('Pessoa deletada com sucesso!');
+                        confirmDeleteModal.style.display = 'none'; // Esconder modal após a ação
+                        window.history.back(); // Voltar uma página
+                        window.location.reload();
+                    } else {
+                        alert('Erro ao deletar dados da pessoa.');
+                    }
+                })
+                .catch(error => {
+                    console.error('Erro:', error);
+                    alert('Erro ao deletar dados da pessoa.');
+                });
+
+            confirmDeleteModal.style.display = 'none'; // Esconder modal após a ação
+        });
+
+        // Event listener para o botão de cancelar no modal
+        cancelDeleteButton.addEventListener('click', function () {
+            confirmDeleteModal.style.display = 'none'; // Esconder modal se o usuário cancelar
+        });
+    });
+</script>

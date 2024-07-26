@@ -2,35 +2,60 @@ const express = require("express");
 const router = express.Router();
 
 const { cadastro } = require("../controllers/cadastroController");
+const { CadastroProntuario } = require("../controllers/ProntuarioController");
 const { LoginPerfis } = require("../controllers/loginController");
 const { cadastroEspecia, selectEspecialidade, updateEspecialidade } = require("../controllers/cadastroEspecialidade");
-const { cadastroConsulta, selectEspecialidadeMedico } = require("../controllers/cadastroConsulta");
+const { cadastroConsulta, selectEspecialidadeMedico,teste } = require("../controllers/cadastroConsulta");
 const { cadastroProntuario } = require("../controllers/cadastroProntuario");
 const { viewPaciente } = require("../controllers/pacienteController");
 const { selects } = require("../controllers/selectController");
-const {ensureAuthenticated,ensureAdmin,ensureMedico} = require("../js/verificacaoLogin")
+const { ensureAuthenticated, ensureAdmin, ensureMedico } = require("../js/verificacaoLogin")
 
 router.get('/', (req, res) => {
   res.render('index', { title: 'Página Inicial' });
 });
 
 router.post('/auth/login', LoginPerfis.LoginPessoa);
+router.post('/direcionaLogin', LoginPerfis.direcionaLogin);
 router.post("/Pessoa/novo", cadastro.adicionaPessoa);
 router.post("/Cadastro/Especialidade", cadastroEspecia.cadastraEspecialidade)
 router.post("/Cadastro/Consulta", cadastroConsulta.cadastraConsulta)
 router.post("/Cadastro/Prontuario/:id", cadastroProntuario.cadastraProntuario)
 router.post("/CadastraEspecialidade", cadastroEspecia.cadastraEspecialidade);
+router.post('/Prontuario/cadastro',CadastroProntuario.Prontuariocadastro)
 // router.post("/Login",LoginPerfis.LoginPessoa);
 // router.post("/Verifica/Login",LoginPerfis.LoginPessoa);
 
 
 
-router.get('/Paciente/Usuario', ensureAuthenticated, (req, res) => {
-  res.render('pages/PacienteUsuario', { user: req.session.user });
+router.get('/Paciente/Usuario', ensureAuthenticated, async (req, res) => {
+  try {
+    const consultaData = await selects.SelecionaConsultaData(req.session.user.id);
+    const consultaAnteriores = await selects.SelecionaConsultaAnteriores(req.session.user.id)
+    res.render('pages/PacienteUsuario', { user: req.session.user, consulta: consultaData, consultaAnteriores });
+  } catch (error) {
+    console.log(error);
+    res.status(500).send('Erro ao buscar dados de consulta');
+  }
+});
+
+router.get('/Historico/Prontuario/:id', ensureMedico, (req, res) => {
+  CadastroProntuario.HistoricoProntuario(req, res, (err,results ) => {
+    res.render('pages/HistoricoProntuario', { user: req.session.user });
+  });
+});
+
+
+router.get('/Item/Prontuario/:id', ensureMedico, (req, res) => {
+  CadastroProntuario.ItemProntuario(req, res, (err,results ) => {
+    res.render('pages/HistoricoProntuario', { user: req.session.user });
+  });
 });
 
 router.get('/Medico', ensureMedico, (req, res) => {
-  res.render('pages/Medico', { user: req.session.user });
+  selects.selectConsultaMedicos(req, res, (err,results ) => {
+    res.render('pages/Medico', { results,user: req.session.user });
+  });
 });
 
 router.get('/adm', ensureAdmin, (req, res) => {
@@ -38,48 +63,54 @@ router.get('/adm', ensureAdmin, (req, res) => {
 });
 
 router.get('/Cadastro', ensureAdmin, (req, res) => {
-  res.render('pages/Cadastro', { user: req.session.user });
+  selectEspecialidadeMedico.selectEspecialidade(req, res, (Especialidade) => {
+    res.render('pages/Cadastro', { Especialidade,user: req.session.user });
+  });
 });
 
 router.get('/Paciente', ensureAdmin, (req, res) => {
   selects.SelecionaTodasPessoas(req, res, (err, tdPessoas) => {
-      res.render('pages/Paciente', { tdPessoas, user: req.session.user });
+    res.render('pages/Paciente', { tdPessoas, user: req.session.user });
   });
 });
 
 router.get('/Especialidade', ensureAdmin, (req, res) => {
   selectEspecialidade.selectsEspecialidade(req, res, (err, especialidades) => {
-      res.render('pages/Especialidade', { especialidades, user: req.session.user });
+    res.render('pages/Especialidade', { especialidades, user: req.session.user });
   });
 });
 
 router.get('/MedicoAdm', ensureAdmin, (req, res) => {
   selects.SelecionaTodosMedicos(req, res, (err, TdsMedicos) => {
-      res.render('pages/MedicoAdm', { TdsMedicos, user: req.session.user });
+    res.render('pages/MedicoAdm', { TdsMedicos, user: req.session.user });
   });
 });
 
-router.get('/Prontuario', ensureMedico, (req, res) => {
-  res.render('pages/Prontuario', { user: req.session.user });
+router.get('/Prontuario/:id', ensureMedico, (req, res) => {
+  CadastroProntuario.Prontuario(req,res,(err)=>{
+    res.render('pages/Prontuario', { user: req.session.user });
+  });
 });
 
 router.get('/ConsultaAdm', ensureAdmin, (req, res) => {
   selects.selecionaTodasConsultas(req, res, (err, tdsConsultas) => {
-      res.render('pages/ConsultaAdm', { tdsConsultas, user: req.session.user });
+    res.render('pages/ConsultaAdm', { tdsConsultas, user: req.session.user });
   });
 });
 
 router.get('/Consulta', ensureAdmin, (req, res) => {
-  selectEspecialidadeMedico.selectsEspecialidadeMedico(req, res, (err, Especialidade, medico, especialidade ,pacientes) => {
-      res.render('pages/Consulta', {Especialidade, medico, especialidadeSelecionada: especialidade ,pacientes, user: req.session.user });
+  selectEspecialidadeMedico.selectsEspecialidadeMedico(req, res, (err, Especialidade, medico, especialidade, pacientes) => {
+    return res.render('pages/Consulta', { Especialidade, medico: [], especialidadeSelecionada: null, pacientes, user: req.session.user });
   });
 });
+
 
 router.get('/login', LoginPerfis.paginaLogin);
 router.get("/PacienteInfo/:id", viewPaciente.selecionaInfosPaciente) /*Direciona para a pagina de info dos paciente*/
 router.get("/paciente/consultas/:id", viewPaciente.selecionaConsultas);
 
-// router.get("/Consulta", selectEspecialidadeMedico.selectsEspecialidadeMedico);
+router.get('/ConsultaM',teste.selectsEspecialidade);
+
 // router.get("/ConsultaAdm", selects.selecionaTodasConsultas);
 // router.get("/Prontuario", viewProntuario.paginaProntuario)
 // router.get("/MedicoAdm", selects.SelecionaTodosMedicos);
@@ -112,15 +143,15 @@ router.put("/Update/consulta/:id", cadastroConsulta.updateConsultas);
 router.put("/Update/prontuario/:id", cadastroProntuario.UpdateProntuario);
 
 
-router.delete('/deletar/pessoa/:id',cadastro.deletePessoa)
-router.delete('/deletar/funcionario/:id',cadastro.deletarFuncionario)
-router.delete('/deletar/login/:id',LoginPerfis.deletarLogin)
-router.delete('/deletar/consulta/:id',cadastroConsulta.excluirConsulta)
-router.delete('/deletar/especialidade/:id',cadastroEspecia.deleteModalidade)
-router.delete('/deletar/prontuario/:id',cadastroProntuario.excluirProntu)
-router.delete('/deletar/endereco/:id',cadastro.deletarEndereco)
-router.delete('/deletar/telefone/id:',cadastro.deletarTelefone)
-router.delete('/deletar/perfil/id:',cadastro.deletarPerfil)
+router.delete('/deletar/pessoa/:id', cadastro.deletePessoa)
+router.delete('/deletar/funcionario/:id', cadastro.deletarFuncionario)
+router.delete('/deletar/login/:id', LoginPerfis.deletarLogin)
+router.delete('/deletar/consulta/:id', cadastroConsulta.excluirConsulta)
+router.delete('/deletar/especialidade/:id', cadastroEspecia.deleteModalidade)
+router.delete('/deletar/prontuario/:id', cadastroProntuario.excluirProntu)
+router.delete('/deletar/endereco/:id', cadastro.deletarEndereco)
+router.delete('/deletar/telefone/id:', cadastro.deletarTelefone)
+router.delete('/deletar/perfil/id:', cadastro.deletarPerfil)
 
 
 router.use(function (req, res) {

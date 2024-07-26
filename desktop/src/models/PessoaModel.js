@@ -1,4 +1,6 @@
 const conectarBancoDeDados = require("../config/db")
+const bcrypt = require("bcrypt");
+const { teste } = require("../controllers/cadastroConsulta");
 
 async function verificaCpf(pessoa) {
     const bd = await conectarBancoDeDados();
@@ -14,11 +16,11 @@ async function verificaCpf(pessoa) {
     }
 }
 
-async function verificaEndereco(endereco) {
+async function verificaEndereco(endereco,numeroEndereco) {
     const bd = await conectarBancoDeDados();
     try {
-        const verificaCep = await bd.query(`SELECT count(cep) as total FROM tbl_endereco where cep =? and numero=?; `, [endereco.cep, endereco.numeroEndereco])
-        console.log(verificaCep)
+        console.log(endereco,numeroEndereco)
+        const verificaCep = await bd.query(`SELECT count(cep) as total FROM tbl_endereco where cep =? and numero=?; `, [endereco,numeroEndereco])
         return verificaCep
     } catch (error) {
         await bd.rollback();
@@ -37,6 +39,7 @@ async function insert(pessoa, endereco, telefones, pacienteFuncionario, loginP, 
 
         const idtel = []
         telefones.forEach(async (tel) => {
+            console.log(tel.numeroTelefone)
             const resTel = await bd.query('INSERT INTO tbl_telefone (numero) VALUES (?)', [tel.numeroTelefone]);
             idtel.push(resTel[0].insertId);
             console.log('ID do Telefone:', idtel[0]);
@@ -69,20 +72,35 @@ async function insert(pessoa, endereco, telefones, pacienteFuncionario, loginP, 
             const funcionarioResult = await bd.query('INSERT INTO tbl_funcionario (pessoa_id,pessoa_endereco_id, data_admissao, crm) VALUES (?, ?, ?,?)', [pessoaId, enderecoId, dataAdmissao, crm]);
             funcionarioId = funcionarioResult[0].insertId
         }
+        const salt = await bcrypt.genSalt(12);
+        const passwordHash = await bcrypt.hash(loginP.senha, salt);
+        console.log(passwordHash)
+        //loginP.senha = passwordHash;
 
         const loginResul = await bd.query(`INSERT INTO tbl_login(login,senha,status,pessoa_id,pessoa_endereco_id) values(?,?,?,?,?)`,
             [loginP.login, loginP.senha, loginP.status, pessoaId, enderecoId])
         const loginId = loginResul[0].insertId
         console.log('ID do Login:', loginId);
 
-        const perfisResult = await bd.query(`INSERT INTO tbl_perfis(tipo,login_id,login_pessoa_id,login_pessoa_endereco_id) values(?,?,?,?)`,
-            [perfis.tipo, loginId, pessoaId, enderecoId])
-        const perfisId = perfisResult[0].insertId
-        console.log('ID do Perfil:', perfisId);
+    
+        const PerfisTipo = perfis.tipo
+        const arrayTipo = []
+        PerfisTipo.forEach(async (id) => {
+            console.log(id)
+            const perfisResult = await bd.query(`INSERT INTO tbl_perfis(tipo,login_id,login_pessoa_id,login_pessoa_endereco_id) values(?,?,?,?)`,
+                [id, loginId, pessoaId, enderecoId])
+                arrayTipo.push(perfisResult[0].insertId)
+                console.log('ID do Perfil:', arrayTipo);
+        });
+
+        // const perfisResult = await bd.query(`INSERT INTO tbl_perfis(tipo,login_id,login_pessoa_id,login_pessoa_endereco_id) values(?,?,?,?)`,
+        //     [perfis.tipo, loginId, pessoaId, enderecoId])
+        // const perfisId = perfisResult[0].insertId
+        // console.log('ID do Perfil:', perfisId);
 
 
         if (pacienteFuncionario !== null && pacienteFuncionario.crm != null) {
-            const IdEspecialidade = await bd.query(`SELECT id FROM tbl_especialidade WHERE desc_especialidade = ?;`, [especialidades.descEspecialidade]);
+            const IdEspecialidade = await bd.query(`SELECT id FROM tbl_especialidade WHERE id  = ?;`, [especialidades.descEspecialidade]);
             const IdEspecialidades = IdEspecialidade[0][0].id;
             console.log("ID da Especialidade", IdEspecialidade[0][0].id)
 
