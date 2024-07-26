@@ -91,23 +91,33 @@
                 <input type="date" id="dataAdmissao" name="dataAdmissao">
 
                 <label for="crm">CRM:</label>
-                <input type="number" id="crm" name="crm">
+                <input type="text" id="crm" name="crm">
 
                 <label for="especialidade">Especialidade:</label>
-                <input type="text" id="especialidade" name="especialidade">
-            </div>
+                <select id="especialidade" name="especialidade">
+                    <option></option>
+                    <% Especialidade.forEach(function(item) { %>
+                        <option value="<%= item.id %>"><%= item.desc_especialidade %></option>
+                    <% }); %>
+                </select>
+                
 
-        
+            </div>
 
             <label for="senha">Senha:</label>
             <input type="password" id="senha" name="senha" required>
 
-            <label for="status">Status:</label>
-            <input type="text" id="status" name="status" required>
+            <label for="confirmSenha">Confirma Senha :</label>
+            <input type="password" id="confirmSenha" name="confirmSenha" required>
 
+            <input type="hidden" id="status" name="status" value="1">
+            <input type="hidden" id="login" name="login" disabled>
 
             <button type="submit" id="submitButton" class="botao">Criar Perfil</button>
         </form>
+        <a href="/adm" class="back-button">
+            <button><span class="material-symbols-outlined">arrow_back</span> Voltar</button>
+        </a>
     </div>
 </div>
 
@@ -162,6 +172,7 @@
             crm: (document.getElementById('medico').checked) ? getFieldValue('crm') : null,
             login: cpfInput,
             senha: getFieldValue('senha'),
+            confirmSenha: getFieldValue("confirmSenha"),
             status: getFieldValue('status'),
             tipo: Array.from(document.querySelectorAll('input[name="perfil"]:checked')).map(input => input.value),
             descEspecialidade: (document.getElementById('medico').checked) ? getFieldValue('especialidade') : null

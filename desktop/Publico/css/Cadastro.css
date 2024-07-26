@@ -131,20 +131,83 @@ input[type="submit"]:hover {
 
 .botao{
   
-    margin-left: 700px;
+    margin-left: 350px;
 }
 
-.img-fundo {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    z-index: -1; /* Para garantir que a imagem fique atrás de outros elementos */
+/* Estilo para o rótulo */
+label {
+    font-size: 16px;
+    font-weight: bold;
+    margin-bottom: 10px;
+    display: block;
 }
 
-.img-fundo img {
+/* Estilo para a seleção */
+select {
     width: 100%;
-    height: 190%;
-    object-fit: cover;
+    padding: 10px;
+    margin-bottom: 20px;
+    font-size: 16px;
+    border: 2px solid #007BFF;
+    border-radius: 4px;
+    background-color: #f8f9fa;
+    color: #333;
+    transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+select:focus {
+    border-color: #0056b3;
+    box-shadow: 0 0 10px rgba(0, 123, 255, 0.5);
+    outline: none;
+}
+
+/* Estilo para o botão */
+button[type="submit"] {
+    display: inline-block;
+    padding: 12px 24px;
+    font-size: 16px;
+    font-weight: bold;
+    color: #fff;
+    background-color: #007BFF;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s, box-shadow 0.3s;
+}
+
+button[type="submit"]:hover {
+    background-color: #0056b3;
+    box-shadow: 0 0 10px rgba(0, 123, 255, 0.5);
+}
+
+button[type="submit"]:active {
+    background-color: #004085;
+}
+
+button[type="submit"]:focus {
+    outline: none;
+}
+
+.back-button {
+    text-decoration: none;
+}
+
+.back-button button {
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 4px;
+    cursor: pointer;
+    display: inline-block;
+}
+
+.back-button button:hover {
+    background-color: #0056b3;
+}
+
+.material-symbols-outlined {
+    font-size: 24px;
+    vertical-align: middle;
+    margin-right: 5px;
 }
