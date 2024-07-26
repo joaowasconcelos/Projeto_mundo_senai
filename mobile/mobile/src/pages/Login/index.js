@@ -4,6 +4,7 @@ import { SafeAreaView,ScrollView,Platform,StyleSheet,Text,View,Image,TextInput} 
 import { LinearGradient } from 'expo-linear-gradient';
 import { useNavigation, useRoute } from '@react-navigation/native'
 
+
 const logo = require('../../../assets/logo_medical.png');
 import api from '../../service/api';
 
@@ -23,7 +24,6 @@ const Login = () => {
     const getLogin = async () => {
 
         try {
-            console.log('oi');
             await api.post(`/Login/mobileEntrar`, { login: login, senha: senha })
                 .then(response => {
                     console.log(response.data);
@@ -45,6 +45,7 @@ const Login = () => {
             if (dadosLogin.tipo === 'Medico') {
                 navigation.navigate('ConsultasMedico', { dadosLogin })
             } else {
+                console.log('oi');
                 navigation.navigate('ConsultasPaciente', { dadosLogin })
             }
         } catch (error) {

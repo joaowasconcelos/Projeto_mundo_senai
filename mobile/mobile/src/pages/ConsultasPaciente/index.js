@@ -5,7 +5,7 @@ import FontAwesome from 'react-native-vector-icons/FontAwesome';
 
 import api from '../../service/api';
 
-const ConsultasPaciente = () => {
+export default function ConsultasPaciente() {
 
   const navigation = useNavigation();
   const route = useRoute();
@@ -65,6 +65,23 @@ const ConsultasPaciente = () => {
     } catch (error) {
       console.error(error);
     }
+    return (
+
+      <View style={styles.modeloCard}>
+
+        <Text style={styles.textHeader}>{item.funcionario_pessoa_id}</Text>
+        <Text style={styles.textHeader}>{item.especialidade}</Text>
+
+        <Text style={styles.textHeader}>Data da consulta:</Text>
+        <Text style={styles.textValue}>{item.data}</Text>
+
+        <Text style={styles.textHeader}>Horário:</Text>
+        <Text style={styles.textValue}>{item.hora}</Text>
+
+        <Text style={styles.textHeader}>Status da consulta:</Text>
+        <Text style={styles.textValue}>{item.status}</Text>
+      </View>
+    )
 
   }
 
@@ -124,7 +141,6 @@ const ConsultasPaciente = () => {
   );
 }
 
-export default ConsultasPaciente;
 
 const styles = StyleSheet.create({
   androidSafeArea: {
