@@ -3,8 +3,6 @@ const Login = require("../models/classes/Login");
 const { selectLogin, verificarSenha,deletarLogin } = require('../models/LoginModel')
 const Perfis = require("../models/PerfisModel");
 
-
-
 const LoginPerfis = {
     paginaLogin: async (req, res) => {
         res.render('pages/Login');
@@ -12,6 +10,7 @@ const LoginPerfis = {
     LoginPessoa: async (req, res) => {
         try {
             const { login, senha } = req.body;
+            console.log(login, senha)
             const loginConsulta = new Login(null, login, senha, null, null, null);
             const result = await selectLogin(loginConsulta);
             console.log(result)
@@ -31,7 +30,8 @@ const LoginPerfis = {
                     req.flash('error', 'Usuario ou senha incorretos');
                     return res.redirect('/Login');
                 }
-            } else {
+            }
+            else {
                 req.flash('error', 'Usuario ou senha incorretos');
                 return res.render('pages/Login');
             }

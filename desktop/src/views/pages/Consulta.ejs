@@ -11,8 +11,10 @@
     <title>Formulário de Consulta</title>
 </head>
 
-<body>
-
+<body >
+    <div class="img-fundo">
+    <img src="../../../images/img-fundoConsulta.jpg" class="" id="">
+</div>
     <div class="container">
         <h2>Formulário de Consulta</h2>
         <form id="consultaForm" action="/Cadastro/Consulta" method="post">
@@ -28,10 +30,11 @@
 
             <div class="form-group">
                 <label for="search">Buscar Paciente:</label>
+                
                 <input type="text" id="search" placeholder="Digite para buscar...">
                 <input type="hidden" id="paciente" name="paciente" required>
-            
                 <input type="hidden" id="ID_PACIENTE" name="ID_PACIENTE">
+                
             </div>
 
             <div class="form-group">
@@ -64,42 +67,11 @@
 
             <input type="hidden" id="status" name="status" value="1">
 
-            <button type="submit">Enviar</button>
+            <button class="btn-enviar" type="submit">Enviar</button>
         </form>
     </div>
 
-    <!-- <script>
-        $(document).ready(function () {
-            var pacientes = [
-                <% pacientes.forEach(function (paciente) { %>
-                    {
-                        label: "<%= paciente.NOME %> <%= paciente.CPF %>",
-                        value: "<%= paciente.id %>",
-                        ID_PACIENTE: "<%= paciente.ID_PACIENTE %>"
-                    },
-                <% }); %>
-            ];
-
-            $("#search").autocomplete({
-                source: pacientes,
-                select: function (event, ui) {
-                    $("#search").val(ui.item.label);
-                    $("#paciente").val(ui.item.value);
-                    $("#ID_PACIENTE").val(ui.item.ID_PACIENTE); // Define o valor do ID_PACIENTE
-                    return false;
-                }
-            });
-
-            $("#especialidade").change(function () {
-                console.log('Submitting form...');
-                $("#consultaForm").submit();
-            });
-
-            var consultaAtiva = true; // Aqui você define a lógica para verificar se a consulta está ativa
-            var statusInput = document.getElementById('status');
-            statusInput.value = consultaAtiva ? "1" : "0";
-        });
-    </script> -->
+   
 
 </body>
 
