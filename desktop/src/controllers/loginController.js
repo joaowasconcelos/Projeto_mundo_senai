@@ -2,6 +2,8 @@ const Login = require("../models/classes/Login");
 const { selectLogin, verificarSenha, deletarLogin } = require('../models/LoginModel')
 const Perfis = require("../models/PerfisModel");
 
+
+
 const LoginPerfis = {
     paginaLogin: async (req, res) => {
         res.render('pages/Login');
