@@ -4,6 +4,7 @@ import { SafeAreaView,ScrollView,Platform,StyleSheet,Text,View,Image,TextInput} 
 import { LinearGradient } from 'expo-linear-gradient';
 import { useNavigation, useRoute } from '@react-navigation/native'
 
+
 const logo = require('../../../assets/logo_medical.png');
 import api from '../../service/api';
 
@@ -23,7 +24,6 @@ const Login = () => {
     const getLogin = async () => {
 
         try {
-            console.log('oi');
             await api.post(`/Login/mobileEntrar`, { login: login, senha: senha })
                 .then(response => {
                     console.log(response.data);
@@ -45,6 +45,7 @@ const Login = () => {
             if (dadosLogin.tipo === 'Medico') {
                 navigation.navigate('ConsultasMedico', { dadosLogin })
             } else {
+                console.log('oi');
                 navigation.navigate('ConsultasPaciente', { dadosLogin })
             }
         } catch (error) {
@@ -111,7 +112,7 @@ const Login = () => {
                                     justifyContent: 'center',
                                     borderRadius: 50,
                                     alignItems: 'center',
-                                    marginTop: 200,
+                                    marginTop: 20,
                                     marginBottom: 10
                                 },
                             ]}
@@ -139,8 +140,8 @@ const styles = StyleSheet.create({
         flex: 1,
         alignItems: 'center',
         justifyContent: 'center',
-        height: 700,
-        width: 460,
+        height: '%60',
+        width: '%46',
         //backgroundColor: '#f7f9f8',
     },
     background: {
@@ -179,7 +180,7 @@ const styles = StyleSheet.create({
         color: '#007c7c',
         fontSize: 19,
         fontWeight: 'bold',
-        marginLeft: 172
+        alignContent: 'center',
     },
     entradaTexto: {
         color: '#004c4c',
@@ -194,13 +195,12 @@ const styles = StyleSheet.create({
     },
     box_white: {
         alignContent: 'center',
-        justifyContent: 'center',
         backgroundColor: 'white',
         height: 710,
         width: 460,
         borderTopLeftRadius: 130,
-        paddingTop: 100,
         alignItems: 'center',
+        paddingTop: 30
     }
 });
 
