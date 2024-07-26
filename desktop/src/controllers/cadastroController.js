@@ -17,9 +17,11 @@ const cadastro = {
             console.log(error);
             res.render('pages/pag_erro', { message: error });
         }
+        },
+    
+    
 
 
-    },
 
     adicionaPessoa: async (req, res) => {
         try {
@@ -94,6 +96,7 @@ const cadastro = {
             res.json(error);
         }
     },
+
 
     updateTelefone: async (req, res) => {
         try {
@@ -201,5 +204,6 @@ const cadastro = {
             res.status(500).json({ success: false, message: 'Erro ao excluir Perfil', error });
         }
     }
+}
 
 module.exports = { cadastro }

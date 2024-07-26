@@ -2,12 +2,14 @@
     max-width: 800px;
     margin: auto;
     padding: 20px;
+    
 }
 
 table {
     width: 100%;
     border-collapse: collapse;
     margin-top: 1rem;
+    background-color: #fff;
 }
 
 table, th, td {
@@ -90,16 +92,18 @@ th {
     border-radius: 4px; /* Borda arredondada */
     cursor: pointer; /* Cursor ao passar por cima do botão */
     display: inline-block; /* Permite que o botão se ajuste ao conteúdo interno */
+    margin-top: 300px;
 }
 
 .back-button button:hover {
     background-color: #0056b3; /* Cor de fundo do botão ao passar o mouse */
+  
 }
 
 .material-symbols-outlined {
     font-size: 24px; /* Tamanho do ícone */
     vertical-align: middle; /* Alinha verticalmente com o texto */
-    margin-right: 5px; /* Espaçamento à direita do ícone */
+    margin-right: 10px; /* Espaçamento à direita do ícone */
 }
 
 .button-container {
@@ -146,3 +150,19 @@ th {
     width: 100%;
     justify-content:center;
 }
+
+.img-fundo {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1; /* Para garantir que a imagem fique atrás de outros elementos */
+}
+
+.img-fundo img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
