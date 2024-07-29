@@ -32,18 +32,18 @@
                 <%= firstObject %>
             </button>
             <% if (typeof secondObject !=='undefined' ) { %>
-            <p class="or-divider">OU</p>
-            <button class="login-option" id="secondObjectBtn" value="<%= secondObject %>">
-                <%= secondObject %>
-            </button>
-            <% } %>
-            <% if (typeof thirdObject !=='undefined' ) { %>
-                <script>console.log("aqqq",thirdObject)</script>
                 <p class="or-divider">OU</p>
-                <button class="login-option" id="thirdObjectBtn" value="<%= thirdObject %>">
-                    <%= thirdObject %>
+                <button class="login-option" id="secondObjectBtn" value="<%= secondObject %>">
+                    <%= secondObject %>
                 </button>
                 <% } %>
+                    <% if (typeof thirdObject !=='undefined' ) { %>
+                        <script>console.log("aqqq", thirdObject)</script>
+                        <p class="or-divider">OU</p>
+                        <button class="login-option" id="thirdObjectBtn" value="<%= thirdObject %>">
+                            <%= thirdObject %>
+                        </button>
+                        <% } %>
 
         </div>
         <script>
@@ -53,21 +53,21 @@
             var firstObjectBtn = document.getElementById('firstObjectBtn');
             var secondObjectBtn = document.getElementById('secondObjectBtn');
             var thirdObjectBtn = document.getElementById('thirdObjectBtn');
-            
-            if(firstObjectBtn !==null){
+
+            if (firstObjectBtn !== null) {
                 firstObjectBtn.addEventListener('click', function () {
-                selecionarTipoLogin(firstObjectBtn.value);
-            });
+                    selecionarTipoLogin(firstObjectBtn.value);
+                });
             }
-            if(secondObjectBtn !==null){
+            if (secondObjectBtn !== null) {
                 secondObjectBtn.addEventListener('click', function () {
-                selecionarTipoLogin(secondObjectBtn.value);
-            });
+                    selecionarTipoLogin(secondObjectBtn.value);
+                });
             }
-            if(thirdObjectBtn !==null){
+            if (thirdObjectBtn !== null) {
                 thirdObjectBtn.addEventListener('click', function () {
-                selecionarTipoLogin(thirdObjectBtn.value);
-            });
+                    selecionarTipoLogin(thirdObjectBtn.value);
+                });
             }
 
             function selecionarTipoLogin(tipo) {
@@ -96,7 +96,7 @@
         <% } %>
 
             <script>
-                    // JavaScript para controlar o modal
+                // JavaScript para controlar o modal
                 var modal = document.getElementById('myModal');
                 var span = document.getElementsByClassName("close")[0];
 
