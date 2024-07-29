@@ -8,7 +8,6 @@ const Especialidade = require("../models/classes/Especialidade")
 const { insert, verificaCpf, verificaEndereco,updateTel,updateEndereco,deletePessoa,deletarFuncionario,deletarEndereco,deletarTelefone, deletarPerfil} = require("../models/PessoaModel")
 
 const cadastro = {
-
     paginaCadastro: async (req, res) => {
         try {
             res.render('pages/Cadastro');
@@ -17,36 +16,35 @@ const cadastro = {
             console.log(error);
             res.render('pages/pag_erro', { message: error });
         }
-
-
     },
 
     adicionaPessoa: async (req, res) => {
         try {
             console.log('Dados recebidos no corpo da requisição:', req.body);
             let result = null;
-            //const { cpf, nome, dataNasc, genero, email, endereco: [{ logradouro, bairro, estado, numeroEndereco, complementoEndereco, cep }], telefone, funcionario: [{ dataAdmissao, crm }], Login: [{ login, senha, status }], Perfis: [{ tipo }],Especialidade:[{descEspecialidade}] } = req.body;
-            const { cpf, nome, dataNasc, genero, email, logradouro, bairro, estado, numeroEndereco, complementoEndereco, cep, dataAdmissao, crm, login, senha, status, tipo, descEspecialidade } = req.body;
+            const { cpf, nome, dataNasc, genero, email, logradouro, bairro, estado, numeroEndereco, complementoEndereco, cep, dataAdmissao, crm, login, senha,confirmSenha, status, tipo, descEspecialidade } = req.body;
             const { telefones } = req.body;
-            console.log(dataNasc,dataAdmissao)
-    
 
+            if (senha != confirmSenha) {
+                return res.json({ message: "Senhas divergentes " })
+            }
+ 
             const novaPessoa = new Pessoa(null, cpf, nome, dataNasc, genero, email);
             const verificaCp = novaPessoa.validaCpf(novaPessoa.Cpf)
-            if (verificaCp !== true) {
+            if (!verificaCp) {
                 return res.json({ message: "CPF INVALIDO" })
             }
             result = await verificaCpf(novaPessoa.cpf)
             if (result[0][0].total > 0) {
                 return res.json({ message: "CPF já cadastrado" })
             }
-
             const dataVal = novaPessoa.DataConvert(novaPessoa.dataNasc);
             if (dataVal == "Invalid Date" || !(new Date(novaPessoa.dataNasc) instanceof Date)) {
                 return res.json({ message: "Data informada é invalida" });
             }
             const novoEndereco = new Endereco(null, logradouro, bairro, estado, numeroEndereco, complementoEndereco, cep);
-            result = await verificaEndereco(novoEndereco.cep, novoEndereco.numeroEndereco)
+            result = await verificaEndereco(cep, numeroEndereco)
+            console.log("result endereco",result)
             if (result[0][0].total > 0) {
                 return res.json({ message: "Endereço já cadastrado" })
             }
@@ -56,17 +54,14 @@ const cadastro = {
             }
             const novoPerfis = new Perfis(null, tipo, null, null, null);
 
-
-            console.log("Telefones:", telefones); // Verifica se telefones contém os dados esperados
             const objTelefone = [];
-            if (telefones.length > 0) { // Verifica se a lista de telefones não está vazia
+            if (telefones.length > 0) { 
                 telefones.forEach(numeroTelefone => {
                     const novoTelefone = new Telefone(null, numeroTelefone);
                     objTelefone.push(novoTelefone);
                 });
             }
-            console.log('Objetos Telefone criados:', objTelefone);
-
+         
 
             let novoFuncionario = null;
 
@@ -94,6 +89,7 @@ const cadastro = {
             res.json(error);
         }
     },
+
 
     updateTelefone: async (req, res) => {
         try {
@@ -125,6 +121,7 @@ const cadastro = {
     deletePessoa:async(req,res) => {
         try {
             const id = req.params.id;
+            console.log(id)
             const objPessoa = new Pessoa(id)
             console.log(objPessoa)
             const result = await deletePessoa(objPessoa);
@@ -201,8 +198,10 @@ const cadastro = {
             res.status(500).json({ success: false, message: 'Erro ao excluir Perfil', error });
         }
     }
+}
+
 
 
 }
-
 module.exports = { cadastro }
+

@@ -1,29 +1,37 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Prontuário</title>
-    <link rel="stylesheet" href="/css/Prontuario.css">
-</head>
-<body>
+<title>Prontuário</title>
+<link rel="stylesheet" href="/css/Prontuario.css">
 
-    <div class="corpo">
-    
+<div class="corpo">
     <h1>Formulário de Prontuário</h1>
-    <form action="/" method="post">
-        <label class="id"   for="id">ID:</label>
-        <input type="text" id="id" name="id" required><br><br>
+    <div class="form">
+        <form action="/Prontuario/cadastro" method="post">
+            <label for="diagnostico">Diagnóstico:</label>
+            <textarea id="diagnostico" name="diagnostico" required></textarea>
 
-        <label for="diagnostico">Diagnóstico:</label>
-        <input type="text" id="diagnostico" name="diagnostico" required><br><br>
+            <label for="medicacao">Medicação:</label>
+            <textarea id="medicacao" name="medicacao" required></textarea>
 
-        <label class="medicacao" for="medicacao">Medicação:</label>
-        <input type="text" id="medicacao" name="medicacao" required><br><br>
-
-        <button class="btn" type="submit">Enviar</button>
-    </form>
+            <button class="btn" type="submit">Enviar</button>
+        </form>
+    </div>
+    <a href="/Medico" class="back-button">
+        <button><span class="material-symbols-outlined">arrow_back</span> Voltar</button>
+    </a>
 </div>
-   
-</body>
-</html>
+
+<script>
+    then(response => response.json())
+    console.log(response)
+        .then(data => {
+            if (data.success) {
+                alert('Cadastro realizado com sucesso!');
+                window.location.href = data.redirect;
+            } else {
+                alert('Falha no cadastro: ' + data.message);
+            }
+        })
+        .catch(error => {
+            console.error('Erro:', error);
+            alert('Um erro ocorreu. Por favor, tente novamente.');
+        });
+</script>

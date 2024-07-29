@@ -1,6 +1,4 @@
-const {SelectsConsultas} = require("../models/SelectsModel")
-const {SelectsMedicos} = require("../models/SelectsModel")
-const {SelectPessoas} = require("../models/SelectsModel")
+const { SelectPessoas,SelectConsultaData,SelectConsultasAnteriores,SelectConsultaMedico,SelectsMedicos,SelectsConsultas} = require("../models/SelectsModel")
 
 
 const selects = {
@@ -16,10 +14,10 @@ const selects = {
         }
     },
 
-    SelecionaTodosMedicos: async(req,res) =>{
+    SelecionaTodosMedicos: async (req, res) => {
         try {
             const TdMedicos = await SelectsMedicos()
-            const TdsMedicos =TdMedicos[0]
+            const TdsMedicos = TdMedicos[0]
             return res.render('pages/MedicoAdm', { TdsMedicos });
         } catch (error) {
             console.log(error)
@@ -27,17 +25,57 @@ const selects = {
         }
     },
 
-    SelecionaTodasPessoas: async(req,res) =>{
+    SelecionaTodasPessoas: async (req, res) => {
         try {
             const TdPessoas = await SelectPessoas()
             const tdPessoas = TdPessoas[0]
             console.log(tdPessoas)
-            return res.render('pages/Paciente', {tdPessoas});
+            return res.render('pages/Paciente', { tdPessoas });
         } catch (error) {
             console.log(error)
             res.json(error);
         }
     },
+
+    SelecionaConsultaData: async (req, res) => {
+        try {
+            const id= req
+            const result = await SelectConsultaData(id)
+            const results = result[0]
+            return results
+          } catch (error) {
+            console.log(error)
+            res.json(error);
+        }
+    },
+
+    SelecionaConsultaAnteriores: async (req, res) => {
+        try {
+            const id= req
+            const result = await SelectConsultasAnteriores(id)
+            const results = result[0]
+            return results
+          } catch (error) {
+            console.log(error)
+            res.json(error);
+        }
+    },
+
+    selectConsultaMedicos: async (req, res) => {
+        try {
+            const cpf = req.session.user.login
+            const result = await SelectConsultaMedico(cpf,null);
+            const { selectConsultaMedicos } = result;
+            const results = selectConsultaMedicos[0]
+            console.log("AQUI",results)
+            // const resultId = selectConsultaIds[0]
+            return res.render('pages/Medico', { results});
+        } catch (error) {
+            console.log(error);
+            return res.json({ error: error.message });
+        }
+    },
+    
 }
 
-module.exports = {selects}
+module.exports = { selects }

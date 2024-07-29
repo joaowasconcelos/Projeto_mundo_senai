@@ -1,13 +1,42 @@
 <link rel="stylesheet" href="/css/Paciente.css">
 
-<div>
-    <h2 class="titulo">Lista de Pacientes</h2>
+<!-- botão de retorno -->
+
+<button class="button">
+    <a href="/adm">
+        <div class="button-box">
+            <span class="button-elem">
+                <svg viewBox="0 0 46 40" xmlns="http://www.w3.org/2000/svg">
+                    <path
+                        d="M46 20.038c0-.7-.3-1.5-.8-2.1l-16-17c-1.1-1-3.2-1.4-4.4-.3-1.2 1.1-1.2 3.3 0 4.4l11.3 11.9H3c-1.7 0-3 1.3-3 3s1.3 3 3 3h33.1l-11.3 11.9c-1 1-1.2 3.3 0 4.4 1.2 1.1 3.3.8 4.4-.3l16-17c.5-.5.8-1.1.8-1.9z">
+                    </path>
+                </svg>
+            </span>
+            <span class="button-elem">
+                <svg viewBox="0 0 46 40">
+                    <path
+                        d="M46 20.038c0-.7-.3-1.5-.8-2.1l-16-17c-1.1-1-3.2-1.4-4.4-.3-1.2 1.1-1.2 3.3 0 4.4l11.3 11.9H3c-1.7 0-3 1.3-3 3s1.3 3 3 3h33.1l-11.3 11.9c-1 1-1.2 3.3 0 4.4 1.2 1.1 3.3.8 4.4-.3l16-17c.5-.5.8-1.1.8-1.9z">
+                    </path>
+                </svg>
+            </span>
+        </div>
+    </a>
+</button>
+
+
+<!-- Titulo -->
+
+<h2 class="titulo">Lista de Pacientes</h2>
+
+<!-- Tabela -->
+
+<div class="table-container">
     <table>
         <thead>
             <tr>
-                <th>ID</th>
+                <th id="id">ID</th>
                 <th>CPF</th>
-                <th>Nome</th>
+                <th id="nome">Nome</th>
                 <th>Data de Nascimento</th>
                 <th>Gênero</th>
                 <th>Tipo</th>
@@ -17,13 +46,13 @@
         <tbody>
             <% tdPessoas.forEach(function(item) { %>
                 <tr>
-                    <td>
+                    <td id="id">
                         <%= item.id %>
                     </td>
                     <td>
                         <%= item.CPF %>
                     </td>
-                    <td>
+                    <td id="nome">
                         <%= item.NOME %>
                     </td>
                     <td>
@@ -36,16 +65,11 @@
                         <%= item.TIPO %>
                     </td>
                     <td><a method="get" href="/PacienteInfo/<%= item.id %>"><span
-                                class="material-symbols-outlined">folder_shared</span></a></td>
+                                class="material-symbols-outlined">folder_shared</span></a>
+                    </td>
                 </tr>
 
                 <% }); %>
         </tbody>
     </table>
-</div>
-
-<div>
-    <a href="/adm" class="back-button">
-        <button><span class="material-symbols-outlined">arrow_back</span> Voltar</button>
-    </a>
 </div>

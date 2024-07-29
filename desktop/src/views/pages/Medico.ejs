@@ -1,7 +1,42 @@
+<link rel="stylesheet" href="/css/Medico.css">
 <div>
-    <h1>Bem-vindo, <%= user.nome %>!</h1>
+    <h3>Consultas de Hoje</h3>    
 </div>
 
 <div>
-    <a href="/Prontuario">Adicionar Prontuario Paciente</a>
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Data</th>
+                <th>Hora</th>
+                <th>Nome Paciente</th>
+                <th>CPF Paciente</th>
+                <th>Nome do Medico</th>
+                <th>Especialidade do Medico</th>
+                <th>Ver Pronturio</th>
+                <th>Adicionar Prontuario</th>
+            </tr>
+        </thead>
+        <tbody>
+            <% results.forEach(function(item) { %>
+                <tr>
+                    <td><%= item.id %></td>
+                    <td><%= item.data %></td>
+                    <td><%= item.hora %></td>
+                    <td><%= item.nome_paciente %></td>
+                    <td><%= item.cpf_paciente %></td>
+                    <td><%= item.nome_funcionario %></td>
+                    <td><%= item.desc_especialidade %></td>
+                    <td><a href="/Historico/Prontuario/<%= item.pessoa_id %>?id_especialidade=<%= encodeURIComponent(item.id_especialidade) %>">Ver histórico de prontuário</a></td>
+                    <td>
+                        <a method="get" href="/Prontuario/<%= item.id %>">
+                            <span class="material-symbols-outlined">add</span>
+                        </a>
+                    </td>
+                    
+                </tr>
+            <% }); %>
+        </tbody>
+    </table>
 </div>
