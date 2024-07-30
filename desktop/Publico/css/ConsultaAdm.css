@@ -1,5 +1,7 @@
 
-
+footer{
+    position: fixed;
+}
 
 nav {
     background-color: #00665E;
