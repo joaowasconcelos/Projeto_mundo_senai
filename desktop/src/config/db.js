@@ -8,8 +8,8 @@ async function criarPoolDeConexoes() {
             host: '192.168.4.106',
             port: '3306',
             database: 'clinica',
-            user: 'murilo',
-            password: '123456789',
+            user: 'root',
+            password: '1234',
             waitForConnections: true, // Aguarda conexões se não houver disponíveis no momento
             connectionLimit: 10, // Limite máximo de conexões no pool
             multipleStatements: true // Permitir a execução de várias queries ao mesmo tempo

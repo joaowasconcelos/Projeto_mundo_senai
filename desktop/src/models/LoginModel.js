@@ -21,7 +21,6 @@ async function selectLogin(objLogin) {
     GROUP BY lo.login, lo.senha, p.nome, lo.pessoa_id;`, [objLogin.login, objLogin.senha]);
 
         const perfilLogin = selectLogin[0]
-        
         return perfilLogin
     }
     catch (error) {

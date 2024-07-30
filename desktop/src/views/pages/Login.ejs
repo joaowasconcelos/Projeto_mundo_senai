@@ -2,6 +2,10 @@
 
 <div class="login-container">
     <h2>Login</h2>
+    <% if (error_msg) { %>
+        <div class="alert alert-danger"><%= error_msg %></div>
+    <% } %>
+    
     <form id="loginForm" action="/auth/login" method="post">
         <!-- Input de Login -->
         <% if (typeof resultl !=='undefined' ) { %>
