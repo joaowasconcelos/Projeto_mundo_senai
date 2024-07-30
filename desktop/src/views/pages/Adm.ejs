@@ -1,8 +1,12 @@
-     <div>
-        <h1 id="letra-adm">Bem-vindo, <%= user.nome %>!</h1>
-    </div>
+<link rel="stylesheet" href="/css/Adm.css">
 
-    <!-- <nav>
+<div id="cabecalho">
+    <h1 id="letra-adm">Bem-vindo, <%= user.nome_pessoa %>!</h1>
+</div>
+
+
+
+<!-- <nav>
         <ul>
             <li><a href="/Paciente">Pacientes</a></li>
             <li><a href="/ConsultaAdm">Consultas</a></li>
@@ -14,41 +18,40 @@
     </nav> -->
 
 
-    <div class="container">
-        <div class="section">
-            <h2>Pacientes</h2>
-            <p>Gerencie os pacientes do sistema.</p>
-            <button onclick="window.location.href='/Paciente'">Ver Pacientes</button>
-        </div>
-
-        <div class="section">
-            <h2>Consultas</h2>
-            <p>Visualize e gerencie as consultas agendadas.</p>
-            <button onclick="window.location.href='/ConsultaAdm'">Ver Consultas</button>
-        </div>
-
-        <div class="section">
-            <h2>Médicos</h2>
-            <p>Gerencie as informações dos médicos.</p>
-            <button onclick="window.location.href='/MedicoAdm'">Ver Médicos</button>
-        </div>
-
-        <div class="section">
-            <h2>Especialidade</h2>
-            <p>Administre as especialidades disponíveis.</p>
-            <button onclick="window.location.href='/Especialidade'">Ver Especialidades</button>
-        </div>
-
-        <div class="section">
-            <h2>Cadastrar Consulta</h2>
-            <p>Agende novas consultas.</p>
-            <button onclick="window.location.href='/Consulta'">Cadastrar Consulta</button>
-        </div>
-
-        <div class="section">
-            <h2>Cadastrar Paciente</h2>
-            <p>Adicione novos pacientes ao sistema.</p>
-            <button onclick="window.location.href='/Cadastro'">Cadastrar Paciente</button>
-        </div>
+<div class="container">
+    <div class="section">
+        <h2>Pacientes</h2>
+        <p>Gerencie todos os pacientes do sistema.</p>
+        <button onclick="window.location.href='/Paciente'">Ver Pacientes</button>
     </div>
 
+    <div class="section">
+        <h2>Consultas</h2>
+        <p>Visualize e gerencie as consultas agendadas.</p>
+        <button onclick="window.location.href='/ConsultaAdm'">Ver Consultas</button>
+    </div>
+
+    <div class="section">
+        <h2>Médicos</h2>
+        <p>Gerencie as informações dos médicos.</p>
+        <button onclick="window.location.href='/MedicoAdm'">Ver Médicos</button>
+    </div>
+
+    <div class="section">
+        <h2>Especialidade</h2>
+        <p>Administre as especialidades disponíveis.</p>
+        <button onclick="window.location.href='/Especialidade'">Ver Especialidades</button>
+    </div>
+
+    <div class="section">
+        <h2>Cadastrar Consulta</h2>
+        <p>Agende novas consultas.</p>
+        <button onclick="window.location.href='/Consulta'">Cadastrar Consulta</button>
+    </div>
+
+    <div class="section">
+        <h2>Cadastrar Paciente</h2>
+        <p>Adicione novos pacientes ao sistema.</p>
+        <button onclick="window.location.href='/Cadastro'">Cadastrar Paciente</button>
+    </div>
+</div>
