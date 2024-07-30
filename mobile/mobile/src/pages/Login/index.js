@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Pressable } from 'react-native';
-import { SafeAreaView,ScrollView,Platform,StyleSheet,Text,View,Image,TextInput} from 'react-native';
+import { SafeAreaView, ScrollView, Platform, StyleSheet, Text, View, Image, TextInput } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
 import { useNavigation, useRoute } from '@react-navigation/native'
 
@@ -24,29 +24,40 @@ const Login = () => {
     const getLogin = async () => {
 
         try {
+            // console.log('oi');
+            // console.log(login, senha);
             await api.post(`/Login/mobileEntrar`, { login: login, senha: senha })
                 .then(response => {
                     console.log(response.data);
-                    if (response !== undefined && response.data != null) {
+                    // if (response !== undefined && response.data != null) {
 
-                        const { data } = response.data;
-                        const [firstEntry] = data;
-                        const { id, idLogin, login, senha, tipo } = firstEntry;
+                    //     const { data } = response.data;
+                    //     const [firstEntry] = data;
+                    //     const { id, idLogin, login, senha, tipo } = firstEntry;
 
-                        console.log(id, idLogin, login, senha, tipo);
-                        setDadosLogin({ id: id, idLogin: idLogin, login: login, senha: senha, tipo: tipo });
-                        console.log(dadosLogin);
-                    } else {
-                        alert('Nenhum registro foi localizado!');
+                    //     // console.log(id, idLogin, login, senha, tipo);
+                    //     setDadosLogin({ id: id, idLogin: idLogin, login: login, senha: senha, tipo: tipo });
+                    //     console.log(dadosLogin);
+                    // } else {
+                    //     alert('Nenhum registro foi localizado!');
+                    // }
+                    console.log(response.data.id)
+                    const id = response.data.id
+                    if (response.data.tipo === 'medico') {
+                        navigation.navigate('MedicoTab', { id })
+                    } else if (response.data.tipo === 'paciente') {
+                        navigation.navigate('PacienteTab', { id })
                     }
                 }).catch(error => {
                     console.log('Erro', error);
                 })
-            if (dadosLogin.tipo === 'Medico') {
-                navigation.navigate('ConsultasMedico', { dadosLogin })
+            if (dadosLogin.tipo === 'medico') {
+                navigation.navigate('MedicoTab', { dadosLogin })
             } else {
-                console.log('oi');
-                navigation.navigate('ConsultasPaciente', { dadosLogin })
+                if (dadosLogin.tipo === 'paciente') {
+                    navigation.navigate('PacienteTab', { dadosLogin })
+
+                }
             }
         } catch (error) {
             if (error.response) {
@@ -116,7 +127,7 @@ const Login = () => {
                                     marginBottom: 10
                                 },
                             ]}
-                            onPress={getLogin}
+                            onPress={getLogin({ id: login.id })}
                         >
                             <Text style={{ textAlign: 'center', fontSize: 25, letterSpacing: 5, fontWeight: 'bold', color: '#fafafa' }}>Logar</Text>
                         </Pressable>
