@@ -5,21 +5,17 @@ import api from '../../service/api';
 import { useNavigation, useRoute } from '@react-navigation/native'
 
 const DadosPaciente = () => {
-  // const [label, setLabel] = useState();
-  // const [pacienteData, setPacienteData] = useState({});
-  // const [flatListPaciente, setflatListPaciente] = useState([]);
-
-
-  const recebeId = (id) => {
-    setLabel(id);
-  }
+  const [label, setLabel] = useState();
+  const [pacienteData, setPacienteData] = useState({});
+  const [flatListPaciente, setflatListPaciente] = useState([]);
+  const [id, setId] = useState(route.params?.id)
 
   const getPaciente = async (id) => {
     console.log('Entrou na função');
     console.log(id);
-    
+
     try {
-      const response = await api.get(`/paciente/infos/${id}`).catch(function (error) {
+      const response = await api.get('/paciente/consultas/:id').catch(function (error) {
         if (error.response) {
           console.log(error.response.data);
           console.log(error.response.status);
@@ -57,7 +53,7 @@ const DadosPaciente = () => {
       <Button
         title="Clique Aqui"
         onPress={() => getPaciente(label)}
-       
+
       />
       <ScrollView contentContainerStyle={styles.scrollViewContent}>
         {[
@@ -76,11 +72,11 @@ const DadosPaciente = () => {
         ].map((item) => (
           <View style={styles.sep} key={item.key}>
             <Text style={styles.label}>{item.label}:</Text>
-            <TextInput 
-              editable={false} 
-              style={styles.campos} 
-              value={pacienteData[item.key] || ''} 
-              
+            <TextInput
+              editable={false}
+              style={styles.campos}
+              value={pacienteData[item.key] || ''}
+
             />
           </View>
         ))}
