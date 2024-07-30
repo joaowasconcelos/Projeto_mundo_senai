@@ -200,5 +200,8 @@ const cadastro = {
     }
 }
 
+
+
+
 module.exports = { cadastro }
 

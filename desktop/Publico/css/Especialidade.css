@@ -1,3 +1,7 @@
+footer{
+    position: fixed;
+}
+
 .container {
     max-width: 800px;
     margin: auto;
@@ -54,7 +58,7 @@ th {
 
 .box form button {
     padding: 10px;
-    background-color: #28a745;
+    background-color: #00665E;
     color: #fff;
     border: none;
     cursor: pointer;
@@ -75,7 +79,7 @@ th {
 .addEspec button,
 .editEspec button {
     padding: 10px;
-    background-color: #007bff;
+    background-color: #00665E; /*muda a cor do botão de adicionar especialidade*/
     color: #fff;
     border: none;
     cursor: pointer;
@@ -83,7 +87,7 @@ th {
 }
 
 #successMessage {
-    color: green;
+    color: #28a745;
     margin-top: 10px;
 }
 
@@ -94,18 +98,18 @@ th {
 }
 
 .back-button button {
-    background-color: #007bff;
+    background-color:  #00665E ; /*muda a cor do botão de voltar*/
     color: #fff;
     border: none;
     padding: 10px 20px;
     border-radius: 4px;
     cursor: pointer;
     display: inline-block;
-    margin-top: 300px;
+    margin-top: 260px;
 }
 
 .back-button button:hover {
-    background-color: #0056b3; /* Cor de fundo do botão ao passar o mouse */
+    background-color: #28a745;; /* Cor de fundo do botão ao passar o mouse */
   
 }
 
@@ -130,7 +134,8 @@ th {
 }
 
 .edit-button button:hover {
-    background-color: #218838;
+    background-color: #000902;
+    margin-top: 50px;
 }
 
 .delete-button button {
