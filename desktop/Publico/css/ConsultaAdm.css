@@ -51,7 +51,8 @@ th {
 }
 
 .back-button button {
-    background-color: #007bff; /* Cor de fundo do botão */
+    margin-top: 300px;
+    background-color: #00665E; /* Cor de fundo do botão */
     color: #fff; /* Cor do texto dentro do botão */
     border: none; /* Remove a borda do botão */
     padding: 10px 20px; /* Espaçamento interno do botão */
@@ -61,7 +62,7 @@ th {
 }
 
 .back-button button:hover {
-    background-color: #0056b3; /* Cor de fundo do botão ao passar o mouse */
+    background-color: #28a745; /* Cor de fundo do botão ao passar o mouse */
 }
 
 .material-symbols-outlined {
