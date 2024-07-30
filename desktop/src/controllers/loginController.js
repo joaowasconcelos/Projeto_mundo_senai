@@ -18,6 +18,10 @@ const LoginPerfis = {
             const loginConsulta = new Login(null, login, senha, null, null, null);
             const result = await selectLogin(loginConsulta);
             console.log(result)
+            if (result.length === 0) {
+                req.flash('error', 'Login ou senha incorretos.');
+                return res.redirect('/login');  
+            }
             let firstObject, secondObject, thirdObject;
 
             if (result[0].tipo.includes("paciente")) {
@@ -35,8 +39,7 @@ const LoginPerfis = {
                 req.session.isAuthenticated = true;
                 req.session.user = result[0];
             }
-
-            if (result[0].tipo.length>0) {
+            if (result[0].tipo.length>=0) {
                 const resultl = result[0].login
                 const results = result[0].senha
                 return res.render("pages/Login", { firstObject, secondObject,thirdObject,resultl,results})
