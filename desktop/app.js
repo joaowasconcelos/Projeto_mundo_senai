@@ -1,5 +1,5 @@
-require('dotenv').config();
-const jwt = require("jsonwebtoken")
+// require('dotenv').config();
+// const jwt = require("jsonwebtoken")
 const express = require('express');
 const bodyParser = require('body-parser');
 const router = require('./src/routes/clinicaRoutes');
