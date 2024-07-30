@@ -43,11 +43,11 @@ const cadastro = {
                 return res.json({ message: "Data informada é invalida" });
             }
             const novoEndereco = new Endereco(null, logradouro, bairro, estado, numeroEndereco, complementoEndereco, cep);
-            result = await verificaEndereco(cep, numeroEndereco)
-            console.log("result endereco",result)
-            if (result[0][0].total > 0) {
-                return res.json({ message: "Endereço já cadastrado" })
-            }
+            // result = await verificaEndereco(cep, numeroEndereco)
+            // console.log("result endereco",result)
+            // if (result[0][0].total > 0) {
+            //     return res.json({ message: "Endereço já cadastrado" })
+            // }
             const novoLogin = new Login(null, login, senha, status, null, null);
             if (novoLogin.login != novaPessoa.cpf) {
                 return res.json({ message: "Login tem que ser o CPF" });
@@ -82,7 +82,7 @@ const cadastro = {
                     return res.json({ message: 'Todos os campos são obrigatórios.' });
                 }
                 result = await insert(novaPessoa, novoEndereco, objTelefone, novoFuncionario, novoLogin, novoPerfis, novaEspecialidade);
-                return res.json({ message: "Funcionario cadastrado com sucesso" })
+                return res.send("Funcionario cadastrado com sucesso" )
             }
         } catch (error) {
             console.log(error)

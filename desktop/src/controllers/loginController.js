@@ -10,15 +10,13 @@ const LoginPerfis = {
     },
     LoginPessoa: async (req, res) => {
         try {
-            console.log("AQUI",req.body)
-            console.log("AQUI",req.query)
-            console.log("AQUI",req.params)
             const { login, senha } = req.body;
-            console.log("AQUI",login,senha)
+            console.log(login,senha)
             const loginConsulta = new Login(null, login, senha, null, null, null);
             const result = await selectLogin(loginConsulta);
             console.log(result)
             let firstObject, secondObject, thirdObject;
+    
 
             if (result[0].tipo.includes("paciente")) {
                 firstObject = "paciente";
@@ -35,7 +33,7 @@ const LoginPerfis = {
                 req.session.isAuthenticated = true;
                 req.session.user = result[0];
             }
-
+            
             if (result[0].tipo.length>0) {
                 const resultl = result[0].login
                 const results = result[0].senha
@@ -50,9 +48,10 @@ const LoginPerfis = {
     direcionaLogin: async (req, res) => {
         try {
             const { tipo } = req.body;
+            console.log("aqui",tipo)
             switch (tipo.toLowerCase()) {
                 case 'paciente':
-                    return res.redirect('/Paciente/Usuario');
+                    return res.redirect('/Paciente/Usuario');   
                 case 'medico':
                     return res.redirect('/Medico');
                 case 'adm':
@@ -71,15 +70,31 @@ const LoginPerfis = {
     LoginPessoaMobile: async (req, res) => {
         try {
             const { login, senha } = req.body
-            const result = await selectLogin(login)
-            if (senha != result[0][0].senha) {
+            const loginConsulta = new Login(null, login, senha, null, null, null);
+            const result = await selectLogin(loginConsulta);
+            if (senha != result[0].senha) {
                 return res.json({ message: 'Senha incorreta' })
             }
-            if (result[0].tipo === 'Paciente') {
-                return res.json({ data: result[0] })
-            } else if (result[0].tipo === 'Medico') {
-                return res.json({ data: result[0] })
+            console.log(result[0].tipo)
+            console.log(result[0].tipo.includes("paciente"))
+            if (result[0].tipo.includes("paciente")) {
+                const tipo = "paciente"
+                const id = result[0].id
+                console.log(tipo)
+                return res.json({id,tipo})
             }
+            console.log("aq")
+            if (result[0].tipo.includes("medico")) {
+                const tipo = "medico"
+                const id = result[0].id
+                console.log(tipo)
+                return res.json({id,tipo})
+            }
+            // if (result[0].tipo === 'paciente') {
+            //     return res.json({ data: result[0] })
+            // } else if (result[0].tipo === 'medico') {
+            //     return res.json({ data: result[0] })
+            // }
             return res.json({ data: result[0] })
         } catch (error) {
             console.log(error)

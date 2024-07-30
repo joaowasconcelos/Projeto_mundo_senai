@@ -106,6 +106,7 @@ router.get('/Consulta', ensureAdmin, (req, res) => {
 
 
 router.get('/login', LoginPerfis.paginaLogin);
+router.post('/Login/mobileEntrar',LoginPerfis.LoginPessoaMobile)
 router.get("/PacienteInfo/:id", viewPaciente.selecionaInfosPaciente) /*Direciona para a pagina de info dos paciente*/
 router.get("/paciente/consultas/:id", viewPaciente.selecionaConsultas);
 

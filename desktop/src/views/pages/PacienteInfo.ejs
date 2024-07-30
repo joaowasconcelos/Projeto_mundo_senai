@@ -1,5 +1,5 @@
 <link rel="stylesheet" href="/css/PacienteInfo.css">
-
+<!-- 
 <a href="/adm">
     <button class="button">
         <div class="button-box">
@@ -19,76 +19,75 @@
             </span>
         </div>
     </button>
-</a>
+</a> -->
 
 <div class="paciente-container">
     <h2 class="titulo">Todos os Dados dos Pacientes</h2>
 
     <% infoPaciente.forEach(function(item) { %>
         <div class="paciente-item">
-
+    
             <input type="hidden" value="<%= item.id %>" id="id">
-
+    
             <label>Nome:</label>
             <input type="text" value="<%= item.Nome %>" readonly>
-
+    
             <label>CPF:</label>
             <input type="text" value="<%= item.CPF %>" readonly>
-
+    
             <label>Data de Nascimento:</label>
             <input type="text" value="<%= item.DataNascimento %>" readonly>
-
+    
             <label>Gênero:</label>
             <input type="text" value="<%= item.Genero %>" readonly>
-
+    
             <label>Email:</label>
             <input type="text" value="<%= item.Email %>" readonly>
-
+    
             <label>Data de Cadastro:</label>
             <input type="text" value="<%= item.DataCadastro %>" readonly>
-
+    
             <label>Logradouro:</label>
             <input type="text" value="<%= item.Logradouro %>" readonly>
-
+    
             <label>Bairro:</label>
             <input type="text" value="<%= item.Bairro %>" readonly>
-
+    
             <label>Estado:</label>
             <input type="text" value="<%= item.Estado %>" readonly>
-
+    
             <label>Número Residencial:</label>
             <input type="text" value="<%= item.NumeroResidencia %>" readonly>
-
+    
             <label>Complemento:</label>
             <input type="text" value="<%= item.Complemento %>" readonly>
-
+    
             <label>CEP:</label>
             <input type="text" value="<%= item.CEP %>" readonly>
-
+    
             <label>Telefone:</label>
             <input type="text" value="<%= item.Telefone %>" readonly>
-
+    
             <label>Tipo:</label>
             <input type="text" value="<%= item.Tipo %>" readonly>
-
+    
             <label>Login:</label>
             <input type="text" value="<%= item.Login %>" readonly>
-
+    
             <label>Senha:</label>
             <input type="text" value="<%= item.Senha %>" readonly>
-
+    
             <label>Data de Admissão:</label>
             <input type="text" value="<%= item.DataAdmissao %>" readonly>
-
+    
             <label>CRM:</label>
             <input type="text" value="<%= item.CRM %>" readonly>
-
+    
             <label>Especialidade:</label>
             <input type="text" value="<%= item.Especialidade %>" readonly>
         </div>
-        <% infoPaciente.forEach(function(item) { %>
-</div>
-
+    <% }); %>
+    
 <div class="botoes">
     <div>
         <a href="/Paciente" class="back-button">
