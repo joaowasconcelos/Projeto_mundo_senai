@@ -31,7 +31,7 @@ footer {
     text-align: center;
     font-size: 14px;
     width: 100%;
-    /* position: fixed; Altera de absolute para fixed */
+    position: fixed;
     bottom: 0; /* Garante que o footer esteja no fundo da página */
     left: 0; /* Garante que o footer esteja alinhado à esquerda */
     padding: 8px 0;
