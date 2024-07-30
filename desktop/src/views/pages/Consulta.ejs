@@ -1,106 +1,233 @@
-<!DOCTYPE html>
-<html lang="pt-br">
+<link rel="stylesheet" href="/css/Consulta.css">
+<link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="/css/Consulta.css">
-    <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
-    <title>Formulário de Consulta</title>
-</head>
+<div class="container">
 
-<body>
+    <h2>Formulário de Consulta</h2>
+    <form id="consultaForm" action="/Cadastro/Consulta" method="post">
+        <div class="form-group">
+            <label for="data">Data:</label>
+            <input type="date" id="data" name="data" required>
+        </div>
 
-    <div class="container">
-        <h2>Formulário de Consulta</h2>
-        <form id="consultaForm" action="/Cadastro/Consulta" method="post">
-            <div class="form-group">
-                <label for="data">Data:</label>
-                <input type="date" id="data" name="data" required>
+
+        <div class="form-group">
+            <label for="hora">Hora:</label>
+            <input type="time" id="hora" name="hora" required>
+        </div>
+
+        <div class="form-group">
+            <label for="search">Buscar Paciente:</label>
+            <input type="text" id="search" placeholder="Digite para buscar..." readonly>
+            <input type="hidden" id="paciente" name="paciente" required>
+            <input type="hidden" id="ID_PACIENTE" name="ID_PACIENTE">
+        </div>
+
+        <div id="modalPacientes" class="modal">
+            <div class="modal-content">
+                <span class="close">&times;</span>
+                <h2 class="titulo">Lista de Pacientes</h2>
+                <input type="text" id="filterPacientes" placeholder="Pesquisar paciente...">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>CPF</th>
+                            <th>Nome</th>
+                        </tr>
+                    </thead>
+                    <tbody id="pacientesTable">
+                        <% pacientes.forEach(function(item) { %>
+                            <tr class="select-paciente" data-id="<%= item.id %>" data-nome="<%= item.NOME %>"
+                                data-id-paciente="<%= item.ID_PACIENTE %>">
+                                <td>
+                                    <%= item.id %>
+                                </td>
+                                <td>
+                                    <%= item.CPF %>
+                                </td>
+                                <td>
+                                    <%= item.NOME %>
+                                </td>
+                            </tr>
+                            <% }); %>
+                    </tbody>
+                </table>
             </div>
+        </div>
 
-            <div class="form-group">
-                <label for="hora">Hora:</label>
-                <input type="time" id="hora" name="hora" required>
-            </div>
-
-            <div class="form-group">
-                <label for="search">Buscar Paciente:</label>
-                <input type="text" id="search" placeholder="Digite para buscar...">
-                <input type="hidden" id="paciente" name="paciente" required>
-            
-                <input type="hidden" id="ID_PACIENTE" name="ID_PACIENTE">
-            </div>
-
-            <div class="form-group">
-                <label for="especialidade">Especialidade:</label>
-                <select id="especialidade" name="especialidade" required>
-                    <option value=""></option>
-                    <% Especialidade.forEach(function(item) { %>
-                        <option value="<%= item.id %>" <%=item.id==especialidadeSelecionada ? 'selected' : '' %>><%=
-                                item.desc_especialidade %>
-                        </option>
+        <div class="form-group">
+            <label for="especialidade">Especialidade:</label>
+            <select id="especialidade" name="especialidade" required>
+                <option value=""></option>
+                <% Especialidade.forEach(function(item) { %>
+                    <option value="<%= item.id %>" <%=item.id==especialidadeSelecionada ? 'selected' : '' %>><%=
+                            item.desc_especialidade %>
+                    </option>
                     <% }); %>
-                </select>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label for="searchMedico">Buscar Médico:</label>
+            <input type="text" id="searchMedico" placeholder="Selecione uma especialidade primeiro..." readonly>
+            <input type="hidden" id="medico" name="medico" required>
+            <input type="hidden" id="id_funcionario" name="id_funcionario">
+        </div>
+
+        <div id="modalMedicos" class="modal">
+            <div class="modal-content">
+                <span class="close">&times;</span>
+                <h2 class="titulo">Lista de Médicos</h2>
+                <input type="text" id="filterMedicos" placeholder="Pesquisar médico...">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Nome</th>
+                        </tr>
+                    </thead>
+                    <tbody id="medicosTable">
+                        <% medico.forEach(function(item) { %>
+                            <tr class="select-medico" data-id="<%= item.id %>" data-nome="<%= item.nome %>"
+                                data-id-medico="<%= item.id_funcionario %>">
+                                <td>
+                                    <%= item.id %>
+                                </td>
+                                <td>
+                                    <%= item.nome %>
+                                </td>
+                            </tr>
+                            <% }); %>
+                    </tbody>
+                </table>
             </div>
+        </div>
 
-            <div class="form-group">
-                <label for="medico">Médico:</label>
-                <select id="medico" name="medico" required>
-                    <% if (medico.length > 0) { %>
-                        <% medico.forEach(function(medicoItem) { %>
-                            <option value="<%= medicoItem.id %>">
-                                <%= medicoItem.nome %>
-                            </option>
-                            <input type="hidden" id="id_funcionario" name="id_funcionario" value="<%= medicoItem.id_funcionario %>">
-                        <% }); %>
-                    <% } else { %>
-                        <option value="">Nenhum médico encontrado</option>
-                    <% } %>
-                </select>
-            </div>
+        <input type="hidden" id="status" name="status" value="1">
 
-            <input type="hidden" id="status" name="status" value="1">
+        <button type="submit">Enviar</button>
 
-            <button type="submit">Enviar</button>
-        </form>
-    </div>
 
-    <!-- <script>
-        $(document).ready(function () {
-            var pacientes = [
-                <% pacientes.forEach(function (paciente) { %>
-                    {
-                        label: "<%= paciente.NOME %> <%= paciente.CPF %>",
-                        value: "<%= paciente.id %>",
-                        ID_PACIENTE: "<%= paciente.ID_PACIENTE %>"
-                    },
-                <% }); %>
-            ];
+    </form>
 
-            $("#search").autocomplete({
-                source: pacientes,
-                select: function (event, ui) {
-                    $("#search").val(ui.item.label);
-                    $("#paciente").val(ui.item.value);
-                    $("#ID_PACIENTE").val(ui.item.ID_PACIENTE); // Define o valor do ID_PACIENTE
-                    return false;
-                }
-            });
+</div>
+<a href="/adm" class="back-button">
+    <button><span class="material-symbols-outlined">arrow_back</span> Voltar</button>
+</a>
 
-            $("#especialidade").change(function () {
-                console.log('Submitting form...');
-                $("#consultaForm").submit();
-            });
-
-            var consultaAtiva = true; // Aqui você define a lógica para verificar se a consulta está ativa
-            var statusInput = document.getElementById('status');
-            statusInput.value = consultaAtiva ? "1" : "0";
+<script>
+    $(document).ready(function () {
+        $("#search").on('focus', function () {
+            $("#modalPacientes").show();
         });
-    </script> -->
 
-</body>
+        $(".close").on('click', function () {
+            $(".modal").hide();
+        });
 
-</html>
+        $(".select-paciente").on('click', function () {
+            var id = $(this).data('id');
+            var nome = $(this).data('nome');
+            var idPaciente = $(this).data('id-paciente');
+
+            $("#search").val(nome);
+            $("#paciente").val(id);
+            $("#ID_PACIENTE").val(idPaciente);
+
+            $("#modalPacientes").hide();
+        });
+
+        $("#filterPacientes").on("keyup", function () {
+            var value = $(this).val().toLowerCase();
+            $("#pacientesTable tr").filter(function () {
+                $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+            });
+        });
+
+        // Médicos modal
+        $("#especialidade").change(function () {
+            var especialidadeId = $(this).val();
+
+            if (especialidadeId) {
+                $("#searchMedico").prop('readonly', false).val('');
+                $("#medico").val('');
+                $("#id_funcionario").val('');
+
+                // Enviar requisição FETCH para buscar médicos pela especialidade
+                fetch('/ConsultaM?especialidade=' + especialidadeId)
+                    .then(response => {
+                        console.log('Resposta recebida:', response);
+                        return response.json();
+                    })
+
+                    .then(data => {
+                        console.log('Dados recebidos dos médicos:', data);
+
+                        var medicosTable = $("#medicosTable");
+                        medicosTable.empty();
+
+                        data.forEach(function (medico) {
+                            medicosTable.append(
+                                '<tr class="select-medico" data-id="' + medico.id + '" data-nome="' + medico.nome + '" data-id-funcionario="' + medico.id_funcionario + '">' +
+                                '<td>' + medico.id + '</td>' +
+                                '<td>' + medico.nome + '</td>' +
+                                '</tr>'
+                            );
+                        });
+
+                        // Adicionar evento de clique para os novos médicos
+                        $(".select-medico").on('click', function () {
+                            var id = $(this).data('id');
+                            var nome = $(this).data('nome');
+                            var idFuncionario = $(this).data('id-funcionario');
+
+                            $("#searchMedico").val(nome);
+                            $("#medico").val(id);
+                            $("#id_funcionario").val(idFuncionario);
+
+                            $("#modalMedicos").hide();
+                        });
+
+                        $("#modalMedicos").show();
+                    })
+
+                    .then(response => response.json())
+                    .then(data => {
+                        console.log(data)
+                        if (data.ok) {
+                            console.log(data)
+                            alert('Consulta cadastrada com sucesso!');
+                            window.location.href = data.redirect;
+                        } else {
+                            alert('Falha no cadastro: ' + data.message);
+                        }
+                    })
+                    .catch(error => console.error('Erro ao buscar médicos:', error));
+            } else {
+                $("#searchMedico").prop('readonly', true).val('Selecione uma especialidade primeiro...');
+                $("#medico").val('');
+                $("#id_funcionario").val('');
+            }
+        });
+
+        $("#searchMedico").on('focus', function () {
+            if (!$("#searchMedico").prop('readonly')) {
+                $("#modalMedicos").show();
+            }
+        });
+
+        $("#filterMedicos").on("keyup", function () {
+            var value = $(this).val().toLowerCase();
+            $("#medicosTable tr").filter(function () {
+                $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+            });
+        });
+
+        var consultaAtiva = true;
+        var statusInput = document.getElementById('status');
+        statusInput.value = consultaAtiva ? "1" : "0";
+    });
+</script>
