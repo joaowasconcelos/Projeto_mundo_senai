@@ -64,7 +64,7 @@
                     <label for="Especialidade">Descrição Especialidade</label>
                     <input type="text" id="Especialidade" name="Especialidade">
                     <button type="submit">Cadastrar</button>     
-                    <button type="button" id="backButton">Voltar</button>
+                    <button type="button" class="btn-voltar" id="backButton">Voltar</button>
                 </form>
             </div>
         </div>
@@ -199,6 +199,8 @@
             const cancelDeleteButton = document.getElementById('cancelDeleteButton');
             let currentEspecialidadeId = null;
 
+// Event listener para o botão de cancelar no modal
+
             // Event listener para cada botão de delete
             deleteButtons.forEach(button => {
                 button.addEventListener('click', function (event) {
@@ -207,6 +209,15 @@
                     confirmDeleteModal.style.display = 'block'; // Exibir modal de confirmação
                 });
             });
+
+            confirmDeleteModal.style.display = 'none'; // Esconder modal após a ação
+            });
+
+            // Event listener para o botão de cancelar no modal
+            cancelDeleteButton.addEventListener('click', function () {
+                confirmDeleteModal.style.display = 'none'; // Esconder modal se o usuário cancelar
+            });
+
 
             // Event listener para o botão de confirmar no modal
             confirmDeleteButton.addEventListener('click', function () {
@@ -230,12 +241,7 @@
                         alert('Erro ao deletar a especialidade.');
                     });
 
-                confirmDeleteModal.style.display = 'none'; // Esconder modal após a ação
-            });
-
-            // Event listener para o botão de cancelar no modal
-            cancelDeleteButton.addEventListener('click', function () {
-                confirmDeleteModal.style.display = 'none'; // Esconder modal se o usuário cancelar
-            });
+              
+            
         });
     </script>
