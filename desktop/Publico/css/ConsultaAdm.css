@@ -53,7 +53,7 @@ th {
 }
 
 .back-button button {
-    margin-top: 300px;
+    margin-top: 60px;
     background-color: #00665E; /* Cor de fundo do botão */
     color: #fff; /* Cor do texto dentro do botão */
     border: none; /* Remove a borda do botão */
@@ -72,3 +72,4 @@ th {
     vertical-align: middle; /* Alinha verticalmente com o texto */
     margin-right: 5px; /* Espaçamento à direita do ícone */
 }
+

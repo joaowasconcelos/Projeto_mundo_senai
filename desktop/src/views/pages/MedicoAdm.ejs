@@ -1,9 +1,14 @@
 <link rel="stylesheet" href="/css/MedicoAdm.css">
 
 <div class="actions">
-    <button onclick="window.location.href='/Medico'">Cadastrar Medico</button>
+    <button class="btn-cadastrar" onclick="window.location.href='/Medico'">Cadastrar Medico</button>
 </div>
 
+<div>
+    <a href="/adm" class="back-button">
+        <button><span class="material-symbols-outlined">arrow_back</span> Voltar</button>
+    </a>
+</div>
 <div>
     <h2 class="titulo">Lista de Médicos</h2>
     <table>
@@ -55,9 +60,4 @@
                 <% }); %>
         </tbody>
     </table>
-</div>
-<div>
-    <a href="/adm" class="back-button">
-        <button><span class="material-symbols-outlined">arrow_back</span> Voltar</button>
-    </a>
 </div>

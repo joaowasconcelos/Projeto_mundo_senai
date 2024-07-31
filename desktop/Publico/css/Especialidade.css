@@ -105,7 +105,8 @@ th {
     border-radius: 4px;
     cursor: pointer;
     display: inline-block;
-    margin-top: 260px;
+   
+    margin-left: 10px;
 }
 
 .back-button button:hover {
