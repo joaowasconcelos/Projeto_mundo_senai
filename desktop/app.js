@@ -46,9 +46,6 @@ app.use(session({
     store: new session.MemoryStore() 
 }));
 
-
-
-
 app.use(express.urlencoded({ extended: true }));
 
 app.use('/', router );
