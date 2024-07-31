@@ -8,6 +8,10 @@
 
 }
 
+#loginButton {
+    width: 400px;
+}
+
 .login-container h2 {
     margin-bottom: 20px;
     text-align: center;

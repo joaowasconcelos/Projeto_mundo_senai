@@ -13,9 +13,9 @@
 
 <!-- Formulario com dados -->
 
-<div class="paciente-container">
+<h2 class="titulo">Todos os Dados dos Pacientes</h2>
 
-    <h2 class="titulo">Todos os Dados dos Pacientes</h2>
+<div class="paciente-container">
 
     <% infoPaciente.forEach(function(item) { %>
         <div class="paciente-item">
@@ -23,89 +23,102 @@
             <input type="hidden" value="<%= item.id %>" id="id">
 
             <label>Nome:</label>
-            <input type="text" value="<%= item.Nome %>" readonly>
+            <input type="text" value="<%= item.Nome %>" id="inputText">
 
             <label>CPF:</label>
-            <input type="text" value="<%= item.CPF %>" readonly>
+            <input type="text" value="<%= item.CPF %>" id="inputText">
 
             <label>Data de Nascimento:</label>
-            <input type="text" value="<%= item.DataNascimento %>" readonly>
+            <input type="text" value="<%= item.DataNascimento %>" id="inputText">
 
             <label>Gênero:</label>
-            <input type="text" value="<%= item.Genero %>" readonly>
+            <input type="text" value="<%= item.Genero %>" id="inputText">
 
             <label>Email:</label>
-            <input type="text" value="<%= item.Email %>" readonly>
+            <input type="text" value="<%= item.Email %>" id="inputText">
 
             <label>Data de Cadastro:</label>
-            <input type="text" value="<%= item.DataCadastro %>" readonly>
+            <input type="text" value="<%= item.DataCadastro %>" id="inputText">
 
             <label>Logradouro:</label>
-            <input type="text" value="<%= item.Logradouro %>" readonly>
+            <input type="text" value="<%= item.Logradouro %>" id="inputText">
 
             <label>Bairro:</label>
-            <input type="text" value="<%= item.Bairro %>" readonly>
+            <input type="text" value="<%= item.Bairro %>" id="inputText">
 
             <label>Estado:</label>
-            <input type="text" value="<%= item.Estado %>" readonly>
+            <input type="text" value="<%= item.Estado %>" id="inputText">
 
             <label>Número Residencial:</label>
-            <input type="text" value="<%= item.NumeroResidencia %>" readonly>
+            <input type="text" value="<%= item.NumeroResidencia %>" id="inputText">
 
             <label>Complemento:</label>
-            <input type="text" value="<%= item.Complemento %>" readonly>
+            <input type="text" value="<%= item.Complemento %>" id="inputText">
 
             <label>CEP:</label>
-            <input type="text" value="<%= item.CEP %>" readonly>
+            <input type="text" value="<%= item.CEP %>" id="inputText">
 
             <label>Telefone:</label>
-            <input type="text" value="<%= item.Telefone %>" readonly>
+            <input type="text" value="<%= item.Telefone %>" id="inputText">
 
             <label>Tipo:</label>
-            <input type="text" value="<%= item.Tipo %>" readonly>
+            <input type="text" value="<%= item.Tipo %>" id="inputText">
 
             <label>Login:</label>
-            <input type="text" value="<%= item.Login %>" readonly>
+            <input type="text" value="<%= item.Login %>" id="inputText">
 
             <label>Senha:</label>
-            <input type="text" value="<%= item.Senha %>" readonly>
+            <input type="text" value="<%= item.Senha %>" id="inputText">
 
             <label>Data de Admissão:</label>
-            <input type="text" value="<%= item.DataAdmissao %>" readonly>
+            <input type="text" value="<%= item.DataAdmissao %>" id="inputText">
 
             <label>CRM:</label>
-            <input type="text" value="<%= item.CRM %>" readonly>
+            <input type="text" value="<%= item.CRM %>" id="inputText">
 
             <label>Especialidade:</label>
-            <input type="text" value="<%= item.Especialidade %>" readonly>
+            <input type="text" value="<%= item.Especialidade %>" id="inputText">
         </div>
         <% }); %>
 
-            <div class="botoes">
-                <div>
-                    <a href="/Paciente" class="back-button">
-                        <button><span class="material-symbols-outlined">arrow_back</span> Voltar</button>
-                    </a>
-                </div>
-                <div class="button-container">
-                    <a href="#" class="edit-button">
-                        <button><span class="material-symbols-outlined">edit</span> Editar</button>
-                    </a>
-                </div>
-                <div class="button-container">
-                    <a href="#" class="delete-button">
-                        <button><span class="material-symbols-outlined">delete</span> Deletar</button>
-                    </a>
-                </div>
-            </div>
-
             <!-- Modal de confirmação -->
             <div id="confirmDeleteModal" class="modal">
+
                 <div class="modal-content">
                     <p>Tem certeza que deseja deletar esta pessoa?</p>
-                    <button id="confirmDeleteButton">Confirmar</button>
-                    <button id="cancelDeleteButton">Cancelar</button>
+
+                    <div id="btn_modal">
+                        <button id="confirmDeleteButton">Confirmar</button>
+                        <button id="cancelDeleteButton">Cancelar</button>
+                    </div>
+
                 </div>
+
+            </div>
+
+            <!-- Botoes -->
+
+            <div class="botoes">
+
+                <!-- Editar -->
+                <div class="button-container">
+                    <a href="#">
+                        <button onclick="habilitarCampos()" id="edit">Editar</button>
+                    </a>
+                </div>
+
+                <!-- Salvar -->
+                <div class="button-container">
+                    <button id="salvar">Salvar</button>
+                </div>
+
+                <!-- Deletar -->
+                <div class="button-container">
+                    <a href="#" class="delete-button">
+                        <button id="delete">Deletar</button>
+                    </a>
+                </div>
+
             </div>
 
 
@@ -115,17 +128,14 @@
                     const confirmDeleteModal = document.getElementById('confirmDeleteModal');
                     const confirmDeleteButton = document.getElementById('confirmDeleteButton');
                     const cancelDeleteButton = document.getElementById('cancelDeleteButton');
-                    const idPessoa = document.getElementById("id").value
-
-
+                    const idPessoa = document.getElementById("id").valu
                     // Event listener para cada botão de delete
                     deleteButtons.forEach(button => {
                         button.addEventListener('click', function (event) {
                             event.preventDefault();
                             confirmDeleteModal.style.display = 'block'; // Exibir modal de confirmação
                         });
-                    });
-
+                    })
                     // Event listener para o botão de confirmar no modal
                     confirmDeleteButton.addEventListener('click', function () {
                         // Enviar requisição DELETE usando fetch
@@ -149,14 +159,42 @@
                             .catch(error => {
                                 console.error('Erro:', error);
                                 alert('Erro ao deletar dados da pessoa.');
-                            });
-
+                            })
                         confirmDeleteModal.style.display = 'none'; // Esconder modal após a ação
-                    });
-
+                    })
                     // Event listener para o botão de cancelar no modal
                     cancelDeleteButton.addEventListener('click', function () {
                         confirmDeleteModal.style.display = 'none'; // Esconder modal se o usuário cancelar
                     });
                 });
+
+                // Habilitando campos para edição
+
+                document.getElementById("inputText").disabled = true; //funcionou apenas para o campo de nome... PQ???????
+
+
+                habilitarCampos = () => {
+                    document.getElementById("inputText").disabled = false;
+                    alert("Campos habilitados para edição, clique em salvar após alterações.")
+                }
+
+
+
+                // Deixando botão de Salvar desabilitado - não funcionou AINDA
+                document.getElementById("salvar").disabled = true;
+
+
+
+                // document.getElementById("inputText").addEventListener("inputText", function (event) {
+
+                //     const conteudo = document.getElementById("inputText").value;
+
+                //     if (conteudo !== null) {
+                //         document.getElementById("inputText").disabled = false;
+                //     } else {
+                //         document.getElementById("salvar").disabled = true;
+                //     }
+                // });
+
+
             </script>
