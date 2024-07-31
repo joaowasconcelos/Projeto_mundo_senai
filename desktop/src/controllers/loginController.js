@@ -2,23 +2,23 @@ const Login = require("../models/classes/Login");
 const { selectLogin, verificarSenha, deletarLogin } = require('../models/LoginModel')
 const Perfis = require("../models/PerfisModel");
 
-
-
 const LoginPerfis = {
     paginaLogin: async (req, res) => {
         res.render('pages/Login');
     },
     LoginPessoa: async (req, res) => {
         try {
-            console.log("AQUI",req.body)
-            console.log("AQUI",req.query)
-            console.log("AQUI",req.params)
             const { login, senha } = req.body;
-            console.log("AQUI",login,senha)
             const loginConsulta = new Login(null, login, senha, null, null, null);
             const result = await selectLogin(loginConsulta);
             console.log(result)
+            if (result.length === 0) {
+                req.flash('error', 'Login ou senha incorretos.');
+                return res.redirect('/login');  
+            }
+
             let firstObject, secondObject, thirdObject;
+    
 
             if (result[0].tipo.includes("paciente")) {
                 firstObject = "paciente";
@@ -36,14 +36,15 @@ const LoginPerfis = {
                 req.session.user = result[0];
             }
 
-            if (result[0].tipo.length>0) {
+            if (result[0].tipo.length>=0) {
+
                 const resultl = result[0].login
                 const results = result[0].senha
                 return res.render("pages/Login", { firstObject, secondObject,thirdObject,resultl,results})
             }
         } catch (error) {
             console.error('Erro ao realizar login:', error);
-            return res.status(500).json({ error: 'Ocorreu um erro no servidor. Por favor, tente novamente mais tarde.' });
+            return res.send('adfhadn um erro no servidor. Por favor, tente novamente mais tarde.');
         }
     },
 
@@ -52,7 +53,7 @@ const LoginPerfis = {
             const { tipo } = req.body;
             switch (tipo.toLowerCase()) {
                 case 'paciente':
-                    return res.redirect('/Paciente/Usuario');
+                    return res.redirect('/Paciente/Usuario');   
                 case 'medico':
                     return res.redirect('/Medico');
                 case 'adm':
@@ -71,14 +72,27 @@ const LoginPerfis = {
     LoginPessoaMobile: async (req, res) => {
         try {
             const { login, senha } = req.body
-            const result = await selectLogin(login)
-            if (senha != result[0][0].senha) {
+            console.log(login, senha)
+            const loginConsulta = new Login(null, login, senha, null, null, null);
+            const result = await selectLogin(loginConsulta);
+            console.log(result)
+            if (senha != result[0].senha) {
                 return res.json({ message: 'Senha incorreta' })
             }
-            if (result[0].tipo === 'Paciente') {
-                return res.json({ data: result[0] })
-            } else if (result[0].tipo === 'Medico') {
-                return res.json({ data: result[0] })
+            if (result[0].tipo.includes("paciente")) {
+                const tipo = "paciente"
+                const id = result[0].id
+                console.log(tipo)
+                return res.json({id,tipo})
+            }
+            console.log(result[0].tipo.includes("medico")) 
+
+    
+            if (result[0].tipo.includes("medico")) {
+                const tipo = "medico"
+                const id = result[0].id
+                console.log(id,tipo)
+                return res.json({id,tipo})
             }
             return res.json({ data: result[0] })
         } catch (error) {
