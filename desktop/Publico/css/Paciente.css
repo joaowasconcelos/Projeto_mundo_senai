@@ -30,6 +30,8 @@ h2 {
 .table-container {
     overflow-x: auto;
     max-height: 454px;
+    width: 80%;
+    margin: auto;
 }
 
 table {
@@ -133,4 +135,55 @@ button:hover {
 a {
     text-decoration: none;
     color: rgb(255, 255, 255);
+}
+
+/* Botão editar */
+button {
+    display: flex;
+    height: 3em;
+    width: 100px;
+    align-items: center;
+    justify-content: center;
+    background-color: #ff00004b;
+    border-radius: 3px;
+    letter-spacing: 1px;
+    transition: all 0.2s linear;
+    cursor: pointer;
+    border: none;
+    background: #fff;
+}
+
+button>svg {
+    margin-right: 5px;
+    margin-left: 5px;
+    font-size: 20px;
+    transition: all 0.4s ease-in;
+}
+
+button:hover>svg {
+    font-size: 1.2em;
+    transform: translateX(-5px);
+}
+
+button:hover {
+    box-shadow: 9px 9px 33px #d1d1d1, -9px -9px 33px #ffffff;
+    transform: translateY(-2px);
+}
+
+a {
+    text-decoration: none;
+    color: black;
+}
+
+/* Titulo  */
+
+h2 {
+    font-family: "Anek Telugu", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 70px;
+    font-style: normal;
+    font-variation-settings:
+        "wdth" 120.2;
+    text-align: center;
+    color: #555;
 }

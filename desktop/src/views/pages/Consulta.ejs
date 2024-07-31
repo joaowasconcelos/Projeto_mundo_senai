@@ -121,115 +121,140 @@
 
 
 <script>
-    $(document).ready(function () {
-        $("#search").on('focus', function () {
-            $("#modalPacientes").show();
-        });
+   $(document).ready(function () {
+    console.log(data);
+    console.log("oiio")
+    $("#consultaForm").on('submit', function (e) {
+        e.preventDefault(); // Previne o comportamento padrão de envio do formulário
 
-        $(".close").on('click', function () {
-            $(".modal").hide();
-        });
+        // Coleta os dados do formulário
+        const formData = {
+            data: $("#data").val(),
+            hora: $("#hora").val(),
+            status: $("#status").val(),
+            paciente: $("#paciente").val(),
+            ID_PACIENTE: $("#ID_PACIENTE").val(),
+            especialidade: $("#especialidade").val(),
+            medico: $("#medico").val(),
+            id_funcionario: $("#id_funcionario").val()
+        };
 
-        $(".select-paciente").on('click', function () {
-            var id = $(this).data('id');
-            var nome = $(this).data('nome');
-            var idPaciente = $(this).data('id-paciente');
-
-            $("#search").val(nome);
-            $("#paciente").val(id);
-            $("#ID_PACIENTE").val(idPaciente);
-
-            $("#modalPacientes").hide();
-        });
-
-        $("#filterPacientes").on("keyup", function () {
-            var value = $(this).val().toLowerCase();
-            $("#pacientesTable tr").filter(function () {
-                $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
-            });
-        });
-
-        // Médicos modal
-        $("#especialidade").change(function () {
-            var especialidadeId = $(this).val();
-
-            if (especialidadeId) {
-                $("#searchMedico").prop('readonly', false).val('');
-                $("#medico").val('');
-                $("#id_funcionario").val('');
-
-                // Enviar requisição FETCH para buscar médicos pela especialidade
-                fetch('/ConsultaM?especialidade=' + especialidadeId)
-                    .then(response => {
-                        console.log('Resposta recebida:', response);
-                        return response.json();
-                    })
-
-                    .then(data => {
-                        console.log('Dados recebidos dos médicos:', data);
-
-                        var medicosTable = $("#medicosTable");
-                        medicosTable.empty();
-
-                        data.forEach(function (medico) {
-                            medicosTable.append(
-                                '<tr class="select-medico" data-id="' + medico.id + '" data-nome="' + medico.nome + '" data-id-funcionario="' + medico.id_funcionario + '">' +
-                                '<td>' + medico.id + '</td>' +
-                                '<td>' + medico.nome + '</td>' +
-                                '</tr>'
-                            );
-                        });
-
-                        // Adicionar evento de clique para os novos médicos
-                        $(".select-medico").on('click', function () {
-                            var id = $(this).data('id');
-                            var nome = $(this).data('nome');
-                            var idFuncionario = $(this).data('id-funcionario');
-
-                            $("#searchMedico").val(nome);
-                            $("#medico").val(id);
-                            $("#id_funcionario").val(idFuncionario);
-
-                            $("#modalMedicos").hide();
-                        });
-
-                        $("#modalMedicos").show();
-                    })
-
-                    .then(response => response.json())
-                    .then(data => {
-                        console.log(data)
-                        if (data.ok) {
-                            console.log(data)
-                            alert('Consulta cadastrada com sucesso!');
-                            window.location.href = data.redirect;
-                        } else {
-                            alert('Falha no cadastro: ' + data.message);
-                        }
-                    })
-                    .catch(error => console.error('Erro ao buscar médicos:', error));
+        // Envia os dados usando fetch
+        fetch('/Cadastro/Consulta', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(formData)
+        })
+        .then(response => response.json())
+        .then(data => {
+            console.log(data);
+            if (data.message = "Consulta inserida com sucesso") {
+                alert('Consulta cadastrada com sucesso!');
+                $("#consultaForm")[0].reset(); // Limpa o formulário
             } else {
-                $("#searchMedico").prop('readonly', true).val('Selecione uma especialidade primeiro...');
-                $("#medico").val('');
-                $("#id_funcionario").val('');
+                console.log('oi')
+                console.log(data);
+                alert('Falha no cadastro: ' + data.message);
             }
+        })
+        .catch(error => {
+            console.error('Erro ao cadastrar consulta:', error);
+            alert('Ocorreu um erro ao cadastrar a consulta.');
         });
-
-        $("#searchMedico").on('focus', function () {
-            if (!$("#searchMedico").prop('readonly')) {
-                $("#modalMedicos").show();
-            }
-        });
-
-        $("#filterMedicos").on("keyup", function () {
-            var value = $(this).val().toLowerCase();
-            $("#medicosTable tr").filter(function () {
-                $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
-            });
-        });
-
-        var consultaAtiva = true;
-        var statusInput = document.getElementById('status');
-        statusInput.value = consultaAtiva ? "1" : "0";
     });
+
+    $("#search").on('focus', function () {
+        $("#modalPacientes").show();
+    });
+
+    $(".close").on('click', function () {
+        $(".modal").hide();
+    });
+
+    $(".select-paciente").on('click', function () {
+        var id = $(this).data('id');
+        var nome = $(this).data('nome');
+        var idPaciente = $(this).data('id-paciente');
+
+        $("#search").val(nome);
+        $("#paciente").val(id);
+        $("#ID_PACIENTE").val(idPaciente);
+
+        $("#modalPacientes").hide();
+    });
+
+    $("#filterPacientes").on("keyup", function () {
+        var value = $(this).val().toLowerCase();
+        $("#pacientesTable tr").filter(function () {
+            $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1);
+        });
+    });
+
+    $("#especialidade").change(function () {
+        var especialidadeId = $(this).val();
+
+        if (especialidadeId) {
+            $("#searchMedico").prop('readonly', false).val('');
+            $("#medico").val('');
+            $("#id_funcionario").val('');
+
+            fetch('/ConsultaM?especialidade=' + especialidadeId)
+                .then(response => response.json())
+                .then(data => {
+                    var medicosTable = $("#medicosTable");
+                    medicosTable.empty();
+
+                    data.forEach(function (medico) {
+                        medicosTable.append(
+                            '<tr class="select-medico" data-id="' + medico.id + '" data-nome="' + medico.nome + '" data-id-funcionario="' + medico.id_funcionario + '">' +
+                            '<td>' + medico.id + '</td>' +
+                            '<td>' + medico.nome + '</td>' +
+                            '</tr>'
+                        );
+                    });
+
+                    $(".select-medico").on('click', function () {
+                        var id = $(this).data('id');
+                        var nome = $(this).data('nome');
+                        var idFuncionario = $(this).data('id-funcionario');
+
+                        $("#searchMedico").val(nome);
+                        $("#medico").val(id);
+                        $("#id_funcionario").val(idFuncionario);
+
+                        $("#modalMedicos").hide();
+                    });
+
+                    $("#modalMedicos").show();
+                })
+                .catch(error => {
+                    console.error('Erro ao buscar médicos:', error);
+                });
+        } else {
+            $("#searchMedico").prop('readonly', true).val('Selecione uma especialidade primeiro...');
+            $("#medico").val('');
+            $("#id_funcionario").val('');
+        }
+    });
+
+    $("#searchMedico").on('focus', function () {
+        if (!$("#searchMedico").prop('readonly')) {
+            $("#modalMedicos").show();
+        }
+    });
+
+    $("#filterMedicos").on("keyup", function () {
+        var value = $(this).val().toLowerCase();
+        $("#medicosTable tr").filter(function () {
+            $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1);
+        });
+    });
+
+    var consultaAtiva = true;
+    var statusInput = document.getElementById('status');
+    statusInput.value = consultaAtiva ? "1" : "0";
+});
+
 </script>

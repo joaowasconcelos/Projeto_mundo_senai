@@ -22,9 +22,9 @@
                 <th>Deletar</th>
             </tr>
         </thead>
-        <tbody>
+        <tbody id="consulta-list">
             <% tdsConsultas.forEach(function(item) { %>
-                <tr>
+                <tr data-id="<%= item.id %>">
                     <td><%= item.id %></td>
                     <td><%= item.data %></td>
                     <td><%= item.hora %></td>
@@ -33,12 +33,15 @@
                     <td><%= item.nome_funcionario %></td>
                     <td><%= item.desc_especialidade %></td>
                     <td>
-                        <span class="material-symbols-outlined">edit</span>
+                        <button class="edit-button">
+                            <span class="material-symbols-outlined">edit</span>
+                        </button>
                     </td>
                     <td>
-                        <span class="material-symbols-outlined">delete</span>
+                        <button class="delete-button">
+                            <span class="material-symbols-outlined">delete</span>
+                        </button>
                     </td>
-            
                 </tr>
             <% }); %>
         </tbody>
@@ -47,40 +50,148 @@
 
 
 
+<!-- Modal de confirmação -->
+<div id="confirmDeleteModal" class="modal" style="display:none;">
+    <div class="modal-content">
+        <p>Tem certeza que deseja deletar esta consulta?</p>
+        <button id="confirmDeleteButton">Confirmar</button>
+        <button id="cancelDeleteButton">Cancelar</button>
+    </div>
+</div>
 
-<!-- <script>
-    document.addEventListener("DOMContentLoaded", function () {
-        fetch('/Seleciona/Todas/Consultas', {
-            method: 'GET',
-            headers: {
-                'Content-Type': 'application/json'
-            }
-        })
-            .then(response => {
-                if (!response.ok) {
-                    throw new Error('A resposta da rede não foi ok');
-                }
-                return response.json();
-            })
-            .then(data => {
-                const tableBody = document.getElementById('consulta-list');
-                data.forEach(paciente => {
-                    const row = document.createElement('tr');
-                    row.innerHTML = `
-                        <td>${paciente.id}</td>
-                        <td>${paciente.data}</td>
-                        <td>${paciente.hora}</td>
-                        <td>${paciente.nome_paciente}</td>
-                        <td>${paciente.cpf_paciente}</td>
-                        <td>${paciente.nome_funcionario}</td>
-                        <td>${paciente.desc_especialidade}</td>
-                     
-                    `;
-                    tableBody.appendChild(row);
-                });
-            })
-            .catch(error => {
-                console.error('Erro ao buscar dados:', error);
+<!-- Modal de edição -->
+<div id="editModal" class="modal" style="display:none;">
+    <div class="modal-content">
+        <h3>Editar Consulta</h3>
+        <form id="editForm">
+            <input type="hidden" id="edit-id">
+            <label>Data:</label>
+            <input type="text" id="edit-data">
+            <label>Hora:</label>
+            <input type="text" id="edit-hora">
+            <label>Nome do Paciente:</label>
+            <input type="text" id="edit-nome-paciente">
+            <label>CPF do Paciente:</label>
+            <input type="text" id="edit-cpf-paciente">
+            <label>Nome do Médico:</label>
+            <input type="text" id="edit-nome-medico">
+            <label>Especialidade do Médico:</label>
+            <input type="text" id="edit-especialidade-medico">
+            <button type="submit">Salvar</button>
+            <button type="button" id="cancelEditButton">Cancelar</button>
+        </form>
+    </div>
+</div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const editButtons = document.querySelectorAll('.edit-button');
+        const deleteButtons = document.querySelectorAll('.delete-button');
+        const confirmDeleteModal = document.getElementById('confirmDeleteModal');
+        const confirmDeleteButton = document.getElementById('confirmDeleteButton');
+        const cancelDeleteButton = document.getElementById('cancelDeleteButton');
+        const editModal = document.getElementById('editModal');
+        const cancelEditButton = document.getElementById('cancelEditButton');
+        const editForm = document.getElementById('editForm');
+        let currentId = null;
+
+        // Função para abrir a modal de edição com os dados preenchidos
+        function openEditModal(id) {
+            const row = document.querySelector(`tr[data-id="${id}"]`);
+            document.getElementById('edit-id').value = id;
+            document.getElementById('edit-data').value = row.children[1].innerText;
+            document.getElementById('edit-hora').value = row.children[2].innerText;
+            document.getElementById('edit-nome-paciente').value = row.children[3].innerText;
+            document.getElementById('edit-cpf-paciente').value = row.children[4].innerText;
+            document.getElementById('edit-nome-medico').value = row.children[5].innerText;
+            document.getElementById('edit-especialidade-medico').value = row.children[6].innerText;
+            editModal.style.display = 'block';
+        }
+
+        // Event listener para os botões de editar
+        editButtons.forEach(button => {
+            button.addEventListener('click', function (event) {
+                event.preventDefault();
+                currentId = this.closest('tr').getAttribute('data-id');
+                openEditModal(currentId);
             });
+        });
+
+        // Event listener para o botão de salvar no formulário de edição
+        editForm.addEventListener('submit', function (event) {
+            event.preventDefault();
+            const id = document.getElementById('edit-id').value;
+            const data = document.getElementById('edit-data').value;
+            const hora = document.getElementById('edit-hora').value;
+            const nomePaciente = document.getElementById('edit-nome-paciente').value;
+            const cpfPaciente = document.getElementById('edit-cpf-paciente').value;
+            const nomeMedico = document.getElementById('edit-nome-medico').value;
+            const especialidadeMedico = document.getElementById('edit-especialidade-medico').value;
+
+            fetch(`/editar/consulta/${id}`, {
+                method: 'PUT',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ data, hora, nome_paciente: nomePaciente, cpf_paciente: cpfPaciente, nome_funcionario: nomeMedico, desc_especialidade: especialidadeMedico })
+            })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success) {
+                        alert('Consulta atualizada com sucesso!');
+                        editModal.style.display = 'none';
+                        location.reload(); // Recarregar a página para mostrar as alterações
+                    } else {
+                        alert('Erro ao atualizar a consulta.');
+                    }
+                })
+                .catch(error => {
+                    console.error('Erro:', error);
+                    alert('Erro ao atualizar a consulta.');
+                });
+        });
+
+        // Event listener para o botão de cancelar no modal de edição
+        cancelEditButton.addEventListener('click', function () {
+            editModal.style.display = 'none';
+        });
+
+        // Event listener para cada botão de deletar
+        deleteButtons.forEach(button => {
+            button.addEventListener('click', function (event) {
+                event.preventDefault();
+                currentId = this.closest('tr').getAttribute('data-id');
+                confirmDeleteModal.style.display = 'block'; // Exibir modal de confirmação
+            });
+        });
+
+        // Event listener para o botão de confirmar no modal de exclusão
+        confirmDeleteButton.addEventListener('click', function () {
+            fetch(`/deletar/consulta/${currentId}`, {
+                method: 'DELETE',
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success) {
+                        alert('Consulta deletada com sucesso!');
+                        confirmDeleteModal.style.display = 'none';
+                        document.querySelector(`tr[data-id="${currentId}"]`).remove(); // Remover linha da tabela
+                    } else {
+                        alert('Erro ao deletar a consulta.');
+                    }
+                })
+                .catch(error => {
+                    console.error('Erro:', error);
+                    alert('Erro ao deletar a consulta.');
+                });
+        });
+
+        // Event listener para o botão de cancelar no modal de exclusão
+        cancelDeleteButton.addEventListener('click', function () {
+            confirmDeleteModal.style.display = 'none'; // Esconder modal se o usuário cancelar
+        });
     });
-</script> -->
+</script>
