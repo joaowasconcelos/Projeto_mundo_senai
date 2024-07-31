@@ -111,7 +111,7 @@ button {
     transition: all 0.2s linear;
     cursor: pointer;
     border: none;
-    background: #fff;
+    background: #00665E;
     margin-top: 70px;
 }
 
@@ -128,13 +128,13 @@ button:hover>svg {
 }
 
 button:hover {
-    box-shadow: 9px 9px 33px #d1d1d1, -9px -9px 33px #ffffff;
+    box-shadow: 9px 9px 33px #00665E, -9px -9px 33px #28a745;
     transform: translateY(-2px);
 }
 
 a {
     text-decoration: none;
-    color: black;
+    color: rgb(255, 255, 255);
 }
 
 /* Botão editar */

@@ -1,8 +1,6 @@
 <link rel="stylesheet" href="/css/Especialidade.css">
 
-<div class="img-fundo">
-    <img src="../../../images/blur-hospital.jpg" class="" id="">
-</div>
+
 
 <div class="container">
     
@@ -191,57 +189,52 @@
 
     </script>
 
-    <script>
-        document.addEventListener('DOMContentLoaded', function () {
-            const deleteButtons = document.querySelectorAll('.delete-button');
-            const confirmDeleteModal = document.getElementById('confirmDeleteModal');
-            const confirmDeleteButton = document.getElementById('confirmDeleteButton');
-            const cancelDeleteButton = document.getElementById('cancelDeleteButton');
-            let currentEspecialidadeId = null;
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const deleteButtons = document.querySelectorAll('.delete-button');
+        const confirmDeleteModal = document.getElementById('confirmDeleteModal');
+        const confirmDeleteButton = document.getElementById('confirmDeleteButton');
+        const cancelDeleteButton = document.getElementById('cancelDeleteButton');
+        let currentEspecialidadeId = null;
 
-// Event listener para o botão de cancelar no modal
-
-            // Event listener para cada botão de delete
-            deleteButtons.forEach(button => {
-                button.addEventListener('click', function (event) {
-                    event.preventDefault();
-                    currentEspecialidadeId = button.getAttribute('data-especialidade-id');
-                    confirmDeleteModal.style.display = 'block'; // Exibir modal de confirmação
-                });
+        // Event listener para cada botão de delete
+        deleteButtons.forEach(button => {
+            button.addEventListener('click', function (event) {
+                event.preventDefault();
+                currentEspecialidadeId = button.getAttribute('data-especialidade-id');
+                confirmDeleteModal.style.display = 'block'; // Exibir modal de confirmação
             });
+        });
 
-            confirmDeleteModal.style.display = 'none'; // Esconder modal após a ação
-            });
-
-            // Event listener para o botão de cancelar no modal
-            cancelDeleteButton.addEventListener('click', function () {
-                confirmDeleteModal.style.display = 'none'; // Esconder modal se o usuário cancelar
-            });
-
-
-            // Event listener para o botão de confirmar no modal
-            confirmDeleteButton.addEventListener('click', function () {
-                // Enviar requisição DELETE usando fetch
-                fetch(`/deletar/especialidade/${currentEspecialidadeId}`, {
-                    method: 'DELETE',
-                    headers: {
-                        'Content-Type': 'application/json'
+        // Event listener para o botão de confirmar no modal
+        confirmDeleteButton.addEventListener('click', function () {
+            // Enviar requisição DELETE usando fetch
+            fetch(`/deletar/especialidade/${currentEspecialidadeId}`, {
+                method: 'DELETE',
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            })
+                .then(response => {
+                    if (response.ok) {
+                        alert('Especialidade deletada com sucesso!');
+                        window.location.reload(); // Recarrega a página após a deleção
+                    } else {
+                        alert('Erro ao deletar a especialidade.');
                     }
                 })
-                    .then(response => {
-                        if (response.ok) {
-                            alert('Especialidade deletada com sucesso!');
-                            window.location.reload(); // Recarrega a página após a deleção
-                        } else {
-                            alert('Erro ao deletar a especialidade.');
-                        }
-                    })
-                    .catch(error => {
-                        console.error('Erro:', error);
-                        alert('Erro ao deletar a especialidade.');
-                    });
-
-              
-            
+                .catch(error => {
+                    console.error('Erro:', error);
+                    alert('Erro ao deletar a especialidade.');
+                })
+                .finally(() => {
+                    confirmDeleteModal.style.display = 'none'; // Esconder modal após a ação
+                });
         });
-    </script>
+
+        // Event listener para o botão de cancelar no modal
+        cancelDeleteButton.addEventListener('click', function () {
+            confirmDeleteModal.style.display = 'none'; // Esconder modal se o usuário cancelar
+        });
+    });
+</script>

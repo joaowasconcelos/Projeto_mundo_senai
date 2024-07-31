@@ -1,0 +1,45 @@
+.body{
+    width: 100%;
+}
+
+/* Estilos para o botão de voltar */
+.back-button {
+    text-decoration: none; /* Remove sublinhado do link */
+}
+
+.back-button button {
+    margin-left: 10px;
+    margin-top: -70px;
+    background-color: #00665E; /* Cor de fundo do botão */
+    color: #fff; /* Cor do texto dentro do botão */
+    border: none; /* Remove a borda do botão */
+    padding: 10px 20px; /* Espaçamento interno do botão */
+    border-radius: 4px; /* Borda arredondada */
+    cursor: pointer; /* Cursor ao passar por cima do botão */
+    display: inline-block; /* Permite que o botão se ajuste ao conteúdo interno */
+}
+
+.back-button button:hover {
+    background-color: #28a745; /* Cor de fundo do botão ao passar o mouse */
+}
+
+.material-symbols-outlined {
+    font-size: 24px; /* Tamanho do ícone */
+    vertical-align: middle; /* Alinha verticalmente com o texto */
+    margin-right: 5px; /* Espaçamento à direita do ícone */
+}
+
+.img-fundo {
+    position: absolute; /* Adicione essa propriedade para tirar a imagem do fluxo normal */
+    top: 0;
+    left: 0;
+    width: 100%; /* Mude para 100% para preencher a largura da tela */
+    height: 100vh; /* Mude para 100vh para preencher a altura da tela */
+    z-index: -1; /* Para garantir que a imagem fique atrás de outros elementos */
+}
+
+.img-fundo img {
+    width: 100%;
+    height: 100%; /* Mude para 100% para preencher a altura da imagem */
+    object-fit: cover;
+}
