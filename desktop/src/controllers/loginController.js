@@ -2,8 +2,6 @@ const Login = require("../models/classes/Login");
 const { selectLogin, verificarSenha, deletarLogin } = require('../models/LoginModel')
 const Perfis = require("../models/PerfisModel");
 
-
-
 const LoginPerfis = {
     paginaLogin: async (req, res) => {
         res.render('pages/Login');
@@ -11,10 +9,8 @@ const LoginPerfis = {
     LoginPessoa: async (req, res) => {
         try {
             const { login, senha } = req.body;
-            console.log(login,senha)
             const loginConsulta = new Login(null, login, senha, null, null, null);
             const result = await selectLogin(loginConsulta);
-            console.log(result)
             let firstObject, secondObject, thirdObject;
     
 
@@ -41,14 +37,13 @@ const LoginPerfis = {
             }
         } catch (error) {
             console.error('Erro ao realizar login:', error);
-            return res.status(500).json({ error: 'Ocorreu um erro no servidor. Por favor, tente novamente mais tarde.' });
+            return res.send('adfhadn um erro no servidor. Por favor, tente novamente mais tarde.');
         }
     },
 
     direcionaLogin: async (req, res) => {
         try {
             const { tipo } = req.body;
-            console.log("aqui",tipo)
             switch (tipo.toLowerCase()) {
                 case 'paciente':
                     return res.redirect('/Paciente/Usuario');   
@@ -70,31 +65,28 @@ const LoginPerfis = {
     LoginPessoaMobile: async (req, res) => {
         try {
             const { login, senha } = req.body
+            console.log(login, senha)
             const loginConsulta = new Login(null, login, senha, null, null, null);
             const result = await selectLogin(loginConsulta);
+            console.log(result)
             if (senha != result[0].senha) {
                 return res.json({ message: 'Senha incorreta' })
             }
-            console.log(result[0].tipo)
-            console.log(result[0].tipo.includes("paciente"))
             if (result[0].tipo.includes("paciente")) {
                 const tipo = "paciente"
                 const id = result[0].id
                 console.log(tipo)
                 return res.json({id,tipo})
             }
-            console.log("aq")
+            console.log(result[0].tipo.includes("medico")) 
+
+    
             if (result[0].tipo.includes("medico")) {
                 const tipo = "medico"
                 const id = result[0].id
-                console.log(tipo)
+                console.log(id,tipo)
                 return res.json({id,tipo})
             }
-            // if (result[0].tipo === 'paciente') {
-            //     return res.json({ data: result[0] })
-            // } else if (result[0].tipo === 'medico') {
-            //     return res.json({ data: result[0] })
-            // }
             return res.json({ data: result[0] })
         } catch (error) {
             console.log(error)

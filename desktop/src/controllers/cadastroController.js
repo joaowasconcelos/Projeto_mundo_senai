@@ -82,6 +82,7 @@ const cadastro = {
                     return res.json({ message: 'Todos os campos são obrigatórios.' });
                 }
                 result = await insert(novaPessoa, novoEndereco, objTelefone, novoFuncionario, novoLogin, novoPerfis, novaEspecialidade);
+                console.log(result)
                 return res.send("Funcionario cadastrado com sucesso" )
             }
         } catch (error) {
