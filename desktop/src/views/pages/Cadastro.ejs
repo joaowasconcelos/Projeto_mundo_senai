@@ -144,6 +144,13 @@
         return (element.value.trim() === '') ? null : element.value;
     }
 
+    function clearForm() {
+        document.getElementById('cadastroForm').reset(); // Reseta os campos do formulário
+        document.querySelectorAll('.phone-input').forEach(input => input.remove()); // Remove os campos de telefone adicionais
+        document.getElementById('camposMedico').style.display = 'none'; // Oculta o bloco de campos de médico
+        document.getElementById('medico').checked = false; // Desmarca o checkbox de médico
+    }
+
     document.getElementById('cadastroForm').addEventListener('submit', function (event) {
         event.preventDefault();
 
@@ -181,13 +188,10 @@
             body: JSON.stringify(formData)
         })
             .then(response => response.json())
-            console.log(response)
             .then(data => {
-                console.log("oi")
-                console.log(data)
-                if (data.success) {
+                if (data.message === "Paciente cadastrado com sucesso") {
                     alert('Cadastro realizado com sucesso!');
-                    window.location.href = data.redirect;
+                    clearForm(); // Limpa os campos do formulário após o sucesso
                 } else {
                     alert('Falha no cadastro: ' + data.message);
                 }
