@@ -184,10 +184,8 @@
             body: JSON.stringify(formData)
         })
             .then(response => response.json())
-            console.log(response)
+
             .then(data => {
-                console.log("oi")
-                console.log(data)
                 if (data.success) {
                     alert('Cadastro realizado com sucesso!');
                     window.location.href = data.redirect;
