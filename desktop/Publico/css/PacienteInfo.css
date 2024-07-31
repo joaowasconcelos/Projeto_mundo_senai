@@ -1,27 +1,34 @@
+@import url('https://fonts.googleapis.com/css2?family=Anek+Telugu:wdth,wght@110.2,100..800&family=Gidugu&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Anek+Telugu:wdth,wght@110.2,100..800&family=Exo+2:ital,wght@0,100..900;1,100..900&family=Gidugu&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Anek+Telugu:wdth,wght@98.8,100..800&family=Exo+2:ital,wght@0,100..900;1,100..900&family=Gidugu&family=Spline+Sans:wght@300..700&display=swap');
+
 /* Estilos para o layout dos dados dos pacientes */
 .paciente-container {
-    margin: 20px;
+    width: 70%;
+    margin: auto;
 }
 
-.titulo {
-    color: #333;
-    font-size: 24px;
-    margin-bottom: 15px;
-}
-
-.paciente-item {
-    margin-bottom: 20px;
-}
-
+/* campos */
 label {
+    font-family: "Exo 2", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 20;
+    font-style: normal;
     display: block;
     font-weight: bold;
-    margin-bottom: 5px;
+    margin-top: 5px;
+}
+
+input {
+    font-family: "Spline Sans", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 18;
+    font-style: normal;
+    color: #333;
 }
 
 input[type="text"] {
     width: calc(100% - 10px);
-    /* Ajuste para compensar a largura da borda */
     padding: 8px;
     box-sizing: border-box;
     margin-bottom: 5px;
@@ -33,113 +40,18 @@ input[type="text"] {
     outline: none;
 }
 
-input[type="text"]:read-only {
-    background-color: #eee;
-    border-color: #ddd;
-    color: #777;
-}
-
-/* Estilos para o botão de voltar */
-.back-button {
-    text-decoration: none;
-    /* Remove sublinhado do link */
-}
-
-.back-button button {
-    background-color: #007bff;
-    /* Cor de fundo do botão */
-    color: #fff;
-    /* Cor do texto dentro do botão */
-    border: none;
-    /* Remove a borda do botão */
-    padding: 10px 20px;
-    /* Espaçamento interno do botão */
-    border-radius: 4px;
-    /* Borda arredondada */
-    cursor: pointer;
-    /* Cursor ao passar por cima do botão */
-    display: inline-block;
-    /* Permite que o botão se ajuste ao conteúdo interno */
-}
-
-.back-button button:hover {
-    background-color: #0056b3;
-    /* Cor de fundo do botão ao passar o mouse */
-}
-
-.material-symbols-outlined {
-    font-size: 24px;
-    /* Tamanho do ícone */
-    vertical-align: middle;
-    /* Alinha verticalmente com o texto */
-    margin-right: 5px;
-    /* Espaçamento à direita do ícone */
-}
-
-.button-container {
-    margin-bottom: 10px;
-    /* Espaço entre os botões */
-}
-
-.edit-button button {
-    background-color: #28a745;
-    /* Cor verde para o botão de editar */
-    color: #fff;
-    /* Cor do texto dentro do botão */
-    border: none;
-    /* Remove a borda do botão */
-    padding: 10px 20px;
-    /* Espaçamento interno do botão */
-    border-radius: 4px;
-    /* Borda arredondada */
-    cursor: pointer;
-    /* Cursor ao passar por cima do botão */
-    display: inline-block;
-    /* Permite que o botão se ajuste ao conteúdo interno */
-}
-
-.edit-button button:hover {
-    background-color: #218838;
-    /* Cor de fundo do botão ao passar o mouse */
-}
-
-.delete-button button {
-    background-color: #dc3545;
-    /* Cor vermelha para o botão de deletar */
-    color: #fff;
-    /* Cor do texto dentro do botão */
-    border: none;
-    /* Remove a borda do botão */
-    padding: 10px 20px;
-    /* Espaçamento interno do botão */
-    border-radius: 4px;
-    /* Borda arredondada */
-    cursor: pointer;
-    /* Cursor ao passar por cima do botão */
-    display: inline-block;
-    /* Permite que o botão se ajuste ao conteúdo interno */
-}
-
-.delete-button button:hover {
-    background-color: #c82333;
-    /* Cor de fundo do botão ao passar o mouse */
-}
-
-.material-symbols-outlined {
-    font-size: 18px;
-    /* Tamanho do ícone */
-    vertical-align: middle;
-    /* Alinha verticalmente com o texto */
-    margin-right: 5px;
-    /* Espaçamento à direita do ícone */
-}
-
+/* div botoes */
 .botoes {
     display: flex;
     flex-direction: row;
     width: 100%;
-    justify-content:center;
+    gap: 60px;
+    justify-content: center;
+    margin-bottom: 20px;
+    margin-top: 20px;
 }
+
+/* modal */
 
 .modal {
     display: none;
@@ -183,19 +95,174 @@ input[type="text"]:read-only {
     background-color: #45a049;
 }
 
-/* Estilos para o botão de delete */
-.delete-button {
- 
-    /* Vermelho */
-    color: white;
-    border: none;
-    padding: 10px 20px;
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
-    font-size: 16px;
-    margin-top: 10px;
-    cursor: pointer;
-    border-radius: 3px;
+#btn_modal {
+    justify-content: center;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin: 0px 30px;
 }
 
+#cancelDeleteButton{
+    background-color: #f33a1e;
+}
+
+/* footer */
+
+footer {
+    position: relative;
+}
+
+/* Botão de retorno */
+
+button {
+    display: flex;
+    height: 3em;
+    width: 100px;
+    align-items: center;
+    justify-content: center;
+    background-color: #ff00004b;
+    border-radius: 3px;
+    letter-spacing: 1px;
+    transition: all 0.2s linear;
+    cursor: pointer;
+    border: none;
+    background: #fff;
+}
+
+button>svg {
+    margin-right: 5px;
+    margin-left: 5px;
+    font-size: 20px;
+    transition: all 0.4s ease-in;
+}
+
+button:hover>svg {
+    font-size: 1.2em;
+    transform: translateX(-5px);
+}
+
+button:hover {
+    box-shadow: 9px 9px 33px #d1d1d1, -9px -9px 33px #ffffff;
+    transform: translateY(-2px);
+}
+
+a {
+    text-decoration: none;
+    color: black;
+}
+
+/* Titulo  */
+
+h2 {
+    font-family: "Anek Telugu", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 70px;
+    font-style: normal;
+    font-variation-settings:
+        "wdth" 120.2;
+    text-align: center;
+    color: #555;
+}
+
+/* Editar */
+
+#edit {
+    border: none;
+    color: #fff;
+    background-image: linear-gradient(30deg, #079759, #91aeb2);
+    border-radius: 20px;
+    background-size: 100% auto;
+    font-family: inherit;
+    font-size: 16px;
+    padding: 0.6em 1.5em;
+}
+
+#edit:hover {
+    background-position: right center;
+    background-size: 200% auto;
+    -webkit-animation: pulse 2s infinite;
+    animation: pulse512 1.5s infinite;
+}
+
+@keyframes pulse512 {
+    0% {
+        box-shadow: 0 0 0 0 #05bada66;
+    }
+
+    70% {
+        box-shadow: 0 0 0 10px rgb(218 103 68 / 0%);
+    }
+
+    100% {
+        box-shadow: 0 0 0 0 rgb(218 103 68 / 0%);
+    }
+}
+
+/* Editar */
+
+#delete {
+    border: none;
+    color: #fff;
+    background-image: linear-gradient(30deg, #f33a1e, #ed944b);
+    border-radius: 20px;
+    background-size: 100% auto;
+    font-family: inherit;
+    font-size: 16px;
+    padding: 0.6em 1.5em;
+}
+
+#delete:hover {
+    background-position: right center;
+    background-size: 200% auto;
+    -webkit-animation: pulse 2s infinite;
+    animation: pulse512 1.5s infinite;
+}
+
+@keyframes pulse512 {
+    0% {
+        box-shadow: 0 0 0 0 #05bada66;
+    }
+
+    70% {
+        box-shadow: 0 0 0 10px rgb(218 103 68 / 0%);
+    }
+
+    100% {
+        box-shadow: 0 0 0 0 rgb(218 103 68 / 0%);
+    }
+}
+
+/* Editar */
+
+#salvar {
+    border: none;
+    color: #fff;
+    background-image: linear-gradient(30deg, #154eaa, #2e8e9f);
+    border-radius: 20px;
+    background-size: 100% auto;
+    font-family: inherit;
+    font-size: 16px;
+    padding: 0.6em 1.5em;
+}
+
+#salvar:hover {
+    background-position: right center;
+    background-size: 200% auto;
+    -webkit-animation: pulse 2s infinite;
+    animation: pulse512 1.5s infinite;
+}
+
+@keyframes pulse512 {
+    0% {
+        box-shadow: 0 0 0 0 #05bada66;
+    }
+
+    70% {
+        box-shadow: 0 0 0 10px rgb(218 103 68 / 0%);
+    }
+
+    100% {
+        box-shadow: 0 0 0 0 rgb(218 103 68 / 0%);
+    }
+}
