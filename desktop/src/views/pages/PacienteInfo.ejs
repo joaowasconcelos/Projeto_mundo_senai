@@ -144,7 +144,7 @@
                     // Event listener para o botão de confirmar no modal
                     confirmDeleteButton.addEventListener('click', function () {
                         // Enviar requisição DELETE usando fetch
-                        fetch(/deletar/pessoa/${idPessoa}, {
+                        fetch(`/deletar/pessoa/${idPessoa}`, {
                             method: 'DELETE',
                             headers: {
                                 'Content-Type': 'application/json'
