@@ -1,7 +1,18 @@
 <link rel="stylesheet" href="/css/Login.css">
+<div class="corpo">
+
+
+    <div class="img-fundo">
+        <img src="../../../images/fundo.jpg" class="" id="">
+    </div>
+
 
 <div class="login-container">
     <h2>Login</h2>
+    <% if (error_msg) { %>
+        <div class="alert alert-danger"><%= error_msg %></div>
+    <% } %>
+    
     <form id="loginForm" action="/auth/login" method="post">
         <!-- Input de Login -->
         <% if (typeof resultl !=='undefined' ) { %>
@@ -110,3 +121,5 @@
                     }
                 }
             </script>
+
+</div>

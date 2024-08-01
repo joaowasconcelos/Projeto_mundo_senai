@@ -27,13 +27,16 @@
 }
 
 .login-container button {
-    width: 100%;
+    width: 106%;
+margin-left: -8px;
     padding: 10px;
+ 
     background-color: #00665E;
     color: white;
     border: none;
     border-radius: 5px;
     cursor: pointer;
+
 }
 
 .login-container button:hover {
@@ -49,4 +52,84 @@
 
 footer {
     position: absolute;
+}
+
+
+.corpo{
+    margin-top: 15%;
+   
+}
+
+.img-fundo {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1; /* Para garantir que a imagem fique atrás de outros elementos */
+}
+
+.img-fundo img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}   
+
+
+/* Estilos para o Modal */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0,0,0,0.4);
+}
+
+.modal-content {
+    background-color: #fefefe;
+    margin: 15% auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%;
+    max-width: 400px; /* Largura máxima do modal */
+    text-align: center;
+    border-radius: 10px;
+    position: relative;
+}
+
+.close {
+    color: #aaa;
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.close:hover,
+.close:focus {
+    color: black;
+    text-decoration: none;
+}
+
+
+.login-option {
+    display: block;
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+    background-color: #00665E;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.login-option:hover {
+    background-color: #004D46;
 }

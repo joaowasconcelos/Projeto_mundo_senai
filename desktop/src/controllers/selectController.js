@@ -75,6 +75,21 @@ const selects = {
             return res.json({ error: error.message });
         }
     },
+    selectConsultaMedicosMobile: async (req, res) => {
+        try {
+            console.log("entrou")
+            const login = req.pamars
+            const result = await SelectConsultaMedico(cpf,null);
+            const { selectConsultaMedicos } = result;
+            const results = selectConsultaMedicos[0]
+            console.log("AQUI",results)
+            // const resultId = selectConsultaIds[0]
+            return res.render('pages/Medico', { results});
+        } catch (error) {
+            console.log(error);
+            return res.json({ error: error.message });
+        }
+    },
     
 }
 
