@@ -1,125 +1,138 @@
 <link rel="stylesheet" href="/css/Especialidade.css">
 
-<div class="img-fundo">
-    <img src="../../../images/blur-hospital.jpg" class="" id="">
-</div>
-
 <div class="container">
-    
-    <table>
-        <thead>
-            <tr>
-                <th>ID</th>
-                <th>Descrição Especialidade</th>
-                <th>Editar</th>
-                <th>Deletar</th>
-            </tr>
-        </thead>
-        <tbody>
-            <% Especialidade.forEach(function(item) { %>
-                <tr>
-                    <td>
-                        <%= item.id %>
-                    </td>
-                    <td>
-                        <%= item.desc_especialidade %>
-                    </td>
-                    <td>
-                        <div class="button-container"><a href="#" class="edit-button">
-                                <button class="editButton" data-id="<%= item.id %>"
-                                    data-desc="<%= item.desc_especialidade %>">
-                                    <span class="material-symbols-outlined">edit</span>
-                                </button>
-                            </a>
-                        </div>
-                    </td>
-                    <td>
-                        <div class="button-container">
-                            <button class="delete-button" data-especialidade-id="<%= item.id %>">
-                                <span class="material-symbols-outlined">delete</span>
-                            </button>
-                        </div>
 
-                        <!-- Modal de confirmação -->
-                        <div id="confirmDeleteModal" class="modal">
-                            <div class="modal-content">
-                                <p>Tem certeza que deseja deletar esta especialidade?</p>
-                                <button id="confirmDeleteButton">Confirmar</button>
-                                <button id="cancelDeleteButton">Cancelar</button>
+    <!-- Tabela -->
+
+    <div id="tabelaContainer">
+
+        <table>
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Descrição Especialidade</th>
+                    <th>Editar</th>
+                    <th>Deletar</th>
+                </tr>
+            </thead>
+            <tbody>
+                <% Especialidade.forEach(function(item) { %>
+                    <tr>
+                        <td>
+                            <%= item.id %>
+                        </td>
+                        <td>
+                            <%= item.desc_especialidade %>
+                        </td>
+                        <td>
+                            <div class="button-container"><a href="#" class="edit-button">
+                                    <button class="editButton" data-id="<%= item.id %>"
+                                        data-desc="<%= item.desc_especialidade %>">
+                                        <span class="material-symbols-outlined">edit</span>
+                                    </button>
+                                </a>
                             </div>
-                        </div>
+                        </td>
+                        <td>
+
+                            <div class="button-container">
+                                <button class="delete-button" data-especialidade-id="<%= item.id %>">
+                                    <span class="material-symbols-outlined">delete</span>
+                                </button>
+                            </div>
+
+                            <!-- Modal de confirmação -->
+                            <div id="confirmDeleteModal" class="modal">
+
+                                <div class="modal-content">
+                                    <p>Tem certeza que deseja deletar esta pessoa?</p>
+
+                                    <div id="btn_modal">
+                                        <button id="confirmDeleteButton">Confirmar</button>
+                                        <button id="cancelDeleteButton">Cancelar</button>
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+    </div>
+    </td>
+    </tr>
+    <% }); %>
+        </tbody>
+        </table>
 
 </div>
-</td>
-</tr>
-<% }); %>
-    </tbody>
-    </table>
-
-    <div class="botoes">
-        <div class="addEspec">
-            <button id="toggleBox"><span class="material-symbols-outlined">add</span>Adiciona Especialidade</button>
-            <div class="box" id="boxForm">
-                <form id="especialidadeForm" action="/CadastraEspecialidade" method="post">
-                    <label for="Especialidade">Descrição Especialidade</label>
-                    <input type="text" id="Especialidade" name="Especialidade">
-                    <button type="submit">Cadastrar</button>     
-                    <button type="button" class="btn-voltar" id="backButton">Voltar</button>
-                </form>
-            </div>
-        </div>
-    </div>
 
 
-    <div class="editEspec">
-        <div class="box" id="editBoxForm" style="display: none;">
-            <form id="editEspecialidadeForm">
-                <input type="hidden" id="editId" name="id">
-                <label for="editEspecialidade">Descrição Especialidade</label>
-                <input type="text" id="editEspecialidade" name="Especialidade" required>
-                <button type="submit">Salvar</button>
-                <button type="button" id="editBackButton">Voltar</button>
+
+<!-- Fim da tabela -->
+
+<div class="botoes">
+    <div class="addEspec">
+        <button id="toggleBox"><span class="material-symbols-outlined">add</span>Adiciona Especialidade</button>
+        <div class="box" id="boxForm">
+            <form id="especialidadeForm" action="/CadastraEspecialidade" method="post">
+                <label for="Especialidade">Descrição Especialidade</label>
+                <input type="text" id="Especialidade" name="Especialidade">
+                <button type="submit">Cadastrar</button>
+                <button type="button" class="btn-voltar" id="backButton">Voltar</button>
             </form>
         </div>
     </div>
-    </div>
-    <div>
-        <a href="/adm" class="back-button">
-            <button><span class="material-symbols-outlined">arrow_back</span> Voltar</button>
-        </a>
-    </div>
+</div>
 
-    <script>
-        document.addEventListener('DOMContentLoaded', function () {
-            const toggleButton = document.getElementById('toggleBox');
-            const boxForm = document.getElementById('boxForm');
-            const backButton = document.getElementById('backButton');
-            const especialidadeForm = document.getElementById('especialidadeForm');
-    
-            toggleButton.addEventListener('click', function () {
-                if (boxForm.style.display === 'none' || boxForm.style.display === '') {
-                    boxForm.style.display = 'block';
-                } else {
-                    boxForm.style.display = 'none';
-                }
-            });
-    
-            backButton.addEventListener('click', function () {
+
+<div class="editEspec">
+    <div class="box" id="editBoxForm" style="display: none;">
+        <form id="editEspecialidadeForm">
+            <input type="hidden" id="editId" name="id">
+            <label for="editEspecialidade">Descrição Especialidade</label>
+            <input type="text" id="editEspecialidade" name="Especialidade" required>
+            <button type="submit">Salvar</button>
+            <button type="button" id="editBackButton">Voltar</button>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a href="/adm" class="back-button">
+        <button><span class="material-symbols-outlined">arrow_back</span> Voltar</button>
+    </a>
+</div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const toggleButton = document.getElementById('toggleBox');
+        const boxForm = document.getElementById('boxForm');
+        const backButton = document.getElementById('backButton');
+        const especialidadeForm = document.getElementById('especialidadeForm');
+
+        toggleButton.addEventListener('click', function () {
+            if (boxForm.style.display === 'none' || boxForm.style.display === '') {
+                boxForm.style.display = 'block';
+            } else {
                 boxForm.style.display = 'none';
-            });
-    
-            especialidadeForm.addEventListener('submit', function (event) {
-                event.preventDefault();
-    
-                const especialidadeInput = document.getElementById('Especialidade').value;
-    
-                fetch('/CadastraEspecialidade', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
-                    body: JSON.stringify({ Especialidade: especialidadeInput }),
-                })
+            }
+        });
+
+        backButton.addEventListener('click', function () {
+            boxForm.style.display = 'none';
+        });
+
+        especialidadeForm.addEventListener('submit', function (event) {
+            event.preventDefault();
+
+            const especialidadeInput = document.getElementById('Especialidade').value;
+
+            fetch('/CadastraEspecialidade', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ Especialidade: especialidadeInput }),
+            })
                 .then(response => response.text())
                 .then(data => {
                     alert(data); // Mostra a mensagem do servidor
@@ -130,118 +143,114 @@
                     console.error('Erro ao cadastrar especialidade:', error);
                     alert('Erro ao cadastrar especialidade. Verifique o console para mais detalhes.');
                 });
-            });
         });
-    </script>
+    });
+
+    document.addEventListener('DOMContentLoaded', function () {
+        const editButtons = document.querySelectorAll('.editButton');
+        const editBoxForm = document.getElementById('editBoxForm');
+        const editBackButton = document.getElementById('editBackButton');
+        const editEspecialidadeForm = document.getElementById('editEspecialidadeForm');
+        const editId = document.getElementById('editId');
+        const editEspecialidade = document.getElementById('editEspecialidade');
+
+        editButtons.forEach(button => {
+            button.addEventListener('click', function () {
+                const id = this.dataset.id;
+                const desc = this.dataset.desc;
+                editId.value = id;
+                editEspecialidade.value = desc;
+                editBoxForm.style.display = 'block';
+            });
+
+        });
+
+        editBackButton.addEventListener('click', function () {
+            editBoxForm.style.display = 'none';
+        });
 
 
-    <script>
 
-        document.addEventListener('DOMContentLoaded', function () {
-            const editButtons = document.querySelectorAll('.editButton');
-            const editBoxForm = document.getElementById('editBoxForm');
-            const editBackButton = document.getElementById('editBackButton');
-            const editEspecialidadeForm = document.getElementById('editEspecialidadeForm');
-            const editId = document.getElementById('editId');
-            const editEspecialidade = document.getElementById('editEspecialidade');
+        editEspecialidadeForm.addEventListener('submit', function (event) {
+            event.preventDefault();
 
-            editButtons.forEach(button => {
-                button.addEventListener('click', function () {
-                    const id = this.dataset.id;
-                    const desc = this.dataset.desc;
-                    editId.value = id;
-                    editEspecialidade.value = desc;
-                    editBoxForm.style.display = 'block';
+            const id = editId.value;
+            const especialidade = editEspecialidade.value;
+
+            fetch(`/Update/especialidade/${id}`, {
+                method: 'PUT',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ Especialidades: especialidade }),
+            })
+                .then(response => response.json())
+                .then(data => {
+                    console.log('Resposta do servidor:', data);
+                    alert('Especialidade atualizada com sucesso!');
+                    editBoxForm.style.display = 'none'; // Fechar o formulário após a atualização
+                    window.location.reload(); // Recarregar a página após a atualização
+                })
+                .catch(error => {
+                    console.error('Erro ao atualizar especialidade:', error);
+                    alert('Erro ao atualizar especialidade. Verifique o console para mais detalhes.');
                 });
-                
-            });
+        });
+    });
 
-            editBackButton.addEventListener('click', function () {
-                editBoxForm.style.display = 'none';
-            });
-           
-         
+</script>
 
-            editEspecialidadeForm.addEventListener('submit', function (event) {
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const deleteButtons = document.querySelectorAll('.delete-button');
+        const confirmDeleteModal = document.getElementById('confirmDeleteModal');
+        const confirmDeleteButton = document.getElementById('confirmDeleteButton');
+        const cancelDeleteButton = document.getElementById('cancelDeleteButton');
+        let currentEspecialidadeId = null;
+
+        // Event listener para o botão de cancelar no modal
+
+        // Event listener para cada botão de delete
+        deleteButtons.forEach(button => {
+            button.addEventListener('click', function (event) {
                 event.preventDefault();
-
-                const id = editId.value;
-                const especialidade = editEspecialidade.value;
-
-                fetch(`/Update/especialidade/${id}`, {
-                    method: 'PUT',
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
-                    body: JSON.stringify({ Especialidades: especialidade }),
-                })
-                    .then(response => response.json())
-                    .then(data => {
-                        console.log('Resposta do servidor:', data);
-                        alert('Especialidade atualizada com sucesso!');
-                        editBoxForm.style.display = 'none'; // Fechar o formulário após a atualização
-                        window.location.reload(); // Recarregar a página após a atualização
-                    })
-                    .catch(error => {
-                        console.error('Erro ao atualizar especialidade:', error);
-                        alert('Erro ao atualizar especialidade. Verifique o console para mais detalhes.');
-                    });
+                currentEspecialidadeId = button.getAttribute('data-especialidade-id');
+                confirmDeleteModal.style.display = 'block'; // Exibir modal de confirmação
             });
         });
 
-    </script>
+        confirmDeleteModal.style.display = 'none'; // Esconder modal após a ação
+    });
 
-    <script>
-        document.addEventListener('DOMContentLoaded', function () {
-            const deleteButtons = document.querySelectorAll('.delete-button');
-            const confirmDeleteModal = document.getElementById('confirmDeleteModal');
-            const confirmDeleteButton = document.getElementById('confirmDeleteButton');
-            const cancelDeleteButton = document.getElementById('cancelDeleteButton');
-            let currentEspecialidadeId = null;
+    // Event listener para o botão de cancelar no modal
+    cancelDeleteButton.addEventListener('click', function () {
+        confirmDeleteModal.style.display = 'none'; // Esconder modal se o usuário cancelar
+    });
 
-// Event listener para o botão de cancelar no modal
 
-            // Event listener para cada botão de delete
-            deleteButtons.forEach(button => {
-                button.addEventListener('click', function (event) {
-                    event.preventDefault();
-                    currentEspecialidadeId = button.getAttribute('data-especialidade-id');
-                    confirmDeleteModal.style.display = 'block'; // Exibir modal de confirmação
-                });
+    // Event listener para o botão de confirmar no modal
+    confirmDeleteButton.addEventListener('click', function () {
+        // Enviar requisição DELETE usando fetch
+        fetch(`/deletar/especialidade/${currentEspecialidadeId}`, {
+            method: 'DELETE',
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        })
+            .then(response => {
+                if (response.ok) {
+                    alert('Especialidade deletada com sucesso!');
+                    window.location.reload(); // Recarrega a página após a deleção
+                } else {
+                    alert('Erro ao deletar a especialidade.');
+                }
+            })
+            .catch(error => {
+                console.error('Erro:', error);
+                alert('Erro ao deletar a especialidade.');
             });
 
-            confirmDeleteModal.style.display = 'none'; // Esconder modal após a ação
-            });
-
-            // Event listener para o botão de cancelar no modal
-            cancelDeleteButton.addEventListener('click', function () {
-                confirmDeleteModal.style.display = 'none'; // Esconder modal se o usuário cancelar
-            });
 
 
-            // Event listener para o botão de confirmar no modal
-            confirmDeleteButton.addEventListener('click', function () {
-                // Enviar requisição DELETE usando fetch
-                fetch(`/deletar/especialidade/${currentEspecialidadeId}`, {
-                    method: 'DELETE',
-                    headers: {
-                        'Content-Type': 'application/json'
-                    }
-                })
-                    .then(response => {
-                        if (response.ok) {
-                            alert('Especialidade deletada com sucesso!');
-                            window.location.reload(); // Recarrega a página após a deleção
-                        } else {
-                            alert('Erro ao deletar a especialidade.');
-                        }
-                    })
-                    .catch(error => {
-                        console.error('Erro:', error);
-                        alert('Erro ao deletar a especialidade.');
-                    });
-
-              
-            
-        });
-    </script>
+    });
+</script>

@@ -23,61 +23,61 @@
             <input type="hidden" value="<%= item.id %>" id="id">
 
             <label>Nome:</label>
-            <input type="text" value="<%= item.Nome %>" id="inputText">
+            <input type="text" value="<%= item.Nome %>" class="input-text" disabled>
 
             <label>CPF:</label>
-            <input type="text" value="<%= item.CPF %>" id="inputText">
+            <input type="text" value="<%= item.CPF %>" class="input-text" disabled>
 
             <label>Data de Nascimento:</label>
-            <input type="text" value="<%= item.DataNascimento %>" id="inputText">
+            <input type="text" value="<%= item.DataNascimento %>" class="input-text" disabled>
 
             <label>Gênero:</label>
-            <input type="text" value="<%= item.Genero %>" id="inputText">
+            <input type="text" value="<%= item.Genero %>" class="input-text" disabled>
 
             <label>Email:</label>
-            <input type="text" value="<%= item.Email %>" id="inputText">
+            <input type="text" value="<%= item.Email %>" class="input-text" disabled>
 
             <label>Data de Cadastro:</label>
-            <input type="text" value="<%= item.DataCadastro %>" id="inputText">
+            <input type="text" value="<%= item.DataCadastro %>" class="input-text" disabled>
 
             <label>Logradouro:</label>
-            <input type="text" value="<%= item.Logradouro %>" id="inputText">
+            <input type="text" value="<%= item.Logradouro %>" class="input-text" disabled>
 
             <label>Bairro:</label>
-            <input type="text" value="<%= item.Bairro %>" id="inputText">
+            <input type="text" value="<%= item.Bairro %>" class="input-text" disabled>
 
             <label>Estado:</label>
-            <input type="text" value="<%= item.Estado %>" id="inputText">
+            <input type="text" value="<%= item.Estado %>" class="input-text" disabled>
 
             <label>Número Residencial:</label>
-            <input type="text" value="<%= item.NumeroResidencia %>" id="inputText">
+            <input type="text" value="<%= item.NumeroResidencia %>" class="input-text" disabled>
 
             <label>Complemento:</label>
-            <input type="text" value="<%= item.Complemento %>" id="inputText">
+            <input type="text" value="<%= item.Complemento %>" class="input-text" disabled>
 
             <label>CEP:</label>
-            <input type="text" value="<%= item.CEP %>" id="inputText">
+            <input type="text" value="<%= item.CEP %>" class="input-text" disabled>
 
             <label>Telefone:</label>
-            <input type="text" value="<%= item.Telefone %>" id="inputText">
+            <input type="text" value="<%= item.Telefone %>" class="input-text" disabled>
 
             <label>Tipo:</label>
-            <input type="text" value="<%= item.Tipo %>" id="inputText">
+            <input type="text" value="<%= item.Tipo %>" class="input-text" disabled>
 
             <label>Login:</label>
-            <input type="text" value="<%= item.Login %>" id="inputText">
+            <input type="text" value="<%= item.Login %>" class="input-text" disabled>
 
             <label>Senha:</label>
-            <input type="text" value="<%= item.Senha %>" id="inputText">
+            <input type="text" value="<%= item.Senha %>" class="input-text" disabled>
 
             <label>Data de Admissão:</label>
-            <input type="text" value="<%= item.DataAdmissao %>" id="inputText">
+            <input type="text" value="<%= item.DataAdmissao %>" class="input-text" disabled>
 
             <label>CRM:</label>
-            <input type="text" value="<%= item.CRM %>" id="inputText">
+            <input type="text" value="<%= item.CRM %>" class="input-text" disabled>
 
             <label>Especialidade:</label>
-            <input type="text" value="<%= item.Especialidade %>" id="inputText">
+            <input type="text" value="<%= item.Especialidade %>" class="input-text" disabled>
         </div>
         <% }); %>
 
@@ -109,7 +109,12 @@
 
                 <!-- Salvar -->
                 <div class="button-container">
-                    <button id="salvar">Salvar</button>
+                    <button id="salvar" class="salvar">Salvar</button>
+                </div>
+
+                <!-- Cancelar -->
+                <div class="button-container">
+                    <button id="cancelar" class="cancelar" onclick="ocultarBtnSaveCancel()">Cancelar</button>
                 </div>
 
                 <!-- Deletar -->
@@ -168,33 +173,65 @@
                     });
                 });
 
-                // Habilitando campos para edição
+                // Habilitando campos
 
-                document.getElementById("inputText").disabled = true; //funcionou apenas para o campo de nome... PQ???????
-
+                const inputTexts = document.getElementsByClassName("input-text");
 
                 habilitarCampos = () => {
-                    document.getElementById("inputText").disabled = false;
+
+                    for (let i = 0; i < inputTexts.length; i++) {
+                        inputTexts[i].removeAttribute("disabled");
+                    };
+
+                    mostrarBtnSave();
+                    mostrarBtnCancel();
+
                     alert("Campos habilitados para edição, clique em salvar após alterações.")
+
+                };
+
+                // Desabilitando campos
+
+                desabilitarCampos = () => {
+
+                    for (let i = 0; i < inputTexts.length; i++) {
+                        inputTexts[i].setAttribute("disabled", "");
+                    };
+
+                };
+
+
+                // Mostrando botão de Salvar
+
+                mostrarBtnSave = () => {
+                    const btnSave = document.querySelector("#salvar");
+                    btnSave.style.visibility = "visible";
+                };
+
+                // Mostrando botão de Cancelar
+
+                mostrarBtnCancel = () => {
+
+                    const btnCancel = document.querySelector("#cancelar");
+                    btnCancel.style.visibility = "visible";
+
+                };
+
+                // Ocultar botoes de salvar e cancelar
+
+                ocultarBtnSaveCancel = () => {
+
+                    const btnSave2 = document.querySelector("#salvar");
+                    btnSave2.style.visibility = "hidden";
+
+                    const btnCancel2 = document.querySelector("#cancelar");
+                    btnCancel2.style.visibility = "hidden";
+
+                    desabilitarCampos();
+
+                    window.location.reload(true); // isso aqui vai recarregar a pagina e apagar as alterações que foram feitas e não salvas
+
                 }
-
-
-
-                // Deixando botão de Salvar desabilitado - não funcionou AINDA
-                document.getElementById("salvar").disabled = true;
-
-
-
-                // document.getElementById("inputText").addEventListener("inputText", function (event) {
-
-                //     const conteudo = document.getElementById("inputText").value;
-
-                //     if (conteudo !== null) {
-                //         document.getElementById("inputText").disabled = false;
-                //     } else {
-                //         document.getElementById("salvar").disabled = true;
-                //     }
-                // });
 
 
             </script>

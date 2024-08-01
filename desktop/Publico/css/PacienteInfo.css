@@ -2,11 +2,26 @@
 @import url('https://fonts.googleapis.com/css2?family=Anek+Telugu:wdth,wght@110.2,100..800&family=Exo+2:ital,wght@0,100..900;1,100..900&family=Gidugu&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Anek+Telugu:wdth,wght@98.8,100..800&family=Exo+2:ital,wght@0,100..900;1,100..900&family=Gidugu&family=Spline+Sans:wght@300..700&display=swap');
 
-/* Estilos para o layout dos dados dos pacientes */
+
+footer {
+    position: relative;
+    bottom: 0;
+    width: 100%;
+}
+
+body {
+    height: 100%;
+    margin-bottom: 0;
+}
+
 .paciente-container {
     width: 70%;
+    height: 100%;
     margin: auto;
+    margin-bottom: 0;
 }
+
+/* Estilos para o layout dos dados dos pacientes */
 
 /* campos */
 label {
@@ -103,14 +118,8 @@ input[type="text"] {
     margin: 0px 30px;
 }
 
-#cancelDeleteButton{
+#cancelDeleteButton {
     background-color: #f33a1e;
-}
-
-/* footer */
-
-footer {
-    position: relative;
 }
 
 /* Botão de retorno */
@@ -199,7 +208,7 @@ h2 {
     }
 }
 
-/* Editar */
+/* Deletar */
 
 #delete {
     border: none;
@@ -233,7 +242,7 @@ h2 {
     }
 }
 
-/* Editar */
+/* Salvar */
 
 #salvar {
     border: none;
@@ -244,9 +253,45 @@ h2 {
     font-family: inherit;
     font-size: 16px;
     padding: 0.6em 1.5em;
+    visibility: hidden;
 }
 
 #salvar:hover {
+    background-position: right center;
+    background-size: 200% auto;
+    -webkit-animation: pulse 2s infinite;
+    animation: pulse512 1.5s infinite;
+}
+
+@keyframes pulse512 {
+    0% {
+        box-shadow: 0 0 0 0 #05bada66;
+    }
+
+    70% {
+        box-shadow: 0 0 0 10px rgb(218 103 68 / 0%);
+    }
+
+    100% {
+        box-shadow: 0 0 0 0 rgb(218 103 68 / 0%);
+    }
+}
+
+/* Cancelar */
+
+#cancelar {
+    border: none;
+    color: #fff;
+    background-image: linear-gradient(30deg, #e7c325, #c6cd88);
+    border-radius: 20px;
+    background-size: 100% auto;
+    font-family: inherit;
+    font-size: 16px;
+    padding: 0.6em 1.5em;
+    visibility: hidden;
+}
+
+#cancelar:hover {
     background-position: right center;
     background-size: 200% auto;
     -webkit-animation: pulse 2s infinite;
