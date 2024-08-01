@@ -1,5 +1,8 @@
-
-
+body {
+    background-image: url('https://img.freepik.com/fotos-premium/close-up-de-forma-de-coracao-sobre-fundo-branco_1048944-12268340.jpg?w=996');
+  background-size: cover;
+  background-position: center;
+}
 nav {
     background-color: #00665E;
     padding: 0.5rem;
