@@ -44,17 +44,6 @@ const DadosPaciente = () => {
     <SafeAreaView style={styles.safeArea}>
       <Text style={styles.subtitulo3}>Dados cadastrais</Text>
 
-      <TextInput
-        style={styles.input}
-        onChangeText={recebeId}
-        placeholder="Digite o ID do paciente"
-      />
-
-      <Button
-        title="Clique Aqui"
-        onPress={() => getPaciente(label)}
-
-      />
       <ScrollView contentContainerStyle={styles.scrollViewContent}>
         {[
           { label: "Nome completo", key: "Nome" },
