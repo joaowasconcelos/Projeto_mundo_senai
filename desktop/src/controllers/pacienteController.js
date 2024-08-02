@@ -2,8 +2,6 @@ const { selectInfosPaciente, selectConsultas } = require("../models/PacienteMode
 const Pessoa = require("../models/classes/Pessoa");
 const Consultas = require("../models/classes/Consulta");
 
-
-
 const viewPaciente = {
     paginaPaciente: async (req, res) => {
         res.render('pages/PacienteUsuario', { user: req.session.user });

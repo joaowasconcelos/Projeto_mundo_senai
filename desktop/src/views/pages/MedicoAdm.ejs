@@ -1,7 +1,14 @@
 <link rel="stylesheet" href="/css/MedicoAdm.css">
 
+
+<div>
+    <a href="/adm" class="back-button">
+        <button><span class="material-symbols-outlined">arrow_back</span> Voltar</button>
+    </a>
+</div>
+
 <div class="actions">
-    <button onclick="window.location.href='/Medico'">Cadastrar Medico</button>
+    <button class="btn-cadastrar" onclick="window.location.href='/Cadastro'">Cadastrar Medico</button>
 </div>
 
 <div>
@@ -17,7 +24,7 @@
                 <th>Data Admissão</th>
                 <th>Especialidade</th>
                 <th>Todos os dados</th>
-                
+
             </tr>
         </thead>
         <tbody>
@@ -55,9 +62,4 @@
                 <% }); %>
         </tbody>
     </table>
-</div>
-<div>
-    <a href="/adm" class="back-button">
-        <button><span class="material-symbols-outlined">arrow_back</span> Voltar</button>
-    </a>
 </div>

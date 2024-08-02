@@ -10,7 +10,6 @@ const { selectEspecialidades } = require("../models/EspecialidadeModel");
 const { SelectPessoas } = require("../models/SelectsModel")
 
 
-
 const cadastroConsulta = {
     cadastraConsulta: async (req, res) => {
         try {
