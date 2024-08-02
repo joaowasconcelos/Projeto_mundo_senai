@@ -1,3 +1,10 @@
+/**
+ * Campo STATUS: 
+ *      0 -> Consulta a realizar
+ *      1 -> Consultas realizadas
+ */
+
+
 class Consulta {
     constructor(pId, pData, pHora, pStatus,pIdp) {
         this.id = pId;

@@ -157,6 +157,23 @@ function MedicoTab() {
           ),
         }}
       />
+
+
+<Tab.Screen
+        name='ConsultasMedico'
+        component={ConsultasMedico}
+        options={{
+          title: 'ConsultasMedico',
+          headerTintColor: '#053c20',
+          headerStyle: {
+            backgroundColor: '#b4c4bc',
+          },
+          headerShown: false,
+          tabBarIcon: ({ color, size }) => (
+            <FontAwesome name='phone' color={color} size={size} />
+          ),
+        }}
+      />  
     </Tab.Navigator>
   )
 }

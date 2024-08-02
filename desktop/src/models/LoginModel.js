@@ -2,7 +2,6 @@ const conectarBancoDeDados = require("../config/db")
 const bcrypt = require('bcrypt');
 
 async function selectLogin(objLogin) {
-    console.log(objLogin)
     const bd = await conectarBancoDeDados();
     try {
         await bd.beginTransaction();
