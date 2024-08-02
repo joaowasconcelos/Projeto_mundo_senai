@@ -106,12 +106,15 @@ router.get('/Consulta', ensureAdmin, (req, res) => {
 
 
 router.get('/login', LoginPerfis.paginaLogin);
-router.post('/Login/mobileEntrar',LoginPerfis.LoginPessoaMobile)
-router.post('/Consultas/Medico',selects.selectConsultaMedicosMobile)
-router.get("/PacienteInfo/:id", viewPaciente.selecionaInfosPaciente) /*Direciona para a pagina de info dos paciente*/
+router.get("/PacienteInfo/:id", viewPaciente.selecionaInfosPaciente) 
 router.get("/paciente/consultas/:id", viewPaciente.selecionaConsultas);
-
 router.get('/ConsultaM',teste.selectsEspecialidade);
+
+//rotas mobile
+router.post('/Login/mobileEntrar',LoginPerfis.LoginPessoaMobile);
+router.post('/Consultas/Medico/Mobile',selects.selectConsultaMedicosMobile);
+router.get('/Consultas/Paciente/Mobile/:id',selects.SelecionaConsultaMobile);
+router.post("/PacienteInfo/Mobile", viewPaciente.selecionaInfosPacienteMobile);
 
 // router.get("/ConsultaAdm", selects.selecionaTodasConsultas);
 // router.get("/Prontuario", viewProntuario.paginaProntuario)

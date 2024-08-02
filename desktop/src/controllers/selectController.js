@@ -1,4 +1,4 @@
-const { SelectPessoas,SelectConsultaData,SelectConsultasAnteriores,SelectConsultaMedico,SelectsMedicos,SelectsConsultas} = require("../models/SelectsModel")
+const { SelectPessoas,SelectConsultaData,SelectConsultasAnteriores,SelectConsultaMedico,SelectsMedicos,SelectsConsultas,SelectConsultaMedicoMobile} = require("../models/SelectsModel")
 
 
 const selects = {
@@ -49,6 +49,19 @@ const selects = {
         }
     },
 
+    SelecionaConsultaMobile: async (req, res) => {
+        try {
+            const {id} = req.params
+            const result = await SelectConsultaData(id)
+            const results = result[0]
+            console.log(results)
+            return res.json(results)
+          } catch (error) {
+            console.log(error)
+            res.json(error);
+        }
+    },
+
     SelecionaConsultaAnteriores: async (req, res) => {
         try {
             const id= req
@@ -78,13 +91,14 @@ const selects = {
     selectConsultaMedicosMobile: async (req, res) => {
         try {
             console.log("entrou")
-            const login = req.pamars
-            const result = await SelectConsultaMedico(cpf,null);
+            console.log(req.session.user.id)
+            const id = req.session.user.id
+            const result = await SelectConsultaMedicoMobile(id);
             const { selectConsultaMedicos } = result;
             const results = selectConsultaMedicos[0]
             console.log("AQUI",results)
             // const resultId = selectConsultaIds[0]
-            return res.render('pages/Medico', { results});
+            return res.json({ results});
         } catch (error) {
             console.log(error);
             return res.json({ error: error.message });

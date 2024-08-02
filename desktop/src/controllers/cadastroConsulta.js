@@ -15,30 +15,6 @@ const cadastroConsulta = {
     cadastraConsulta: async (req, res) => {
         try {
             const { data, hora, status, paciente, ID_PACIENTE, especialidade, medico, id_funcionario } = req.body;
-            console.log(req.body);
-            // let horaInicio = "08:00";
-            // let horaTermino = "16:30";
-            // let agora = new Date();
-            
-            // let horaAtual = `${agora.getHours()}:${agora.getMinutes()}`;
-            
-            // // Função para converter "HH:MM" em minutos totais do dia
-            // function converterHoraParaMinutos(hora) {
-            //     let [horas, minutos] = hora.split(':').map(Number);
-            //     return horas * 60 + minutos;
-            // }
-            
-            // let minutosInicio = converterHoraParaMinutos(horaInicio);
-            // let minutosTermino = converterHoraParaMinutos(horaTermino);
-            // let minutosAtual = converterHoraParaMinutos(horaAtual);
-            // console.log(minutosAtual)
-            // console.log(minutosInicio)
-            // console.log(minutosTermino)
-    
-            
-            // if (minutosAtual < minutosInicio || minutosAtual > minutosTermino) {
-            //     return res.json({ message: "Não pode agendar consulta fora do expediente" });
-            // }
             const novaConsulta = new Consulta(null, data, hora, status, null);
             const novoPaciente = new Pessoa(paciente, null, null, null, null, null);
             const novoMedico = new Pessoa(medico, null, null, null, null, null)
