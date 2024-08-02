@@ -42,7 +42,9 @@ const LoginPerfis = {
     },
     LoginPessoaMobile: async (req, res) => {
         try {
+            console.log('oi1');
             const { login, senha } = req.body
+            console.log(login,senha)
             const result = await selectLogin(login)
             if (senha != result[0][0].senha) {
                 return res.json({ message: 'Senha incorreta' })

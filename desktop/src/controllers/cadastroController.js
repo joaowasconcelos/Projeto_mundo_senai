@@ -201,5 +201,5 @@ const cadastro = {
             res.status(500).json({ success: false, message: 'Erro ao excluir Perfil', error });
         }
     }
-
+}
 module.exports = { cadastro }
