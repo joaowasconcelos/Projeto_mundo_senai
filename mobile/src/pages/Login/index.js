@@ -16,37 +16,28 @@ const Login = () => {
 
     const navigation = useNavigation();
 
-    const navegaLogin = () => {
-        // Navega para a tela principal
-        navigation.navigate('Main');
-    };
+    // const navegaLogin = () => {
+    //     // Navega para a tela principal
+    //     navigation.navigate('Main');
+    // };
 
     const getLogin = async () => {
         try {
             await api.post(`/Login/mobileEntrar`, { login: login, senha: senha })
                 .then(response => {
-                    console.log("aqui", response.data);
-                    if (response !== undefined && response.data != null) {
-
-                        const { data } = response.data;
-                        const [firstEntry] = data;
-                        const { id, idLogin, login, senha, tipo } = firstEntry;
-
-                        console.log(id, idLogin, login, senha, tipo);
-                        setDadosLogin({ id: id, idLogin: idLogin, login: login, senha: senha, tipo: tipo });
-                        console.log(dadosLogin);
-                    } else {
-                        alert('Nenhum registro foi localizado!');
+                    console.log(response.data.user.nome_pessoa)
+                    const nome = response.data.user.nome_pessoa
+                    if (response.data.tipo === 'medico') {
+                        navigation.navigate('ConsultasMedico', { id: response.data.id  })
+                    } else if (response.data.tipo === 'paciente') {
+                        navigation.navigate('ConsultasPaciente', { id: response.data.id })
                     }
+
                 }).catch(error => {
                     console.log('Erro', error);
                 })
-            if (dadosLogin.tipo === 'Medico') {
-                navigation.navigate('ConsultasMedico', { dadosLogin })
-            } else {
-                console.log('oi');
-                navigation.navigate('ConsultasPaciente', { dadosLogin })
-            }
+                console.log(dadosLogin)
+            
         } catch (error) {
             if (error.response) {
                 console.log(error.response.data);

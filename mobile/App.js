@@ -26,21 +26,6 @@ function MainTabs() {
         },
       }}
     >
-      {/* <Tab.Screen
-        name='LoginStack'
-        component={LoginStack}
-        options={{
-          title: 'LoginStack',
-          headerStyle: {
-            backgroundColor: '#b4c4bc',
-          },
-          headerShown: false,
-          tabBarIcon: ({ color, size }) => (
-            <FontAwesome name='id-card' color={color} size={size} />
-          ),
-        }}
-      /> */}
-
       <Tab.Screen
         name="Login"
         component={Login}
@@ -69,28 +54,14 @@ function MainTabs() {
           ),
         }}
       />
-      
-      {/* <Tab.Screen
-        name='ConsultasMedico'
-        component={ConsultasMedico}
-        options={{
-          title: 'Próximas consultas',
-          headerStyle: {
-            backgroundColor: '#b4c4bc',
-          },
-          headerShown: false,
-          tabBarIcon: ({ color, size }) => (
-            <FontAwesome name='id-card' color={color} size={size} />
-          ),
-        }}
-      /> */}
+
       <Tab.Screen
         name="DadosPaciente"
         component={DadosPaciente}
         options={{
-          tabBarStyle: {
-            display: 'none'
-          },
+          // tabBarStyle: {
+          //   display: 'none'
+          // },
           title: 'Dados',
           headerTintColor: '#fafafa',
           headerStyle: {
@@ -113,33 +84,27 @@ function MainTabs() {
           ),
         }}
       />
-      
+
+
+<Tab.Screen
+        name='ConsultasMedico'
+        component={ConsultasMedico}
+        options={{
+          title: 'ConsultasMedico',
+          headerTintColor: '#053c20',
+          headerStyle: {
+            backgroundColor: '#b4c4bc',
+          },
+          headerShown: false,
+          tabBarIcon: ({ color, size }) => (
+            <FontAwesome name='phone' color={color} size={size} />
+          ),
+        }}
+      />  
     </Tab.Navigator>
 
   );
 }
-
-
-// function LoginStack() {
-//   return (
-//     <Stack.Navigator>     
-      
-//       <Stack.Screen
-//         name="ConsultasPaciente"
-//         component={ConsultasPaciente}
-//         options={{ headerShown: false }}
-//       />
-
-//       <Stack.Screen
-//         name="ConsultasMedico"
-//         component={ConsultasMedico}
-//         options={{ headerShown: false }}
-//       />
-
-
-//     </Stack.Navigator>
-//   );
-// }
 
 export default function App() {
   return (

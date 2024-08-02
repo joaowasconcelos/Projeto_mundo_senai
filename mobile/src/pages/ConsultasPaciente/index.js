@@ -1,189 +1,121 @@
-import React, { useState } from 'react';
-import { SafeAreaView, ScrollView, Platform, StyleSheet, Text, View, Button, Pressable, FlatList } from 'react-native';
-import { useNavigation, useRoute, useFocusEffect } from '@react-navigation/native';
-import FontAwesome from 'react-native-vector-icons/FontAwesome';
+  import React, { useState, useEffect } from 'react';
+  import { SafeAreaView, StyleSheet, Text, View, ScrollView, Platform } from 'react-native';
+  import { useNavigation, useRoute } from '@react-navigation/native';
+  import FontAwesome from 'react-native-vector-icons/FontAwesome';
 
-import api from '../../service/api';
+  import api from '../../service/api';
 
-export default function ConsultasPaciente() {
+  export default function ConsultasPaciente() {
+    const navigation = useNavigation();
+    const route = useRoute();
 
-  const navigation = useNavigation();
-  const route = useRoute();
+    const [consultas, setConsultas] = useState([]);
+    const id = route.params?.id;
 
-  let [flatListConsultas, setFlatListClientes] = useState([]);
-  const [showAlert, setShowAlert] = useState(false);
-  const [alertMessage, setAlertMessage] = useState('');
-  const [refresh, setRefresh] = useState(false);
-  const [status, setStatus] = useState(false);
-
-  const listarConsultas = async () => {
-
-    try {
-      const response = await api.get('/paciente/novo') //conferir se essa rota ai ta certa pois não achei
-
-        .catch(function (error) {
-
-          if (error.response) {
-
-            console.log(error.response.data);
-            console.log(error.response.status);
-            console.log(error.response.headers);
-
-          } else if (error.resquest) {
-
-            if ((error.resquest._response).include('Failed')) {
-              console.log('Erro ao conectar com API');
-
-            }
-          } else {
-
-            console.log(error.message);
-
-          }
-
-          console.log(error.config);
-
-        });
-      if (response != undefined) {
-        if (response.data.length > 0) {
-
-          let temp = [];
-          for (let i = 0; i < response.data.length; i++) {
-            temp.push(response.data[i]);
-
-          }
-          setFlatListClientes(temp);
-          temp = [];
-
+    const listarConsultas = async () => {
+      try {
+        const response = await api.get(`/Consultas/Paciente/Mobile/${id}`);
+        console.log('Dados recebidos:', response.data);
+        if (Array.isArray(response.data)) {
+          setConsultas(response.data);
         } else {
-          setAlertMessage('Nenhum registro foi localizado!')
-          exibeAlert();
-          return;
+          console.error('A resposta não é uma array:', response.data);
         }
+      } catch (error) {
+        console.error("Erro ao listar consultas:", error);
       }
+    };
 
-    } catch (error) {
-      console.error(error);
-    }
-    return (
-
-      <View style={styles.modeloCard}>
-
-        <Text style={styles.textHeader}>{item.funcionario_pessoa_id}</Text>
-        <Text style={styles.textHeader}>{item.especialidade}</Text>
-
-        <Text style={styles.textHeader}>Data da consulta:</Text>
-        <Text style={styles.textValue}>{item.data}</Text>
-
-        <Text style={styles.textHeader}>Horário:</Text>
-        <Text style={styles.textValue}>{item.hora}</Text>
-
-        <Text style={styles.textHeader}>Status da consulta:</Text>
-        <Text style={styles.textValue}>{item.status}</Text>
-      </View>
-    )
-
-  }
-
-  useFocusEffect(
-    React.useCallback(() => {
+    useEffect(() => {
       listarConsultas();
-    }, [refresh])
-  )
-
-
-  let listViewItem = (item) => {
+    }, []);
 
     return (
+      <SafeAreaView style={styles.androidSafeArea}>
+        <View style={styles.barraPerfil}>
+          <Text style={styles.textHeader}>Bem-vindo!</Text>
+          <FontAwesome name="user" size={35} color="#243434" onPress={() => navigation.navigate('Dados')} />
+        </View>
 
-      <View style={styles.modeloCard}>
-
-        <Text style={styles.textHeader}>{item.funcionario_pessoa_id}</Text>
-        <Text style={styles.textHeader}>{item.especialidade}</Text>
-
-        <Text style={styles.textHeader}>Data da consulta:</Text>
-        <Text style={styles.textValue}>{item.data}</Text>
-
-        <Text style={styles.textHeader}>Horário:</Text>
-        <Text style={styles.textValue}>{item.hora}</Text>
-
-        <Text style={styles.textHeader}>Status da consulta:</Text>
-        <Text style={styles.textValue}>{item.status}</Text>
-      </View>
-    )
-
+        <ScrollView contentContainerStyle={{ paddingHorizontal: 20 }}>
+      
+          {consultas.map((consulta) => (
+            <View key={consulta.id} style={styles.modeloCard}>
+              <Text>Proximas Consultas</Text>
+              <Text style={styles.textHeader}>Nome do Paciente:</Text>
+              <Text style={styles.textValue}>{consulta.nome_paciente}</Text>
+              <Text style={styles.textHeader}>CPF do Paciente:</Text>
+              <Text style={styles.textValue}>{consulta.cpf_paciente}</Text>
+              <Text style={styles.textHeader}>Especialidade:</Text>
+              <Text style={styles.textValue}>{consulta.desc_especialidade}</Text>
+              <Text style={styles.textHeader}>Data da Consulta:</Text>
+              <Text style={styles.textValue}>{consulta.data}</Text>
+              <Text style={styles.textHeader}>Hora da Consulta:</Text>
+              <Text style={styles.textValue}>{consulta.hora}</Text>
+              <Text style={styles.textHeader}>Nome do Funcionário:</Text>
+              <Text style={styles.textValue}>{consulta.nome_funcionario}</Text>
+            </View>
+          ))}
+        </ScrollView>
+      </SafeAreaView>
+    );
   }
 
-
-  return (
-
-    <SafeAreaView style={styles.androidSafeArea}>
-
-      <View style={styles.barraPerfil}>
-
-        <Text style={styles.textHeader}>Bem vindo!</Text>
-
-        <FontAwesome name='user' size={35} color={'#243434'} onPress={() => navigation.navigate('Dados')} />
-
-      </View>
-
-      <View style={{ flex: 1 }}>
-        <FlatList
-          style={{ marginTop: 20 }}
-          contentContainerStyle={{ paddingHorizontal: 20 }}
-          data={flatListConsultas}
-          keyExtractor={(item, index) => index.toString()}
-          renderItem={({ item }) => listViewItem(item)}
-        />
-      </View>
-
-    </SafeAreaView>
-  );
-}
-
-
-const styles = StyleSheet.create({
-  androidSafeArea: {
-    paddingTop: Platform.OS === 'android' ? 40 : 0,
-  },
-  container: {
-    flex: 1,
-    backgroundColor: '#f1f1f1',
-    alignItems: 'center',
-    justifyContent: 'center',
-    height: 897
-  },
-  subtitulo3: {
-    color: '#007c7c',
-    fontSize: 19,
-    fontWeight: 'bold',
-    marginLeft: 172
-  },
-  barraPerfil: {
-    width: '100%',
-    height: 55,
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    display: 'flex',
-    padding: 10,
-    backgroundColor: '#f1f1f1'
-  },
-  textHeader: {
-    fontSize: 25,
-    fontWeight: 'bold',
-    color: '#243434',
-    paddingTop: 4
-  },
-  modeloCard: {
-    backgroundColor: 'purple',
-    marginBottom: 30,
-    padding: 15,
-    borderRadius: 10,
-    elevation: 8,
-  },
-  textValue: {
-    color: 'white',
-    fontSize: 18
-  }
-});
+  const styles = StyleSheet.create({
+    androidSafeArea: {
+      paddingTop: Platform.OS === 'android' ? 40 : 0,
+      flex: 1,
+      backgroundColor: '#f0f0f0', // Fundo cinza claro e neutro
+    },
+    barraPerfil: {
+      width: '100%',
+      height: 60,
+      flexDirection: 'row',
+      justifyContent: 'space-between',
+      alignItems: 'center',
+      paddingHorizontal: 20,
+      backgroundColor: '#4A90E2', // Azul suave para a barra de perfil
+      elevation: 4,
+      borderBottomWidth: 1,
+      borderBottomColor: '#d0d0d0', // Linha inferior sutil
+    },
+    textHeader: {
+      fontSize: 15, // Tamanho da fonte aumentado para melhor visibilidade
+      fontWeight: '600',
+    
+    },
+    tituloConsultas: {
+      fontSize: 22,
+      fontWeight: 'bold',
+      color: '#333333',
+      marginVertical: 15,
+      paddingHorizontal: 20,
+    },
+    modeloCard: {
+      backgroundColor: '#ffffff',
+      marginVertical: 10,
+      padding: 20,
+      borderRadius: 12,
+      shadowColor: '#000',
+      shadowOffset: { width: 0, height: 2 },
+      shadowOpacity: 0.1,
+      shadowRadius: 4,
+      elevation: 4,
+      borderWidth: 1,
+      borderColor: '#e0e0e0',
+    },
+    textHeaderCard: {
+      fontSize: 16,
+      fontWeight: 'bold',
+      color: '#333333',
+      marginBottom: 8,
+    },
+    textValue: {
+      color: '#555555',
+      fontSize: 16,
+      marginBottom: 12,
+      lineHeight: 22,
+    },
+  });
+  
 
