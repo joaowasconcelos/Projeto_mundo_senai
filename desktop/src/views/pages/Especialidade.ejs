@@ -41,20 +41,7 @@
                                 </button>
                             </div>
 
-                            <!-- Modal de confirmação -->
-                            <div id="confirmDeleteModal" class="modal">
-
-                                <div class="modal-content">
-                                    <p>Tem certeza que deseja deletar esta pessoa?</p>
-
-                                    <div id="btn_modal">
-                                        <button id="confirmDeleteButton">Confirmar</button>
-                                        <button id="cancelDeleteButton">Cancelar</button>
-                                    </div>
-
-                                </div>
-
-                            </div>
+                            
 
     </div>
     </td>
@@ -65,9 +52,24 @@
 
 </div>
 
+<!-- Modal de confirmação -->
+<div id="confirmDeleteModal" class="modal">
 
+    <div class="modal-content">
+        <p>Tem certeza que deseja deletar esta pessoa?</p>
+
+        <div id="btn_modal">
+            <button id="confirmDeleteButton">Confirmar</button>
+            <button id="cancelDeleteButton">Cancelar</button>
+        </div>
+
+    </div>
+
+</div>
 
 <!-- Fim da tabela -->
+
+<!-- adicionar especialidade -->
 
 <div class="botoes">
     <div class="addEspec">
@@ -83,6 +85,7 @@
     </div>
 </div>
 
+<!-- modal de adicionar especialidade -->
 
 <div class="editEspec">
     <div class="box" id="editBoxForm" style="display: none;">
@@ -96,11 +99,7 @@
     </div>
 </div>
 
-<div>
-    <a href="/adm" class="back-button">
-        <button><span class="material-symbols-outlined">arrow_back</span> Voltar</button>
-    </a>
-</div>
+
 
 <script>
     document.addEventListener('DOMContentLoaded', function () {
@@ -169,8 +168,6 @@
             editBoxForm.style.display = 'none';
         });
 
-
-
         editEspecialidadeForm.addEventListener('submit', function (event) {
             event.preventDefault();
 
@@ -198,9 +195,6 @@
         });
     });
 
-</script>
-
-<script>
     document.addEventListener('DOMContentLoaded', function () {
         const deleteButtons = document.querySelectorAll('.delete-button');
         const confirmDeleteModal = document.getElementById('confirmDeleteModal');
