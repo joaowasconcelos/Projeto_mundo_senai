@@ -14,19 +14,10 @@ import { SafeAreaProvider } from 'react-native-safe-area-context';
 const Tab = createBottomTabNavigator();
 const Stack = createNativeStackNavigator();
 
-function MainTabs() {
+function LoginStack() {
   return (
-    <Tab.Navigator
-      screenOptions={{
-        tabBarActiveTintColor: '#fafafa',
-        tabBarInactiveTintColor: '#c3c3c3',
-        tabBarStyle: {
-
-          backgroundColor: '#243434',
-        },
-      }}
-    >
-      <Tab.Screen
+    <Stack.Navigator>
+      <Stack.Screen
         name="Login"
         component={Login}
         options={{
@@ -40,6 +31,31 @@ function MainTabs() {
           },
         }}
       />
+      <Stack.Screen
+        name="PacienteTab"
+        component={PacienteTab}
+        options={{ headerShown: false }}
+      />
+      <Stack.Screen
+        name="MedicoTab"
+        component={MedicoTab}
+        options={{ headerShown: false }}
+      />
+    </Stack.Navigator>
+  );
+}
+
+function PacienteTab() {
+  return (
+    <Tab.Navigator
+      screenOptions={{
+        tabBarActiveTintColor: '#fafafa',
+        tabBarInactiveTintColor: '#c3c3c3',
+        tabBarStyle: {
+          backgroundColor: '#243434',
+        },
+      }}
+    >
       <Tab.Screen
         name='ConsultasPaciente'
         component={ConsultasPaciente}
@@ -54,14 +70,71 @@ function MainTabs() {
           ),
         }}
       />
-
       <Tab.Screen
         name="DadosPaciente"
         component={DadosPaciente}
         options={{
-          // tabBarStyle: {
-          //   display: 'none'
-          // },
+          tabBarStyle: {
+            display: 'none'
+          },
+          title: 'Dados',
+          headerTintColor: '#fafafa',
+          headerStyle: {
+            backgroundColor: '#243434'
+          },
+        }}
+      />
+      <Tab.Screen
+        name='Contato'
+        component={Contato}
+        options={{
+          title: 'Contato',
+          headerTintColor: '#053c20',
+          headerStyle: {
+            backgroundColor: '#b4c4bc',
+          },
+          headerShown: false,
+          tabBarIcon: ({ color, size }) => (
+            <FontAwesome name='phone' color={color} size={size} />
+          ),
+        }}
+      />
+    </Tab.Navigator>
+  );
+}
+
+function MedicoTab() {
+  return (
+    <Tab.Navigator
+      screenOptions={{
+        tabBarActiveTintColor: '#fafafa',
+        tabBarInactiveTintColor: '#c3c3c3',
+        tabBarStyle: {
+          backgroundColor: '#243434',
+        },
+      }}
+    >
+      <Tab.Screen
+        name='ConsultasMedico'
+        component={ConsultasMedico}
+        options={{
+          title: 'Próximas consultas',
+          headerStyle: {
+            backgroundColor: '#b4c4bc',
+          },
+          headerShown: false,
+          tabBarIcon: ({ color, size }) => (
+            <FontAwesome name='id-card' color={color} size={size} />
+          ),
+        }}
+      />
+      <Tab.Screen
+        name="DadosPaciente"
+        component={DadosPaciente}
+        options={{
+          tabBarStyle: {
+            display: 'none'
+          },
           title: 'Dados',
           headerTintColor: '#fafafa',
           headerStyle: {
@@ -102,15 +175,14 @@ function MainTabs() {
         }}
       />  
     </Tab.Navigator>
-
-  );
+  )
 }
 
 export default function App() {
   return (
     <SafeAreaProvider>
       <NavigationContainer>
-        <MainTabs />
+        <LoginStack />
       </NavigationContainer>
     </SafeAreaProvider>
   );

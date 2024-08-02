@@ -23,6 +23,8 @@ const Login = () => {
 
     const getLogin = async () => {
         try {
+            // console.log('oi');
+            // console.log(login, senha);
             await api.post(`/Login/mobileEntrar`, { login: login, senha: senha })
                 .then(response => {
                     console.log(response.data.user.nome_pessoa)
@@ -106,7 +108,7 @@ const Login = () => {
                                     marginBottom: 10
                                 },
                             ]}
-                            onPress={getLogin}
+                            onPress={getLogin({ id: login.id })}
                         >
                             <Text style={{ textAlign: 'center', fontSize: 25, letterSpacing: 5, fontWeight: 'bold', color: '#fafafa' }}>Logar</Text>
                         </Pressable>
