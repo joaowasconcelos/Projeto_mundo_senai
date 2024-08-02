@@ -195,10 +195,10 @@
                 desabilitarCampos = () => {
 
                     for (let i = 0; i < inputTexts.length; i++) {
-                        inputTexts[i].ad("disabled");
+                        inputTexts[i].setAttribute("disabled", "");
                     };
 
-                }
+                };
 
 
                 // Mostrando botão de Salvar
@@ -211,16 +211,26 @@
                 // Mostrando botão de Cancelar
 
                 mostrarBtnCancel = () => {
+
                     const btnCancel = document.querySelector("#cancelar");
                     btnCancel.style.visibility = "visible";
+
                 };
 
+                // Ocultar botoes de salvar e cancelar
+
                 ocultarBtnSaveCancel = () => {
+
                     const btnSave2 = document.querySelector("#salvar");
                     btnSave2.style.visibility = "hidden";
 
                     const btnCancel2 = document.querySelector("#cancelar");
                     btnCancel2.style.visibility = "hidden";
+
+                    desabilitarCampos();
+
+                    window.location.reload(true); // isso aqui vai recarregar a pagina e apagar as alterações que foram feitas e não salvas
+
                 }
 
 
