@@ -1,3 +1,5 @@
+require('dotenv').config();
+const jwt = require("jsonwebtoken")
 const express = require('express');
 const bodyParser = require('body-parser');
 const router = require('./src/routes/clinicaRoutes');
@@ -23,8 +25,12 @@ app.use(session({
     secret: 'yourSecretKey',
     resave: false,
     saveUninitialized: true,
-    cookie: { maxAge: 900000, httpOnly: true }
+    cookie: { maxAge: 900000, httpOnly: true },
+    store: new session.MemoryStore() 
 }));
+
+
+
 
 app.use(express.urlencoded({ extended: true }));
 

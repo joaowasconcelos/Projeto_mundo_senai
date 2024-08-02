@@ -7,15 +7,12 @@ const cadastroEspecia = {
         try {
             const { Especialidade } = req.body;
             if (Especialidade === null || Especialidade === "" || Especialidade === "undefined") {
-                return res.send('<script>alert("Descrição Inválida"); window.history.back();</script>');
+                return res.send("Descrição Inválida"); 
             }
 
             const cadEsp = await selectEspecialidades();
             const especialidadeLowerCase = Especialidade.toLowerCase();
             teste = cadEsp[0]
-
-            console.log("cadEsp", cadEsp);
-            console.log("teste",teste)
             
             let especialidadeJaCadastrada = false;
             for (let i = 0; i < teste.length; i++) {
@@ -24,13 +21,11 @@ const cadastroEspecia = {
                     break;
                 }
             }
-            console.log("especialidadeJaCadastrada",especialidadeJaCadastrada)
             if (especialidadeJaCadastrada === true) {
-                return res.send('<script>alert("Especialidade já cadastrada"); window.history.back();</script>');
+                return res.send("Especialidade já cadastrada");
             }
-            
             const result = await insertEspecialidade(Especialidade);
-            return res.send('<script>alert("Especialidade cadastrada com sucesso"); window.history.back();</script>');
+            return res.send("Especialidade cadastrada com sucesso");
         } catch (error) {
             console.error("Erro ao cadastrar especialidades:", error);
             res.status(500).json({ error: "Erro ao cadastrar especialidades" });
@@ -41,7 +36,6 @@ const cadastroEspecia = {
         try {
             const id = req.params.id
             const objEspe = new Especialidade(id)
-            console.log(objEspe)
             const result = await deleteModalidade(objEspe);
             if (result.error) {
                 res.status(500).json({ success: false, message: 'Erro ao excluir Especialidade', error: result.details });
@@ -60,7 +54,6 @@ const selectEspecialidade = {
             result = await selectEspecialidades()
             const Especialidade = result[0]
             return res.render('pages/Especialidade', { Especialidade });
-        
         } catch (error) {
             console.error("Erro ao cadastrar especialidades:", error);
             res.status(500).json({ error: "Erro ao cadastrar especialidades" });

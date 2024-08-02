@@ -20,7 +20,8 @@ label {
 }
 
 input[type="text"] {
-    width: calc(100% - 10px); /* Ajuste para compensar a largura da borda */
+    width: calc(100% - 10px);
+    /* Ajuste para compensar a largura da borda */
     padding: 8px;
     box-sizing: border-box;
     margin-bottom: 5px;
@@ -37,71 +38,164 @@ input[type="text"]:read-only {
     border-color: #ddd;
     color: #777;
 }
+
 /* Estilos para o botão de voltar */
 .back-button {
-    text-decoration: none; /* Remove sublinhado do link */
+    text-decoration: none;
+    /* Remove sublinhado do link */
 }
 
 .back-button button {
-    background-color: #007bff; /* Cor de fundo do botão */
-    color: #fff; /* Cor do texto dentro do botão */
-    border: none; /* Remove a borda do botão */
-    padding: 10px 20px; /* Espaçamento interno do botão */
-    border-radius: 4px; /* Borda arredondada */
-    cursor: pointer; /* Cursor ao passar por cima do botão */
-    display: inline-block; /* Permite que o botão se ajuste ao conteúdo interno */
+    background-color: #007bff;
+    /* Cor de fundo do botão */
+    color: #fff;
+    /* Cor do texto dentro do botão */
+    border: none;
+    /* Remove a borda do botão */
+    padding: 10px 20px;
+    /* Espaçamento interno do botão */
+    border-radius: 4px;
+    /* Borda arredondada */
+    cursor: pointer;
+    /* Cursor ao passar por cima do botão */
+    display: inline-block;
+    /* Permite que o botão se ajuste ao conteúdo interno */
 }
 
 .back-button button:hover {
-    background-color: #0056b3; /* Cor de fundo do botão ao passar o mouse */
+    background-color: #0056b3;
+    /* Cor de fundo do botão ao passar o mouse */
 }
 
 .material-symbols-outlined {
-    font-size: 24px; /* Tamanho do ícone */
-    vertical-align: middle; /* Alinha verticalmente com o texto */
-    margin-right: 5px; /* Espaçamento à direita do ícone */
+    font-size: 24px;
+    /* Tamanho do ícone */
+    vertical-align: middle;
+    /* Alinha verticalmente com o texto */
+    margin-right: 5px;
+    /* Espaçamento à direita do ícone */
 }
+
 .button-container {
-    margin-bottom: 10px; /* Espaço entre os botões */
+    margin-bottom: 10px;
+    /* Espaço entre os botões */
 }
 
 .edit-button button {
-    background-color: #28a745; /* Cor verde para o botão de editar */
-    color: #fff; /* Cor do texto dentro do botão */
-    border: none; /* Remove a borda do botão */
-    padding: 10px 20px; /* Espaçamento interno do botão */
-    border-radius: 4px; /* Borda arredondada */
-    cursor: pointer; /* Cursor ao passar por cima do botão */
-    display: inline-block; /* Permite que o botão se ajuste ao conteúdo interno */
+    background-color: #28a745;
+    /* Cor verde para o botão de editar */
+    color: #fff;
+    /* Cor do texto dentro do botão */
+    border: none;
+    /* Remove a borda do botão */
+    padding: 10px 20px;
+    /* Espaçamento interno do botão */
+    border-radius: 4px;
+    /* Borda arredondada */
+    cursor: pointer;
+    /* Cursor ao passar por cima do botão */
+    display: inline-block;
+    /* Permite que o botão se ajuste ao conteúdo interno */
 }
 
 .edit-button button:hover {
-    background-color: #218838; /* Cor de fundo do botão ao passar o mouse */
+    background-color: #218838;
+    /* Cor de fundo do botão ao passar o mouse */
 }
 
 .delete-button button {
-    background-color: #dc3545; /* Cor vermelha para o botão de deletar */
-    color: #fff; /* Cor do texto dentro do botão */
-    border: none; /* Remove a borda do botão */
-    padding: 10px 20px; /* Espaçamento interno do botão */
-    border-radius: 4px; /* Borda arredondada */
-    cursor: pointer; /* Cursor ao passar por cima do botão */
-    display: inline-block; /* Permite que o botão se ajuste ao conteúdo interno */
+    background-color: #dc3545;
+    /* Cor vermelha para o botão de deletar */
+    color: #fff;
+    /* Cor do texto dentro do botão */
+    border: none;
+    /* Remove a borda do botão */
+    padding: 10px 20px;
+    /* Espaçamento interno do botão */
+    border-radius: 4px;
+    /* Borda arredondada */
+    cursor: pointer;
+    /* Cursor ao passar por cima do botão */
+    display: inline-block;
+    /* Permite que o botão se ajuste ao conteúdo interno */
 }
 
 .delete-button button:hover {
-    background-color: #c82333; /* Cor de fundo do botão ao passar o mouse */
+    background-color: #c82333;
+    /* Cor de fundo do botão ao passar o mouse */
 }
 
 .material-symbols-outlined {
-    font-size: 18px; /* Tamanho do ícone */
-    vertical-align: middle; /* Alinha verticalmente com o texto */
-    margin-right: 5px; /* Espaçamento à direita do ícone */
+    font-size: 18px;
+    /* Tamanho do ícone */
+    vertical-align: middle;
+    /* Alinha verticalmente com o texto */
+    margin-right: 5px;
+    /* Espaçamento à direita do ícone */
 }
 
-.botoes{
+.botoes {
     display: flex;
     flex-direction: row;
     width: 100%;
     justify-content:center;
 }
+
+.modal {
+    display: none;
+    /* Por padrão, o modal está oculto */
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    /* Fundo escuro semi-transparente */
+    overflow: auto;
+}
+
+.modal-content {
+    background-color: #fefefe;
+    margin: 15% auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 50%;
+    max-width: 400px;
+    text-align: center;
+}
+
+.modal-content p {
+    margin-bottom: 20px;
+}
+
+.modal-content button {
+    margin: 10px;
+    padding: 10px 20px;
+    cursor: pointer;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 3px;
+}
+
+.modal-content button:hover {
+    background-color: #45a049;
+}
+
+/* Estilos para o botão de delete */
+.delete-button {
+ 
+    /* Vermelho */
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin-top: 10px;
+    cursor: pointer;
+    border-radius: 3px;
+}
+
