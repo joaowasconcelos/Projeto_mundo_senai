@@ -1,5 +1,9 @@
-
-
+body {
+    /* background-image: url('https://img.freepik.com/fotos-premium/close-up-de-forma-de-coracao-sobre-fundo-branco_1048944-12268340.jpg?w=996');
+  background-size: cover;
+  background-position: center; */
+  background: linear-gradient(#f3fffc, #a3b9b2);
+}
 nav {
     background-color: #00665E;
     padding: 0.5rem;
@@ -33,7 +37,9 @@ table {
 }
 
 table, th, td {
-    border: 1px solid #ccc;
+    border: 1px solid #444444;
+    background-color: #d2fffb;
+    color: rgb(0, 0, 0);
 }
 
 th, td {
@@ -42,9 +48,9 @@ th, td {
 }
 
 th {
-    background-color: #eee;
+    background-color: #0b7b71;
+    color: rgb(255, 255, 255);
 }
-
 /* Estilos para o botão de voltar */
 .back-button {
     text-decoration: none; /* Remove sublinhado do link */
@@ -62,10 +68,15 @@ th {
 
 .back-button button:hover {
     background-color: #0056b3; /* Cor de fundo do botão ao passar o mouse */
+    margin: 0%;
 }
 
 .material-symbols-outlined {
     font-size: 24px; /* Tamanho do ícone */
     vertical-align: middle; /* Alinha verticalmente com o texto */
     margin-right: 5px; /* Espaçamento à direita do ícone */
+}
+
+footer {
+    position: absolute;
 }
