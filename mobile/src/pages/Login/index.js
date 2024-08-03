@@ -21,18 +21,17 @@ const Login = () => {
     //     navigation.navigate('Main');
     // };
 
+    // { id: login.id }
     const getLogin = async () => {
         try {
-            // console.log('oi');
-            // console.log(login, senha);
             await api.post(`/Login/mobileEntrar`, { login: login, senha: senha })
                 .then(response => {
                     console.log(response.data.user.nome_pessoa)
                     const nome = response.data.user.nome_pessoa
                     if (response.data.tipo === 'medico') {
-                        navigation.navigate('ConsultasMedico', { id: response.data.id  })
+                        navigation.navigate('MedicoTab', { id: response.data.id  })
                     } else if (response.data.tipo === 'paciente') {
-                        navigation.navigate('ConsultasPaciente', { id: response.data.id })
+                        navigation.navigate('PacienteTab', { id: response.data.id })
                     }
 
                 }).catch(error => {
@@ -57,27 +56,18 @@ const Login = () => {
     }
 
     return (
-
         <SafeAreaView style={styles.androidSafeArea}>
-
             <ScrollView>
-
                 <LinearGradient colors={['rgb(0, 76, 76)', 'transparent']} style={styles.background} />
-
                 <View style={styles.topo}>
-
                     <Text style={styles.title}>SP MEDICAL GROUP</Text>
                     <Image source={logo} />
-
                 </View>
 
                 <View style={styles.container}>
-
                     <View style={styles.box_white}>
-
                         <Text style={styles.subtitulo5}>Bem Vindo</Text>
                         <Text style={styles.subtitulo4}>Faça login em sua conta</Text>
-
                         <TextInput
                             placeholder='Digite seu C.P.F.'
                             style={styles.entradaTexto}
@@ -108,7 +98,7 @@ const Login = () => {
                                     marginBottom: 10
                                 },
                             ]}
-                            onPress={getLogin({ id: login.id })}
+                            onPress={getLogin}
                         >
                             <Text style={{ textAlign: 'center', fontSize: 25, letterSpacing: 5, fontWeight: 'bold', color: '#fafafa' }}>Logar</Text>
                         </Pressable>
