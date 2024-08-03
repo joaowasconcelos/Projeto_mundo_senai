@@ -1,3 +1,26 @@
+@import url('https://fonts.googleapis.com/css2?family=Anek+Telugu:wdth,wght@98.8,100..800&family=Exo+2:ital,wght@0,100..900;1,100..900&family=Gidugu&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&family=Spline+Sans:wght@300..700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Anek+Telugu:wdth,wght@98.8,100..800&family=Exo+2:ital,wght@0,100..900;1,100..900&family=Gidugu&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&family=Space+Grotesk:wght@300..700&family=Spline+Sans:wght@300..700&display=swap');
+/* footer */
+
+footer {
+    position: absolute;
+}
+
+/* Tabela */
+
+#min {
+    width: 40px;
+}
+
+#id_camp {
+    width: 50px;
+}
+
+#tabelaContainer {
+    overflow-x: auto;
+    max-height: 454px;
+}
+
 table {
     width: 70%;
     border-collapse: collapse;
@@ -9,11 +32,12 @@ table {
 
 thead {
     background-color: #f5f5f5;
+
 }
 
 th,
 td {
-    padding: 15px;
+    padding: 10px;
     text-align: left;
     border-bottom: 1px solid #ddd;
 }
@@ -41,7 +65,9 @@ td a:hover {
     font-size: 24px;
     vertical-align: middle;
 }
-/* nao sei ainda */
+
+
+/* Modal de edição */
 
 .box {
     display: none;
@@ -49,11 +75,14 @@ td a:hover {
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    width: 300px;
+    width: 200px;
+    height: 100px;
     padding: 20px;
     background-color: #fff;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     z-index: 1000;
+    justify-content: center;
+    align-items: center;
 }
 
 .box form {
@@ -61,119 +90,231 @@ td a:hover {
     flex-direction: column;
 }
 
-.box form label,
-.box form input,
-.box form button {
-    margin-bottom: 10px;
+#esp_title {
+    text-align: center;
+    font-family: "Roboto", sans-serif;
+    font-weight: 500;
+    font-style: normal;
+    margin-bottom: 15px;
 }
 
-.box form button {
-    padding: 10px;
-    background-color: #00665E;
-    color: #fff;
-    border: none;
-    cursor: pointer;
-}
-
-.box form button[type="button"] {
-    background-color: #dc3545;
-}
-
-.addEspec,
-.editEspec {
-    display: flex;
+#editEspecialidadeForm {
     justify-content: center;
     align-items: center;
-    flex-direction: column;
 }
 
-.addEspec button,
-.editEspec button {
-    padding: 10px;
-    background-color: #00665E; /*muda a cor do botão de adicionar especialidade*/
-    color: #fff;
-    border: none;
-    cursor: pointer;
-    margin-top: 20px;
+#editEspecialidade {
+    width: 200px;
+    height: 25px;
+    border: 1px solid black;
+    border-radius: 2px;
+    padding-left: 10px;
+    font-weight: bold;
+    font-family: "Roboto", sans-serif;
+    font-weight: 500;
+    font-style: normal;
 }
 
-#successMessage {
-    color: #28a745;
+#btn_modal {
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
     margin-top: 10px;
 }
 
-/* Estilos para o botão de voltar */
-.back-button {
-    text-decoration: none;
-    /* Remove sublinhado do link */
+/* btn de salvar do modal */
+
+#save_btn {
+    width: 100px;
+    height: 30px;
+    background-color: #4CAF50;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.2s ease-in-out;
+    justify-content: center;
+    align-items: center;
 }
 
-.back-button button {
-    background-color:  #00665E ; /*muda a cor do botão de voltar*/
+#save_btn:hover {
+    background-color: #3e8e41;
+}
+
+#save_btn:active {
+    background-color: #2f6f31;
+}
+
+#save_btn:focus {
+    outline: none;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+}
+
+/* btn de delete do modal */
+
+#editBackButton {
+    width: 100px;
+    height: 30px;
+    background-color: #ff0000;
     color: #fff;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.2s ease-in-out;
+    justify-content: center;
+    align-items: center;
+}
+
+#editBackButton:hover {
+    background-color: #8e3e3e;
+}
+
+#editBackButton:active {
+    background-color: #6f2f2f;
+}
+
+#editBackButton:focus {
+    outline: none;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+}
+
+/* Botao de adicionar especialidade */
+
+.addEspec {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    margin: auto;
+    width: 100%;
+    padding-top: 5px;
+}
+
+#toggleBox {
+    background-color: #00665E;
+    color: #fff;
+    font-size: 16px;
     border: none;
     padding: 10px 20px;
     border-radius: 4px;
     cursor: pointer;
-    display: inline-block;
-    margin-top: 260px;
 }
 
-.back-button button:hover {
-    background-color: #28a745;; /* Cor de fundo do botão ao passar o mouse */
-}
-
-.material-symbols-outlined {
-    font-size: 24px;
-    vertical-align: middle;
-    margin-right: 10px;
-}
-
-.button-container {
-    margin-bottom: 10px;
-}
+/* Botao de edição */
 
 .edit-button button {
     background-color: #28a745;
     color: #fff;
     border: none;
-    padding: 10px 20px;
+    padding: 10px 10px;
     border-radius: 4px;
     cursor: pointer;
     display: inline-block;
 }
 
-.edit-button button:hover {
-    background-color: #000902;
-    margin-top: 50px;
-}
+/* Botao de delete */
 
 .delete-button button {
-    background-color: #dc3545;
+    background-color: #ff0000;
     color: #fff;
     border: none;
-    padding: 10px 20px;
+    padding: 10px 10px;
     border-radius: 4px;
     cursor: pointer;
     display: inline-block;
 }
 
-.delete-button button:hover {
-    background-color: #c82333;
-}
+/* Icones dos botoes */
 
 .material-symbols-outlined {
     font-size: 18px;
-    /* Tamanho do ícone */
     vertical-align: middle;
-    /* Alinha verticalmente com o texto */
     margin-right: 5px;
-    /* Espaçamento à direita do ícone */
 }
 
-.botoes {
+/* Botão de retorno */
+#retorno {
     display: flex;
-    flex-direction: row;
-    width: 100%;
-    justify-content:center;
+    height: 3em;
+    width: 100px;
+    align-items: center;
+    justify-content: center;
+    background-color: #eeeeee4b;
+    border-radius: 3px;
+    letter-spacing: 1px;
+    transition: all 0.2s linear;
+    cursor: pointer;
+    border: none;
+    background: #fff;
 }
+
+#retorno>svg {
+    margin-right: 5px;
+    margin-left: 5px;
+    font-size: 20px;
+    transition: all 0.4s ease-in;
+}
+
+#retorno:hover>svg {
+    font-size: 1.2em;
+    transform: translateX(-5px);
+}
+
+#retorno:hover {
+    box-shadow: 9px 9px 33px #d1d1d1, -9px -9px 33px #ffffff;
+    transform: translateY(-2px);
+}
+
+#ret {
+    text-decoration: none;
+    color: black;
+}
+
+/* modal de excluir */
+
+#confirmDeleteModal {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 1000;
+    background-color: #fff;
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    display: none;
+}
+
+#confirmDeleteModal .modal-content {
+    text-align: center;
+}
+
+#confirmDeleteModal #btn_modal {
+    margin-top: 20px;
+}
+
+#confirmDeleteModal button {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+#confirmDeleteModal #confirmDeleteButton {
+    background-color: #4CAF50;
+    color: #fff;
+}
+
+#confirmDeleteModal #cancelDeleteButton {
+    background-color: #ccc;
+    color: #333;
+}
+
+#btn_modal {
+    justify-content: center;
+    align-items: center;
+}
+
