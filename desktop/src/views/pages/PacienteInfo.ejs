@@ -20,7 +20,7 @@
     <% infoPaciente.forEach(function(item) { %>
         <div class="paciente-item">
 
-            <input type="hidden" value="<%= item.id %>" id="id">
+            <input type="hidden" value="<%= item.id %>" id="ids">
 
             <label>Nome:</label>
             <input type="text" value="<%= item.Nome %>" class="input-text" disabled>
@@ -133,7 +133,11 @@
                     const confirmDeleteModal = document.getElementById('confirmDeleteModal');
                     const confirmDeleteButton = document.getElementById('confirmDeleteButton');
                     const cancelDeleteButton = document.getElementById('cancelDeleteButton');
-                    const idPessoa = document.getElementById("id").valu
+
+                   
+                    console.log(document.getElementById("ids").value)
+
+                    const idPessoa = document.getElementById("ids").value
                     // Event listener para cada botão de delete
                     deleteButtons.forEach(button => {
                         button.addEventListener('click', function (event) {
@@ -151,8 +155,9 @@
                             }
                         })
                             .then(response => {
+                                console.log('oiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiii')
                                 console.log(response)
-                                if (response.ok) {
+                                if (response.ok === true) {
                                     alert('Pessoa deletada com sucesso!');
                                     confirmDeleteModal.style.display = 'none'; // Esconder modal após a ação
                                     window.history.back(); // Voltar uma página

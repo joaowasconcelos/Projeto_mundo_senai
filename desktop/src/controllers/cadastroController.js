@@ -126,11 +126,7 @@ const cadastro = {
             const objPessoa = new Pessoa(id)
             console.log(objPessoa)
             const result = await deletePessoa(objPessoa);
-            if (result.error) {
-                res.status(500).json({ success: false, message: 'Erro ao excluir Funcionario', error: result.details });
-            } else {
-                res.status(200).json(result);
-            }
+            return res.json({ message: "Delete pessoa" })
         } catch (error) {
             res.status(500).json({  error: "Erro ao excluir pessoa" });
         }
