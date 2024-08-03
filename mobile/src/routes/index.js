@@ -9,11 +9,9 @@ import Contato from './src/pages/Contato';
 import DadosPaciente from './src/pages/DadosPaciente';
 import Login from './src/pages/Login';
 import ConsultasMedico from './src/pages/ConsultasMedico';
-import { SafeAreaProvider } from 'react-native-safe-area-context';
 
 const Tab = createBottomTabNavigator();
 const Stack = createNativeStackNavigator();
-
 const Drawer = createDrawerNavigator();
 
 export default function Routes() {
@@ -30,20 +28,17 @@ export default function Routes() {
             component={MainTabs}
             options={{ headerShown: false }}
           />
-    {/* 
+    
           <Stack.Screen
             name="ConsultasPaciente"
-            component={stackConsultas}
-            // options={{ headerShown: false }}
+            component={ConsultasPaciente}
+           
           />
     
           <Stack.Screen
             name="ConsultasMedico"
             component={ConsultasMedico}
-            // options={{ headerShown: false }}
-          /> */}
-    
-    
+          />
         </Stack.Navigator>
       );
 }

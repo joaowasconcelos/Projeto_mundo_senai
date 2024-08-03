@@ -14,11 +14,6 @@ export default function bottonROutes() {
             options={{ headerShown: false }}
           />
           <Stack.Screen
-            name="Main"
-            component={MainTabs}
-            options={{ headerShown: false }}
-          />
-          <Stack.Screen
             name="DadosPaciente"
             component={DadosPaciente}
             options={{

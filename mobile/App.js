@@ -74,14 +74,14 @@ function PacienteTab() {
         name="DadosPaciente"
         component={DadosPaciente}
         options={{
-          tabBarStyle: {
-            display: 'none'
-          },
-          title: 'Dados',
-          headerTintColor: '#fafafa',
+          title: 'Meus Dados',
           headerStyle: {
-            backgroundColor: '#243434'
+            backgroundColor: '#b4c4bc',
           },
+          headerShown: false,
+          tabBarIcon: ({ color, size }) => (
+            <FontAwesome name='user' color={color} size={size} />
+          ),
         }}
       />
       <Tab.Screen
@@ -132,14 +132,14 @@ function MedicoTab() {
         name="DadosPaciente"
         component={DadosPaciente}
         options={{
-          tabBarStyle: {
-            display: 'none'
-          },
-          title: 'Dados',
-          headerTintColor: '#fafafa',
+          title: 'Meus Dados',
           headerStyle: {
-            backgroundColor: '#243434'
+            backgroundColor: '#b4c4bc',
           },
+          headerShown: false,
+          tabBarIcon: ({ color, size }) => (
+            <FontAwesome name='user' color={color} size={size} />
+          ),
         }}
       />
       <Tab.Screen
@@ -159,7 +159,7 @@ function MedicoTab() {
       />
 
 
-<Tab.Screen
+  {/* <Tab.Screen
         name='ConsultasMedico'
         component={ConsultasMedico}
         options={{
@@ -173,7 +173,7 @@ function MedicoTab() {
             <FontAwesome name='phone' color={color} size={size} />
           ),
         }}
-      />  
+      />   */}
     </Tab.Navigator>
   )
 }
