@@ -128,16 +128,16 @@
             const nomeMedico = document.getElementById('edit-nome-medico').value;
             const especialidadeMedico = document.getElementById('edit-especialidade-medico').value;
 
-            fetch(`/editar/consulta/${id}`, {
+            fetch(`/Update/consulta/${id}`, {
                 method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json'
                 },
-                body: JSON.stringify({ data, hora, nome_paciente: nomePaciente, cpf_paciente: cpfPaciente, nome_funcionario: nomeMedico, desc_especialidade: especialidadeMedico })
+                body: JSON.stringify({ data, hora })
             })
                 .then(response => response.json())
                 .then(data => {
-                    if (data.success) {
+                    if (data.message === "Consulta Atualizada") {
                         alert('Consulta atualizada com sucesso!');
                         editModal.style.display = 'none';
                         location.reload(); // Recarregar a página para mostrar as alterações
@@ -175,7 +175,7 @@
             })
                 .then(response => response.json())
                 .then(data => {
-                    if (data.success) {
+                    if (data.message === 'Consulta excluida com sucesso') {
                         alert('Consulta deletada com sucesso!');
                         confirmDeleteModal.style.display = 'none';
                         document.querySelector(`tr[data-id="${currentId}"]`).remove(); // Remover linha da tabela

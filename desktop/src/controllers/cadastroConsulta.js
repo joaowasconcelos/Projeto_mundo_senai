@@ -40,13 +40,17 @@ const cadastroConsulta = {
 
     updateConsultas: async (req, res) => {
         try {
-            const { Consulta: [{ data, hora, status }] } = req.body;
+            const { data, hora } = req.body;
+            console.log(data, hora)
             const ConsultaId = req.params.id
-            const updateConsulta = new Consulta(ConsultaId, data, hora, status, null);
+            console.log(ConsultaId)
+            const updateConsulta = new Consulta(ConsultaId, data, hora, null, null);
             const dataConsulta = updateConsulta.DataConvert(updateConsulta.Data)
+            updateConsulta.data = dataConsulta
             if (dataConsulta == "Invalid Date" || !(new Date(updateConsulta.Data) instanceof Date)) {
                 return res.json({ message: "Data informada é invalida" });
             }
+           
 
             result = await updateConsul(updateConsulta)
             return res.json({ message: "Consulta Atualizada" })
@@ -61,11 +65,7 @@ const cadastroConsulta = {
             const id = req.params.id;
             const obgConsult = new Consulta(id)
             const result = await excluirConsulta(obgConsult)
-            if (result.error) {
-                res.status(500).json({ success: false, message: 'Erro ao excluir Login', error: result.details });
-            } else {
-                res.status(200).json(result);
-            }
+            return res.json({ message: "Consulta excluida com sucesso" })
         } catch (error) {
             res.status(500).json({ error: "Erro ao excluir Consulta" });
         }
