@@ -101,15 +101,31 @@ td a:hover {
 #editEspecialidadeForm {
     justify-content: center;
     align-items: center;
+    height: 120px;
+    gap: 15px;
 }
 
 #editEspecialidade {
-    width: 200px;
-    height: 25px;
-    border: 1px solid black;
-    border-radius: 2px;
-    padding-left: 10px;
-    font-weight: bold;
+    border: 2px solid transparent;
+    width: 16em;
+    height: 2.5em;
+    padding-left: 0.8em;
+    outline: none;
+    overflow: hidden;
+    background-color: #aaaaaa6f;
+    border-radius: 10px;
+    transition: all 0.5s;
+}
+
+#editEspecialidade:hover,
+#editEspecialidade:focus {
+    border: 2px solid #5c8f5d;
+    box-shadow: 0px 0px 0px 7px rgba(121, 207, 181, 0.2);
+    background-color: white;
+}
+
+.editEspecialidade {
+    text-align: center;
     font-family: "Roboto", sans-serif;
     font-weight: 500;
     font-style: normal;
@@ -119,7 +135,6 @@ td a:hover {
     display: flex;
     flex-direction: row;
     gap: 10px;
-    margin-top: 10px;
 }
 
 /* btn de salvar do modal */
@@ -208,7 +223,8 @@ td a:hover {
     background-color: #28a745;
     color: #fff;
     border: none;
-    padding: 10px 10px;
+    width: 40px;
+    height: 40px;
     border-radius: 4px;
     cursor: pointer;
     display: inline-block;
@@ -220,7 +236,8 @@ td a:hover {
     background-color: #ff0000;
     color: #fff;
     border: none;
-    padding: 10px 10px;
+    width: 40px;
+    height: 40px;
     border-radius: 4px;
     cursor: pointer;
     display: inline-block;
@@ -306,11 +323,13 @@ td a:hover {
 #confirmDeleteModal #confirmDeleteButton {
     background-color: #4CAF50;
     color: #fff;
+    font-weight: bold;
 }
 
 #confirmDeleteModal #cancelDeleteButton {
-    background-color: #ccc;
-    color: #333;
+    background-color: #c38b31;
+    color: #ffffff;
+    font-weight: bold;
 }
 
 #btn_modal {
@@ -318,3 +337,82 @@ td a:hover {
     align-items: center;
 }
 
+/* Modal do botão especialidade */
+
+.box {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 1000;
+    background-color: #fff;
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    display: none;
+    width: 300px;
+    height: 130px;
+}
+
+#especialidadeForm {
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+}
+
+#btnEspecialidade {
+    display: flex;
+    flex-direction: row;
+    gap: 15px;
+}
+
+#Especialidade {
+    border: 2px solid transparent;
+    width: 16em;
+    height: 2.5em;
+    padding-left: 0.8em;
+    outline: none;
+    overflow: hidden;
+    background-color: #aaaaaa6f;
+    border-radius: 10px;
+    transition: all 0.5s;
+}
+
+#Especialidade:hover,
+#Especialidade:focus {
+    border: 2px solid #5c8f5d;
+    box-shadow: 0px 0px 0px 7px rgba(121, 207, 181, 0.2);
+    background-color: white;
+}
+
+.Especialidade {
+    text-align: center;
+    font-family: "Roboto", sans-serif;
+    font-weight: 500;
+    font-style: normal;
+}
+
+#cadastrar {
+    background-color: #28a745;
+    color: #fff;
+    border: none;
+    padding: 10px 10px;
+    border-radius: 4px;
+    cursor: pointer;
+    display: inline-block;
+    width: 100px;
+    font-weight: bold;
+}
+
+.btn-voltar {
+    background-color: #c38b31;
+    color: #fff;
+    border: none;
+    padding: 10px 10px;
+    border-radius: 4px;
+    cursor: pointer;
+    display: inline-block;
+    width: 100px;
+    font-weight: bold;
+}

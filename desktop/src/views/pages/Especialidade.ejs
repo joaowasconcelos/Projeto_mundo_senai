@@ -84,23 +84,23 @@
 
     <div class="addEspec">
 
-      <div class="modal-content">
+        <div class="modal-content">
 
-        <p>Tem certeza que deseja deletar esta pessoa?</p>
+            <p>Tem certeza que deseja deletar esta pessoa?</p>
 
-        <div id="btn_modal">
+            <div id="btn_modal">
 
-          <button id="confirmDeleteButton">Confirmar</button>
+                <button id="confirmDeleteButton">Confirmar</button>
 
-          <button id="cancelDeleteButton">Cancelar</button>
+                <button id="cancelDeleteButton">Cancelar</button>
+
+            </div>
 
         </div>
 
-      </div>
-
     </div>
 
-  </div>
+</div>
 <!-- Fim da tabela -->
 
 <!-- adicionar especialidade -->
@@ -115,11 +115,15 @@
 
             <form id="especialidadeForm" action="/CadastraEspecialidade" method="post">
 
-                <label for="Especialidade">Especialidade:</label>
+                <label for="Especialidade" class="Especialidade">Especialidade:</label>
                 <input type="text" id="Especialidade" name="Especialidade">
 
-                <button type="submit">Cadastrar</button>
-                <button type="button" class="btn-voltar" id="backButton">Voltar</button>
+                <div id="btnEspecialidade">
+                    <button type="submit" id="cadastrar">Cadastrar</button>
+                    <button type="button" class="btn-voltar" id="backButton">Voltar</button>
+                </div>
+
+
 
             </form>
 
