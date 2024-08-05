@@ -5,7 +5,7 @@ const Funcionario = require("../models/classes/Funcionario");
 const Login = require("../models/classes/Login");
 const Perfis = require("../models/classes/Perfis")
 const Especialidade = require("../models/classes/Especialidade")
-const { insert, verificaCpf, verificaEndereco, updateTel, updateEndereco, deletePessoa, deletarFuncionario, deletarEndereco, deletarTelefone, deletarPerfil } = require("../models/PessoaModel");
+const { insert, verificaCpf, verificaEndereco,updatePaciente, deletePessoa, deletarFuncionario, deletarEndereco, deletarTelefone, deletarPerfil } = require("../models/PessoaModel");
 
 const cadastro = {
     paginaCadastro: async (req, res) => {
@@ -130,11 +130,12 @@ const cadastro = {
                 const novoFuncionario = new Funcionario(null,null,null,null,null,null,DataAdmissao,CRM)
                 const novaEspecialidade = new Especialidade(null,Especialidades);
                 console.log(novoFuncionario,novaEspecialidade)
-                const result = await updatePaciente();
+                const result = await updatePaciente(id,novaPessoa,novoEndereco,novoTelefone,novoPerfil,novoLogin,novoFuncionario,novaEspecialidade);
+                console.log("result",result)
             }
 
-            const result = await updatePaciente();
-          
+            const result = await updatePaciente(id,novaPessoa,novoEndereco,novoTelefone,novoPerfil,novoLogin);
+            console.log("result",result)
            
 
         } catch (error) {
