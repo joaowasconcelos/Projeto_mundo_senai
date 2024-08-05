@@ -66,17 +66,10 @@
         <form id="editForm">
             <input type="hidden" id="edit-id">
             <label>Data:</label>
-            <input type="text" id="edit-data">
+            <input type="date" id="edit-data">
             <label>Hora:</label>
-            <input type="text" id="edit-hora">
-            <label>Nome do Paciente:</label>
-            <input type="text" id="edit-nome-paciente">
-            <label>CPF do Paciente:</label>
-            <input type="text" id="edit-cpf-paciente">
-            <label>Nome do Médico:</label>
-            <input type="text" id="edit-nome-medico">
-            <label>Especialidade do Médico:</label>
-            <input type="text" id="edit-especialidade-medico">
+            <input type="time" id="edit-hora">
+            
             <button type="submit">Salvar</button>
             <button type="button" id="cancelEditButton">Cancelar</button>
         </form>
@@ -101,10 +94,6 @@
             document.getElementById('edit-id').value = id;
             document.getElementById('edit-data').value = row.children[1].innerText;
             document.getElementById('edit-hora').value = row.children[2].innerText;
-            document.getElementById('edit-nome-paciente').value = row.children[3].innerText;
-            document.getElementById('edit-cpf-paciente').value = row.children[4].innerText;
-            document.getElementById('edit-nome-medico').value = row.children[5].innerText;
-            document.getElementById('edit-especialidade-medico').value = row.children[6].innerText;
             editModal.style.display = 'block';
         }
 
@@ -123,11 +112,7 @@
             const id = document.getElementById('edit-id').value;
             const data = document.getElementById('edit-data').value;
             const hora = document.getElementById('edit-hora').value;
-            const nomePaciente = document.getElementById('edit-nome-paciente').value;
-            const cpfPaciente = document.getElementById('edit-cpf-paciente').value;
-            const nomeMedico = document.getElementById('edit-nome-medico').value;
-            const especialidadeMedico = document.getElementById('edit-especialidade-medico').value;
-
+    
             fetch(`/Update/consulta/${id}`, {
                 method: 'PUT',
                 headers: {

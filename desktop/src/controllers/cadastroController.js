@@ -5,7 +5,7 @@ const Funcionario = require("../models/classes/Funcionario");
 const Login = require("../models/classes/Login");
 const Perfis = require("../models/classes/Perfis")
 const Especialidade = require("../models/classes/Especialidade")
-const { insert, verificaCpf, verificaEndereco,updateTel,updateEndereco,deletePessoa,deletarFuncionario,deletarEndereco,deletarTelefone, deletarPerfil} = require("../models/PessoaModel")
+const { insert, verificaCpf, verificaEndereco,updatePaciente, deletePessoa, deletarFuncionario, deletarEndereco, deletarTelefone, deletarPerfil } = require("../models/PessoaModel");
 
 const cadastro = {
     paginaCadastro: async (req, res) => {
@@ -22,13 +22,13 @@ const cadastro = {
         try {
             console.log('Dados recebidos no corpo da requisição:', req.body);
             let result = null;
-            const { cpf, nome, dataNasc, genero, email, logradouro, bairro, estado, numeroEndereco, complementoEndereco, cep, dataAdmissao, crm, login, senha,confirmSenha, status, tipo, descEspecialidade } = req.body;
+            const { cpf, nome, dataNasc, genero, email, logradouro, bairro, estado, numeroEndereco, complementoEndereco, cep, dataAdmissao, crm, login, senha, confirmSenha, status, tipo, descEspecialidade } = req.body;
             const { telefones } = req.body;
 
             if (senha != confirmSenha) {
                 return res.json({ message: "Senhas divergentes " })
             }
- 
+
             const novaPessoa = new Pessoa(null, cpf, nome, dataNasc, genero, email);
             const verificaCp = novaPessoa.validaCpf(novaPessoa.Cpf)
             if (!verificaCp) {
@@ -43,7 +43,7 @@ const cadastro = {
                 return res.json({ message: "Data informada é invalida" });
             }
             const novoEndereco = new Endereco(null, logradouro, bairro, estado, numeroEndereco, complementoEndereco, cep);
-        
+
             const novoLogin = new Login(null, login, senha, status, null, null);
             if (novoLogin.login != novaPessoa.cpf) {
                 return res.json({ message: "Login tem que ser o CPF" });
@@ -51,13 +51,13 @@ const cadastro = {
             const novoPerfis = new Perfis(null, tipo, null, null, null);
 
             const objTelefone = [];
-            if (telefones.length > 0) { 
+            if (telefones.length > 0) {
                 telefones.forEach(numeroTelefone => {
                     const novoTelefone = new Telefone(null, numeroTelefone);
                     objTelefone.push(novoTelefone);
                 });
             }
-         
+
 
             let novoFuncionario = null;
 
@@ -65,7 +65,7 @@ const cadastro = {
             if (!novaPessoa.validaCampos() || !novoEndereco.validaCampos() || !novoLogin.validaCampos() || !novoPerfis.validaCampos()) {
                 return res.json({ message: 'Todos os campos são obrigatórios.' });
             }
-          
+
             if (dataAdmissao === null || dataAdmissao === undefined) {
                 result = await insert(novaPessoa, novoEndereco, objTelefone, null, novoLogin, novoPerfis, null);
                 return res.json({ message: "Paciente cadastrado com sucesso" });
@@ -79,7 +79,7 @@ const cadastro = {
                 }
                 result = await insert(novaPessoa, novoEndereco, objTelefone, novoFuncionario, novoLogin, novoPerfis, novaEspecialidade);
                 console.log(result)
-                return res.send("Funcionario cadastrado com sucesso" )
+                return res.send("Funcionario cadastrado com sucesso")
             }
         } catch (error) {
             console.log(error)
@@ -88,34 +88,63 @@ const cadastro = {
     },
 
 
-    updateTelefone: async (req, res) => {
+    // updateTelefone: async (req, res) => {
+    //     try {
+    //         const { numeroTelefone } = req.body;
+    //         const TelId = req.params.id
+    //         const updateTelefone = new Telefone(TelId, numeroTelefone)
+    //         console.log(updateTel)
+    //         result = await updateTel(updateTelefone)
+    //         return res.json({ message: "Telefone atualizado" })
+    //     } catch (error) {
+    //         console.error("Erro ao cadastrar especialidades:", error);
+    //         res.status(500).json({ error: "Erro ao cadastrar especialidades" });
+    //     }
+    // },
+
+    // updateEndereco: async (req, res) => {
+    //     try {
+    //         const { endereco: [{ logradouro, bairro, estado, numeroEndereco, complementoEndereco, cep }] } = req.body;
+    //         const EndeId = req.params.id
+    //         const updateEndere = new Endereco(EndeId, logradouro, bairro, estado, numeroEndereco, complementoEndereco, cep)
+    //         result = await updateEndereco(updateEndere)
+    //         return res.json({ message: "Endereço Atualizado" })
+    //     } catch (error) {
+    //         console.error("Erro ao cadastrar especialidades:", error);
+    //         res.status(500).json({ error: "Erro ao cadastrar especialidades" });
+    //     }
+    // },
+
+    updatePessoa: async (req, res) => {
         try {
-            const { numeroTelefone } = req.body;
-            const TelId = req.params.id
-            const updateTelefone = new Telefone(TelId, numeroTelefone)
-            console.log(updateTel)
-            result = await updateTel(updateTelefone)
-            return res.json({ message: "Telefone atualizado" })
+            const { Nome, DataNascimento, Genero, Email,Logradouro, Bairro, Estado, NumeroResidencia, Complemento, CEP, Telefones,Tipo,Senha,DataAdmissao, CRM, Especialidades} = req.body;
+            const id = req.params.id
+            const novaPessoa = new Pessoa(null, null, Nome,DataNascimento,Genero,Email)         
+            const novoEndereco = new Endereco(null,Logradouro,Bairro,Estado,NumeroResidencia,Complemento,CEP)
+            const novoTelefone = new Telefone(null,Telefones)
+            const novoPerfil = new Perfis(null,Tipo)
+            const novoLogin = new Login(null,null,Senha)
+            console.log(novaPessoa,novoEndereco,novoTelefone,novoPerfil,novoLogin)
+
+            if(DataAdmissao !== undefined){
+                const novoFuncionario = new Funcionario(null,null,null,null,null,null,DataAdmissao,CRM)
+                const novaEspecialidade = new Especialidade(null,Especialidades);
+                console.log(novoFuncionario,novaEspecialidade)
+                const result = await updatePaciente(id,novaPessoa,novoEndereco,novoTelefone,novoPerfil,novoLogin,novoFuncionario,novaEspecialidade);
+                console.log("result",result)
+            }
+
+            const result = await updatePaciente(id,novaPessoa,novoEndereco,novoTelefone,novoPerfil,novoLogin);
+            console.log("result",result)
+           
+
         } catch (error) {
             console.error("Erro ao cadastrar especialidades:", error);
             res.status(500).json({ error: "Erro ao cadastrar especialidades" });
         }
     },
 
-    updateEndereco: async (req, res) => {
-        try {
-            const { endereco: [{ logradouro, bairro, estado, numeroEndereco, complementoEndereco, cep }] } = req.body;
-            const EndeId = req.params.id
-            const updateEndere = new Endereco(EndeId, logradouro, bairro, estado, numeroEndereco, complementoEndereco, cep)
-            result = await updateEndereco(updateEndere)
-            return res.json({ message: "Endereço Atualizado" })
-        } catch (error) {
-            console.error("Erro ao cadastrar especialidades:", error);
-            res.status(500).json({ error: "Erro ao cadastrar especialidades" });
-        }
-    },
-
-    deletePessoa:async(req,res) => {
+    deletePessoa: async (req, res) => {
         try {
             const id = req.params.id;
             console.log(id)
@@ -124,10 +153,10 @@ const cadastro = {
             const result = await deletePessoa(objPessoa);
             return res.json({ message: "Delete pessoa" })
         } catch (error) {
-            res.status(500).json({  error: "Erro ao excluir pessoa" });
+            res.status(500).json({ error: "Erro ao excluir pessoa" });
         }
     },
-    deletarFuncionario: async (req,res) =>{
+    deletarFuncionario: async (req, res) => {
         try {
             const id = req.params.id
             const objFunci = new Funcionario(id);
@@ -143,7 +172,7 @@ const cadastro = {
             res.status(500).json({ success: false, message: 'Erro ao excluir Funcionario', error });
         }
     },
-    deletarEndereco: async (req,res) =>{
+    deletarEndereco: async (req, res) => {
         try {
             const id = req.params.id
             const obgEndereco = new Endereco(id);
@@ -159,10 +188,10 @@ const cadastro = {
             res.status(500).json({ success: false, message: 'Erro ao excluir Endereco', error });
         }
     },
-    deletarTelefone: async (req,res) => {
-        try{
+    deletarTelefone: async (req, res) => {
+        try {
             const id = req.params.id
-            const obgTele = new Telefone (id)
+            const obgTele = new Telefone(id)
             console.log(obgTele)
             const result = await deletarTelefone(obgTele);
             if (result.error) {
@@ -175,10 +204,10 @@ const cadastro = {
             res.status(500).json({ success: false, message: 'Erro ao excluir Telefone', error });
         }
     },
-    deletarPerfil: async (req,res) => {
-        try{
+    deletarPerfil: async (req, res) => {
+        try {
             const id = req.params.id
-            const obfPerfil = new Perfis (id)
+            const obfPerfil = new Perfis(id)
             console.log(obfPerfil)
             const result = await deletarPerfil(obfPerfil);
             if (result.error) {

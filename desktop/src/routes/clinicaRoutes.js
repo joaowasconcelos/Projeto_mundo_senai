@@ -142,10 +142,11 @@ router.post("/PacienteInfo/Mobile", viewPaciente.selecionaInfosPacienteMobile);
 
 
 router.put("/Update/especialidade/:id", updateEspecialidade.updateEspec);
-router.put("/Update/telefone/:id", cadastro.updateTelefone);
-router.put("/Update/endereco/:id", cadastro.updateEndereco);
+// router.put("/Update/telefone/:id", cadastro.updateTelefone);
+// router.put("/Update/endereco/:id", cadastro.updateEndereco);
 router.put("/Update/consulta/:id", cadastroConsulta.updateConsultas);
 router.put("/Update/prontuario/:id", cadastroProntuario.UpdateProntuario);
+router.put("/Update/pessoa/:id", cadastro.updatePessoa);
 
 router.delete('/deletar/pessoa/:id', cadastro.deletePessoa)
 router.delete('/deletar/funcionario/:id', cadastro.deletarFuncionario)

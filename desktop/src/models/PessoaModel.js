@@ -126,15 +126,20 @@ async function insert(pessoa, endereco, telefones, pacienteFuncionario, loginP, 
     }
 }
 
-async function updateTel(tel){
+async function updatePaciente(id,novaPessoa,novoEndereco,novoTelefone,novoPerfil,novoLogin,novoFuncionario,novaEspecialidade) {
+    console.log("chegou os dados na model",id,novaPessoa,novoEndereco,novoTelefone,novoPerfil,novoLogin,novoFuncionario,novaEspecialidade)
     const bd = await conectarBancoDeDados();
     try {
         await bd.beginTransaction();
-        const UpdateTelefone = await bd.query('update tbl_telefone set numero = ? where id =?;',
-            [tel.numeroTelefone,tel.id]
+
+        const UpdateTelefone = await bd.query('UPDATE tbl_telefone SET numero = ? WHERE id IN (SELECT telefone_id FROM tbl_pessoa_has_tbl_telefone WHERE pessoa_id = ?);',
+            [novoTelefone.numeroTelefone,id]
         );
-        console.log(UpdateTelefone)
-        return UpdateTelefone;
+
+        const UpdateEnderecos = await bd.query('update tbl_endereco set logradouro = ?,bairro = ?,estado = ?, numero = ?, complemento=?, cep=? where id IN(select endereco_id from tbl_pessoa where id = ?);',
+            [novoEndereco.logradouro,novoEndereco.bairro,novoEndereco.estado,novoEndereco.numeroEndereco,novoEndereco.complementoEndereco,novoEndereco.cep,id]);
+            console.log(UpdateEnderecos)
+
         await bd.commit();
     } catch (error) {
         await bd.rollback();
@@ -145,24 +150,43 @@ async function updateTel(tel){
     }
 }
 
-async function updateEndereco(endere){
-    const bd = await conectarBancoDeDados();
-    try {
-        await bd.beginTransaction();
-        const UpdateEnderecos = await bd.query('update tbl_endereco set logradouro = ?,bairro = ?,estado = ?, numero = ?, complemento=?, cep=? where id =?;',
-            [endere.logradouro,endere.bairro,endere.estado,endere.numeroEndereco,endere.complementoEndereco,endere.cep,endere.id]
-        );
-        console.log(UpdateEnderecos)
-        return UpdateEnderecos;
-        await bd.commit();
-    } catch (error) {
-        await bd.rollback();
-        console.log('Erro na transação:', error);
-        return { error: 'Falha na transação', details: error };
-    } finally {
-        bd.release();
-    }
-}
+// async function updateTel(tel){
+//     const bd = await conectarBancoDeDados();
+//     try {
+//         await bd.beginTransaction();
+//         const UpdateTelefone = await bd.query('update tbl_telefone set numero = ? where id =?;',
+//             [tel.numeroTelefone,tel.id]
+//         );
+//         console.log(UpdateTelefone)
+//         return UpdateTelefone;
+//         await bd.commit();
+//     } catch (error) {
+//         await bd.rollback();
+//         console.log('Erro na transação:', error);
+//         return { error: 'Falha na transação', details: error };
+//     } finally {
+//         bd.release();
+//     }
+// }
+
+// async function updateEndereco(endere){
+//     const bd = await conectarBancoDeDados();
+//     try {
+//         await bd.beginTransaction();
+//         const UpdateEnderecos = await bd.query('update tbl_endereco set logradouro = ?,bairro = ?,estado = ?, numero = ?, complemento=?, cep=? where id =?;',
+//             [endere.logradouro,endere.bairro,endere.estado,endere.numeroEndereco,endere.complementoEndereco,endere.cep,endere.id]
+//         );
+//         console.log(UpdateEnderecos)
+//         return UpdateEnderecos;
+//         await bd.commit();
+//     } catch (error) {
+//         await bd.rollback();
+//         console.log('Erro na transação:', error);
+//         return { error: 'Falha na transação', details: error };
+//     } finally {
+//         bd.release();
+//     }
+// }
 
 async function deletePessoa(id){
     const bd = await conectarBancoDeDados();
@@ -248,4 +272,4 @@ async function deletarTelefone(id) {
         await bd.release();
     }
 }
-module.exports = { insert, verificaCpf, verificaEndereco,updateTel,updateEndereco,deletePessoa,deletarFuncionario,deletarEndereco,deletarTelefone };
+module.exports = { insert, verificaCpf, verificaEndereco,updatePaciente,deletePessoa,deletarFuncionario,deletarEndereco,deletarTelefone };
