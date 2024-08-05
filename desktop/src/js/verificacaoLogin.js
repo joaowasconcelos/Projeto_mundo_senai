@@ -3,7 +3,7 @@ function ensureAuthenticated(req, res, next) {
         return next();
     } else {
         req.flash('error', 'Faça login para ter Acesso');
-        return res.redirect('/login');  
+        return res.redirect('/login');
     }
 }
 function ensureAdmin(req, res, next) {
@@ -11,7 +11,7 @@ function ensureAdmin(req, res, next) {
         return next();
     } else {
         req.flash('error', 'Faça login para ter Acesso');
-                return res.redirect('/login');  
+        return res.redirect('/login');
     }
 }
 function ensureMedico(req, res, next) {
@@ -19,7 +19,7 @@ function ensureMedico(req, res, next) {
         return next();
     } else {
         req.flash('error', 'Faça login para ter Acesso');
-        return res.redirect('/login');  
+        return res.redirect('/login');
     }
 }
 
