@@ -1,32 +1,47 @@
-.container {
-    max-width: 800px;
-    margin: auto;
-    padding: 20px;
-    
-}
-
 table {
-    width: 100%;
+    width: 70%;
     border-collapse: collapse;
-    margin-top: 1rem;
-    background-color: #fff;
+    margin-bottom: 20px;
+    justify-content: center;
+    align-items: center;
+    margin: auto;
 }
 
-table,
-th,
-td {
-    border: 1px solid #ccc;
+thead {
+    background-color: #f5f5f5;
 }
 
 th,
 td {
-    padding: 0.5rem;
+    padding: 15px;
     text-align: left;
+    border-bottom: 1px solid #ddd;
 }
 
 th {
-    background-color: #eee;
+    font-weight: bold;
+    color: #555;
 }
+
+tbody tr:hover {
+    background-color: #f1f1f1;
+}
+
+td a {
+    text-decoration: none;
+    color: #324337;
+    font-weight: bold;
+}
+
+td a:hover {
+    text-decoration: underline;
+}
+
+.material-symbols-outlined {
+    font-size: 24px;
+    vertical-align: middle;
+}
+/* nao sei ainda */
 
 .box {
     display: none;
@@ -54,7 +69,7 @@ th {
 
 .box form button {
     padding: 10px;
-    background-color: #28a745;
+    background-color: #00665E;
     color: #fff;
     border: none;
     cursor: pointer;
@@ -75,7 +90,7 @@ th {
 .addEspec button,
 .editEspec button {
     padding: 10px;
-    background-color: #007bff;
+    background-color: #00665E; /*muda a cor do botão de adicionar especialidade*/
     color: #fff;
     border: none;
     cursor: pointer;
@@ -83,7 +98,7 @@ th {
 }
 
 #successMessage {
-    color: green;
+    color: #28a745;
     margin-top: 10px;
 }
 
@@ -94,19 +109,18 @@ th {
 }
 
 .back-button button {
-    background-color: #007bff;
+    background-color:  #00665E ; /*muda a cor do botão de voltar*/
     color: #fff;
     border: none;
     padding: 10px 20px;
     border-radius: 4px;
     cursor: pointer;
     display: inline-block;
-    margin-top: 300px;
+    margin-top: 260px;
 }
 
 .back-button button:hover {
-    background-color: #0056b3; /* Cor de fundo do botão ao passar o mouse */
-  
+    background-color: #28a745;; /* Cor de fundo do botão ao passar o mouse */
 }
 
 .material-symbols-outlined {
@@ -130,7 +144,8 @@ th {
 }
 
 .edit-button button:hover {
-    background-color: #218838;
+    background-color: #000902;
+    margin-top: 50px;
 }
 
 .delete-button button {
@@ -162,19 +177,3 @@ th {
     width: 100%;
     justify-content:center;
 }
-
-.img-fundo {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    z-index: -1; /* Para garantir que a imagem fique atrás de outros elementos */
-}
-
-.img-fundo img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-}
-

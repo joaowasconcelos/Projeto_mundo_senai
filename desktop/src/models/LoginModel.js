@@ -18,10 +18,9 @@ async function selectLogin(objLogin) {
     INNER JOIN tbl_perfis AS pe ON lo.id = pe.login_id
     INNER JOIN tbl_pessoa AS p ON lo.pessoa_id = p.id
     WHERE lo.login = ? AND lo.senha = ?
-    GROUP BY lo.login, lo.senha, p.nome, lo.pessoa_id;`, [objLogin.login, objLogin.senha]);
+    GROUP BY lo.login, lo.senha, p.nome, lo.pessoa_id;`, [objLogin.login,objLogin.senha]);
 
         const perfilLogin = selectLogin[0]
-        
         return perfilLogin
     }
     catch (error) {

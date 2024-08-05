@@ -1,11 +1,6 @@
 <link rel="stylesheet" href="/css/Cadastro.css">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 
-
-    <div class="img-fundo">
-        <img src="../../../images/IMG-fundoPacient.jpg" class="" id="">
-    </div>
-
 <div class="container">
     <div class="cadastro-form">
         <h2 class="text-1">Cadastro</h2>
@@ -149,6 +144,13 @@
         return (element.value.trim() === '') ? null : element.value;
     }
 
+    function clearForm() {
+        document.getElementById('cadastroForm').reset(); // Reseta os campos do formulário
+        document.querySelectorAll('.phone-input').forEach(input => input.remove()); // Remove os campos de telefone adicionais
+        document.getElementById('camposMedico').style.display = 'none'; // Oculta o bloco de campos de médico
+        document.getElementById('medico').checked = false; // Desmarca o checkbox de médico
+    }
+
     document.getElementById('cadastroForm').addEventListener('submit', function (event) {
         event.preventDefault();
 
@@ -187,9 +189,9 @@
         })
             .then(response => response.json())
             .then(data => {
-                if (data.success) {
+                if (data.message === "Paciente cadastrado com sucesso") {
                     alert('Cadastro realizado com sucesso!');
-                    window.location.href = data.redirect;
+                    clearForm(); // Limpa os campos do formulário após o sucesso
                 } else {
                     alert('Falha no cadastro: ' + data.message);
                 }

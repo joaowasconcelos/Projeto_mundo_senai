@@ -15,35 +15,25 @@ const Login = () => {
     const [dadosLogin, setDadosLogin] = useState({})
 
     const navigation = useNavigation();
-
     const getLogin = async () => {
         try {
             // console.log('oi');
             console.log(login, senha);
             await api.post(`/Login/mobileEntrar`, { login: login, senha: senha })
                 .then(response => {
-                    // if (response !== undefined && response.data != null) {
-
-                    //     const { data } = response.data;
-                    //     const [firstEntry] = data;
-                    //     const { id, idLogin, login, senha, tipo } = firstEntry;
-
-                    // console.log(id, login, senha, tipo);
-                    //     setDadosLogin({ id: id, idLogin: idLogin, login: login, senha: senha, tipo: tipo });
-                    //     console.log(dadosLogin);
-                    // } else {
-                    //     alert('Nenhum registro foi localizado!');
-                    // }
-                    console.log(response.data.id)
-                    const id = response.data.id
+                    console.log(response.data.user.nome_pessoa)
+                    const nome = response.data.user.nome_pessoa
                     if (response.data.tipo === 'medico') {
-                        navigation.navigate('MedicoTab', { id })
+                        navigation.navigate('ConsultasMedico', { id: response.data.id  })
                     } else if (response.data.tipo === 'paciente') {
-                        navigation.navigate('PacienteTab', { id })
+                        navigation.navigate('ConsultasPaciente', { id: response.data.id })
                     }
+
                 }).catch(error => {
                     console.log('Erro', error);
                 })
+                console.log(dadosLogin)
+            
         } catch (error) {
             if (error.response) {
                 console.log(error.response.data);

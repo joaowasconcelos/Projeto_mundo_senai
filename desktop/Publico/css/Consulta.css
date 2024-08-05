@@ -6,7 +6,7 @@
     padding: 30px;
     border-radius: 10px;
     box-shadow: 0px 0px 50px rgba(0, 0, 0, 0.1);
-    margin-top: 100px; /* Espaço para o header */
+    margin-top: -19px; /* Espaço para o header */
 }
 
 h2 {
@@ -235,12 +235,13 @@ th {
 
 /* Estilo para o botão */
 button[type="submit"] {
+    margin-left: 700px;
     display: inline-block;
     padding: 12px 24px;
     font-size: 16px;
     font-weight: bold;
     color: #fff;
-    background-color: #007BFF;
+    background-color: #00665E ;
     border: none;
     border-radius: 4px;
     cursor: pointer;
@@ -248,12 +249,12 @@ button[type="submit"] {
 }
 
 button[type="submit"]:hover {
-    background-color: #0056b3;
+    background-color:#28a745  ;
     box-shadow: 0 0 10px rgba(0, 123, 255, 0.5);
 }
 
 button[type="submit"]:active {
-    background-color: #004085;
+    background-color: #00665E;
 }
 
 button[type="submit"]:focus {
@@ -265,7 +266,9 @@ button[type="submit"]:focus {
 }
 
 .back-button button {
-    background-color: #007bff;
+margin-left: 10px;
+    margin-top: 0px;
+    background-color: #00665E; /*cor de fundo do botão de voltar */
     color: #fff;
     border: none;
     padding: 10px 20px;
@@ -275,7 +278,7 @@ button[type="submit"]:focus {
 }
 
 .back-button button:hover {
-    background-color: #0056b3;
+    background-color: #28a745
 }
 
 .material-symbols-outlined {

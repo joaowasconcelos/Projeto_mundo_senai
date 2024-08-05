@@ -1,7 +1,18 @@
 <link rel="stylesheet" href="/css/Login.css">
+<div class="corpo">
+
+
+    <div class="img-fundo">
+        <img src="../../../images/fundo.jpg" class="" id="">
+    </div>
+
 
 <div class="login-container">
     <h2>Login</h2>
+    <% if (error_msg) { %>
+        <div class="alert alert-danger"><%= error_msg %></div>
+    <% } %>
+    
     <form id="loginForm" action="/auth/login" method="post">
         <!-- Input de Login -->
         <% if (typeof resultl !=='undefined' ) { %>
@@ -32,18 +43,18 @@
                 <%= firstObject %>
             </button>
             <% if (typeof secondObject !=='undefined' ) { %>
-            <p class="or-divider">OU</p>
-            <button class="login-option" id="secondObjectBtn" value="<%= secondObject %>">
-                <%= secondObject %>
-            </button>
-            <% } %>
-            <% if (typeof thirdObject !=='undefined' ) { %>
-                <script>console.log("aqqq",thirdObject)</script>
                 <p class="or-divider">OU</p>
-                <button class="login-option" id="thirdObjectBtn" value="<%= thirdObject %>">
-                    <%= thirdObject %>
+                <button class="login-option" id="secondObjectBtn" value="<%= secondObject %>">
+                    <%= secondObject %>
                 </button>
                 <% } %>
+                    <% if (typeof thirdObject !=='undefined' ) { %>
+                        <script>console.log("aqqq", thirdObject)</script>
+                        <p class="or-divider">OU</p>
+                        <button class="login-option" id="thirdObjectBtn" value="<%= thirdObject %>">
+                            <%= thirdObject %>
+                        </button>
+                        <% } %>
 
         </div>
         <script>
@@ -53,21 +64,21 @@
             var firstObjectBtn = document.getElementById('firstObjectBtn');
             var secondObjectBtn = document.getElementById('secondObjectBtn');
             var thirdObjectBtn = document.getElementById('thirdObjectBtn');
-            
-            if(firstObjectBtn !==null){
+
+            if (firstObjectBtn !== null) {
                 firstObjectBtn.addEventListener('click', function () {
-                selecionarTipoLogin(firstObjectBtn.value);
-            });
+                    selecionarTipoLogin(firstObjectBtn.value);
+                });
             }
-            if(secondObjectBtn !==null){
+            if (secondObjectBtn !== null) {
                 secondObjectBtn.addEventListener('click', function () {
-                selecionarTipoLogin(secondObjectBtn.value);
-            });
+                    selecionarTipoLogin(secondObjectBtn.value);
+                });
             }
-            if(thirdObjectBtn !==null){
+            if (thirdObjectBtn !== null) {
                 thirdObjectBtn.addEventListener('click', function () {
-                selecionarTipoLogin(thirdObjectBtn.value);
-            });
+                    selecionarTipoLogin(thirdObjectBtn.value);
+                });
             }
 
             function selecionarTipoLogin(tipo) {
@@ -96,7 +107,7 @@
         <% } %>
 
             <script>
-                    // JavaScript para controlar o modal
+                // JavaScript para controlar o modal
                 var modal = document.getElementById('myModal');
                 var span = document.getElementsByClassName("close")[0];
 
@@ -110,3 +121,5 @@
                     }
                 }
             </script>
+
+</div>

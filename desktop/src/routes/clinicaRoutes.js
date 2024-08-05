@@ -108,9 +108,15 @@ router.get('/Consulta', ensureAdmin, (req, res) => {
 router.get('/login', LoginPerfis.paginaLogin);
 router.post(`/Login/mobileEntrar`, LoginPerfis.LoginPessoaMobile);
 router.get("/PacienteInfo/:id", viewPaciente.selecionaInfosPaciente) /*Direciona para a pagina de info dos paciente*/
+router.get("/PacienteInfo/:id", viewPaciente.selecionaInfosPaciente) 
 router.get("/paciente/consultas/:id", viewPaciente.selecionaConsultas);
-
 router.get('/ConsultaM',teste.selectsEspecialidade);
+
+//rotas mobile
+router.post('/Login/mobileEntrar',LoginPerfis.LoginPessoaMobile);
+router.post('/Consultas/Medico/Mobile',selects.selectConsultaMedicosMobile);
+router.get('/Consultas/Paciente/Mobile/:id',selects.SelecionaConsultaMobile);
+router.post("/PacienteInfo/Mobile", viewPaciente.selecionaInfosPacienteMobile);
 
 // router.get("/ConsultaAdm", selects.selecionaTodasConsultas);
 // router.get("/Prontuario", viewProntuario.paginaProntuario)
@@ -143,7 +149,6 @@ router.put("/Update/endereco/:id", cadastro.updateEndereco);
 router.put("/Update/consulta/:id", cadastroConsulta.updateConsultas);
 router.put("/Update/prontuario/:id", cadastroProntuario.UpdateProntuario);
 
-
 router.delete('/deletar/pessoa/:id', cadastro.deletePessoa)
 router.delete('/deletar/funcionario/:id', cadastro.deletarFuncionario)
 router.delete('/deletar/login/:id', LoginPerfis.deletarLogin)
@@ -153,7 +158,6 @@ router.delete('/deletar/prontuario/:id', cadastroProntuario.excluirProntu)
 router.delete('/deletar/endereco/:id', cadastro.deletarEndereco)
 router.delete('/deletar/telefone/id:', cadastro.deletarTelefone)
 router.delete('/deletar/perfil/id:', cadastro.deletarPerfil)
-
 
 router.use(function (req, res) {
   res.status(404).render(`pages/pag_erro`, { message: '404 - Página não encontrada' })

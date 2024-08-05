@@ -2,8 +2,6 @@ const { selectInfosPaciente, selectConsultas } = require("../models/PacienteMode
 const Pessoa = require("../models/classes/Pessoa");
 const Consultas = require("../models/classes/Consulta");
 
-
-
 const viewPaciente = {
     paginaPaciente: async (req, res) => {
         res.render('pages/PacienteUsuario', { user: req.session.user });
@@ -21,6 +19,20 @@ const viewPaciente = {
             res.json(error);
         }
     },
+
+    selecionaInfosPacienteMobile: async (req, res) => {
+        try {
+            const ids = req.session.user.id 
+            const novaPessoa = new Pessoa(ids, null, null, null, null, null)
+            const infosPaciente = await selectInfosPaciente(novaPessoa.id)
+            const infoPaciente = infosPaciente[0]
+            return res.json({infoPaciente});
+        } catch (error) {
+            console.log(error)
+            res.json(error);
+        }
+    },
+
     selecionaConsultas: async (req, res) => {
         try {
             const { id } = req.params.id
