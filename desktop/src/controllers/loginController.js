@@ -74,7 +74,7 @@ const LoginPerfis = {
             const { login, senha } = req.body
             const loginConsulta = new Login(null, login, senha, null, null, null);
             const resultMobile = await selectLogin(loginConsulta);
-
+            console.log(login,senha)
             if (senha != resultMobile[0].senha) {
                 return res.json({ message: 'Senha incorreta' })
             }

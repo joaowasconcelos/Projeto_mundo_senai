@@ -6,6 +6,7 @@ const router = require('./src/routes/clinicaRoutes');
 const expressLayouts = require('express-ejs-layouts');
 const path = require('path');
 const session = require('express-session');
+const flash = require('connect-flash');
 
 const app = express();
 const port = 3000;
