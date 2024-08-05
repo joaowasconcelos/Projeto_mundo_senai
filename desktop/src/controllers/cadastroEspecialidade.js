@@ -35,6 +35,7 @@ const cadastroEspecia = {
     deleteModalidade: async (req, res) => {
         try {
             const id = req.params.id
+            console.log(id)
             const objEspe = new Especialidade(id)
             const result = await deleteModalidade(objEspe);
             if (result.error) {

@@ -9,7 +9,7 @@
 
 <div class="login-container">
     <h2>Login</h2>
-    <% if (error_msg) { %>
+    <% if ( typeof error_msg !=='undefined') { %>
         <div class="alert alert-danger"><%= error_msg %></div>
     <% } %>
     
