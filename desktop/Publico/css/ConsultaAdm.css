@@ -1,11 +1,8 @@
 
-footer{
-    position:static
-}
 
-nav {
-    background-color: #00665E;
-    padding: 0.5rem;
+
+footer{
+  position: fixed;
 }
 
 nav ul {
@@ -46,8 +43,12 @@ th, td {
 }
 
 th {
-    background-color: #eee;
+  padding: 15px;
+  text-align: left;
+  border-bottom: 1px solid #ddd;
+  text-align: center;
 }
+  
 /* Estilos para o botão de voltar */
 .back-button {
     text-decoration: none; /* Remove sublinhado do link */
