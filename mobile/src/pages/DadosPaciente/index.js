@@ -48,7 +48,7 @@ export default function ConsultasPaciente() {
             <Text style={styles.textHeaderCard}>Email:</Text>
             <Text style={styles.textValue}>{paciente.Email}</Text>
             <Text style={styles.textHeaderCard}>Telefone:</Text>
-            <Text style={styles.textValue}>{paciente.Telefone}</Text>
+            <Text style={styles.textValue}>{paciente.Telefones}</Text>
             <Text style={styles.textHeaderCard}>Endereço:</Text>
             <Text style={styles.textValue}>
               {paciente.Logradouro}, {paciente.NumeroResidencia}, {paciente.Complemento}, {paciente.Bairro}, {paciente.Estado}, {paciente.CEP}

@@ -51,7 +51,8 @@ const selects = {
 
     SelecionaConsultaMobile: async (req, res) => {
         try {
-            const {id} = req.params
+            const id = req.session.user.id
+            console.log(id)
             const result = await SelectConsultaData(id)
             const results = result[0]
             console.log(results)
