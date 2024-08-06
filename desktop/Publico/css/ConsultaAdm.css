@@ -81,67 +81,81 @@ th {
 
 /* Modal */
 .modal {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 150%;
-    background-color: rgba(0, 0, 0, 0.5);
-    display: none;
-    justify-content: center;
-    align-items: center;
-  }
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 150%;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: none;
+  justify-content: center;
+  align-items: center;
+  margin-top: -3%;
+  margin-top: 20px;
+}
+
+/* Conteúdo do modal */
+.modal-content {
+  margin: 130px auto;
+  background-color: #fff;
+  padding: 10px;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  max-width: 500px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* Título do modal */
+.modal-content h3 {
+  margin-top: -10;
+  font-size: 24px;
+  font-weight: bold;
+  margin-bottom: 10px;
+
+}
+
+/* Formulário dentro do modal */
+.modal-content form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 0px;
+  width: 60%;
+  margin: auto;
   
-  /* Conteúdo do modal */
-  .modal-content {
-    margin: 150px auto;
-    background-color: #fff;
-    padding: 10px;
-    border-radius: 10px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
-    max-width: 500px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-  }
+}
+
+
+
+/* Botão de envio do formulário */
+.modal-content form button[type="submit"] {
+  width: 50%;
+  margin-top: 10px;
+  padding: 5px;
+  background-color: #00665E;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-right: 200px;
+}
+
+ /* Botão de cancelar do formulário */
+.modal-content form button[type="button"]{
+  background-color: #c80707;
+  margin-top: 20px;
+  border: none;
+  border-radius: 5px;
+  color: #fff;
+  cursor: pointer;
+  width: 50%;
+  padding: 5px;
+ margin-top: -25px;
+ margin-left: 200px;
+}
   
-  /* Título do modal */
-  .modal-content h3 {
-    margin-top: 0;
-    font-size: 24px;
-    font-weight: bold;
-    margin-bottom: 10px;
-  }
-  
-  /* Formulário dentro do modal */
-  .modal-content form {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding: 20px;
-  }
-  
-  /* Campos do formulário */
-  .modal-content form input[type="text"],
-  .modal-content form input[type="email"],
-  .modal-content form input[type="password"] {
-    width: 100%;
-    padding: 10px;
-    margin-bottom: 10px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-  }
-  
-  /* Botão de envio do formulário */
-  .modal-content form button[type="submit"] {
-    width: 50%;
-    padding: 5px;
-    background-color: #4CAF50;
-    color: #fff;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-  }
   
   /* Animações */
   .fade-in {
@@ -173,3 +187,93 @@ th {
       transform: scale(0.9);
     }
   }
+
+
+  /* Modal de confirmação */
+#confirmDeleteModal {
+  margin-top: 50px;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: none;
+  justify-content: center;
+  align-items: center;
+}
+
+#confirmDeleteModal .modal-content {
+  background-color: #fff;
+  padding: 2rem;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  max-width: 400px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+#confirmDeleteModal .modal-content p {
+  font-size: 1.2rem;
+  font-weight: bold;
+  margin-bottom: 1rem;
+  text-align: center;
+}
+
+#confirmDeleteModal .modal-content button {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 10px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+#confirmDeleteButton {
+  background-color: #00665E;
+  color: #fff;
+}
+
+#confirmDeleteButton:hover {
+  background-color: #28a745;
+}
+
+#cancelDeleteButton {
+  background-color: #c80707;
+  color: #fff;
+}
+
+#cancelDeleteButton:hover {
+  background-color: #ff3737;
+}
+
+
+.delete-button{
+  background-color: #ff0000;
+  color: #fff;
+  border: none;
+  width: 40px;
+  height: 40px;
+  border-radius: 4px;
+  cursor: pointer;
+  display: inline-block;
+  margin-left: 10px;
+}
+
+.edit-button{
+  background-color: #00665E;
+  color: #fff;
+  border: none;
+  width: 40px;
+  height: 40px;
+  border-radius: 4px;
+  cursor: pointer;
+  display: inline-block;
+  margin-left: 10px;
+}
+
+
+
+
+
