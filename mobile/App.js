@@ -11,6 +11,7 @@ import Login from './src/pages/Login';
 import ConsultasMedico from './src/pages/ConsultasMedico';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 
+
 const Tab = createBottomTabNavigator();
 const Stack = createNativeStackNavigator();
 
@@ -46,6 +47,7 @@ function LoginStack() {
 }
 
 function PacienteTab() {
+
   return (
     <Tab.Navigator
       screenOptions={{
