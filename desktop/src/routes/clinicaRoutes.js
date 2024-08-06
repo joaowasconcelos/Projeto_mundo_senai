@@ -113,7 +113,7 @@ router.get('/ConsultaM',teste.selectsEspecialidade);
 //rotas mobile
 router.post('/Login/mobileEntrar',LoginPerfis.LoginPessoaMobile);
 router.post('/Consultas/Medico/Mobile',selects.selectConsultaMedicosMobile);
-router.get('/Consultas/Paciente/Mobile/:id',selects.SelecionaConsultaMobile);
+router.get('/Consultas/Paciente/Mobile',selects.SelecionaConsultaMobile);
 router.post("/PacienteInfo/Mobile", viewPaciente.selecionaInfosPacienteMobile);
 
 // router.get("/ConsultaAdm", selects.selecionaTodasConsultas);

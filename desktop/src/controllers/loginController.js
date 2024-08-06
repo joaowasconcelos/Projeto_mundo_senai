@@ -75,8 +75,20 @@ const LoginPerfis = {
             const loginConsulta = new Login(null, login, senha, null, null, null);
             const resultMobile = await selectLogin(loginConsulta);
             console.log(login,senha)
+            
+            if (!resultMobile[0]) {
+                return res.json({ message: 'Senha incorreta' })
+            }
+
             if (senha != resultMobile[0].senha) {
                 return res.json({ message: 'Senha incorreta' })
+            }
+            console.log(resultMobile[0].tipo)
+            console.log("aqui",resultMobile[0].tipo.includes("paciente, medico")||resultMobile[0].tipo.includes("medico, paciente"))
+
+            if(resultMobile[0].tipo.includes("paciente, medico")||resultMobile[0].tipo.includes("medico, paciente")){
+                req.session.user = resultMobile[0];
+                return res.json({user: req.session.user });
             }
 
             if (resultMobile[0].tipo.includes("paciente")) {
@@ -90,7 +102,6 @@ const LoginPerfis = {
                 const tipo = "medico"
                 const id = resultMobile[0].id
                 req.session.user = resultMobile[0];
-                console.log("requisição do usuario",req.session.user)
                 return res.json({ id, tipo, user: req.session.user });
             }
 
