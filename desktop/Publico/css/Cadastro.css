@@ -194,6 +194,7 @@ button[type="submit"]:focus {
 
 .back-button {
     text-decoration: none;
+    margin-left: 10px;
 }
 
 .back-button button {
