@@ -82,6 +82,7 @@
     textHeader: {
       fontSize: 15, // Tamanho da fonte aumentado para melhor visibilidade
       fontWeight: '600',
+      color:'grey'
     
     },
     tituloConsultas: {
