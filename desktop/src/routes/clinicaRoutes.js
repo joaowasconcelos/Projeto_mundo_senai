@@ -106,12 +106,15 @@ router.get('/Consulta', ensureAdmin, (req, res) => {
 
 
 router.get('/login', LoginPerfis.paginaLogin);
-router.post('/Login/mobileEntrar',LoginPerfis.LoginPessoaMobile)
-router.post('/Consultas/Medico',selects.selectConsultaMedicosMobile)
-router.get("/PacienteInfo/:id", viewPaciente.selecionaInfosPaciente) /*Direciona para a pagina de info dos paciente*/
+router.get("/PacienteInfo/:id", viewPaciente.selecionaInfosPaciente) 
 router.get("/paciente/consultas/:id", viewPaciente.selecionaConsultas);
-
 router.get('/ConsultaM',teste.selectsEspecialidade);
+
+//rotas mobile
+router.post('/Login/mobileEntrar',LoginPerfis.LoginPessoaMobile);
+router.post('/Consultas/Medico/Mobile',selects.selectConsultaMedicosMobile);
+router.get('/Consultas/Paciente/Mobile/:id',selects.SelecionaConsultaMobile);
+router.post("/PacienteInfo/Mobile", viewPaciente.selecionaInfosPacienteMobile);
 
 // router.get("/ConsultaAdm", selects.selecionaTodasConsultas);
 // router.get("/Prontuario", viewProntuario.paginaProntuario)
@@ -139,10 +142,11 @@ router.get('/ConsultaM',teste.selectsEspecialidade);
 
 
 router.put("/Update/especialidade/:id", updateEspecialidade.updateEspec);
-router.put("/Update/telefone/:id", cadastro.updateTelefone);
-router.put("/Update/endereco/:id", cadastro.updateEndereco);
+// router.put("/Update/telefone/:id", cadastro.updateTelefone);
+// router.put("/Update/endereco/:id", cadastro.updateEndereco);
 router.put("/Update/consulta/:id", cadastroConsulta.updateConsultas);
 router.put("/Update/prontuario/:id", cadastroProntuario.UpdateProntuario);
+router.put("/Update/pessoa/:id", cadastro.updatePessoa);
 
 router.delete('/deletar/pessoa/:id', cadastro.deletePessoa)
 router.delete('/deletar/funcionario/:id', cadastro.deletarFuncionario)

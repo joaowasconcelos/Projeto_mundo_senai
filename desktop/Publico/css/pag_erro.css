@@ -43,3 +43,7 @@
     height: 100%; /* Mude para 100% para preencher a altura da imagem */
     object-fit: cover;
 }
+footer {
+    position: absolute;
+}
+

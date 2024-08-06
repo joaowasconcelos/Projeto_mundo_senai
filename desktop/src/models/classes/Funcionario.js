@@ -20,7 +20,6 @@ class Funcionario extends Pessoa {
 
   
     DataConvert(value) {
-        console.log()
         let [dia, mes, ano] = value.split('/');
         let dataFormatada = `${ano}-${mes}-${dia}`;
         this.dataAdmissao = new Date(dataFormatada);

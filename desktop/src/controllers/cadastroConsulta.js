@@ -14,30 +14,6 @@ const cadastroConsulta = {
     cadastraConsulta: async (req, res) => {
         try {
             const { data, hora, status, paciente, ID_PACIENTE, especialidade, medico, id_funcionario } = req.body;
-            console.log(req.body);
-            // let horaInicio = "08:00";
-            // let horaTermino = "16:30";
-            // let agora = new Date();
-            
-            // let horaAtual = `${agora.getHours()}:${agora.getMinutes()}`;
-            
-            // // Função para converter "HH:MM" em minutos totais do dia
-            // function converterHoraParaMinutos(hora) {
-            //     let [horas, minutos] = hora.split(':').map(Number);
-            //     return horas * 60 + minutos;
-            // }
-            
-            // let minutosInicio = converterHoraParaMinutos(horaInicio);
-            // let minutosTermino = converterHoraParaMinutos(horaTermino);
-            // let minutosAtual = converterHoraParaMinutos(horaAtual);
-            // console.log(minutosAtual)
-            // console.log(minutosInicio)
-            // console.log(minutosTermino)
-    
-            
-            // if (minutosAtual < minutosInicio || minutosAtual > minutosTermino) {
-            //     return res.json({ message: "Não pode agendar consulta fora do expediente" });
-            // }
             const novaConsulta = new Consulta(null, data, hora, status, null);
             const novoPaciente = new Pessoa(paciente, null, null, null, null, null);
             const novoMedico = new Pessoa(medico, null, null, null, null, null)
@@ -64,13 +40,17 @@ const cadastroConsulta = {
 
     updateConsultas: async (req, res) => {
         try {
-            const { Consulta: [{ data, hora, status }] } = req.body;
+            const { data, hora } = req.body;
+            console.log(data, hora)
             const ConsultaId = req.params.id
-            const updateConsulta = new Consulta(ConsultaId, data, hora, status, null);
+            console.log(ConsultaId)
+            const updateConsulta = new Consulta(ConsultaId, data, hora, null, null);
             const dataConsulta = updateConsulta.DataConvert(updateConsulta.Data)
+            updateConsulta.data = dataConsulta
             if (dataConsulta == "Invalid Date" || !(new Date(updateConsulta.Data) instanceof Date)) {
                 return res.json({ message: "Data informada é invalida" });
             }
+           
 
             result = await updateConsul(updateConsulta)
             return res.json({ message: "Consulta Atualizada" })
@@ -85,11 +65,7 @@ const cadastroConsulta = {
             const id = req.params.id;
             const obgConsult = new Consulta(id)
             const result = await excluirConsulta(obgConsult)
-            if (result.error) {
-                res.status(500).json({ success: false, message: 'Erro ao excluir Login', error: result.details });
-            } else {
-                res.status(200).json(result);
-            }
+            return res.json({ message: "Consulta excluida com sucesso" })
         } catch (error) {
             res.status(500).json({ error: "Erro ao excluir Consulta" });
         }

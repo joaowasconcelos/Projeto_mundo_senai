@@ -16,48 +16,29 @@ const Login = () => {
 
     const navigation = useNavigation();
 
-    const navegaLogin = () => {
-        // Navega para a tela principal
-        navigation.navigate('Main');
-    };
+    // const navegaLogin = () => {
+    //     // Navega para a tela principal
+    //     navigation.navigate('Main');
+    // };
 
+    // { id: login.id }
     const getLogin = async () => {
         try {
-            // console.log('oi');
-            // console.log(login, senha);
             await api.post(`/Login/mobileEntrar`, { login: login, senha: senha })
                 .then(response => {
-                    console.log(response.data);
-                    // if (response !== undefined && response.data != null) {
-
-                    //     const { data } = response.data;
-                    //     const [firstEntry] = data;
-                    //     const { id, idLogin, login, senha, tipo } = firstEntry;
-
-                    //     // console.log(id, idLogin, login, senha, tipo);
-                    //     setDadosLogin({ id: id, idLogin: idLogin, login: login, senha: senha, tipo: tipo });
-                    //     console.log(dadosLogin);
-                    // } else {
-                    //     alert('Nenhum registro foi localizado!');
-                    // }
-                    console.log(response.data.id)
-                    const id = response.data.id
+                    console.log(response.data.user.nome_pessoa)
+                    const nome = response.data.user.nome_pessoa
                     if (response.data.tipo === 'medico') {
-                        navigation.navigate('MedicoTab', { id })
+                        navigation.navigate('MedicoTab', { id: response.data.id  })
                     } else if (response.data.tipo === 'paciente') {
-                        navigation.navigate('PacienteTab', { id })
+                        navigation.navigate('PacienteTab', { id: response.data.id })
                     }
+
                 }).catch(error => {
                     console.log('Erro', error);
                 })
-            if (dadosLogin.tipo === 'medico') {
-                navigation.navigate('MedicoTab', { dadosLogin })
-            } else {
-                if (dadosLogin.tipo === 'paciente') {
-                    navigation.navigate('PacienteTab', { dadosLogin })
-
-                }
-            }
+                console.log(dadosLogin)
+            
         } catch (error) {
             if (error.response) {
                 console.log(error.response.data);
@@ -75,27 +56,18 @@ const Login = () => {
     }
 
     return (
-
         <SafeAreaView style={styles.androidSafeArea}>
-
             <ScrollView>
-
                 <LinearGradient colors={['rgb(0, 76, 76)', 'transparent']} style={styles.background} />
-
                 <View style={styles.topo}>
-
                     <Text style={styles.title}>SP MEDICAL GROUP</Text>
                     <Image source={logo} />
-
                 </View>
 
                 <View style={styles.container}>
-
                     <View style={styles.box_white}>
-
                         <Text style={styles.subtitulo5}>Bem Vindo</Text>
                         <Text style={styles.subtitulo4}>Faça login em sua conta</Text>
-
                         <TextInput
                             placeholder='Digite seu C.P.F.'
                             style={styles.entradaTexto}
@@ -126,7 +98,7 @@ const Login = () => {
                                     marginBottom: 10
                                 },
                             ]}
-                            onPress={getLogin({ id: login.id })}
+                            onPress={getLogin}
                         >
                             <Text style={{ textAlign: 'center', fontSize: 25, letterSpacing: 5, fontWeight: 'bold', color: '#fafafa' }}>Logar</Text>
                         </Pressable>

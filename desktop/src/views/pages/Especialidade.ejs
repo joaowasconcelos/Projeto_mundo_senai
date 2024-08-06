@@ -267,10 +267,12 @@
         deleteButtons.forEach(button => {
             button.addEventListener('click', function (event) {
                 event.preventDefault();
-                currentEspecialidadeId = button.getAttribute('data-especialidade-id');
+                currentEspecialidadeId = document.getElementById('data-especialidade-id');
                 confirmDeleteModal.style.display = 'block'; // Exibir modal de confirmação
             });
         });
+
+        console.log("aquiiiiii",currentEspecialidadeId)
 
         // Event listener para o botão de cancelar no modal
         cancelDeleteButton.addEventListener('click', function () {
