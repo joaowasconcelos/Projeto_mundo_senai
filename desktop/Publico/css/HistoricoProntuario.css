@@ -1,4 +1,14 @@
 /* Estilo geral */
+body,
+html {
+    margin: 0;
+    padding: 0;
+    margin-top: 35px;
+    height: 100%;
+    /* Adiciona altura 100% ao body e html */
+}
+
+
 .body {
     display: flex;
     flex-direction: column;
@@ -8,7 +18,36 @@
     margin: 0;
     font-family: Arial, sans-serif;
     background-color: #f0f0f0;
+    width: 100%;
+    /* Adiciona largura 100% ao body */
 }
+
+footer {
+    bottom: 0;
+    /* Garante que o footer esteja no fundo da página */
+    left: 0;
+    /* Garante que o footer esteja alinhado à esquerda */
+    width: 100%;
+    /* Largura 100% para que o footer ocupe toda a largura da página */
+    background: #00665E;
+    color: #fff;
+    text-align: center;
+    font-size: 16px;
+    /* Aumenta o tamanho da fonte para 16px */
+    padding: 20px 0px;
+    font-family: "Armata", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+    z-index: 0;
+    /* Garante que o footer fique sobre outros elementos */
+
+}
+
+
+
+
+
+
 
 h1 {
     text-align: center;
@@ -29,16 +68,19 @@ h1 {
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     width: 80%;
     max-width: 600px;
+
 }
 
-.diagnostico, .medicacao {
+.diagnostico,
+.medicacao {
     display: flex;
     flex-direction: column;
     flex: 1;
     margin: 10px 0;
 }
 
-.diagnostico h5, .medicacao h3 {
+.diagnostico h5,
+.medicacao h3 {
     margin: 0 0 10px;
     color: #555;
 }
@@ -58,13 +100,14 @@ p {
 
 .text a {
     text-decoration: none;
-    color: #0066cc;
+    color: #00665E;
+    ;
     font-weight: bold;
     transition: color 0.3s ease;
 }
 
 .text a:hover {
-    color: #004080;
+    color: #28a745;
 }
 
 /* Estilo para o modal */
@@ -106,25 +149,38 @@ p {
 }
 
 .back-button {
-    text-decoration: none; /* Remove sublinhado do link */
+    text-decoration: none;
+    /* Remove sublinhado do link */
 }
 
 .back-button button {
-    background-color: #007bff; /* Cor de fundo do botão */
-    color: #fff; /* Cor do texto dentro do botão */
-    border: none; /* Remove a borda do botão */
-    padding: 10px 20px; /* Espaçamento interno do botão */
-    border-radius: 4px; /* Borda arredondada */
-    cursor: pointer; /* Cursor ao passar por cima do botão */
-    display: inline-block; /* Permite que o botão se ajuste ao conteúdo interno */
+    margin-right: 1350px;
+    background-color: #00665E;
+    /* Cor de fundo do botão */
+    color: #fff;
+    /* Cor do texto dentro do botão */
+    border: none;
+    /* Remove a borda do botão */
+    padding: 10px 20px;
+    /* Espaçamento interno do botão */
+    border-radius: 4px;
+    /* Borda arredondada */
+    cursor: pointer;
+    /* Cursor ao passar por cima do botão */
+    display: inline-block;
+    /* Permite que o botão se ajuste ao conteúdo interno */
 }
 
 .back-button button:hover {
-    background-color: #0056b3; /* Cor de fundo do botão ao passar o mouse */
+    background-color: #28a745;
+    /* Cor de fundo do botão ao passar o mouse */
 }
 
 .material-symbols-outlined {
-    font-size: 24px; /* Tamanho do ícone */
-    vertical-align: middle; /* Alinha verticalmente com o texto */
-    margin-right: 5px; /* Espaçamento à direita do ícone */
+    font-size: 24px;
+    /* Tamanho do ícone */
+    vertical-align: middle;
+    /* Alinha verticalmente com o texto */
+    margin-right: 5px;
+    /* Espaçamento à direita do ícone */
 }
