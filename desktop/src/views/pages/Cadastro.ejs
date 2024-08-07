@@ -92,10 +92,12 @@
                 <select id="especialidade" name="especialidade">
                     <option></option>
                     <% Especialidade.forEach(function(item) { %>
-                        <option value="<%= item.id %>"><%= item.desc_especialidade %></option>
-                    <% }); %>
+                        <option value="<%= item.id %>">
+                            <%= item.desc_especialidade %>
+                        </option>
+                        <% }); %>
                 </select>
-                
+
 
             </div>
 
