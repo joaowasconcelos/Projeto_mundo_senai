@@ -37,22 +37,34 @@ export default function ConsultasPaciente() {
       <ScrollView contentContainerStyle={{ paddingHorizontal: 20 }}>
         {dados.map((paciente) => (
           <View key={paciente.id} style={styles.modeloCard}>
+            <View style={styles.ladoalado}>
             <Text style={styles.textHeaderCard}>Nome:</Text>
             <Text style={styles.textValue}>{paciente.Nome}</Text>
             <Text style={styles.textHeaderCard}>CPF:</Text>
             <Text style={styles.textValue}>{paciente.CPF}</Text>
+            </View>
+            <View style={styles.ladoalado}>
             <Text style={styles.textHeaderCard}>Data de Nascimento:</Text>
             <Text style={styles.textValue}>{paciente.DataNascimento}</Text>
+            </View>
+            <View style={styles.ladoalado}> 
             <Text style={styles.textHeaderCard}>Gênero:</Text>
             <Text style={styles.textValue}>{paciente.Genero}</Text>
+            </View>
+            <View style={styles.ladoalado}>
+            <Text style={styles.textHeaderCard}>Telefone:</Text>
+            <Text style={styles.textValue}>{paciente.Telefones}</Text> 
+            </View>
+            <View style={styles.ladoalado}>
             <Text style={styles.textHeaderCard}>Email:</Text>
             <Text style={styles.textValue}>{paciente.Email}</Text>
-            <Text style={styles.textHeaderCard}>Telefone:</Text>
-            <Text style={styles.textValue}>{paciente.Telefones}</Text>
+            </View>
+            <View style={styles.ladoalado}>
             <Text style={styles.textHeaderCard}>Endereço:</Text>
-            <Text style={styles.textValue}>
-              {paciente.Logradouro}, {paciente.NumeroResidencia}, {paciente.Complemento}, {paciente.Bairro}, {paciente.Estado}, {paciente.CEP}
+            <Text style={styles.textValue}>{paciente.Logradouro}, {paciente.NumeroResidencia},
             </Text>
+            </View>
+            <Text style={styles.textValue}>{paciente.Complemento} {paciente.Bairro}, {paciente.Estado}, {paciente.CEP}</Text>
           </View>
         ))}
       </ScrollView>
@@ -73,7 +85,7 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     alignItems: 'center',
     paddingHorizontal: 20,
-    backgroundColor: '#4A90E2', // Cor azul para a barra superior
+    backgroundColor: '#243434', // Cor azul para a barra superior
     elevation: 4,
     borderBottomWidth: 1,
     borderBottomColor: '#cfcfcf', // Linha inferior sutil
@@ -85,7 +97,7 @@ const styles = StyleSheet.create({
   },
   modeloCard: {
     backgroundColor: '#ffffff', // Cor de fundo branca para os cards
-    borderRadius: 10, // Bordas arredondadas
+    borderRadius: 30, // Bordas arredondadas
     padding: 15, // Espaçamento interno
     marginVertical: 10, // Espaçamento entre os cards
     shadowColor: '#000', // Sombra para iOS
@@ -93,6 +105,9 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.1,
     shadowRadius: 5,
     elevation: 2, // Sombra para Android
+    width:"100%",
+    height:"100%",
+    gap:5
   },
   textHeaderCard: {
     fontSize: 18,
@@ -106,4 +121,9 @@ const styles = StyleSheet.create({
     marginBottom: 8,
     lineHeight: 22,
   },
+  ladoalado:{
+    display:"flex",
+    flexDirection:'row',
+    gap:5
+  }
 });

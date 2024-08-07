@@ -11,58 +11,49 @@ const Contatos = () => {
 
     <SafeAreaView style={styles.androidSafeArea}>
 
-      <ScrollView>
+      <View style={styles.container}>
 
-        <View style={styles.container}>
+        <Image style={styles.image} source={contato} />
 
-          <Image style={styles.image} source={contato} />
+        <Text style={styles.subtitulo4}>Entre em contato conosco!</Text>
 
-          <Text style={styles.subtitulo4}>Entre em contato conosco!</Text>
+        <View style={styles.box_white}>
 
-          <View style={styles.box_white}>
+          <View style={styles.boxesPai}>
 
-            <View style={styles.boxesPai}>
-
-              <View style={styles.boxes}>
-                <FontAwesome name='car' size={25} color={'#243434'} onPress={() => navigation.navigate('Dados')} />
-
-                <Text style={styles.text}>123, Rua das Flores</Text>
-                <Text style={styles.text}>Jardim Primavera - São Paulo</Text>
-                <Text style={styles.text}>12.784-567</Text>
-              </View>
-
-              <View style={styles.boxes}>
-                <FontAwesome name='mobile' size={39} color={'#243434'} onPress={() => navigation.navigate('Dados')} />
-
+            <View style={styles.boxes}>
+              <FontAwesome name='car' size={25} color={'#243434'} onPress={() => navigation.navigate('Dados')} />
+              <Text style={styles.text}>123, Rua das Flores</Text>
+              <Text style={styles.text}>Jardim Primavera - São Paulo</Text>
+              <Text style={styles.text}>12.784-567</Text>
+            </View>
+            <View style={styles.boxes}>
+              <FontAwesome name='mobile' size={39} color={'#243434'} onPress={() => navigation.navigate('Dados')} />
+              <View style={styles.ladoalado}>
                 <Text style={styles.text}>(19) 3345-6789</Text>
                 <Text style={styles.text}>(19) 3456-7890</Text>
               </View>
-
+            </View>
+            <View style={styles.boxes}>
+              <FontAwesome name='calendar' size={25} color={'#243434'} onPress={() => navigation.navigate('Dados')} />
+            </View>
+            <View style={styles.ladoalado}>
               <View style={styles.boxes}>
-                <FontAwesome name='calendar' size={25} color={'#243434'} onPress={() => navigation.navigate('Dados')} />
-
                 <Text style={styles.text}>Dias Úteis</Text>
                 <Text style={styles.text}>9:00 - 18:00</Text>
               </View>
-
               <View style={styles.boxes}>
                 <Text style={styles.text}>Finais de semana</Text>
                 <Text style={styles.text}>9:00 - 14:00</Text>
               </View>
-
               <View style={styles.boxes}>
                 <Text style={styles.text}>Feriados</Text>
                 <Text style={styles.text}>10:00 - 14:00</Text>
               </View>
-
             </View>
-
           </View>
-
         </View>
-
-      </ScrollView>
-
+      </View>
     </SafeAreaView>
   );
 };
@@ -91,9 +82,9 @@ const styles = StyleSheet.create({
     borderTopRightRadius: 60
   },
   image: {
-    width: 250,
-    height: 250,
-    marginTop: 70,
+    width: 200,
+    height: 200,
+    marginTop: 20,
     marginBottom: 10
   },
   subtitulo4: {
@@ -114,9 +105,14 @@ const styles = StyleSheet.create({
     gap: 15
   },
   text: {
-    fontWeight:'bold',
+    fontWeight: 'bold',
     fontSize: 15,
     color: 'grey'
+  },
+  ladoalado: {
+    display: "flex",
+    flexDirection: 'row',
+    gap: 5
   }
 });
 

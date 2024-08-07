@@ -64,7 +64,7 @@ function PacienteTab() {
         options={{
           title: 'ConsultasPaciente',
           headerStyle: {
-            backgroundColor: '#b4c4bc',
+            backgroundColor: '#026161',
           },
           headerShown: false,
           tabBarIcon: ({ color, size }) => (
