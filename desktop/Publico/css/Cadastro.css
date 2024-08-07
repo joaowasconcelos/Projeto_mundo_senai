@@ -1,3 +1,7 @@
+footer{
+    position: fixed;
+  }
+
 header {
     background: #00665E;
     color: #fff;

@@ -168,6 +168,7 @@ JOIN
     tbl_especialidade e ON e.id = fe.especialidade_id
 WHERE 
     c.paciente_pessoa_id = ?;`, [id])
+    console.log(selectConsulta)
         return selectConsulta
         await bd.commit()
     } catch (error) {
