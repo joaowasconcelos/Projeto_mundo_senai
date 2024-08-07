@@ -1,14 +1,10 @@
 <link rel="stylesheet" href="/css/PacienteUsuario.css">
-<div>
-    <h1>Bem-vindo, <%= user.nome_pessoa %>!</h1>
-</div>
 
+<h1>Bem-vindo, <%= user.nome_pessoa %>!</h1>
 
-<form action="/logout" method="get" class="logout-form">
-    <button type="submit" class="logout-button">
-        <span class="material-symbols-outlined">logout</span>
-    </button>
-</form>
+<!-- Próximas consultas -->
+
+<div id="pr_consultas">
 
     <h3 class="titulo">Próximas consultas:</h3>
 

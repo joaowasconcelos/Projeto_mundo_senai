@@ -15,8 +15,8 @@ body, html {
     padding: 30px;
     border-radius: 10px;
     box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
-    margin-top: 70px;
-    margin-bottom: 20px;
+    margin-top: 60px;
+    margin-bottom: 80px;
 }
 
 h2 {
@@ -189,6 +189,8 @@ button[type="submit"]:focus {
 .back-button {
     text-decoration: none;
     margin-left: 10px;
+    margin-top: auto;
+    position: absolute;
 }
 
 .back-button button {
@@ -202,7 +204,7 @@ button[type="submit"]:focus {
 }
 
 .back-button button:hover {
-    background-color: #28a745; /*cor de fundo do botão de voltar*/
+    background-color: #28a745; 
 }
 
 .material-symbols-outlined {
