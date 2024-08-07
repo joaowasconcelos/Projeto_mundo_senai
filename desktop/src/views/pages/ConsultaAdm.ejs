@@ -11,6 +11,7 @@
     <table>
         <thead>
             <tr>
+                <div></div>
                 <th>ID</th>
                 <th>Data</th>
                 <th>Hora</th>
@@ -65,12 +66,12 @@
         <h3>Editar Consulta</h3>
         <form id="editForm">
             <input type="hidden" id="edit-id">
-            <label>Data:</label>
+            <label class="data">Data:</label>
             <input type="date" id="edit-data">
-            <label>Hora:</label>
+            <label class="hora">Hora:</label>
             <input type="time" id="edit-hora">
             
-            <button type="submit">Salvar</button>
+            <button type="submit" class="Salvar">Salvar</button>
             <button type="button" id="cancelEditButton">Cancelar</button>
         </form>
     </div>

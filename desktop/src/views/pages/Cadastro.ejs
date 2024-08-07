@@ -1,7 +1,13 @@
 <link rel="stylesheet" href="/css/Cadastro.css">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 
+
+<a href="/adm" class="back-button">
+    <button><span class="material-symbols-outlined">arrow_back</span> Voltar</button>
+</a>
 <div class="container">
+
+    
     <div class="cadastro-form">
         <h2 class="text-1">Cadastro</h2>
         <form id="cadastroForm" action="/Pessoa/novo" method="post">
@@ -92,10 +98,12 @@
                 <select id="especialidade" name="especialidade">
                     <option></option>
                     <% Especialidade.forEach(function(item) { %>
-                        <option value="<%= item.id %>"><%= item.desc_especialidade %></option>
-                    <% }); %>
+                        <option value="<%= item.id %>">
+                            <%= item.desc_especialidade %>
+                        </option>
+                        <% }); %>
                 </select>
-                
+
 
             </div>
 
@@ -110,9 +118,7 @@
 
             <button type="submit" id="submitButton" class="botao">Criar Perfil</button>
         </form>
-        <a href="/adm" class="back-button">
-            <button><span class="material-symbols-outlined">arrow_back</span> Voltar</button>
-        </a>
+        
     </div>
 </div>
 

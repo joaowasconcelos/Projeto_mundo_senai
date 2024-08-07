@@ -139,7 +139,7 @@ async function updatePaciente(id,novaPessoa,novoEndereco,novoTelefone,novoPerfil
         const UpdateEnderecos = await bd.query('update tbl_endereco set logradouro = ?,bairro = ?,estado = ?, numero = ?, complemento=?, cep=? where id IN(select endereco_id from tbl_pessoa where id = ?);',
             [novoEndereco.logradouro,novoEndereco.bairro,novoEndereco.estado,novoEndereco.numeroEndereco,novoEndereco.complementoEndereco,novoEndereco.cep,id]);
             console.log(UpdateEnderecos);
-
+        
         const UpdatePessoa = await bd.query('UPDATE tbl_pessoa SET nome = ?,data_nasc = ?, genero = ?, email = ? WHERE id = ?;',
             [novaPessoa.nome,novaPessoa.dataNasc,novaPessoa.genero,novaPessoa.email,id]
             );

@@ -264,7 +264,7 @@ td a:hover {
     transition: all 0.2s linear;
     cursor: pointer;
     border: none;
-    background: #fff;
+    background: #00665E;
 }
 
 #retorno>svg {
@@ -405,14 +405,24 @@ td a:hover {
     font-weight: bold;
 }
 
-.btn-voltar {
-    background-color: #c38b31;
-    color: #fff;
-    border: none;
-    padding: 10px 10px;
-    border-radius: 4px;
-    cursor: pointer;
-    display: inline-block;
-    width: 100px;
-    font-weight: bold;
-}
+.back-button button {
+    margin-left: 10px;
+        margin-top: 0px;
+        background-color: #00665E; /*cor de fundo do botão de voltar */
+        color: #fff;
+        border: none;
+        padding: 10px 20px;
+        border-radius: 4px;
+        cursor: pointer;
+        display: inline-block;
+    }
+    
+    .back-button button:hover {
+        background-color: #28a745
+    }
+    
+    .material-symbols-outlined {
+        font-size: 24px;
+        vertical-align: middle;
+        margin-right: 5px;
+    }

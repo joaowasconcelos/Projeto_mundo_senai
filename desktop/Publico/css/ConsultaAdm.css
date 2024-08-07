@@ -1,175 +1,185 @@
-
-footer{
-    position:static
-}
-
-nav {
-    background-color: #00665E;
-    padding: 0.5rem;
+footer {
+  position: fixed;
 }
 
 nav ul {
-    list-style-type: none;
-    margin: 0;
-    padding: 0;
-    display: flex;
-    justify-content: center;
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: center;
 }
 
 nav ul li {
-    margin: 0 1rem;
+  margin: 0 1rem;
 }
 
 nav ul li a {
-    color: #fff;
-    text-decoration: none;
+  color: #fff;
+  text-decoration: none;
 }
 
 main {
-    padding: 1rem;
+  padding: 1rem;
 }
 
 table {
-    margin: auto;
-    width: 80%;
-    border-collapse: collapse;
-    margin-top: 1rem;
+  margin: auto;
+  width: 80%;
+  border-collapse: collapse;
+  margin-top: 1rem;
+  overflow-x: auto;
 }
 
-table, th, td {
-    border: 1px solid #ccc;
-}
-
-th, td {
-    padding: 0.5rem;
-    text-align: left;
+th,
+td {
+  padding: 0.5rem;
+  text-align: left;
 }
 
 th {
-    background-color: #eee;
+  padding: 15px;
+  text-align: left;
+  border-bottom: 1px solid #ddd;
+  text-align: center;
 }
+
 /* Estilos para o botão de voltar */
 .back-button {
-    text-decoration: none; /* Remove sublinhado do link */
+  text-decoration: none;
+  /* Remove sublinhado do link */
 }
 
 .back-button button {
-    margin-top: -70px;
-    background-color: #00665E; /* Cor de fundo do botão */
-    color: #fff; /* Cor do texto dentro do botão */
-    border: none; /* Remove a borda do botão */
-    padding: 10px 20px; /* Espaçamento interno do botão */
-    border-radius: 4px; /* Borda arredondada */
-    cursor: pointer; /* Cursor ao passar por cima do botão */
-    display: inline-block; /* Permite que o botão se ajuste ao conteúdo interno */
+  margin-top: -70px;
+  background-color: #00665E;
+  /* Cor de fundo do botão */
+  color: #fff;
+  /* Cor do texto dentro do botão */
+  border: none;
+  /* Remove a borda do botão */
+  padding: 10px 20px;
+  /* Espaçamento interno do botão */
+  border-radius: 4px;
+  /* Borda arredondada */
+  cursor: pointer;
+  /* Cursor ao passar por cima do botão */
+  display: inline-block;
+  /* Permite que o botão se ajuste ao conteúdo interno */
 }
 
 .back-button button:hover {
-    background-color: #28a745; /* Cor de fundo do botão ao passar o mouse */
+  background-color: #28a745;
+  /* Cor de fundo do botão ao passar o mouse */
 }
 
 .material-symbols-outlined {
-    font-size: 24px; /* Tamanho do ícone */
-    vertical-align: middle; /* Alinha verticalmente com o texto */
-    margin-right: 5px; /* Espaçamento à direita do ícone */
+  font-size: 24px;
+  /* Tamanho do ícone */
+  vertical-align: middle;
+  /* Alinha verticalmente com o texto */
+  margin-right: 5px;
+  /* Espaçamento à direita do ícone */
 }
 
-.titulo{
-    margin-left: 40%;
+.titulo {
+  margin-left: 40%;
 }
 
 
 /* Modal */
 .modal {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 150%;
-    background-color: rgba(0, 0, 0, 0.5);
-    display: none;
-    justify-content: center;
-    align-items: center;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 150%;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: none;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Conteúdo do modal */
+.modal-content {
+  margin: 150px auto;
+  background-color: #fff;
+  padding: 10px;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  max-width: 500px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* Título do modal */
+.modal-content h3 {
+  margin-top: 0;
+  font-size: 24px;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+/* Formulário dentro do modal */
+.modal-content form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+}
+
+/* Campos do formulário */
+.modal-content form input[type="text"],
+.modal-content form input[type="email"],
+.modal-content form input[type="password"] {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+/* Botão de envio do formulário */
+.modal-content form button[type="submit"] {
+  width: 50%;
+  padding: 5px;
+  background-color: #4CAF50;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+/* Animações */
+.fade-in {
+  animation: fadeIn 0.5s;
+}
+
+.fade-out {
+  animation: fadeOut 0.5s;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: scale(0.9);
   }
-  
-  /* Conteúdo do modal */
-  .modal-content {
-    margin: 150px auto;
-    background-color: #fff;
-    padding: 10px;
-    border-radius: 10px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
-    max-width: 500px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+
+  to {
+    opacity: 1;
+    transform: scale(1);
   }
-  
-  /* Título do modal */
-  .modal-content h3 {
-    margin-top: 0;
-    font-size: 24px;
-    font-weight: bold;
-    margin-bottom: 10px;
+}
+
+@keyframes fadeOut {
+  from {
+    opacity: 1;
+    transform: scale(1);
   }
-  
-  /* Formulário dentro do modal */
-  .modal-content form {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding: 20px;
+
+  to {
+    opacity: 0;
+    transform: scale(0.9);
   }
-  
-  /* Campos do formulário */
-  .modal-content form input[type="text"],
-  .modal-content form input[type="email"],
-  .modal-content form input[type="password"] {
-    width: 100%;
-    padding: 10px;
-    margin-bottom: 10px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-  }
-  
-  /* Botão de envio do formulário */
-  .modal-content form button[type="submit"] {
-    width: 50%;
-    padding: 5px;
-    background-color: #4CAF50;
-    color: #fff;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-  }
-  
-  /* Animações */
-  .fade-in {
-    animation: fadeIn 0.5s;
-  }
-  
-  .fade-out {
-    animation: fadeOut 0.5s;
-  }
-  
-  @keyframes fadeIn {
-    from {
-      opacity: 0;
-      transform: scale(0.9);
-    }
-    to {
-      opacity: 1;
-      transform: scale(1);
-    }
-  }
-  
-  @keyframes fadeOut {
-    from {
-      opacity: 1;
-      transform: scale(1);
-    }
-    to {
-      opacity: 0;
-      transform: scale(0.9);
-    }
-  }
+}
