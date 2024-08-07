@@ -1,95 +1,84 @@
 <link rel="stylesheet" href="/css/Login.css">
 <div class="corpo">
 
-
     <div class="img-fundo">
         <img src="../../../images/fundo.jpg" class="" id="">
     </div>
 
+    <div class="login-container">
+        <h2>Login</h2>
+        <% if (typeof error_msg !== 'undefined') { %>
+            <div class="alert alert-danger"><%= error_msg %></div>
+        <% } %>
+        
+        <form id="loginForm" action="/auth/login" method="post">
+            <!-- Input de Login -->
+            <input type="text" id="login" placeholder="Login" name="login" value="<%= typeof resultl !== 'undefined' ? resultl : '' %>" required>
 
-<div class="login-container">
-    <h2>Login</h2>
-    <% if ( typeof error_msg !=='undefined') { %>
-        <div class="alert alert-danger"><%= error_msg %></div>
-    <% } %>
-    
-    <form id="loginForm" action="/auth/login" method="post">
-        <!-- Input de Login -->
-        <% if (typeof resultl !=='undefined' ) { %>
-            <input type="text" id="login" placeholder="Login" name="login" value="<%= resultl %>" required>
-            <% } else { %>
-                <input type="text" id="login" placeholder="Login" name="login" required>
-                <% } %>
+            <!-- Input de Senha -->
+            <input type="password" id="senha" placeholder="Senha" name="senha" value="<%= typeof results !== 'undefined' ? results : '' %>" required>
 
-                    <!-- Input de Senha -->
-                    <% if (typeof results !=='undefined' ) { %>
-                        <input type="password" id="senha" placeholder="Senha" name="senha" value="<%= results %>"
-                            required>
-                        <% } else { %>
-                            <input type="password" id="senha" placeholder="Senha" name="senha" required>
-                            <% } %>
+            <button type="submit" id="loginButton">Login</button>
+        </form>
+    </div>
 
-                                <button type="submit" id="loginButton">Login</button>
-    </form>
-</div>
+    <!-- Modal -->
+    <% 
+    const options = [];
+    if (typeof firstObject !== 'undefined') options.push(firstObject);
+    if (typeof secondObject !== 'undefined') options.push(secondObject);
+    if (typeof thirdObject !== 'undefined') options.push(thirdObject);
+    %>
 
-<!-- Modal -->
-<% if (typeof firstObject !=='undefined' || typeof secondObject !=='undefined' ) { %>
-    <div id="myModal" class="modal">
-        <div class="modal-content">
-            <span class="close">&times;</span>
-            <h3>Deseja logar como:</h3>
-            <button class="login-option" id="firstObjectBtn" value="<%= firstObject %>">
-                <%= firstObject %>
-            </button>
-            <% if (typeof secondObject !=='undefined' ) { %>
-                <p class="or-divider">OU</p>
-                <button class="login-option" id="secondObjectBtn" value="<%= secondObject %>">
-                    <%= secondObject %>
-                </button>
-                <% } %>
-                    <% if (typeof thirdObject !=='undefined' ) { %>
-                        <script>console.log("aqqq", thirdObject)</script>
+    <% if (options.length > 0) { %>
+        <div id="myModal" class="modal">
+            <div class="modal-content">
+                <span class="close">&times;</span>
+                <h3>Deseja logar como:</h3>
+                <% options.forEach((option, index) => { %>
+                    <button class="login-option" id="<%= option %>Btn" value="<%= option %>">
+                        <%= option %>
+                    </button>
+                    <% if (index < options.length - 1) { %>
                         <p class="or-divider">OU</p>
-                        <button class="login-option" id="thirdObjectBtn" value="<%= thirdObject %>">
-                            <%= thirdObject %>
-                        </button>
-                        <% } %>
-
+                    <% } %>
+                <% }); %>
+            </div>
         </div>
+
         <script>
-            var modal = document.getElementById('myModal');
-            modal.style.display = "block";
+            document.addEventListener('DOMContentLoaded', function () {
+                var modal = document.getElementById('myModal');
+                var closeButton = document.querySelector('.modal .close');
 
-            var firstObjectBtn = document.getElementById('firstObjectBtn');
-            var secondObjectBtn = document.getElementById('secondObjectBtn');
-            var thirdObjectBtn = document.getElementById('thirdObjectBtn');
+                if (modal) {
+                    modal.style.display = "block";
 
-            if (firstObjectBtn !== null) {
-                firstObjectBtn.addEventListener('click', function () {
-                    selecionarTipoLogin(firstObjectBtn.value);
-                });
-            }
-            if (secondObjectBtn !== null) {
-                secondObjectBtn.addEventListener('click', function () {
-                    selecionarTipoLogin(secondObjectBtn.value);
-                });
-            }
-            if (thirdObjectBtn !== null) {
-                thirdObjectBtn.addEventListener('click', function () {
-                    selecionarTipoLogin(thirdObjectBtn.value);
-                });
-            }
+                    closeButton.onclick = function () {
+                        modal.style.display = "none";
+                    };
 
-            function selecionarTipoLogin(tipo) {
-                // Enviar a seleção via fetch para o servidor
-                fetch('/direcionaLogin', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify({ tipo: tipo })
-                })
+                    window.onclick = function (event) {
+                        if (event.target == modal) {
+                            modal.style.display = "none";
+                        }
+                    };
+                }
+
+                document.querySelectorAll('.login-option').forEach(button => {
+                    button.addEventListener('click', function () {
+                        selecionarTipoLogin(button.value);
+                    });
+                });
+
+                function selecionarTipoLogin(tipo) {
+                    fetch('/direcionaLogin', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify({ tipo: tipo })
+                    })
                     .then(response => {
                         if (response.ok) {
                             window.location.href = response.url; // Redirecionar após o login
@@ -102,24 +91,9 @@
                         console.error('Erro ao fazer login:', error);
                         alert('Erro ao fazer login. Tente novamente.');
                     });
-            }
+                }
+            });
         </script>
-        <% } %>
-
-            <script>
-                // JavaScript para controlar o modal
-                var modal = document.getElementById('myModal');
-                var span = document.getElementsByClassName("close")[0];
-
-                span.onclick = function () {
-                    modal.style.display = "none";
-                }
-
-                window.onclick = function (event) {
-                    if (event.target == modal) {
-                        modal.style.display = "none";
-                    }
-                }
-            </script>
+    <% } %>
 
 </div>

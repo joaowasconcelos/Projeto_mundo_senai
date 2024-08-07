@@ -22,6 +22,7 @@ const viewPaciente = {
 
     selecionaInfosPacienteMobile: async (req, res) => {
         try {
+        console.log("aqui",req.session.user.id )
             const ids = req.session.user.id 
             const novaPessoa = new Pessoa(ids, null, null, null, null, null)
             const infosPaciente = await selectInfosPaciente(novaPessoa.id)
@@ -44,7 +45,25 @@ const viewPaciente = {
             console.log(error)
             res.json(error);
         }
-    }
+    },
+
+    logout: async (req, res) => {
+        try {
+            req.session.destroy((err) => {
+                if (err) {
+                    console.error('Erro ao destruir a sessão:', err);
+                    return res.status(500).json({ message: 'Erro ao tentar sair.' });
+                }
+    
+                res.clearCookie('connect.sid'); 
+                res.redirect('/login'); 
+            });
+        } catch (error) {
+            console.error('Erro no processo de logout:', error);
+            res.status(500).json({ message: 'Erro inesperado durante o logout.' });
+        }
+    },
+    
 }
 
 module.exports = { viewPaciente }
