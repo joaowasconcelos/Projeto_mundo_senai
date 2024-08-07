@@ -119,7 +119,13 @@ const cadastro = {
         try {
             const { Nome, DataNascimento, Genero, Email,Logradouro, Bairro, Estado, NumeroResidencia, Complemento, CEP, Telefones,Tipo,Senha,DataAdmissao, CRM, Especialidades} = req.body;
             const id = req.params.id
-            const novaPessoa = new Pessoa(null, null, Nome,DataNascimento,Genero,Email)         
+            const novaPessoa = new Pessoa(null, null, Nome,DataNascimento,Genero,Email)        
+            const dataVal = novaPessoa.DataConvert(novaPessoa.dataNasc);
+            if (dataVal == "Invalid Date" || !(new Date(novaPessoa.dataNasc) instanceof Date)) {
+                return res.json({ message: "Data informada é invalida" });
+            } 
+          
+            novaPessoa.DataNascimento = dataVal
             const novoEndereco = new Endereco(null,Logradouro,Bairro,Estado,NumeroResidencia,Complemento,CEP)
             const novoTelefone = new Telefone(null,Telefones)
             const novoPerfil = new Perfis(null,Tipo)
@@ -133,11 +139,13 @@ const cadastro = {
                 const result = await updatePaciente(id,novaPessoa,novoEndereco,novoTelefone,novoPerfil,novoLogin,novoFuncionario,novaEspecialidade);
                 console.log("result",result)
             }
+          
 
             const result = await updatePaciente(id,novaPessoa,novoEndereco,novoTelefone,novoPerfil,novoLogin);
             console.log("result",result)
            
-
+            return res.json({ message: "Pessoa Atualizada" })
+            console.log('oi')
         } catch (error) {
             console.error("Erro ao cadastrar especialidades:", error);
             res.status(500).json({ error: "Erro ao cadastrar especialidades" });

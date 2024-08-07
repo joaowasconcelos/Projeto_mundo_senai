@@ -1,8 +1,5 @@
 body {
-    /* background-image: url('https://img.freepik.com/fotos-premium/close-up-de-forma-de-coracao-sobre-fundo-branco_1048944-12268340.jpg?w=996');
-  background-size: cover;
-  background-position: center; */
-  background: linear-gradient(#f3fffc, #a3b9b2);
+background: #fff;
 }
 
 .logout-form {
@@ -62,8 +59,8 @@ table {
 }
 
 table, th, td {
-    border: 1px solid #444444;
-    background-color: #d2fffb;
+    border: 1px solid #8c8c8c;
+    background-color: #92d6d137;
     color: rgb(0, 0, 0);
 }
 
@@ -104,4 +101,11 @@ th {
 
 footer {
     position: absolute;
+}
+a:link { 
+    font-weight: bolder;
+  }
+
+.material-symbols-outlined {
+    font-weight: bolder;
 }

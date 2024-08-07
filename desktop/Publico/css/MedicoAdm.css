@@ -1,73 +1,146 @@
-footer{
+@import url('https://fonts.googleapis.com/css2?family=Anek+Telugu:wdth,wght@110.2,100..800&family=Gidugu&display=swap');
+
+footer {
     position: fixed;
 }
 
-table {
+body,
+html {
+    margin: 0;
+    padding: 0;
+}
+
+/* Titulo */
+
+h2 {
+    font-family: "Anek Telugu", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 70px;
+    font-style: normal;
+    font-variation-settings:
+        "wdth" 120.2;
+    text-align: center;
+    color: #555;
+}
+
+/* Tabela */
+
+#tableContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0 auto;
     width: 80%;
+    text-align: center;
+    height: 320px;
+    overflow-x: auto;
+    max-height: 320px;
+}
+
+table {
+    width: 100%;
     border-collapse: collapse;
-    margin-top: 1rem;
-    margin: auto;
 }
 
-table, th, td {
-    border: 1px solid #ccc;
+thead {
+    background-color: #f5f5f5;
 }
 
-th, td {
-    padding: 0.5rem;
+th,
+td {
+    padding: 15px;
     text-align: left;
+    border-bottom: 1px solid #ddd;
 }
 
 th {
-    background-color: #eee;
+    font-weight: bold;
+    color: #555;
 }
 
-.titulo{
+tbody tr:hover {
+    background-color: #f1f1f1;
+}
+
+td a {
+    text-decoration: none;
+    color: #324337;
+    font-weight: bold;
+}
+
+td a:hover {
+    text-decoration: underline;
+}
+
+/* lista medico - escrito */
+
+.titulo {
     text-align: center;
 }
-/* Estilos para o botão de voltar */
-.back-button {
-    text-decoration: none; /* Remove sublinhado do link */
+
+/* Botão de retorno */
+
+button {
+    display: flex;
+    height: 3em;
+    width: 100px;
+    align-items: center;
+    justify-content: center;
+    background-color: #ff00004b;
+    border-radius: 3px;
+    letter-spacing: 1px;
+    transition: all 0.2s linear;
+    cursor: pointer;
+    border: none;
+    background: #ffffff;
+    margin-top: 70px; /* asoa */
 }
 
-.back-button button {
-    margin-left: 10px;
-    margin-top: -10%;
-    background-color:  #00665E; /*muda de cor ao passar o mouse*/
-    color: #fff; /* Cor do texto dentro do botão */
-    border: none; /* Remove a borda do botão */
-    padding: 10px 20px; /* Espaçamento interno do botão */
-    border-radius: 4px; /* Borda arredondada */
-    cursor: pointer; /* Cursor ao passar por cima do botão */
-    display: inline-block; /* Permite que o botão se ajuste ao conteúdo interno */
+button>svg {
+    margin-right: 5px;
+    margin-left: 5px;
+    font-size: 20px;
+    transition: all 0.4s ease-in;
 }
 
-.back-button button:hover {
-    
-    background-color: #28a745; /*cor de fundo do botão de voltar*/ 
+button:hover>svg {
+    font-size: 1.2em;
+    transform: translateX(-5px);
 }
 
-.material-symbols-outlined {
-    font-size: 24px; /* Tamanho do ícone */
-    vertical-align: middle; /* Alinha verticalmente com o texto */
-    margin-right: 5px; /* Espaçamento à direita do ícone */
+button:hover {
+    box-shadow: 9px 9px 33px #f1f0f0, -9px -9px 33px #e6e6e6;
+    transform: translateY(-2px);
 }
 
-
-.actions{
-    margin-left: 80%;
-    width: 10%;
-    margin-top: 50px;
-    
+a {
+    text-decoration: none;
+    color: rgb(0, 0, 0);
 }
 
-.btn-cadastrar{
-    background-color:  #00665E; /*muda de cor ao passar o mouse*/
-    color: #fff; /* Cor do texto dentro do botão */
-    border: none; /* Remove a borda do botão */
-    padding: 10px 20px; /* Espaçamento interno do botão */
-    border-radius: 4px; /* Borda arredondada */
-    cursor: pointer; /* Cursor ao passar por cima do botão */
-    margin-right: 8px;
-  
+/* Cadastrar */
+
+.button2 {
+    background-color: #00665E;
+    color: #ffffff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: bold;
+    width: max-content;
+}
+
+.button2:hover {
+    background-color: #3e8e41;
+    /* darker green on hover */
+}
+
+#btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: auto;
+    width: 100%;
 }

@@ -38,34 +38,80 @@ nav ul {
     justify-content: center;
 }
 
-nav ul li {
-    margin: 0 1rem;
+#hs_consultas {
+    width: 80%;
+    margin: auto;
+    /* background-color: violet; */
+    height: 400px;    
+    max-height: 400px;
+    margin-bottom: 25px;
+    overflow-x: auto;
 }
 
-nav ul li a {
-    color: #fff;
-    text-decoration: none;
-}
-
-main {
-    padding: 1rem;
-}
+/* Tabela */
 
 table {
     width: 100%;
     border-collapse: collapse;
-    margin-top: 1rem;
+    margin-bottom: 20px;
 }
 
-table, th, td {
-    border: 1px solid #ccc;
+thead {
+    background-color: #f5f5f5;
 }
 
-th, td {
-    padding: 0.5rem;
+th,
+td {
+    padding: 15px;
     text-align: left;
+    border-bottom: 1px solid #ddd;
 }
 
 th {
-    background-color: #eee;
+    font-weight: bold;
+    color: #555;
+}
+
+tbody tr:hover {
+    background-color: #f1f1f1;
+}
+
+td a {
+    text-decoration: none;
+    color: #324337;
+    font-weight: bold;
+}
+
+td a:hover {
+    text-decoration: underline;
+}
+
+/* Titulos */
+
+h1 {
+    font-family: "Roboto", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+    margin-left: 50px;
+    margin-top: 70px;
+}
+
+h3 {
+    font-family: "Roboto", sans-serif;
+    font-weight: bold;
+    font-style: normal;
+    text-align: center;
+}
+
+footer {
+    align-items: end;
+    position: relative;
+    bottom: 0;
+    display: block;
+}
+
+body,
+html {
+    margin: 0;
+    padding: 0;
 }

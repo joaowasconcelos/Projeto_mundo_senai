@@ -37,23 +37,26 @@ export default function ConsultasMedico() {
         <Text style={styles.textHeader}>Bem-vindo!</Text>
         <FontAwesome name="sign-out" size={35} color="#FFFFFF" onPress={() => navigation.navigate('Login')} />
       </View>
-
+      <Text style={styles.tituloConsultas}>Consultas Agendadas:</Text>
       <ScrollView contentContainerStyle={{ paddingHorizontal: 20 }}>
-        <Text style={styles.tituloConsultas}>Consultas Agendadas</Text>
         {consultas.map((consulta) => (
           <View key={consulta.id} style={styles.modeloCard}>
-            <Text style={styles.textHeaderCard}>Nome do Paciente:</Text>
-            <Text style={styles.textValue}>{consulta.nome_paciente}</Text>
-            <Text style={styles.textHeaderCard}>CPF do Paciente:</Text>
-            <Text style={styles.textValue}>{consulta.cpf_paciente}</Text>
-            <Text style={styles.textHeaderCard}>Especialidade:</Text>
-            <Text style={styles.textValue}>{consulta.desc_especialidade}</Text>
-            <Text style={styles.textHeaderCard}>Data da Consulta:</Text>
-            <Text style={styles.textValue}>{consulta.data}</Text>
-            <Text style={styles.textHeaderCard}>Hora da Consulta:</Text>
-            <Text style={styles.textValue}>{consulta.hora}</Text>
-            <Text style={styles.textHeaderCard}>Nome do Funcionário:</Text>
-            <Text style={styles.textValue}>{consulta.nome_funcionario}</Text>
+            <View style={styles.ladoalado}>
+              <Text style={styles.textHeaderCard}>Nome do Paciente:</Text>
+              <Text style={styles.textValue}>{consulta.nome_paciente}</Text>
+            </View>
+            <View style={styles.ladoalado}>
+              <Text style={styles.textHeaderCard}>Especialidade:</Text>
+              <Text style={styles.textValue}>{consulta.desc_especialidade}</Text>
+            </View>
+            <View style={styles.ladoalado}>
+              <Text style={styles.textHeaderCard}>Data da Consulta:</Text>
+              <Text style={styles.textValue}>{consulta.data}</Text>
+            </View>
+            <View style={styles.ladoalado}>
+              <Text style={styles.textHeaderCard}>Hora da Consulta:</Text>
+              <Text style={styles.textValue}>{consulta.hora}</Text>
+            </View>
           </View>
         ))}
       </ScrollView>
@@ -74,7 +77,7 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     alignItems: 'center',
     paddingHorizontal: 20,
-    backgroundColor: '#3A7CA5', // Azul suave para a barra de perfil
+    backgroundColor: '#243434',
     elevation: 4,
     borderBottomWidth: 0.5,
     borderBottomColor: '#B0C4DE', // Linha inferior sutil e suave
@@ -89,12 +92,13 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     color: '#333333',
     marginVertical: 15,
+    marginLeft: 25
   },
   modeloCard: {
     backgroundColor: '#ffffff',
     marginVertical: 10,
     padding: 20,
-    borderRadius: 12,
+    borderRadius: 30,
     shadowColor: '#000',
     shadowOffset: { width: 0, height: 2 },
     shadowOpacity: 0.1,
@@ -115,4 +119,9 @@ const styles = StyleSheet.create({
     marginBottom: 12,
     lineHeight: 22,
   },
+  ladoalado: {
+    display: "flex",
+    flexDirection: 'row',
+    gap: 5
+  }
 });

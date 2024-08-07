@@ -1,4 +1,3 @@
-
 <link rel="stylesheet" href="/css/PacienteUsuario.css">
 <div>
     <h1>Bem-vindo, <%= user.nome_pessoa %>!</h1>
@@ -11,71 +10,94 @@
     </button>
 </form>
 
-<div>
-    <h3 class="titulo">Proximas Consultas:</h3>
-</div>
+    <h3 class="titulo">Próximas consultas:</h3>
 
-<div>
-    <table>
-        <thead>
-            <tr>
-                <th>ID</th>
-                <th>Data</th>
-                <th>Hora</th>
-                <th>Nome Paciente</th>
-                <th>CPF Paciente</th>
-                <th>Nome do Medico</th>
-                <th>Especialidade do Medico</th>
-            </tr>
-        </thead>
-        <tbody>
-            <% consulta.forEach(function(item) { %>
+    <div>
+        <table>
+            <thead>
                 <tr>
-                    <td><%= item.id %></td>
-                    <td><%= item.data %></td>
-                    <td><%= item.hora %></td>
-                    <td><%= item.nome_paciente %></td>
-                    <td><%= item.cpf_paciente %></td>
-                    <td><%= item.nome_funcionario %></td>
-                    <td><%= item.desc_especialidade %></td>
+                    <th>Data</th>
+                    <th>Hora</th>
+                    <th>Nome do paciente</th>
+                    <th>CPF</th>
+                    <th>Médico</th>
+                    <th>Especialidade do médico</th>
                 </tr>
-            <% }); %>
-        </tbody>
-    </table>
+            </thead>
+            <tbody>
+                <% consulta.forEach(function(item) { %>
+                    <tr>
+                        <td>
+                            <%= item.data %>
+                        </td>
+                        <td>
+                            <%= item.hora %>
+                        </td>
+                        <td>
+                            <%= item.nome_paciente %>
+                        </td>
+                        <td>
+                            <%= item.cpf_paciente %>
+                        </td>
+                        <td>
+                            <%= item.nome_funcionario %>
+                        </td>
+                        <td>
+                            <%= item.desc_especialidade %>
+                        </td>
+                    </tr>
+                    <% }); %>
+            </tbody>
+        </table>
+    </div>
+
+
 </div>
 
 
-<div>
-    <h3 class="titulo">Historico de Consultas:</h3>
-</div>
+<!-- Historico -->
 
-<div>
-    <table>
-        <thead>
-            <tr>
-                <th>ID</th>
-                <th>Data</th>
-                <th>Hora</th>
-                <th>Nome Paciente</th>
-                <th>CPF Paciente</th>
-                <th>Nome do Medico</th>
-                <th>Especialidade do Medico</th>
-            </tr>
-        </thead>
-        <tbody>
-            <% consultaAnteriores.forEach(function(item) { %>
+<div id="hs_consultas">
+
+    <h3 class="titulo">Histórico de consultas:</h3>
+
+    <div>
+        <table>
+            <thead>
                 <tr>
-                    <td><%= item.id %></td>
-                    <td><%= item.data %></td>
-                    <td><%= item.hora %></td>
-                    <td><%= item.nome_paciente %></td>
-                    <td><%= item.cpf_paciente %></td>
-                    <td><%= item.nome_funcionario %></td>
-                    <td><%= item.desc_especialidade %></td>
+                    <th>Data</th>
+                    <th>Hora</th>
+                    <th>Nome do paciente</th>
+                    <th>CPF</th>
+                    <th>Médico</th>
+                    <th>Especialidade do médico</th>
                 </tr>
-            <% }); %>
-        </tbody>
-    </table>
+            </thead>
+            <tbody>
+                <% consultaAnteriores.forEach(function(item) { %>
+                    <tr>
+                        <td>
+                            <%= item.data %>
+                        </td>
+                        <td>
+                            <%= item.hora %>
+                        </td>
+                        <td>
+                            <%= item.nome_paciente %>
+                        </td>
+                        <td>
+                            <%= item.cpf_paciente %>
+                        </td>
+                        <td>
+                            <%= item.nome_funcionario %>
+                        </td>
+                        <td>
+                            <%= item.desc_especialidade %>
+                        </td>
+                    </tr>
+                    <% }); %>
+            </tbody>
+        </table>
+    </div>
+
 </div>
-
-
