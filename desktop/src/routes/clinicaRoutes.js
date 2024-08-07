@@ -109,6 +109,7 @@ router.get('/login', LoginPerfis.paginaLogin);
 router.get("/PacienteInfo/:id", viewPaciente.selecionaInfosPaciente) 
 router.get("/paciente/consultas/:id", viewPaciente.selecionaConsultas);
 router.get('/ConsultaM',teste.selectsEspecialidade);
+router.get('/logout', viewPaciente.logout);
 
 //rotas mobile
 router.post('/Login/mobileEntrar',LoginPerfis.LoginPessoaMobile);

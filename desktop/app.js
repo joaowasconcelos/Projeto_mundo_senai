@@ -18,7 +18,7 @@ app.use(express.static(path.join(__dirname, 'publico')));
 
 // Configuração da sessão deve vir antes do uso do flash
 app.use(session({
-    secret: process.env.SESSION_SECRET || 'yourSecretKey',
+    secret: 'yourSecretKey',
     resave: false,
     saveUninitialized: true,
     cookie: { httpOnly: true },

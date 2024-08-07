@@ -1,5 +1,9 @@
 <link rel="stylesheet" href="/css/HistoricoProntuario.css">
 <div class="body">
+    <% if (resultProntuario.length === 0) { %>
+        <h2>Não há registro</h2>
+    <% } %>
+
     <% resultProntuario.forEach(function(item) { %>
         <div class="container">
             <div class="diagnostico">

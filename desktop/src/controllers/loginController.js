@@ -37,7 +37,6 @@ const LoginPerfis = {
             }
 
             if (result[0].tipo.length>=0) {
-
                 const resultl = result[0].login
                 const results = result[0].senha
                 return res.render("pages/Login", { firstObject, secondObject,thirdObject,resultl,results})

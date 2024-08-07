@@ -25,6 +25,7 @@ main {
 }
 
 footer {
+    position: fixed;
     display: block;
     background: #00665E;
     color: #fff;
