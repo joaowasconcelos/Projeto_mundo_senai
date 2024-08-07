@@ -1,117 +1,75 @@
-import React, { useState, useEffect } from 'react';
-import { Pressable } from 'react-native';
-import { SafeAreaView, ScrollView, Platform, StyleSheet, Text, View, Image, TextInput } from 'react-native';
+import React, { useState } from 'react';
+import { Button, Pressable, Modal, StyleSheet, Text, View, Image, TextInput, TouchableOpacity, Platform, SafeAreaView, ScrollView } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
-import { useNavigation, useRoute } from '@react-navigation/native'
-
+import { useNavigation } from '@react-navigation/native';
 
 const logo = require('../../../assets/logo_medical.png');
 import api from '../../service/api';
 
 const Login = () => {
-
     const [login, setLogin] = useState('');
     const [senha, setSenha] = useState('');
-    const [dadosLogin, setDadosLogin] = useState({})
+    const [message, setMessage] = useState('');
+    const [modalVisible, setModalVisible] = useState(false);
+    const [userType, setUserType] = useState('');
 
     const navigation = useNavigation();
 
-    const navegaLogin = () => {
-        // Navega para a tela principal
-        navigation.navigate('Main');
-    };
-
     const getLogin = async () => {
         try {
-            // console.log('oi');
-            // console.log(login, senha);
-            await api.post(`/Login/mobileEntrar`, { login: login, senha: senha })
-                .then(response => {
-                    console.log(response.data);
-                    // if (response !== undefined && response.data != null) {
+            const response = await api.post('/Login/mobileEntrar', { login, senha });
+            setMessage(response.data.message);
 
-                    //     const { data } = response.data;
-                    //     const [firstEntry] = data;
-                    //     const { id, idLogin, login, senha, tipo } = firstEntry;
-
-                    //     // console.log(id, idLogin, login, senha, tipo);
-                    //     setDadosLogin({ id: id, idLogin: idLogin, login: login, senha: senha, tipo: tipo });
-                    //     console.log(dadosLogin);
-                    // } else {
-                    //     alert('Nenhum registro foi localizado!');
-                    // }
-                    console.log(response.data.id)
-                    const id = response.data.id
-                    if (response.data.tipo === 'medico') {
-                        navigation.navigate('MedicoTab', { id })
-                    } else if (response.data.tipo === 'paciente') {
-                        navigation.navigate('PacienteTab', { id })
-                    }
-                }).catch(error => {
-                    console.log('Erro', error);
-                })
-            if (dadosLogin.tipo === 'medico') {
-                navigation.navigate('MedicoTab', { dadosLogin })
+            if (response.data.user.tipo.includes("paciente, medico") || response.data.user.tipo.includes("medico, paciente")) {
+                setUserType(response.data.user.tipo);
+                setModalVisible(true);
             } else {
-                if (dadosLogin.tipo === 'paciente') {
-                    navigation.navigate('PacienteTab', { dadosLogin })
-
-                }
+                redirectUser(response.data.tipo, response.data);
             }
         } catch (error) {
-            if (error.response) {
-                console.log(error.response.data);
-                console.log(error.response.status);
-                console.log(error.response.headers);
-            } else if (error.request) {
-                if ((error.request._response).includes('Failed')) {
-                    console.log('Erro ao conectar a API.');
-                }
-            } else {
-                console.log('Erro', error.message);
-            }
-            console.log(error.config);
+            console.error(error);
+            setMessage('Erro ao conectar a API.');
         }
-    }
+    };
+
+    const redirectUser = (type, data) => {
+        if (type === 'medico') {
+            navigation.navigate('MedicoTab', { id: data.id });
+        } else if (type === 'paciente') {
+            navigation.navigate('PacienteTab', { id: data.user });
+        }
+    };
 
     return (
-
         <SafeAreaView style={styles.androidSafeArea}>
-
             <ScrollView>
-
                 <LinearGradient colors={['rgb(0, 76, 76)', 'transparent']} style={styles.background} />
-
                 <View style={styles.topo}>
-
                     <Text style={styles.title}>SP MEDICAL GROUP</Text>
                     <Image source={logo} />
-
                 </View>
 
                 <View style={styles.container}>
-
                     <View style={styles.box_white}>
-
                         <Text style={styles.subtitulo5}>Bem Vindo</Text>
                         <Text style={styles.subtitulo4}>Faça login em sua conta</Text>
+
+                        {message ? <Text style={{ fontSize: 20, fontWeight: 'bold', color: '#b20000' }}>{message}</Text> : null}
 
                         <TextInput
                             placeholder='Digite seu C.P.F.'
                             style={styles.entradaTexto}
                             value={login}
-                            onChangeText={setLogin}>
-                        </TextInput>
+                            onChangeText={setLogin}
+                        />
 
                         <TextInput
                             placeholder='Digite sua senha'
                             secureTextEntry={true}
                             style={styles.entradaTexto}
                             value={senha}
-                            onChangeText={setSenha}>
-                        </TextInput>
-
-                        <Text style={styles.subtitulo3}>Esqueceu a senha?</Text>
+                            onChangeText={setSenha}
+                        />
 
                         <Pressable
                             style={({ pressed }) => [
@@ -126,17 +84,47 @@ const Login = () => {
                                     marginBottom: 10
                                 },
                             ]}
-                            onPress={getLogin({ id: login.id })}
+                            onPress={getLogin}
                         >
                             <Text style={{ textAlign: 'center', fontSize: 25, letterSpacing: 5, fontWeight: 'bold', color: '#fafafa' }}>Logar</Text>
                         </Pressable>
-
                     </View>
-
                 </View>
+
+                {/* Modal */}
+                <Modal
+                    animationType="slide"
+                    transparent={true}
+                    visible={modalVisible}
+                    onRequestClose={() => {
+                        setModalVisible(!modalVisible);
+                    }}
+                >
+                    <View style={styles.modalView}>
+                        <Text style={styles.modalText}>Escolha seu tipo de acesso</Text>
+                        <TouchableOpacity
+                            style={[styles.button, styles.buttonClose]}
+                            onPress={() => {
+                                setModalVisible(!modalVisible);
+                                redirectUser('paciente', { user: login });
+                            }}
+                        >
+                            <Text style={styles.textStyle}>Paciente</Text>
+                        </TouchableOpacity>
+                        <TouchableOpacity
+                            style={[styles.button, styles.buttonClose]}
+                            onPress={() => {
+                                setModalVisible(!modalVisible);
+                                redirectUser('medico', { id: login });
+                            }}
+                        >
+                            <Text style={styles.textStyle}>Médico</Text>
+                        </TouchableOpacity>
+                    </View>
+                </Modal>
+
             </ScrollView>
         </SafeAreaView>
-
     );
 };
 
@@ -211,6 +199,47 @@ const styles = StyleSheet.create({
         borderTopLeftRadius: 130,
         alignItems: 'center',
         paddingTop: 30
+    },
+    modalView: {
+        display:'flex',
+        alignItems:'flex-end',
+        justifyContent:'flex-end',
+        margin: 20,
+        backgroundColor: 'white',
+        borderRadius: 20,
+        padding: 35,
+        alignItems: 'center',
+        shadowColor: '#000',
+        shadowOffset: {
+            width: 0,
+            height: 2
+        },
+        shadowOpacity: 0.25,
+        shadowRadius: 4,
+        elevation: 5
+    },
+    button: {
+        justifyContent:'center',
+        borderRadius: 15,
+        padding: 10,
+        elevation: 2,
+        marginVertical: 5,
+        width:200,
+        height:50
+    },
+    buttonClose: {
+        backgroundColor: '#2196F3',
+    },
+    textStyle: {
+        fontSize:15,
+        color: 'white',
+        fontWeight: 'bold',
+        textAlign: 'center'
+    },
+    modalText: {
+        marginBottom: 15,
+        textAlign: 'center',
+        fontSize: 18,
+        fontWeight: 'bold'
     }
 });
-

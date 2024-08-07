@@ -28,8 +28,8 @@ async function updateConsul(consultas) {
     try {
         await bd.beginTransaction();
         console.log(consultas)
-        const UpConsultas = await bd.query('update tbl_consulta set data = ?,hora = ?,status = ? where id =?;',
-            [consultas.data, consultas.hora, consultas.status, consultas.id]
+        const UpConsultas = await bd.query('update tbl_consulta set data = ?,hora = ? where id =?;',
+            [consultas.data, consultas.hora, consultas.id]
         );
         await bd.commit();
         return UpConsultas

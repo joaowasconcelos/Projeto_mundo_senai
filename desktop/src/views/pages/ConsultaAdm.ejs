@@ -11,6 +11,7 @@
     <table>
         <thead>
             <tr>
+                <div></div>
                 <th>ID</th>
                 <th>Data</th>
                 <th>Hora</th>
@@ -65,19 +66,12 @@
         <h3>Editar Consulta</h3>
         <form id="editForm">
             <input type="hidden" id="edit-id">
-            <label>Data:</label>
-            <input type="text" id="edit-data">
-            <label>Hora:</label>
-            <input type="text" id="edit-hora">
-            <label>Nome do Paciente:</label>
-            <input type="text" id="edit-nome-paciente">
-            <label>CPF do Paciente:</label>
-            <input type="text" id="edit-cpf-paciente">
-            <label>Nome do Médico:</label>
-            <input type="text" id="edit-nome-medico">
-            <label>Especialidade do Médico:</label>
-            <input type="text" id="edit-especialidade-medico">
-            <button type="submit">Salvar</button>
+            <label class="data">Data:</label>
+            <input type="date" id="edit-data">
+            <label class="hora">Hora:</label>
+            <input type="time" id="edit-hora">
+            
+            <button type="submit" class="Salvar">Salvar</button>
             <button type="button" id="cancelEditButton">Cancelar</button>
         </form>
     </div>
@@ -101,10 +95,6 @@
             document.getElementById('edit-id').value = id;
             document.getElementById('edit-data').value = row.children[1].innerText;
             document.getElementById('edit-hora').value = row.children[2].innerText;
-            document.getElementById('edit-nome-paciente').value = row.children[3].innerText;
-            document.getElementById('edit-cpf-paciente').value = row.children[4].innerText;
-            document.getElementById('edit-nome-medico').value = row.children[5].innerText;
-            document.getElementById('edit-especialidade-medico').value = row.children[6].innerText;
             editModal.style.display = 'block';
         }
 
@@ -123,21 +113,17 @@
             const id = document.getElementById('edit-id').value;
             const data = document.getElementById('edit-data').value;
             const hora = document.getElementById('edit-hora').value;
-            const nomePaciente = document.getElementById('edit-nome-paciente').value;
-            const cpfPaciente = document.getElementById('edit-cpf-paciente').value;
-            const nomeMedico = document.getElementById('edit-nome-medico').value;
-            const especialidadeMedico = document.getElementById('edit-especialidade-medico').value;
-
-            fetch(`/editar/consulta/${id}`, {
+    
+            fetch(`/Update/consulta/${id}`, {
                 method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json'
                 },
-                body: JSON.stringify({ data, hora, nome_paciente: nomePaciente, cpf_paciente: cpfPaciente, nome_funcionario: nomeMedico, desc_especialidade: especialidadeMedico })
+                body: JSON.stringify({ data, hora })
             })
                 .then(response => response.json())
                 .then(data => {
-                    if (data.success) {
+                    if (data.message === "Consulta Atualizada") {
                         alert('Consulta atualizada com sucesso!');
                         editModal.style.display = 'none';
                         location.reload(); // Recarregar a página para mostrar as alterações
@@ -175,7 +161,7 @@
             })
                 .then(response => response.json())
                 .then(data => {
-                    if (data.success) {
+                    if (data.message === 'Consulta excluida com sucesso') {
                         alert('Consulta deletada com sucesso!');
                         confirmDeleteModal.style.display = 'none';
                         document.querySelector(`tr[data-id="${currentId}"]`).remove(); // Remover linha da tabela

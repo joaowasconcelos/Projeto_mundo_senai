@@ -1,16 +1,17 @@
 <link rel="stylesheet" href="/css/Especialidade.css">
 
+<a href="/adm" class="back-button">
+    <button><span class="material-symbols-outlined">arrow_back</span> Voltar</button>
+</a>
+
 <div class="container">
-
     <!-- Tabela -->
-
     <div id="tabelaContainer">
-
         <table>
             <thead>
                 <tr>
                     <th>ID</th>
-                    <th>Descrição Especialidade</th>
+                    <th>Especialidade</th>
                     <th>Editar</th>
                     <th>Deletar</th>
                 </tr>
@@ -18,103 +19,88 @@
             <tbody>
                 <% Especialidade.forEach(function(item) { %>
                     <tr>
-                        <td>
-                            <%= item.id %>
-                        </td>
-                        <td>
-                            <%= item.desc_especialidade %>
-                        </td>
-                        <td>
-                            <div class="button-container"><a href="#" class="edit-button">
-                                    <button class="editButton" data-id="<%= item.id %>"
-                                        data-desc="<%= item.desc_especialidade %>">
+                        <td id="id_camp"><%= item.id %></td>
+                        <td><%= item.desc_especialidade %></td>
+                        <td id="min">
+                            <div class="button-container">
+                                <a href="#" class="edit-button">
+                                    <button class="editButton" data-id="<%= item.id %>" data-desc="<%= item.desc_especialidade %>">
                                         <span class="material-symbols-outlined">edit</span>
                                     </button>
                                 </a>
                             </div>
                         </td>
-                        <td>
-
+                        <td id="min">
                             <div class="button-container">
-                                <button class="delete-button" data-especialidade-id="<%= item.id %>">
-                                    <span class="material-symbols-outlined">delete</span>
-                                </button>
+                                <a href="#" class="delete-button">
+                                    <button class="deleteButton" data-especialidade-id="<%= item.id %>">
+                                        <span class="material-symbols-outlined">delete</span>
+                                    </button>
+                                </a>
                             </div>
-
-                            <!-- Modal de confirmação -->
-                            <div id="confirmDeleteModal" class="modal">
-
-                                <div class="modal-content">
-                                    <p>Tem certeza que deseja deletar esta pessoa?</p>
-
-                                    <div id="btn_modal">
-                                        <button id="confirmDeleteButton">Confirmar</button>
-                                        <button id="cancelDeleteButton">Cancelar</button>
-                                    </div>
-
-                                </div>
-
-                            </div>
-
-    </div>
-    </td>
-    </tr>
-    <% }); %>
-        </tbody>
+                        </td>
+                    </tr>
+                <% }); %>
+            </tbody>
         </table>
-
+    </div>
 </div>
 
+<!-- Modal de confirmação -->
+<div id="confirmDeleteModal" class="botoes">
+    <div class="addEspec">
+        <div class="modal-content">
+            <p>Tem certeza que deseja deletar esta especialidade?</p>
+            <div id="btn_modal">
+                <button id="confirmDeleteButton">Confirmar</button>
+                <button id="cancelDeleteButton">Cancelar</button>
+            </div>
+        </div>
+    </div>
+</div>
 
-
-<!-- Fim da tabela -->
-
+<!-- adicionar especialidade -->
 <div class="botoes">
     <div class="addEspec">
-        <button id="toggleBox"><span class="material-symbols-outlined">add</span>Adiciona Especialidade</button>
+        <button id="toggleBox"><span class="material-symbols-outlined">add</span>Adicionar Especialidade</button>
         <div class="box" id="boxForm">
             <form id="especialidadeForm" action="/CadastraEspecialidade" method="post">
-                <label for="Especialidade">Descrição Especialidade</label>
+                <label for="Especialidade" class="Especialidade">Especialidade:</label>
                 <input type="text" id="Especialidade" name="Especialidade">
-                <button type="submit">Cadastrar</button>
-                <button type="button" class="btn-voltar" id="backButton">Voltar</button>
+                <div id="btnEspecialidade">
+                    <button type="submit" id="cadastrar">Cadastrar</button>
+                    <button type="button" class="btn-voltar" id="backButton">Voltar</button>
+                </div>
             </form>
         </div>
     </div>
 </div>
 
-
+<!-- modal de adicionar especialidade -->
 <div class="editEspec">
     <div class="box" id="editBoxForm" style="display: none;">
         <form id="editEspecialidadeForm">
             <input type="hidden" id="editId" name="id">
-            <label for="editEspecialidade">Descrição Especialidade</label>
+            <label id="esp_title" for="editEspecialidade">Especialidade</label>
             <input type="text" id="editEspecialidade" name="Especialidade" required>
-            <button type="submit">Salvar</button>
-            <button type="button" id="editBackButton">Voltar</button>
+            <div id="btn_modal">
+                <button id="save_btn" type="submit">Salvar</button>
+                <button type="button" id="editBackButton">Voltar</button>
+            </div>
         </form>
     </div>
 </div>
 
-<div>
-    <a href="/adm" class="back-button">
-        <button><span class="material-symbols-outlined">arrow_back</span> Voltar</button>
-    </a>
-</div>
-
 <script>
     document.addEventListener('DOMContentLoaded', function () {
+        // Adicionar especialidade
         const toggleButton = document.getElementById('toggleBox');
         const boxForm = document.getElementById('boxForm');
         const backButton = document.getElementById('backButton');
         const especialidadeForm = document.getElementById('especialidadeForm');
 
         toggleButton.addEventListener('click', function () {
-            if (boxForm.style.display === 'none' || boxForm.style.display === '') {
-                boxForm.style.display = 'block';
-            } else {
-                boxForm.style.display = 'none';
-            }
+            boxForm.style.display = boxForm.style.display === 'block' ? 'none' : 'block';
         });
 
         backButton.addEventListener('click', function () {
@@ -133,20 +119,19 @@
                 },
                 body: JSON.stringify({ Especialidade: especialidadeInput }),
             })
-                .then(response => response.text())
-                .then(data => {
-                    alert(data); // Mostra a mensagem do servidor
-                    boxForm.style.display = 'none'; // Fechar o formulário após o cadastro
-                    window.location.reload(); // Recarregar a página após o cadastro
-                })
-                .catch(error => {
-                    console.error('Erro ao cadastrar especialidade:', error);
-                    alert('Erro ao cadastrar especialidade. Verifique o console para mais detalhes.');
-                });
+            .then(response => response.text())
+            .then(data => {
+                alert(data);
+                boxForm.style.display = 'none';
+                window.location.reload();
+            })
+            .catch(error => {
+                console.error('Erro ao cadastrar especialidade:', error);
+                alert('Erro ao cadastrar especialidade. Verifique o console para mais detalhes.');
+            });
         });
-    });
 
-    document.addEventListener('DOMContentLoaded', function () {
+        // Editar especialidade
         const editButtons = document.querySelectorAll('.editButton');
         const editBoxForm = document.getElementById('editBoxForm');
         const editBackButton = document.getElementById('editBackButton');
@@ -162,14 +147,11 @@
                 editEspecialidade.value = desc;
                 editBoxForm.style.display = 'block';
             });
-
         });
 
         editBackButton.addEventListener('click', function () {
             editBoxForm.style.display = 'none';
         });
-
-
 
         editEspecialidadeForm.addEventListener('submit', function (event) {
             event.preventDefault();
@@ -184,73 +166,64 @@
                 },
                 body: JSON.stringify({ Especialidades: especialidade }),
             })
-                .then(response => response.json())
-                .then(data => {
-                    console.log('Resposta do servidor:', data);
-                    alert('Especialidade atualizada com sucesso!');
-                    editBoxForm.style.display = 'none'; // Fechar o formulário após a atualização
-                    window.location.reload(); // Recarregar a página após a atualização
-                })
-                .catch(error => {
-                    console.error('Erro ao atualizar especialidade:', error);
-                    alert('Erro ao atualizar especialidade. Verifique o console para mais detalhes.');
-                });
+            .then(response => response.json())
+            .then(data => {
+                console.log('Resposta do servidor:', data);
+                alert('Especialidade atualizada com sucesso!');
+                editBoxForm.style.display = 'none';
+                window.location.reload();
+            })
+            .catch(error => {
+                console.error('Erro ao atualizar especialidade:', error);
+                alert('Erro ao atualizar especialidade. Verifique o console para mais detalhes.');
+            });
         });
-    });
 
-</script>
-
-<script>
-    document.addEventListener('DOMContentLoaded', function () {
-        const deleteButtons = document.querySelectorAll('.delete-button');
+        // Excluir especialidade
+        const deleteButtons = document.querySelectorAll('.deleteButton');
         const confirmDeleteModal = document.getElementById('confirmDeleteModal');
         const confirmDeleteButton = document.getElementById('confirmDeleteButton');
         const cancelDeleteButton = document.getElementById('cancelDeleteButton');
         let currentEspecialidadeId = null;
 
-        // Event listener para o botão de cancelar no modal
-
-        // Event listener para cada botão de delete
         deleteButtons.forEach(button => {
             button.addEventListener('click', function (event) {
                 event.preventDefault();
-                currentEspecialidadeId = button.getAttribute('data-especialidade-id');
-                confirmDeleteModal.style.display = 'block'; // Exibir modal de confirmação
+                currentEspecialidadeId = this.getAttribute('data-especialidade-id');
+                console.log('Especialidade ID para deletar:', currentEspecialidadeId); // Adicione esse console.log para verificar o ID
+                confirmDeleteModal.style.display = 'block';
             });
         });
 
-        confirmDeleteModal.style.display = 'none'; // Esconder modal após a ação
-    });
+        cancelDeleteButton.addEventListener('click', function () {
+            confirmDeleteModal.style.display = 'none';
+        });
 
-    // Event listener para o botão de cancelar no modal
-    cancelDeleteButton.addEventListener('click', function () {
-        confirmDeleteModal.style.display = 'none'; // Esconder modal se o usuário cancelar
-    });
-
-
-    // Event listener para o botão de confirmar no modal
-    confirmDeleteButton.addEventListener('click', function () {
-        // Enviar requisição DELETE usando fetch
-        fetch(`/deletar/especialidade/${currentEspecialidadeId}`, {
-            method: 'DELETE',
-            headers: {
-                'Content-Type': 'application/json'
-            }
-        })
-            .then(response => {
-                if (response.ok) {
-                    alert('Especialidade deletada com sucesso!');
-                    window.location.reload(); // Recarrega a página após a deleção
-                } else {
+        confirmDeleteButton.addEventListener('click', function () {
+            if (currentEspecialidadeId) {
+                fetch(`/deletar/especialidade/${currentEspecialidadeId}`, {
+                    method: 'DELETE',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    }
+                })
+                .then(response => {
+                    if (response.ok) {
+                        alert('Especialidade deletada com sucesso!');
+                        window.location.reload();
+                    } else {
+                        alert('Erro ao deletar a especialidade.');
+                    }
+                })
+                .catch(error => {
+                    console.error('Erro:', error);
                     alert('Erro ao deletar a especialidade.');
-                }
-            })
-            .catch(error => {
-                console.error('Erro:', error);
-                alert('Erro ao deletar a especialidade.');
-            });
+                });
 
-
-
+                confirmDeleteModal.style.display = 'none';
+            } else {
+                alert('Erro: ID da especialidade não encontrado.');
+            }
+        });
     });
 </script>

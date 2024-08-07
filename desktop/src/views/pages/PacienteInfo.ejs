@@ -2,82 +2,76 @@
 
 <!-- botão de retorno -->
 
-<button>
-    <svg height="16" width="16" xmlns="http://www.w3.org/2000/svg" version="1.1" viewBox="0 0 1024 1024">
-        <path
-            d="M874.690416 495.52477c0 11.2973-9.168824 20.466124-20.466124 20.466124l-604.773963 0 188.083679 188.083679c7.992021 7.992021 7.992021 20.947078 0 28.939099-4.001127 3.990894-9.240455 5.996574-14.46955 5.996574-5.239328 0-10.478655-1.995447-14.479783-5.996574l-223.00912-223.00912c-3.837398-3.837398-5.996574-9.046027-5.996574-14.46955 0-5.433756 2.159176-10.632151 5.996574-14.46955l223.019353-223.029586c7.992021-7.992021 20.957311-7.992021 28.949332 0 7.992021 8.002254 7.992021 20.957311 0 28.949332l-188.073446 188.073446 604.753497 0C865.521592 475.058646 874.690416 484.217237 874.690416 495.52477z">
-        </path>
-    </svg>
-    <a href="/Paciente"><span>Voltar</span></a>
-</button>
+<div class="container">
+    <a href="/adm" class="back-button">
+        <button><span class="material-symbols-outlined">arrow_back</span> Voltar</button>
+    </a>
 
 <!-- Formulario com dados -->
 
 <h2 class="titulo">Todos os Dados dos Pacientes</h2>
 
 <div class="paciente-container">
-
     <% infoPaciente.forEach(function(item) { %>
         <div class="paciente-item">
-
-            <input type="hidden" value="<%= item.id %>" id="id">
+            <input type="hidden" value="<%= item.id %>" id="ids">
 
             <label>Nome:</label>
-            <input type="text" value="<%= item.Nome %>" class="input-text" disabled>
+            <input type="text" value="<%= item.Nome %>" class="input-text" disabled name="Nome">
 
             <label>CPF:</label>
-            <input type="text" value="<%= item.CPF %>" class="input-text" disabled>
+            <input type="text" value="<%= item.CPF %>" class="input" disabled name="CPF">
 
             <label>Data de Nascimento:</label>
-            <input type="text" value="<%= item.DataNascimento %>" class="input-text" disabled>
+            <input type="text" value="<%= item.DataNascimento %>" class="input-text" disabled name="DataNascimento">
 
             <label>Gênero:</label>
-            <input type="text" value="<%= item.Genero %>" class="input-text" disabled>
+            <input type="text" value="<%= item.Genero %>" class="input-text" disabled name="Genero">
 
             <label>Email:</label>
-            <input type="text" value="<%= item.Email %>" class="input-text" disabled>
+            <input type="text" value="<%= item.Email %>" class="input-text" disabled name="Email">
 
             <label>Data de Cadastro:</label>
-            <input type="text" value="<%= item.DataCadastro %>" class="input-text" disabled>
+            <input type="text" value="<%= item.DataCadastro %>" class="input-text" disabled name="DataCadastro">
 
             <label>Logradouro:</label>
-            <input type="text" value="<%= item.Logradouro %>" class="input-text" disabled>
+            <input type="text" value="<%= item.Logradouro %>" class="input-text" disabled name="Logradouro">
 
             <label>Bairro:</label>
-            <input type="text" value="<%= item.Bairro %>" class="input-text" disabled>
+            <input type="text" value="<%= item.Bairro %>" class="input-text" disabled name="Bairro">
 
             <label>Estado:</label>
-            <input type="text" value="<%= item.Estado %>" class="input-text" disabled>
+            <input type="text" value="<%= item.Estado %>" class="input-text" disabled name="Estado">
 
             <label>Número Residencial:</label>
-            <input type="text" value="<%= item.NumeroResidencia %>" class="input-text" disabled>
+            <input type="text" value="<%= item.NumeroResidencia %>" class="input-text" disabled name="NumeroResidencia">
 
             <label>Complemento:</label>
-            <input type="text" value="<%= item.Complemento %>" class="input-text" disabled>
+            <input type="text" value="<%= item.Complemento %>" class="input-text" disabled name="Complemento">
 
             <label>CEP:</label>
-            <input type="text" value="<%= item.CEP %>" class="input-text" disabled>
+            <input type="text" value="<%= item.CEP %>" class="input-text" disabled name="CEP">
 
             <label>Telefone:</label>
-            <input type="text" value="<%= item.Telefone %>" class="input-text" disabled>
+            <input type="text" value="<%= item.Telefones %>" class="input-text" disabled name="Telefones">
 
             <label>Tipo:</label>
-            <input type="text" value="<%= item.Tipo %>" class="input-text" disabled>
+            <input type="text" value="<%= item.Tipo %>" class="input-text" disabled name="Tipo">
 
             <label>Login:</label>
-            <input type="text" value="<%= item.Login %>" class="input-text" disabled>
+            <input type="text" value="<%= item.Logins %>" class="input" disabled name="Logins">
 
             <label>Senha:</label>
-            <input type="text" value="<%= item.Senha %>" class="input-text" disabled>
+            <input type="text" value="<%= item.Senha %>" class="input-text" disabled name="Senha">
 
             <label>Data de Admissão:</label>
-            <input type="text" value="<%= item.DataAdmissao %>" class="input-text" disabled>
+            <input type="text" value="<%= item.DataAdmissao %>" class="input-text" disabled name="DataAdmissao">
 
             <label>CRM:</label>
-            <input type="text" value="<%= item.CRM %>" class="input-text" disabled>
+            <input type="text" value="<%= item.CRM %>" class="input-text" disabled name="CRM">
 
             <label>Especialidade:</label>
-            <input type="text" value="<%= item.Especialidade %>" class="input-text" disabled>
+            <input type="text" value="<%= item.Especialidade %>" class="input-text" disabled name="Especialidade">
         </div>
         <% }); %>
 
@@ -133,7 +127,11 @@
                     const confirmDeleteModal = document.getElementById('confirmDeleteModal');
                     const confirmDeleteButton = document.getElementById('confirmDeleteButton');
                     const cancelDeleteButton = document.getElementById('cancelDeleteButton');
-                    const idPessoa = document.getElementById("id").valu
+
+
+                    console.log(document.getElementById("ids").value)
+
+                    const idPessoa = document.getElementById("ids").value
                     // Event listener para cada botão de delete
                     deleteButtons.forEach(button => {
                         button.addEventListener('click', function (event) {
@@ -152,11 +150,13 @@
                         })
                             .then(response => {
                                 console.log(response)
-                                if (response.ok) {
+                                if (response.ok === true) {
                                     alert('Pessoa deletada com sucesso!');
                                     confirmDeleteModal.style.display = 'none'; // Esconder modal após a ação
+                                    console.log("AQUI", sessionStorage);
                                     window.history.back(); // Voltar uma página
-                                    window.location.reload();
+                                    sessionStorage.setItem('reloadPage', 'true');
+
                                 } else {
                                     alert('Erro ao deletar dados da pessoa.');
                                 }
@@ -172,66 +172,95 @@
                         confirmDeleteModal.style.display = 'none'; // Esconder modal se o usuário cancelar
                     });
                 });
+            </script>
 
+
+            <script>
                 // Habilitando campos
-
                 const inputTexts = document.getElementsByClassName("input-text");
-
                 habilitarCampos = () => {
-
                     for (let i = 0; i < inputTexts.length; i++) {
                         inputTexts[i].removeAttribute("disabled");
                     };
-
                     mostrarBtnSave();
                     mostrarBtnCancel();
-
                     alert("Campos habilitados para edição, clique em salvar após alterações.")
-
                 };
 
                 // Desabilitando campos
 
                 desabilitarCampos = () => {
-
                     for (let i = 0; i < inputTexts.length; i++) {
                         inputTexts[i].setAttribute("disabled", "");
                     };
-
                 };
 
-
                 // Mostrando botão de Salvar
-
                 mostrarBtnSave = () => {
                     const btnSave = document.querySelector("#salvar");
                     btnSave.style.visibility = "visible";
                 };
 
                 // Mostrando botão de Cancelar
-
                 mostrarBtnCancel = () => {
-
                     const btnCancel = document.querySelector("#cancelar");
                     btnCancel.style.visibility = "visible";
-
                 };
 
                 // Ocultar botoes de salvar e cancelar
-
                 ocultarBtnSaveCancel = () => {
-
                     const btnSave2 = document.querySelector("#salvar");
                     btnSave2.style.visibility = "hidden";
-
                     const btnCancel2 = document.querySelector("#cancelar");
                     btnCancel2.style.visibility = "hidden";
-
                     desabilitarCampos();
-
                     window.location.reload(true); // isso aqui vai recarregar a pagina e apagar as alterações que foram feitas e não salvas
 
                 }
+            </script>
 
+            <script>
+                document.addEventListener('DOMContentLoaded', function () {
+                    const saveButton = document.getElementById('salvar');
 
+                    // Função para coletar dados do formulário
+                    const coletarDados = () => {
+                        const inputs = document.querySelectorAll('.input-text');
+                        const data = {};
+                        inputs.forEach(input => {
+                            data[input.name] = input.value;
+                        });
+                        console.log("data",data)
+                        return data;
+                    };
+
+                    // Evento de clique para o botão salvar
+                    saveButton.addEventListener('click', function (event) {
+                        event.preventDefault(); // Prevenir comportamento padrão do botão
+                        const data = coletarDados();
+                        const idPessoa = document.getElementById("ids").value;
+                        console.log(data)
+                        console.log(idPessoa)
+
+                        fetch(`/Update/pessoa/${idPessoa}`, {
+                            method: 'PUT', 
+                            headers: {
+                                'Content-Type': 'application/json'
+                            },
+                            body: JSON.stringify(data) 
+                        })
+                            .then(response => {
+                                if (response.ok) {
+                                    alert('Dados atualizados com sucesso!');
+                                    window.location.reload(); // Recarregar a página para mostrar os dados atualizados
+                                } else {
+                                    alert('Erro ao atualizar os dados.');
+                                }
+                            })
+                            .catch(error => {
+                                console.error('Erro:', error);
+                                alert('Erro ao atualizar os dados.');
+                            });
+                    });
+                });
             </script>

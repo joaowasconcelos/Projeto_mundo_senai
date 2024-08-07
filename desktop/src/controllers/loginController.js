@@ -72,29 +72,39 @@ const LoginPerfis = {
     LoginPessoaMobile: async (req, res) => {
         try {
             const { login, senha } = req.body
-            console.log(login, senha)
             const loginConsulta = new Login(null, login, senha, null, null, null);
-            const result = await selectLogin(loginConsulta);
-            console.log(result)
-            if (senha != result[0].senha) {
+            const resultMobile = await selectLogin(loginConsulta);
+            console.log(login,senha)
+            
+            if (!resultMobile[0]) {
                 return res.json({ message: 'Senha incorreta' })
             }
-            if (result[0].tipo.includes("paciente")) {
-                const tipo = "paciente"
-                const id = result[0].id
-                console.log(tipo)
-                return res.json({id,tipo})
-            }
-            console.log(result[0].tipo.includes("medico")) 
 
-    
-            if (result[0].tipo.includes("medico")) {
-                const tipo = "medico"
-                const id = result[0].id
-                console.log(id,tipo)
-                return res.json({id,tipo})
+            if (senha != resultMobile[0].senha) {
+                return res.json({ message: 'Senha incorreta' })
             }
-            return res.json({ data: result[0] })
+            console.log(resultMobile[0].tipo)
+            console.log("aqui",resultMobile[0].tipo.includes("paciente, medico")||resultMobile[0].tipo.includes("medico, paciente"))
+
+            if(resultMobile[0].tipo.includes("paciente, medico")||resultMobile[0].tipo.includes("medico, paciente")){
+                req.session.user = resultMobile[0];
+                return res.json({user: req.session.user });
+            }
+
+            if (resultMobile[0].tipo.includes("paciente")) {
+                const tipo = "paciente"
+                req.session.user = resultMobile[0];
+                const id = resultMobile[0].id
+                return res.json({ id, tipo, user: req.session.user });
+            }
+
+            if (resultMobile[0].tipo.includes("medico")) {
+                const tipo = "medico"
+                const id = resultMobile[0].id
+                req.session.user = resultMobile[0];
+                return res.json({ id, tipo, user: req.session.user });
+            }
+
         } catch (error) {
             console.log(error)
             res.json(error);

@@ -19,6 +19,20 @@ const viewPaciente = {
             res.json(error);
         }
     },
+
+    selecionaInfosPacienteMobile: async (req, res) => {
+        try {
+            const ids = req.session.user.id 
+            const novaPessoa = new Pessoa(ids, null, null, null, null, null)
+            const infosPaciente = await selectInfosPaciente(novaPessoa.id)
+            const infoPaciente = infosPaciente[0]
+            return res.json({infoPaciente});
+        } catch (error) {
+            console.log(error)
+            res.json(error);
+        }
+    },
+
     selecionaConsultas: async (req, res) => {
         try {
             const { id } = req.params.id

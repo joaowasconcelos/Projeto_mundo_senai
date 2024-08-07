@@ -140,9 +140,9 @@ async function SelectConsultaData(id) {
     try {
         console.log(id)
         await bd.beginTransaction();
-        const dataHoje = await bd.query(`SELECT CURDATE();`);
-        const dateOnly = dataHoje[0][0]['CURDATE()'].toISOString().split('T')[0];
-        console.log(dateOnly); // Output: 2024-07-13
+        // const dataHoje = await bd.query(`SELECT CURDATE();`);
+        // const dateOnly = dataHoje[0][0]['CURDATE()'].toISOString().split('T')[0];
+        // console.log(dateOnly); // Output: 2024-07-13
 
 
         const selectConsulta = await bd.query
@@ -167,7 +167,8 @@ JOIN
 JOIN
     tbl_especialidade e ON e.id = fe.especialidade_id
 WHERE 
-    c.paciente_pessoa_id = ? AND c.data >= ?;`, [id, dateOnly])
+    c.paciente_pessoa_id = ?;`, [id])
+    console.log(selectConsulta)
         return selectConsulta
         await bd.commit()
     } catch (error) {
@@ -229,6 +230,54 @@ WHERE
     }
 }
 
+async function SelectConsultaMedicoMobile(id) {
+    console.log(id)
+    const bd = await conectarBancoDeDados();
+    try {
+        await bd.beginTransaction();
+        const selectConsultaMedicos = await bd.query(
+            `SELECT 
+    c.id,
+    DATE_FORMAT(c.data, '%d/%m/%Y') AS data,
+    c.hora,
+    p.id AS pessoa_id,
+    p.nome AS nome_paciente,
+    p.cpf AS cpf_paciente,
+    pf.nome AS nome_funcionario,
+    pf.cpf AS cpf_medico,
+    e.desc_especialidade,
+    e.id as id_especialidade
+FROM 
+    tbl_consulta c
+JOIN
+    tbl_pessoa p ON c.paciente_pessoa_id = p.id
+JOIN 
+    tbl_funcionario f ON c.funcionario_pessoa_id = f.pessoa_id
+JOIN
+    tbl_pessoa pf ON f.pessoa_id = pf.id
+JOIN 
+    tbl_funcionario_has_tbl_especialidade fe ON fe.funcionario_id = f.id
+JOIN
+    tbl_especialidade e ON e.id = fe.especialidade_id
+WHERE 
+    pf.id = ?;`, 
+            [id]
+        );
+        const selectConsultaIds = await bd.query(
+            `SELECT * FROM tbl_consulta c WHERE c.id = ?;`, 
+            [id]
+        );
+        await bd.commit();
+        return { selectConsultaIds, selectConsultaMedicos };
+    } catch (error) {
+        console.error('Erro ao criar prontuario:', error);
+        await bd.rollback(); 
+        throw error;
+    } finally {
+        await bd.release(); 
+    }
+}
+
 
 async function SelectConsultasAnteriores(id) {
     const bd = await conectarBancoDeDados();
@@ -274,4 +323,4 @@ WHERE
 
 
 
-module.exports = { SelectsConsultas, SelectsMedicos, SelectPessoas, SelectMedicoEspec, SelectConsultaData, SelectConsultasAnteriores, SelectConsultaMedico };
+module.exports = { SelectsConsultas, SelectsMedicos, SelectPessoas, SelectMedicoEspec, SelectConsultaData, SelectConsultasAnteriores, SelectConsultaMedico,SelectConsultaMedicoMobile };

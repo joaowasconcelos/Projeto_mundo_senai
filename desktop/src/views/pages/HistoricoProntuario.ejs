@@ -1,5 +1,17 @@
 <link rel="stylesheet" href="/css/HistoricoProntuario.css">
+
+
+
 <div class="body">
+
+    
+
+    <a href="/Medico" class="back-button">
+        <button><span class="material-symbols-outlined">arrow_back</span> Voltar</button>
+    </a>
+
+
+    
     <% resultProntuario.forEach(function(item) { %>
         <div class="container">
             <div class="diagnostico">
@@ -18,10 +30,9 @@
         </div>
     <% }); %>
 
-    <a href="/Medico" class="back-button">
-        <button><span class="material-symbols-outlined">arrow_back</span> Voltar</button>
-    </a>
+    
 </div>
+
 
 
 <div id="myModal" class="modal">
@@ -31,6 +42,9 @@
         </div>
     </div>
 </div>
+
+
+
 
 <script>
     document.addEventListener('DOMContentLoaded', function() {
