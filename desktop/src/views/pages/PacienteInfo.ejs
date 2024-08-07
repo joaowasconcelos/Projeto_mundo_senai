@@ -20,7 +20,7 @@
             <input type="text" value="<%= item.Nome %>" class="input-text" disabled name="Nome">
 
             <label>CPF:</label>
-            <input type="text" value="<%= item.CPF %>" class="input" disabled name="CPF">
+            <input type="text" value="<%= item.CPF %>" class="input" readonly name="CPF">
 
             <label>Data de Nascimento:</label>
             <input type="text" value="<%= item.DataNascimento %>" class="input-text" disabled name="DataNascimento">
@@ -56,22 +56,22 @@
             <input type="text" value="<%= item.Telefones %>" class="input-text" disabled name="Telefones">
 
             <label>Tipo:</label>
-            <input type="text" value="<%= item.Tipo %>" class="input-text" disabled name="Tipo">
+            <input type="text" value="<%= item.Tipo %>" class="input-text" readonly name="Tipo">
 
             <label>Login:</label>
-            <input type="text" value="<%= item.Logins %>" class="input" disabled name="Logins">
+            <input type="text" value="<%= item.Logins %>" class="input" readonly name="Logins">
 
             <label>Senha:</label>
             <input type="text" value="<%= item.Senha %>" class="input-text" disabled name="Senha">
 
             <label>Data de Admissão:</label>
-            <input type="text" value="<%= item.DataAdmissao %>" class="input-text" disabled name="DataAdmissao">
+            <input type="text" value="<%= item.DataAdmissao %>" class="input-text" readonly name="DataAdmissao">
 
             <label>CRM:</label>
-            <input type="text" value="<%= item.CRM %>" class="input-text" disabled name="CRM">
+            <input type="text" value="<%= item.CRM %>" class="input-text" readonly name="CRM">
 
             <label>Especialidade:</label>
-            <input type="text" value="<%= item.Especialidade %>" class="input-text" disabled name="Especialidade">
+            <input type="text" value="<%= item.Especialidade %>" class="input-text" readonly name="Especialidade">
         </div>
         <% }); %>
 
@@ -250,6 +250,7 @@
                             body: JSON.stringify(data) 
                         })
                             .then(response => {
+                                console.log(response)
                                 if (response.ok) {
                                     alert('Dados atualizados com sucesso!');
                                     window.location.reload(); // Recarregar a página para mostrar os dados atualizados
